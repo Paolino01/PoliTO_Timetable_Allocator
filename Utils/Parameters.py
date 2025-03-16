@@ -1,6 +1,9 @@
 '''This class contains all the parameters of the program (e.g. number of slots per day, is saturday enabled, etc.). These parameters will be used in the generation of the timetable.'''
-class Parameter:
+class Parameters:
     def __init__(self):
+        # DB created by the Scraper
+        self.DB = "../Scraper_Tesi/Data/GoodDB.db"
+
         # Number of lecture slots per each day, 5 days per week
         self.slotPerDay: int = 7
 

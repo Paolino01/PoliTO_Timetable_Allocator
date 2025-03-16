@@ -1,28 +1,38 @@
+import math
+
 from docplex.mp.model import Model
-from slots import Slots
+from Components.Slots import get_slots_per_week
+from Utils.Hooks.Teachings import Teachings
 
 if __name__ == '__main__':
     # Problem definition
     model = Model(name="PoliTO_Timetable_Scheduling")
 
-    s = Slots()
-
     # List of Teachings that I need to allocate
-    subjects = ["Math", "CS", "Physics"]
+    teachings_class = Teachings()
+    teachings = teachings_class.teachings
 
-    #Number of slots per week
-    slots = s.getSlotsPerWeek()
+    # TODO: limiting the number of teachings so that I stay under the 1000 vars included in the trial version of CPLEX
+    teachings = teachings[:25]
 
-    # Variabili binarie x[s,t] = 1 se la materia 's' è assegnata allo slot 't'
-    x = {(s, t): model.binary_var(name=f"x_{s}_{t}") for s in subjects for t in slots}
+    # Number of slots per week
+    slots = get_slots_per_week()
 
-    # Vincolo: ogni materia deve avere esattamente 2 lezioni a settimana
-    for s in subjects:
-        model.add_constraint(model.sum(x[s, t] for t in slots) == 2)
+    # Binary variables x[s,t] = 1 if the Teaching 't' is assigned to Slot 's'
+    x = {(t.id_teaching, s): model.binary_var(name=f"x_{t.id_teaching}_{s}") for t in teachings for s in slots}
 
-    # Vincolo: in ogni slot può esserci al massimo una materia
-    for t in slots:
-        model.add_constraint(model.sum(x[s, t] for s in subjects) <= 1)
+    # Constraint: each Teaching must have exactly cfu/2 Slots per week
+    for t in teachings:
+        model.add_constraint(model.sum(x[t.id_teaching, s] for s in slots) == math.floor(t.cfu/2))
+
+    # Constraint: a Teaching cannot overlap with the others, according to the correlations
+    for s in slots:
+        for t1 in teachings:
+            for t_id, corr in t1.correlations.items():
+                # I need this if in order to not impose the same constraint twice (e.g. one from 267072 to 267158 and the other from 267158 to 267072)
+                if t1.id_teaching < t_id:
+                    # TODO: cannot test until I can work with the whole DB
+                    model.add_constraint(x[t1.id_teaching, s] + x[t_id, s] <= 1)
 
     # Solving the problem
     solution = model.solve(log_output=True)
@@ -30,7 +40,7 @@ if __name__ == '__main__':
     # Printing the results
     if solution:
         print("\nSolution found:")
-        for s in subjects:
-            print(f"{s}: {[int(solution[x[s, t]]) for t in slots]}")
+        for t in teachings:
+            print(f"{t.id_teaching}: {[int(solution[x[t.id_teaching, s]]) for s in slots]}")
     else:
         print("No solution found.")

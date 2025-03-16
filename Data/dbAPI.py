@@ -1,1 +1,0 @@
-# TODO: connect to the "Good_DB.db" in the Scraper to retrieve the data about the teachings
