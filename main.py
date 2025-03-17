@@ -1,12 +1,12 @@
 import math
 
-from docplex.mp.model import Model
+from docplex.cp.model import CpoModel
 from Components.Slots import get_slots_per_week
 from Utils.Hooks.Teachings import Teachings
 
 if __name__ == '__main__':
     # Problem definition
-    model = Model(name="PoliTO_Timetable_Scheduling")
+    model = CpoModel(name="PoliTO_Timetable_Scheduling")
 
     # List of Teachings that I need to allocate
     teachings_class = Teachings()
