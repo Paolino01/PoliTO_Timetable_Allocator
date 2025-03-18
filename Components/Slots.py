@@ -18,14 +18,14 @@ def get_slots_per_week():
                 print("The number of slots must be between 0 and 7.")
             else:
                 if params.saturday_slots == 0:
-                    params.setSaturdayEnabled(False)
+                    params.set_saturday_enabled(False)
 
                 # Set the number of Slot per week
-                slots = range(5 * params.slotPerDay + params.saturday_slots)
+                slots = range(5 * params.slot_per_day + params.saturday_slots)
 
                 break
     else:
         # Set the number of Slot per week
-        slots = range(5 * params.slotPerDay)
+        slots = range(5 * params.slot_per_day)
 
     return slots
