@@ -26,3 +26,6 @@ class Teachings:
 
             if teaching is not None:
                 teaching.set_correlations(str(row[1]), int(row[2]))
+
+            # Adding a correlation of 100 with the same teaching
+            teaching.set_correlations(str(row[0]), 100)

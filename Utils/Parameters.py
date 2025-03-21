@@ -14,8 +14,10 @@ class Parameters:
 
         # Number of maximum consecutive lecture Slots that students can have in a day
         self.max_consecutive_slots = 4
-        # Number of maximum "correlated lectures" in a day
-        self.max_corr_in_day = 400
+        # Number of maximum correlated lectures in a day
+        self.max_corr_in_day = 500
+        # Number of minimum correlated lectures in 3 slots
+        self.min_corr_in_slots = 20
 
     def set_saturday_enabled(self, saturday_enabled: bool):
         self.saturday_enabled = saturday_enabled
