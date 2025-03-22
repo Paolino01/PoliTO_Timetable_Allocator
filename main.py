@@ -2,6 +2,7 @@ import math
 
 from docplex.cp.model import CpoModel
 from Components.Slots import get_slots_per_week
+from Data.DbAPI import DbAPI
 from Utils.Hooks.Teachings import Teachings
 from Utils.Parameters import Parameters
 
@@ -19,6 +20,7 @@ if __name__ == '__main__':
     model = CpoModel(name="PoliTO_Timetable_Scheduling")
 
     params = Parameters()
+    db_api = DbAPI()
 
     # List of Teachings that I need to allocate
     teachings_class = Teachings()
@@ -67,6 +69,9 @@ if __name__ == '__main__':
     if solution:
         print("\nSolution found:")
         for t in teachings:
-                print(f"{t.id_teaching}: {[int(solution[timetable_matrix[t.id_teaching, s]]) for s in slots]}")
+            print(f"{t.id_teaching}: {[int(solution[timetable_matrix[t.id_teaching, s]]) for s in slots]}")
     else:
         print("\nNo solution found.")
+
+    # Saving the results to the DB
+    db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)

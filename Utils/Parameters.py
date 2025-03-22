@@ -19,6 +19,10 @@ class Parameters:
         # Number of minimum correlated lectures in 3 slots
         self.min_corr_in_slots = 20
 
+        # Name of day and time slot
+        self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
+        self.time_slots = ["8.30-10.00", "10.00-11.30", "11.30-13.00", "13.00-14.30", "14.30-16.00", "16.00-17.30", "17.30-19.00"]
+
     def set_saturday_enabled(self, saturday_enabled: bool):
         self.saturday_enabled = saturday_enabled
 
