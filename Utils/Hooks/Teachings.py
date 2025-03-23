@@ -1,5 +1,5 @@
 from Data.DbAPI import DbAPI
-from Utils.Interfaces.Teaching import Teaching
+from Utils.Components.Teaching import Teaching
 
 class Teachings:
     def __init__(self):
