@@ -19,6 +19,9 @@ class Parameters:
         # Number of maximum correlation value between first and last slot of a day
         self.max_corr_first_last_slot = 50
 
+        # Number of maximum days in a week for a Teaching (used to avoid that a teaching has 1 slot in each day)
+        self.max_days_teaching = 4
+
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
         self.time_slots = ["8.30-10.00", "10.00-11.30", "11.30-13.00", "13.00-14.30", "14.30-16.00", "16.00-17.30", "17.30-19.00"]
