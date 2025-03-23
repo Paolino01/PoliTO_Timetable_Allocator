@@ -13,7 +13,8 @@ class Teaching:
         self.main_teacher: str = main_teacher
 
         # Correlations between teachings. I have a dictionary where the key is a teaching and the value is the weight of the correlation for that teaching
-        self.correlations: dict = {}
+        # As default I set the correlation of a Teaching with itself to 100
+        self.correlations: dict = {id_teaching: 100}
 
     def set_correlations(self, id_teaching: str, correlation: int):
         self.correlations[id_teaching] = correlation

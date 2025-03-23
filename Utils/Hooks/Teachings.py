@@ -1,5 +1,5 @@
 from Data.DbAPI import DbAPI
-from Utils.Interfaces.Teaching import Teaching
+from Utils.Components.Teaching import Teaching
 
 class Teachings:
     def __init__(self):
@@ -26,6 +26,3 @@ class Teachings:
 
             if teaching is not None:
                 teaching.set_correlations(str(row[1]), int(row[2]))
-
-            # Adding a correlation of 100 with the same teaching
-            teaching.set_correlations(str(row[0]), 100)

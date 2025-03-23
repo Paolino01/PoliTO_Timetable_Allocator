@@ -1,7 +1,7 @@
 import math
 import sqlite3
 
-from Utils.Interfaces.Teaching import Teaching
+from Utils.Components.Teaching import Teaching
 from Utils.Parameters import Parameters
 
 

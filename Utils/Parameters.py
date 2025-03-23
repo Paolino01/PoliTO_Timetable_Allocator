@@ -12,12 +12,12 @@ class Parameters:
         #Saves the number of slots on Saturday. Minimum is 1, maximum is 7, default is 4
         self.n_slots_saturday: int = 4
 
-        # Number of maximum consecutive lecture Slots that students can have in a day
-        self.max_consecutive_slots = 4
         # Number of maximum correlated lectures in a day
         self.max_corr_in_day = 500
         # Number of minimum correlated lectures in 3 slots
-        self.min_corr_in_slots = 20
+        self.min_corr_in_slots = 150
+        # Number of maximum correlation value between first and last slot of a day
+        self.max_corr_first_last_slot = 50
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]

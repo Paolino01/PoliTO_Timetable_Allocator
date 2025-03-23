@@ -28,13 +28,36 @@ if __name__ == '__main__':
 
     # Number of slots per week
     slots = get_slots_per_week()
+    # Number of days per week
+    days = range(5 if params.saturday_enabled == False else 6)
 
     # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
     timetable_matrix = {(t.id_teaching, s): model.binary_var(name=f"x_{t.id_teaching}_{s}") for t in teachings for s in slots}
 
+    #Variable that counts how many hours a teaching has in a day
+    n_slots_in_day_teaching = {(t.id_teaching, d): model.integer_var(0, 2, name=f"y_{t.id_teaching}_{d}") for t in teachings for d in days}
+
     # Constraint: each Teaching must have exactly cfu/2 Slots per week
     for t in teachings:
         model.add_constraint(model.sum(timetable_matrix[t.id_teaching, s] for s in slots) == math.floor(t.cfu/2))
+
+    # Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
+    # TODO: this constraint should only be applied to Lecture Slots and not Laboratory Slots
+    for t in teachings:
+        for d in days:
+            # Counts how many hours the Teaching t has in Day d
+            model.add(n_slots_in_day_teaching[t.id_teaching, d] == model.sum(timetable_matrix[t.id_teaching, s] for s in range(d * params.slot_per_day, (d+1) * params.slot_per_day)))
+
+            # Add the constraint that a Teaching should have a maximum of 2 Slots in a day (only for Lectures and not for Laboratories)
+            model.add(n_slots_in_day_teaching[t.id_teaching, d] <= 2)
+
+            # TODO: I need to figure out how to implement the constraint about consecutive slots of the same Teaching, this is not working
+            '''
+            # If n_slots_in_day_teaching[t.id_teaching, d] == 2, the two Slots should be consecutive
+            for s in range(len(slots) - 1):
+                if math.floor(s / params.slot_per_day) == d and math.floor((s+1) / params.slot_per_day) == d:
+                    model.add(timetable_matrix[t.id_teaching, s] + timetable_matrix[t.id_teaching, s+1] >= n_slots_in_day_teaching[t.id_teaching, d])
+            '''
 
     for s in slots:
         for t1 in teachings:
@@ -42,7 +65,7 @@ if __name__ == '__main__':
             # This way I don't limit the number of consecutive lecture slots
             model.add_constraint(model.sum(
                 corr * (timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s + i])
-                for i in range(1, params.slot_per_day - (s % params.slot_per_day))
+                for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s+i in slots
                 for t2_id, corr in t1.correlations.items()) <= params.max_corr_in_day)
 
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
@@ -52,15 +75,19 @@ if __name__ == '__main__':
                     model.add_constraint(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s] <= 1)
 
     # Constraint: I consider 3 consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
-    # TODO: needs testing
     for s in range(len(slots) - 2):
         for t1 in teachings:
             correlations_in_slots = model.sum(
-                corr * (timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s + i])
+                corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
                 for i in range(1, 3)
                 for t2_id, corr in t1.correlations.items())
 
             model.add(1 == model.logical_or(correlations_in_slots <= 0, correlations_in_slots >= params.min_corr_in_slots))
+
+    # Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
+    for t1 in teachings:
+        for t2_id, corr in t1.correlations.items():
+            model.add(model.sum(corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + (params.slot_per_day-1)]) for s in range(0, 35, 7)) <= params.max_corr_first_last_slot)
 
     # Solving the problem
     solution = model.solve(log_output=True)
@@ -70,8 +97,8 @@ if __name__ == '__main__':
         print("\nSolution found:")
         for t in teachings:
             print(f"{t.id_teaching}: {[int(solution[timetable_matrix[t.id_teaching, s]]) for s in slots]}")
+
+        # Saving the results to the DB
+        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)
     else:
         print("\nNo solution found.")
-
-    # Saving the results to the DB
-    db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)
