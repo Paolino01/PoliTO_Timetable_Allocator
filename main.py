@@ -1,7 +1,6 @@
 import math
 
 from docplex.cp.model import CpoModel
-from docplex.cp.modeler import logical_or
 
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
@@ -73,7 +72,7 @@ if __name__ == '__main__':
             # Constraint: limiting the number of correlated lectures in a day. For example, I impose that the sum of the correlations between lectures in a day should be <= params.max_corr_in_day
             # This way I don't limit the number of consecutive lecture slots
             model.add_constraint(model.sum(
-                corr * (timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s + i])
+                corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s+i in slots
                 for t2_id, corr in t1.correlations.items()) <= params.max_corr_in_day)
 

@@ -26,3 +26,9 @@ class Teachings:
 
             if teaching is not None:
                 teaching.set_correlations(str(row[1]), int(row[2]))
+
+            # In the DB we only have teaching1, teaching2, corr and not teaching2, teaching1, corr. I add the second option to the Python structures
+            teaching = next((t for t in self.teachings if t.id_teaching == str(row[1])), None)
+
+            if teaching is not None:
+                teaching.set_correlations(str(row[0]), int(row[2]))
