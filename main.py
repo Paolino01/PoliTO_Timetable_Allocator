@@ -76,6 +76,20 @@ if __name__ == '__main__':
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s+i in slots
                 for t2_id, corr in t1.correlations.items()) <= params.max_corr_in_day)
 
+            # Uncomment this if you want to add a number of minimum correlations in a day
+            '''
+            model.add(model.logical_or(
+                model.sum(
+                    corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
+                    for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
+                    for t2_id, corr in t1.correlations.items()) >= params.min_corr_in_day,
+                model.sum(
+                    corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
+                    for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
+                    for t2_id, corr in t1.correlations.items()) == 0)
+            )
+            '''
+
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
             for t2_id, corr in t1.correlations.items():
                 # I need this if in order to not impose the same constraint twice (e.g. one from 267072 to 267158 and the other from 267158 to 267072)
@@ -87,7 +101,7 @@ if __name__ == '__main__':
         for t1 in teachings:
             correlations_in_slots = model.sum(
                 corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
-                for i in range(1, params.n_consecutive_slots)
+                for i in range(0, params.n_consecutive_slots)
                 for t2_id, corr in t1.correlations.items())
 
             model.add(1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))
