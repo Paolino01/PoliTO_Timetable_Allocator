@@ -88,7 +88,7 @@ if __name__ == '__main__':
         for t1 in teachings:
             correlations_in_slots = model.sum(
                 corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
-                for i in range(0, params.n_consecutive_slots)
+                for i in range(1, params.n_consecutive_slots)
                 for t2_id, corr in t1.correlations.items())
 
             model.add(1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))

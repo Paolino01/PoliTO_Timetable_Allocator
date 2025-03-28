@@ -13,9 +13,9 @@ class Parameters:
         self.n_slots_saturday: int = 4
 
         # Number of maximum correlated lectures in a day
-        self.max_corr_in_day = 300
+        self.max_corr_in_day = 500
         # Number of consecutive slots on which we calculate the minimum correlated lectures
-        self.n_consecutive_slots = 2
+        self.n_consecutive_slots = 3
         # Number of minimum correlated lectures in self.n_consecutive_slots slots
         self.min_corr_in_slots = 120
         # Number of maximum correlation value between first and last slot of a day
