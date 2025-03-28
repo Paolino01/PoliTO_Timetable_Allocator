@@ -13,7 +13,7 @@ class DbAPI:
         self.db = sqlite3.connect(self.params.DB)
 
         # TODO: this DB is used to show the results in a comprehensive way using the GUI. In the final version it would be better to have only one DB with all the informations
-        self.gui_db = sqlite3.connect("../GUI_orario_Tesi/interface-server/Db_finale_postModifiche.db")
+        self.gui_db = sqlite3.connect("../../GUI_orario_Tesi/interface-server/Db_finale_postModifiche.db")
 
     '''
         Get all the teachings in the DB
