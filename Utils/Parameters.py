@@ -21,6 +21,8 @@ class Parameters:
         # Number of maximum correlation value between first and last slot of a day
         self.max_corr_first_last_slot = 50
 
+        # Number of maximum consecutive Slots in a day for a Teaching
+        self.max_consecutive_slots_teaching = 2
         # Number of maximum days in a week for a Teaching (used to avoid that a teaching has 1 slot in each day)
         self.max_days_teaching = 4
 
