@@ -32,6 +32,7 @@ if __name__ == '__main__':
     # Number of days per week
     days = range(5 if params.saturday_enabled == False else 6)
 
+    '''Variables for the model'''
     # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
     timetable_matrix = {(t.id_teaching, s): model.binary_var(name=f"x_{t.id_teaching}_{s}") for t in teachings for s in slots}
 
@@ -75,20 +76,6 @@ if __name__ == '__main__':
                 corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s+i in slots
                 for t2_id, corr in t1.correlations.items()) <= params.max_corr_in_day)
-
-            # Uncomment this if you want to add a number of minimum correlations in a day
-            '''
-            model.add(model.logical_or(
-                model.sum(
-                    corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
-                    for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
-                    for t2_id, corr in t1.correlations.items()) >= params.min_corr_in_day,
-                model.sum(
-                    corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
-                    for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
-                    for t2_id, corr in t1.correlations.items()) == 0)
-            )
-            '''
 
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
             for t2_id, corr in t1.correlations.items():
