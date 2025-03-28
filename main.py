@@ -1,7 +1,6 @@
 import math
 
 from docplex.cp.model import CpoModel
-from docplex.cp.modeler import logical_or
 
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
@@ -33,6 +32,7 @@ if __name__ == '__main__':
     # Number of days per week
     days = range(5 if params.saturday_enabled == False else 6)
 
+    '''Variables for the model'''
     # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
     timetable_matrix = {(t.id_teaching, s): model.binary_var(name=f"x_{t.id_teaching}_{s}") for t in teachings for s in slots}
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             # Constraint: limiting the number of correlated lectures in a day. For example, I impose that the sum of the correlations between lectures in a day should be <= params.max_corr_in_day
             # This way I don't limit the number of consecutive lecture slots
             model.add_constraint(model.sum(
-                corr * (timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s + i])
+                corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s+i in slots
                 for t2_id, corr in t1.correlations.items()) <= params.max_corr_in_day)
 
@@ -83,12 +83,12 @@ if __name__ == '__main__':
                 if t1.id_teaching < t2_id:
                     model.add_constraint(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2_id, s] <= 1)
 
-    # Constraint: I consider 3 consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
-    for s in range(len(slots) - 2):
+    # Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
+    for s in range(len(slots) - (params.n_consecutive_slots-1)):
         for t1 in teachings:
             correlations_in_slots = model.sum(
                 corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + i])
-                for i in range(1, 3)
+                for i in range(1, params.n_consecutive_slots)
                 for t2_id, corr in t1.correlations.items())
 
             model.add(1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))
