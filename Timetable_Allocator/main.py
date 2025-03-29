@@ -4,6 +4,7 @@ from docplex.cp.model import CpoModel
 
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
+from Utils.Hooks.Teachers import Teachers
 from Utils.Hooks.Teachings import Teachings
 from Utils.Parameters import Parameters
 
@@ -17,6 +18,10 @@ if __name__ == '__main__':
     # List of Teachings that I need to allocate
     teachings_class = Teachings()
     teachings = teachings_class.teachings
+
+    # List of Teachers with their Teachings
+    teachers_class = Teachers()
+    teachers = teachers_class.teachers
 
     # Number of slots per week
     slots = get_slots_per_week()
@@ -37,6 +42,8 @@ if __name__ == '__main__':
     last_lecture_of_day = {(t.id_teaching, d): model.integer_var(0, len(slots)-1, name=f"last_lecture_{t.id_teaching}_{d}") for t in teachings for d in days}
     # Variable that saves the difference between the first and last lecture Slot, for each Day and Teaching
     lectures_dispersion_of_day = {(t.id_teaching, d): model.integer_var(0, params.slot_per_day-1, name=f"lecture_dispersion_{t.id_teaching}_{d}") for t in teachings for d in days}
+
+    '''Teachings Constraint'''
 
     # Constraint: each Teaching must have exactly cfu/2 Slots per week
     for t in teachings:
@@ -62,7 +69,7 @@ if __name__ == '__main__':
             # If n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
             for s in range(len(slots) - 1):
                 if math.floor(s / params.slot_per_day) == d and math.floor((s+1) / params.slot_per_day) == d:
-                    model.add(model.logical_or(timetable_matrix[t.id_teaching, s] == 0, (timetable_matrix[t.id_teaching, s] + timetable_matrix[t.id_teaching, s+1]) >= n_slots_in_day_teaching[t.id_teaching, d]))
+                    model.add(model.logical_or(timetable_matrix[t.id_teaching, s] == 0, (timetable_matrix[t.id_teaching, s] + timetable_matrix[t.id_teaching, s+1]) >= model.min(2, n_slots_in_day_teaching[t.id_teaching, d])))
 
     for s in slots:
         for t1 in teachings:
@@ -110,6 +117,13 @@ if __name__ == '__main__':
     for t1 in teachings:
         for t2_id, corr in t1.correlations.items():
             model.add(model.sum(corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + (params.slot_per_day-1)]) for s in range(0, 35, 7)) <= params.max_corr_first_last_slot)
+
+    '''Teachers Contraints'''
+
+    # Constraint: Teachings taught by the same Teacher cannot overlap
+    for s in slots:
+        for teacher in teachers:
+            model.add(model.sum(timetable_matrix[t, s] for t in teacher.teachings_ids) <= 1)
 
     # Solving the problem
     solution = model.solve(log_output=True)

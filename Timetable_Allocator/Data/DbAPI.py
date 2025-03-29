@@ -15,6 +15,8 @@ class DbAPI:
         # TODO: this DB is used to show the results in a comprehensive way using the GUI. In the final version it would be better to have only one DB with all the informations
         self.gui_db = sqlite3.connect("../../GUI_orario_Tesi/interface-server/Db_finale_postModifiche.db")
 
+    '''Teachings'''
+
     '''
         Get all the teachings in the DB
         Return: list of teachings in format [ID_INC, nStudenti, nStudentiFreq, collegio, titolo, CFU, oreLez, titolare]
@@ -50,6 +52,36 @@ class DbAPI:
         cur.execute(sql)
         correlations = cur.fetchall()
         return correlations
+
+    '''Teachers'''
+
+    '''
+        Get all the Teachers surnames in the DB
+        Return: list of Teachers surnames in format [Surname]
+    '''
+    def get_teachers_surnames(self):
+        cur = self.db.cursor()
+        sql = "SELECT Cognome FROM Docente_in_Insegnamento"
+        cur.execute(sql)
+        teachers_surnames = cur.fetchall()
+        return teachers_surnames
+
+    '''
+        Given a Teacher's surname, get all his Teachings
+        Return: list of Teachings in format [ID_INC]
+    '''
+    def get_teachings_for_teacher(self, teacher_surname):
+        # TODO: getting only the teachings from Mechatronic Engineering, instead of the whole DB. The final query should be: SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '"
+        cur = self.db.cursor()
+        sql = ('SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '" AND ID_INC IN (SELECT id_inc FROM Insegnamento_in_Orientamento '
+                        'WHERE nomeCdl="MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)" '
+                        'AND orientamento="Control Technologies for Industry 4.0")')
+        cur.execute(sql)
+        teachings_ids = cur.fetchall()
+        return teachings_ids
+
+
+    '''Timetable'''
 
     '''
         Saving the generated timetable to the GUI DB
