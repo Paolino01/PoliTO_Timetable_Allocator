@@ -7,15 +7,6 @@ from Data.DbAPI import DbAPI
 from Utils.Hooks.Teachings import Teachings
 from Utils.Parameters import Parameters
 
-'''
-    This function returns the correlation value between two teachings that are in the same day in different slots
-'''
-def get_corr_value():
-    if timetable_matrix[t, s] == 1:
-        return
-    else:
-        return 0
-
 if __name__ == '__main__':
     # Problem definition
     model = CpoModel(name="PoliTO_Timetable_Scheduling")
