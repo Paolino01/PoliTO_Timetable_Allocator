@@ -118,12 +118,21 @@ if __name__ == '__main__':
         for t2_id, corr in t1.correlations.items():
             model.add(model.sum(corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t2_id, s + (params.slot_per_day-1)]) for s in range(0, 35, 7)) <= params.max_corr_first_last_slot)
 
+
     '''Teachers Contraints'''
 
     # Constraint: Teachings taught by the same Teacher cannot overlap
+    # TODO: split between Teachings of different semesters
     for s in slots:
         for teacher in teachers:
             model.add(model.sum(timetable_matrix[t, s] for t in teacher.teachings_ids) <= 1)
+
+    # Constraint: a Teacher cannot have lectures in a Slot in which they are unavailable
+    for teacher in teachers:
+        for t in teacher.teachings_ids:
+            for s in teacher.unaivalable_slots:
+                model.add(timetable_matrix[t, s] == 0)
+
 
     # Solving the problem
     solution = model.solve(log_output=True)

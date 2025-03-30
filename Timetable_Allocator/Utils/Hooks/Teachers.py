@@ -26,7 +26,7 @@ class Teachers:
 
     def load_unaivalable_slots(self):
         for t in self.teachers:
-            list_unavalable_slots = self.db_api.get_unaivalable_slots(t.surname)
+            list_unavalable_slots = self.db_api.get_teachers_unavailabilities(t.surname)
 
             for row in list_unavalable_slots:
                 t.add_unaivalable_slots(int(row[0]))

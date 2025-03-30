@@ -70,15 +70,27 @@ class DbAPI:
         Given a Teacher's surname, get all his Teachings
         Return: list of Teachings in format [ID_INC]
     '''
-    def get_teachings_for_teacher(self, teacher_surname):
+    def get_teachings_for_teacher(self, teacher):
         # TODO: getting only the teachings from Mechatronic Engineering, instead of the whole DB. The final query should be: SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '"
         cur = self.db.cursor()
-        sql = ('SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '" AND ID_INC IN (SELECT id_inc FROM Insegnamento_in_Orientamento '
-                        'WHERE nomeCdl="MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)" '
-                        'AND orientamento="Control Technologies for Industry 4.0")')
-        cur.execute(sql)
+        sql = ("SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome=? AND ID_INC IN"
+                    "(SELECT ID_INC FROM main.Insegnamento_in_Orientamento "
+                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'"
+                        "AND orientamento='Control Technologies for Industry 4.0')")
+        cur.execute(sql, (teacher,))
         teachings_ids = cur.fetchall()
         return teachings_ids
+
+    '''
+        Given a Teacher, get all the Slots in which they are unavailable
+        Return: list of Slots in format [Unavailable_Slot]
+    '''
+    def get_teachers_unavailabilities(self, teacher):
+        cur = self.db.cursor()
+        sql = "SELECT Unavailable_Slot FROM Teachers_Unavailability WHERE Teacher=?"
+        cur.execute(sql, (teacher,))
+        teachers_unavailabilities = cur.fetchall()
+        return teachers_unavailabilities
 
 
     '''Timetable'''
