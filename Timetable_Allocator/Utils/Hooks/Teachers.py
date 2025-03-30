@@ -1,32 +1,34 @@
 from Data.DbAPI import DbAPI
 from Utils.Components.Teacher import Teacher
+from Utils.Components.Teaching import Teaching
 
 
 class Teachers:
-    def __init__(self):
+    def __init__(self, all_teachings:list[Teaching]):
         self.teachers:list[Teacher] = []
         self.db_api = DbAPI()
 
         self.load_teachers_from_db()
-        self.load_teachings_for_teacher()
+        self.load_teachings_for_teacher(all_teachings)
+        #self.load_unaivalable_slots()
 
     '''Load all the teachers from the db, by surname.'''
     def load_teachers_from_db(self):
-        list_teachers_surnames = self.db_api.get_teachers_surnames()
+        list_teachers = self.db_api.get_teachers()
 
-        for row in list_teachers_surnames:
+        for row in list_teachers:
             self.teachers.append(Teacher(str(row[0])))
 
-    def load_teachings_for_teacher(self):
+    def load_teachings_for_teacher(self, all_teachings:list[Teaching]):
         for t in self.teachers:
-            list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(t.surname)
+            list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(t.teacher)
 
             for row in list_teachings_for_teacher:
-                t.add_teachings(str(row[0]))
+                t.add_teachings(str(row[0]), all_teachings)
 
     def load_unaivalable_slots(self):
         for t in self.teachers:
-            list_unavalable_slots = self.db_api.get_teachers_unavailabilities(t.surname)
+            list_unavalable_slots = self.db_api.get_teachers_unavailabilities(t.teacher)
 
             for row in list_unavalable_slots:
                 t.add_unaivalable_slots(int(row[0]))

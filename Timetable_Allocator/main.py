@@ -20,7 +20,7 @@ if __name__ == '__main__':
     teachings = teachings_class.teachings
 
     # List of Teachers with their Teachings
-    teachers_class = Teachers()
+    teachers_class = Teachers(teachings)
     teachers = teachers_class.teachers
 
     # Number of slots per week
@@ -43,7 +43,8 @@ if __name__ == '__main__':
     # Variable that saves the difference between the first and last lecture Slot, for each Day and Teaching
     lectures_dispersion_of_day = {(t.id_teaching, d): model.integer_var(0, params.slot_per_day-1, name=f"lecture_dispersion_{t.id_teaching}_{d}") for t in teachings for d in days}
 
-    '''Teachings Constraint'''
+
+    '''Teachings Constraints'''
 
     # Constraint: each Teaching must have exactly cfu/2 Slots per week
     for t in teachings:
@@ -125,13 +126,26 @@ if __name__ == '__main__':
     # TODO: split between Teachings of different semesters
     for s in slots:
         for teacher in teachers:
-            model.add(model.sum(timetable_matrix[t, s] for t in teacher.teachings_ids) <= 1)
+            model.add(model.sum(timetable_matrix[t.id_teaching, s] for t in teacher.teachings) <= 1)
 
     # Constraint: a Teacher cannot have lectures in a Slot in which they are unavailable
     for teacher in teachers:
-        for t in teacher.teachings_ids:
+        for t in teacher.teachings:
             for s in teacher.unaivalable_slots:
-                model.add(timetable_matrix[t, s] == 0)
+                model.add(timetable_matrix[t.id_teaching, s] == 0)
+
+    '''
+    # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
+    for teacher in teachers:
+        for d in days:
+            model.add(model.sum(timetable_matrix[t, s+i]
+                    for t in teacher.teachings_ids
+                    for s in range(d*params.slot_per_day, ((d+1)*params.slot_per_day)-params.max_consecutive_slots_teacher) if s in slots
+                    for i in range(0, (params.max_consecutive_slots_teacher+1))
+                )
+                <= params.max_consecutive_slots_teacher
+            )
+    '''
 
 
     # Solving the problem

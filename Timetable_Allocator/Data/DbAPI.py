@@ -56,15 +56,15 @@ class DbAPI:
     '''Teachers'''
 
     '''
-        Get all the Teachers surnames in the DB
-        Return: list of Teachers surnames in format [Surname]
+        Get all the Teachers in the DB
+        Return: list of Teachers in format [Surname]
     '''
-    def get_teachers_surnames(self):
+    def get_teachers(self):
         cur = self.db.cursor()
         sql = "SELECT Cognome FROM Docente_in_Insegnamento"
         cur.execute(sql)
-        teachers_surnames = cur.fetchall()
-        return teachers_surnames
+        teachers = cur.fetchall()
+        return teachers
 
     '''
         Given a Teacher's surname, get all his Teachings
