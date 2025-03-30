@@ -17,8 +17,6 @@ class Teachers:
         for row in list_teachers_surnames:
             self.teachers.append(Teacher(str(row[0])))
 
-        print(self.teachers)
-
     def load_teachings_for_teacher(self):
         for t in self.teachers:
             list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(t.surname)
