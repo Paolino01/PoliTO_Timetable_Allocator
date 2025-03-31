@@ -8,7 +8,6 @@ class Teacher:
         self.unaivalable_slots = []
 
     def add_teachings(self, teaching_id: str, all_teachings: list[Teaching]):
-        # TODO: needs testing
         self.teachings.append(next((t for t in all_teachings if t.id_teaching == teaching_id)))
 
     def add_unaivalable_slots(self, unaivalable_slot: int):
