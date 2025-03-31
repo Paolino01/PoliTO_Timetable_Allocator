@@ -2,7 +2,7 @@ import sqlite3
 
 class Db_API:
     def __init__(self):
-        self.db = sqlite3.connect("../Data/Courses_DB.db")
+        self.db = sqlite3.connect("../Data/GoodDB.db")
 
     '''
         Get all the teachings in the DB

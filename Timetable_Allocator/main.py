@@ -1,7 +1,5 @@
 import math
-
 from docplex.cp.model import CpoModel
-
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
 from Utils.Hooks.Teachers import Teachers
@@ -97,7 +95,6 @@ if __name__ == '__main__':
 
             model.add(1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))
 
-
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     # TODO: cannot be tested with the free version of CPLEX due to its limitations, we need the server
     '''
@@ -123,10 +120,18 @@ if __name__ == '__main__':
     '''Teachers Contraints'''
 
     # Constraint: Teachings taught by the same Teacher cannot overlap
-    # TODO: split between Teachings of different semesters
     for s in slots:
         for teacher in teachers:
-            model.add(model.sum(timetable_matrix[t.id_teaching, s] for t in teacher.teachings) <= 1)
+            # Constraints for the first semester
+            model.add(model.sum(timetable_matrix[t.id_teaching, s]
+                for t in teacher.teachings if t.didactic_period[-1] == '1')
+                <= 1
+            )
+            # Constraints for the second semester
+            model.add(model.sum(timetable_matrix[t.id_teaching, s]
+                for t in teacher.teachings if t.didactic_period[-1] == '2')
+                <= 1
+            )
 
     # Constraint: a Teacher cannot have lectures in a Slot in which they are unavailable
     for teacher in teachers:
@@ -134,18 +139,16 @@ if __name__ == '__main__':
             for s in teacher.unaivalable_slots:
                 model.add(timetable_matrix[t.id_teaching, s] == 0)
 
-    '''
     # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
     for teacher in teachers:
         for d in days:
-            model.add(model.sum(timetable_matrix[t, s+i]
-                    for t in teacher.teachings_ids
+            model.add(model.sum(timetable_matrix[t.id_teaching, s+i]
+                    for t in teacher.teachings
                     for s in range(d*params.slot_per_day, ((d+1)*params.slot_per_day)-params.max_consecutive_slots_teacher) if s in slots
                     for i in range(0, (params.max_consecutive_slots_teacher+1))
                 )
                 <= params.max_consecutive_slots_teacher
             )
-    '''
 
 
     # Solving the problem

@@ -10,7 +10,7 @@ class Teachers:
 
         self.load_teachers_from_db()
         self.load_teachings_for_teacher(all_teachings)
-        #self.load_unaivalable_slots()
+        self.load_unaivalable_slots()
 
     '''Load all the teachers from the db, by surname.'''
     def load_teachers_from_db(self):

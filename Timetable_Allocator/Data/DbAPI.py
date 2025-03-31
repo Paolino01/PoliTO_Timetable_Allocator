@@ -22,13 +22,12 @@ class DbAPI:
         Return: list of teachings in format [ID_INC, nStudenti, nStudentiFreq, collegio, titolo, CFU, oreLez, titolare]
     '''
     def get_teachings(self):
-        # TODO: getting only the mechatronic teachings, instead of the whole DB. The final query should be: SELECT * FROM Insegnamento
+        # TODO: for now I'm getting only the mechatronic teachings, instead of the whole DB
         cur = self.db.cursor()
-        sql =   ("SELECT * FROM Insegnamento "
-                 "WHERE id_inc IN "
-                    "(SELECT id_inc FROM Insegnamento_in_Orientamento "
-                        "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
-                        "AND orientamento='Control Technologies for Industry 4.0')")
+        sql =   ("SELECT Insegnamento.ID_INC, titolo, CFU, oreLez, titolare, periodoDidattico FROM Insegnamento, Insegnamento_in_Orientamento "
+                 "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
+                    "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
+                        "AND orientamento='Control Technologies for Industry 4.0'")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -61,19 +60,19 @@ class DbAPI:
     '''
     def get_teachers(self):
         cur = self.db.cursor()
-        sql = "SELECT Cognome FROM Docente_in_Insegnamento"
+        sql = "SELECT Cognome FROM Docente"
         cur.execute(sql)
         teachers = cur.fetchall()
         return teachers
 
     '''
-        Given a Teacher's surname, get all his Teachings
+        Given a Teacher's surname, get all the Teachings in which they are the Main Teacher
         Return: list of Teachings in format [ID_INC]
     '''
     def get_teachings_for_teacher(self, teacher):
         # TODO: getting only the teachings from Mechatronic Engineering, instead of the whole DB. The final query should be: SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '"
         cur = self.db.cursor()
-        sql = ("SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome=? AND ID_INC IN"
+        sql = ("SELECT ID_INC FROM Insegnamento WHERE titolare=? AND ID_INC IN"
                     "(SELECT ID_INC FROM main.Insegnamento_in_Orientamento "
                     "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'"
                         "AND orientamento='Control Technologies for Industry 4.0')")

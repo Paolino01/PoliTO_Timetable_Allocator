@@ -14,7 +14,7 @@ class Teachings:
         list_teachings = self.db_api.get_teachings()
 
         for row in list_teachings:
-            self.teachings.append(Teaching(str(row[0]), int(row[1]), int(row[2]), row[3], row[4], int(row[5]), int(row[6]), row[7]))
+            self.teachings.append(Teaching(str(row[0]), row[1], int(row[2]), int(row[3]), row[4], row[5]))
 
     '''Load the correlations info from the db.'''
     def load_correlations_info_from_db(self):
