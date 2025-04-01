@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea in Ingegneria  informatica (computer engineering)  (Torino)">
+	<orientamento nome="Percorso">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Chemistry">06KWRLM</insegnamento>
+				<insegnamento nome="Computer_sciences">07JCJLM</insegnamento>
+				<insegnamento nome="English_Language_1st_level">02MCCLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_I">04KWQLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Linear_algebra_and_geometry">03KXTLM</insegnamento>
+				<insegnamento nome="Physics_I">04KXVLM</insegnamento>
+				<insegnamento nome="Programming_techniques">02OJPLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Algorithms_and_data_structures">01URNLM</insegnamento>
+				<insegnamento nome="Electromagnetism_and_Circuit_theory">01URLLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_II">07KXULM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architecture">02KTMLM</insegnamento>
+				<insegnamento nome="Elective_courses_from_&quot;Big_Global_Challenges&quot;_catalogue">01DEELM</insegnamento>
+				<insegnamento nome="Introduction_to_databases">01RKWLM</insegnamento>
+				<insegnamento nome="Mathematical_methods_for_Computer_Science">01UROLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_networks">08KSILM</insegnamento>
+				<insegnamento nome="Electronic_systems,_technologies_and_measurements">06QXWLM</insegnamento>
+				<insegnamento nome="Operating_systems">04JEZLM</insegnamento>
+				<insegnamento nome="Signal_analysis_and_processing">02OGGLM</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Calcolo_numerico:_metodi_e_software" crediti="6.0" correlazione="20">01SUNLM</opzione>
+					<opzione nome="Energia,_progresso_e_sostenibilita'" crediti="6.0" correlazione="20">01OYZLM</opzione>
+					<opzione nome="Etica_della_Tecnologia" crediti="6.0" correlazione="20">01HMWLM</opzione>
+					<opzione nome="Gestione_industriale_della_qualita'" crediti="6.0" correlazione="20">02BDYLM</opzione>
+					<opzione nome="Imprenditorialita'_e_innovazione" crediti="6.0" correlazione="20">01RMMLM</opzione>
+					<opzione nome="Introduzione_alle_Applicazioni_Web" crediti="6.0" correlazione="95">01DXULM</opzione>
+					<opzione nome="Modellazione_digitale_di_impianti" crediti="6.0" correlazione="20">01DYBLM</opzione>
+					<opzione nome="Processi_di_re-impiego_e_valorizzazione_energetica" crediti="6.0" correlazione="20">01POSLM</opzione>
+					<opzione nome="Storia_delle_Scienze_e_delle_Tecniche" crediti="6.0" correlazione="20">01FSWLM</opzione>
+					<opzione nome="Strumenti_dell'Ingegneria_per_l'industria_4.0" crediti="6.0" correlazione="20">01RZWLM</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Applied_electronics">03MZGLM</insegnamento>
+				<insegnamento nome="Automatic_control">06LSLLM</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Advanced_technologies_for_risk-based_decision_making" crediti="6.0" correlazione="20">01DYCLM</opzione>
+					<opzione nome="Affidabilita',_sicurezza_e_manutenzione_per_l'azienda" crediti="6.0" correlazione="20">01QYTLM</opzione>
+					<opzione nome="Agri-Tech:_Technologies_for_a_sustainable_agriculture" crediti="6.0" correlazione="20">01FGGLM</opzione>
+					<opzione nome="Applied_signal_processing_laboratory" crediti="6.0" correlazione="20">02TUMLM</opzione>
+					<opzione nome="Automotive_evolution" crediti="6.0" correlazione="20">01DDVLM</opzione>
+					<opzione nome="Cambiamenti_climatici_e_socio_economici" crediti="6.0" correlazione="20">01SANLM</opzione>
+					<opzione nome="Company_economics" crediti="6.0" correlazione="20">01OFYLM</opzione>
+					<opzione nome="Compatibilita'_elettromagnetica_nell'integrazione_dei_sistemi" crediti="6.0" correlazione="20">01QYYLM</opzione>
+					<opzione nome="Controllo_dei_sistemi_meccanici" crediti="6.0" correlazione="20">02EQYLM</opzione>
+					<opzione nome="Droni_per_il_rilievo_territoriale_e_architettonico" crediti="6.0" correlazione="20">01SAOLM</opzione>
+					<opzione nome="Elementi_di_fisica_nucleare" crediti="6.0" correlazione="20">03IOYLM</opzione>
+					<opzione nome="Evoluzione_dei_veicoli_aerospaziali" crediti="6.0" correlazione="20">01OQDLM</opzione>
+					<opzione nome="Generazione_fotovoltaica_ed_eolica_di_energia_elettrica" crediti="6.0" correlazione="20">01OELLM</opzione>
+					<opzione nome="Impianti_di_cogenerazione" crediti="6.0" correlazione="20">01QMBLM</opzione>
+					<opzione nome="Impostazione_progettuale_dell'autoveicolo" crediti="6.0" correlazione="20">01FLXLM</opzione>
+					<opzione nome="Inclusive_design_nelle_scienze_dell'architettura_e_dell'ingegneria" crediti="6.0" correlazione="20">03SAMLM</opzione>
+					<opzione nome="Ingegneria_nelle_terapie_medico-chirurgiche" crediti="6.0" correlazione="20">01QZQLM</opzione>
+					<opzione nome="Introduzione_all'informazione_e_calcolo_quantistico" crediti="6.0" correlazione="95">01UEHLM</opzione>
+					<opzione nome="Introduzione_alle_nanotecnologie" crediti="6.0" correlazione="20">02JNULM</opzione>
+					<opzione nome="Laboratorio_di_internet" crediti="6.0" correlazione="95">01UEJLM</opzione>
+					<opzione nome="Machine_dynamics" crediti="6.0" correlazione="20">01NHYLM</opzione>
+					<opzione nome="Matematica_applicata" crediti="6.0" correlazione="20">02BNYLM</opzione>
+					<opzione nome="Meccanica_Lagrangiana" crediti="6.0" correlazione="20">01DYELM</opzione>
+					<opzione nome="Open_and_virtualized_networks" crediti="6.0" correlazione="20">01UEGLM</opzione>
+					<opzione nome="Ottimizzazione_per_il_problem_solving" crediti="6.0" correlazione="95">01QNKLM</opzione>
+					<opzione nome="Processi_dell'industria_alimentare" crediti="6.0" correlazione="20">03BXYLM</opzione>
+					<opzione nome="Reti_e_sistemi_complessi:_fenomeni_fisici_e_interazioni_sociali" crediti="6.0" correlazione="20">01QFXLM</opzione>
+					<opzione nome="Rischio_sismico" crediti="6.0" correlazione="20">01QZJLM</opzione>
+					<opzione nome="Sicurezza_e_legislazione_dell'ambiente_e_del_territorio" crediti="6.0" correlazione="20">01NJALM</opzione>
+					<opzione nome="Sistemi_di_propulsione_elettrica_per_i_trasporti" crediti="6.0" correlazione="20">02NMLLM</opzione>
+					<opzione nome="Sperimentazione_e_progettazione_di_tecnologie_energetiche" crediti="6.0" correlazione="20">01QMCLM</opzione>
+					<opzione nome="Tecnologie_per_IoT" crediti="6.0" correlazione="95">01UEILM</opzione>
+					<opzione nome="Visualizzazione_dell'informazione_quantitativa" crediti="6.0" correlazione="95">01QZNLM</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Object_oriented_programming">04JEYLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Primo anno sede di Mondovi'">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Analisi_matematica_I">22ACFLM</insegnamento>
+				<insegnamento nome="Chimica">20AHMLM</insegnamento>
+				<insegnamento nome="English_Language_1st_level">02MCCLM</insegnamento>
+				<insegnamento nome="Informatica">15BHDLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Algebra_lineare_e_geometria">03RKCLM</insegnamento>
+				<insegnamento nome="Fisica_I">20AXOLM</insegnamento>
+				<insegnamento nome="Programming_techniques">02OJPLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Algorithms_and_data_structures">01URNLM</insegnamento>
+				<insegnamento nome="Electromagnetism_and_Circuit_theory">01URLLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_II">07KXULM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architecture">02KTMLM</insegnamento>
+				<insegnamento nome="Elective_courses_from_&quot;Big_Global_Challenges&quot;_catalogue">01DEELM</insegnamento>
+				<insegnamento nome="Introduction_to_databases">01RKWLM</insegnamento>
+				<insegnamento nome="Mathematical_methods_for_Computer_Science">01UROLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_networks">08KSILM</insegnamento>
+				<insegnamento nome="Electronic_systems,_technologies_and_measurements">06QXWLM</insegnamento>
+				<insegnamento nome="Operating_systems">04JEZLM</insegnamento>
+				<insegnamento nome="Signal_analysis_and_processing">02OGGLM</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Calcolo_numerico:_metodi_e_software" crediti="6.0" correlazione="20">01SUNLM</opzione>
+					<opzione nome="Energia,_progresso_e_sostenibilita'" crediti="6.0" correlazione="20">01OYZLM</opzione>
+					<opzione nome="Etica_della_Tecnologia" crediti="6.0" correlazione="20">01HMWLM</opzione>
+					<opzione nome="Gestione_industriale_della_qualita'" crediti="6.0" correlazione="20">02BDYLM</opzione>
+					<opzione nome="Imprenditorialita'_e_innovazione" crediti="6.0" correlazione="20">01RMMLM</opzione>
+					<opzione nome="Introduzione_alle_Applicazioni_Web" crediti="6.0" correlazione="95">01DXULM</opzione>
+					<opzione nome="Modellazione_digitale_di_impianti" crediti="6.0" correlazione="20">01DYBLM</opzione>
+					<opzione nome="Processi_di_re-impiego_e_valorizzazione_energetica" crediti="6.0" correlazione="20">01POSLM</opzione>
+					<opzione nome="Storia_delle_Scienze_e_delle_Tecniche" crediti="6.0" correlazione="20">01FSWLM</opzione>
+					<opzione nome="Strumenti_dell'Ingegneria_per_l'industria_4.0" crediti="6.0" correlazione="20">01RZWLM</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Applied_electronics">03MZGLM</insegnamento>
+				<insegnamento nome="Automatic_control">06LSLLM</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Advanced_technologies_for_risk-based_decision_making" crediti="6.0" correlazione="20">01DYCLM</opzione>
+					<opzione nome="Affidabilita',_sicurezza_e_manutenzione_per_l'azienda" crediti="6.0" correlazione="20">01QYTLM</opzione>
+					<opzione nome="Agri-Tech:_Technologies_for_a_sustainable_agriculture" crediti="6.0" correlazione="20">01FGGLM</opzione>
+					<opzione nome="Applied_signal_processing_laboratory" crediti="6.0" correlazione="20">02TUMLM</opzione>
+					<opzione nome="Automotive_evolution" crediti="6.0" correlazione="20">01DDVLM</opzione>
+					<opzione nome="Cambiamenti_climatici_e_socio_economici" crediti="6.0" correlazione="20">01SANLM</opzione>
+					<opzione nome="Company_economics" crediti="6.0" correlazione="20">01OFYLM</opzione>
+					<opzione nome="Compatibilita'_elettromagnetica_nell'integrazione_dei_sistemi" crediti="6.0" correlazione="20">01QYYLM</opzione>
+					<opzione nome="Controllo_dei_sistemi_meccanici" crediti="6.0" correlazione="20">02EQYLM</opzione>
+					<opzione nome="Droni_per_il_rilievo_territoriale_e_architettonico" crediti="6.0" correlazione="20">01SAOLM</opzione>
+					<opzione nome="Elementi_di_fisica_nucleare" crediti="6.0" correlazione="20">03IOYLM</opzione>
+					<opzione nome="Evoluzione_dei_veicoli_aerospaziali" crediti="6.0" correlazione="20">01OQDLM</opzione>
+					<opzione nome="Generazione_fotovoltaica_ed_eolica_di_energia_elettrica" crediti="6.0" correlazione="20">01OELLM</opzione>
+					<opzione nome="Impianti_di_cogenerazione" crediti="6.0" correlazione="20">01QMBLM</opzione>
+					<opzione nome="Impostazione_progettuale_dell'autoveicolo" crediti="6.0" correlazione="20">01FLXLM</opzione>
+					<opzione nome="Inclusive_design_nelle_scienze_dell'architettura_e_dell'ingegneria" crediti="6.0" correlazione="20">03SAMLM</opzione>
+					<opzione nome="Ingegneria_nelle_terapie_medico-chirurgiche" crediti="6.0" correlazione="20">01QZQLM</opzione>
+					<opzione nome="Introduzione_all'informazione_e_calcolo_quantistico" crediti="6.0" correlazione="95">01UEHLM</opzione>
+					<opzione nome="Introduzione_alle_nanotecnologie" crediti="6.0" correlazione="20">02JNULM</opzione>
+					<opzione nome="Laboratorio_di_internet" crediti="6.0" correlazione="95">01UEJLM</opzione>
+					<opzione nome="Machine_dynamics" crediti="6.0" correlazione="20">01NHYLM</opzione>
+					<opzione nome="Matematica_applicata" crediti="6.0" correlazione="20">02BNYLM</opzione>
+					<opzione nome="Meccanica_Lagrangiana" crediti="6.0" correlazione="20">01DYELM</opzione>
+					<opzione nome="Open_and_virtualized_networks" crediti="6.0" correlazione="20">01UEGLM</opzione>
+					<opzione nome="Ottimizzazione_per_il_problem_solving" crediti="6.0" correlazione="95">01QNKLM</opzione>
+					<opzione nome="Processi_dell'industria_alimentare" crediti="6.0" correlazione="20">03BXYLM</opzione>
+					<opzione nome="Reti_e_sistemi_complessi:_fenomeni_fisici_e_interazioni_sociali" crediti="6.0" correlazione="20">01QFXLM</opzione>
+					<opzione nome="Rischio_sismico" crediti="6.0" correlazione="20">01QZJLM</opzione>
+					<opzione nome="Sicurezza_e_legislazione_dell'ambiente_e_del_territorio" crediti="6.0" correlazione="20">01NJALM</opzione>
+					<opzione nome="Sistemi_di_propulsione_elettrica_per_i_trasporti" crediti="6.0" correlazione="20">02NMLLM</opzione>
+					<opzione nome="Sperimentazione_e_progettazione_di_tecnologie_energetiche" crediti="6.0" correlazione="20">01QMCLM</opzione>
+					<opzione nome="Tecnologie_per_IoT" crediti="6.0" correlazione="95">01UEILM</opzione>
+					<opzione nome="Visualizzazione_dell'informazione_quantitativa" crediti="6.0" correlazione="95">01QZNLM</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Object_oriented_programming">04JEYLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Percorso INTRAPRENDENTI">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Chemistry">06KWRLM</insegnamento>
+				<insegnamento nome="Computer_sciences">07JCJLM</insegnamento>
+				<insegnamento nome="English_Language_1st_level">02MCCLM</insegnamento>
+				<insegnamento nome="Laboratorio_Problem_Solving_1_-_Intraprendenti">01UZILM</insegnamento>
+				<insegnamento nome="Laboratorio_di_Chimica_-_Intraprendenti">01DGCLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_I">04KWQLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Laboratorio_Problem_Solving_2_-_Intraprendenti">01UZLLM</insegnamento>
+				<insegnamento nome="Laboratorio_di_Fisica_I_-_Intraprendenti">01DGDLM</insegnamento>
+				<insegnamento nome="Linear_algebra_and_geometry">03KXTLM</insegnamento>
+				<insegnamento nome="Physics_I">04KXVLM</insegnamento>
+				<insegnamento nome="Programming_techniques">02OJPLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Algorithms_and_data_structures">01URNLM</insegnamento>
+				<insegnamento nome="Electromagnetism_and_Circuit_theory">01URLLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_II">07KXULM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architecture">02KTMLM</insegnamento>
+				<insegnamento nome="Elective_courses_from_&quot;Big_Global_Challenges&quot;_catalogue">01DEELM</insegnamento>
+				<insegnamento nome="Introduction_to_databases">01RKWLM</insegnamento>
+				<insegnamento nome="Mathematical_methods_for_Computer_Science">01UROLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_networks">08KSILM</insegnamento>
+				<insegnamento nome="Electronic_systems,_technologies_and_measurements">06QXWLM</insegnamento>
+				<insegnamento nome="Operating_systems">04JEZLM</insegnamento>
+				<insegnamento nome="Signal_analysis_and_processing">02OGGLM</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Calcolo_numerico:_metodi_e_software" crediti="6.0" correlazione="20">01SUNLM</opzione>
+					<opzione nome="Energia,_progresso_e_sostenibilita'" crediti="6.0" correlazione="20">01OYZLM</opzione>
+					<opzione nome="Etica_della_Tecnologia" crediti="6.0" correlazione="20">01HMWLM</opzione>
+					<opzione nome="Gestione_industriale_della_qualita'" crediti="6.0" correlazione="20">02BDYLM</opzione>
+					<opzione nome="Imprenditorialita'_e_innovazione" crediti="6.0" correlazione="20">01RMMLM</opzione>
+					<opzione nome="Introduzione_alle_Applicazioni_Web" crediti="6.0" correlazione="95">01DXULM</opzione>
+					<opzione nome="Modellazione_digitale_di_impianti" crediti="6.0" correlazione="20">01DYBLM</opzione>
+					<opzione nome="Processi_di_re-impiego_e_valorizzazione_energetica" crediti="6.0" correlazione="20">01POSLM</opzione>
+					<opzione nome="Storia_delle_Scienze_e_delle_Tecniche" crediti="6.0" correlazione="20">01FSWLM</opzione>
+					<opzione nome="Strumenti_dell'Ingegneria_per_l'industria_4.0" crediti="6.0" correlazione="20">01RZWLM</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A(Free_ECTS_credits_3rd_year)" crediti="6.0">
+					<opzione nome="Advanced_technologies_for_risk-based_decision_making" crediti="6.0" correlazione="20">01DYCLM</opzione>
+					<opzione nome="Affidabilita',_sicurezza_e_manutenzione_per_l'azienda" crediti="6.0" correlazione="20">01QYTLM</opzione>
+					<opzione nome="Agri-Tech:_Technologies_for_a_sustainable_agriculture" crediti="6.0" correlazione="20">01FGGLM</opzione>
+					<opzione nome="Applied_signal_processing_laboratory" crediti="6.0" correlazione="20">02TUMLM</opzione>
+					<opzione nome="Automotive_evolution" crediti="6.0" correlazione="20">01DDVLM</opzione>
+					<opzione nome="Cambiamenti_climatici_e_socio_economici" crediti="6.0" correlazione="20">01SANLM</opzione>
+					<opzione nome="Company_economics" crediti="6.0" correlazione="20">01OFYLM</opzione>
+					<opzione nome="Compatibilita'_elettromagnetica_nell'integrazione_dei_sistemi" crediti="6.0" correlazione="20">01QYYLM</opzione>
+					<opzione nome="Controllo_dei_sistemi_meccanici" crediti="6.0" correlazione="20">02EQYLM</opzione>
+					<opzione nome="Droni_per_il_rilievo_territoriale_e_architettonico" crediti="6.0" correlazione="20">01SAOLM</opzione>
+					<opzione nome="Elementi_di_fisica_nucleare" crediti="6.0" correlazione="20">03IOYLM</opzione>
+					<opzione nome="Evoluzione_dei_veicoli_aerospaziali" crediti="6.0" correlazione="20">01OQDLM</opzione>
+					<opzione nome="Generazione_fotovoltaica_ed_eolica_di_energia_elettrica" crediti="6.0" correlazione="20">01OELLM</opzione>
+					<opzione nome="Impianti_di_cogenerazione" crediti="6.0" correlazione="20">01QMBLM</opzione>
+					<opzione nome="Impostazione_progettuale_dell'autoveicolo" crediti="6.0" correlazione="20">01FLXLM</opzione>
+					<opzione nome="Inclusive_design_nelle_scienze_dell'architettura_e_dell'ingegneria" crediti="6.0" correlazione="20">03SAMLM</opzione>
+					<opzione nome="Ingegneria_nelle_terapie_medico-chirurgiche" crediti="6.0" correlazione="20">01QZQLM</opzione>
+					<opzione nome="Introduzione_all'informazione_e_calcolo_quantistico" crediti="6.0" correlazione="95">01UEHLM</opzione>
+					<opzione nome="Introduzione_alle_nanotecnologie" crediti="6.0" correlazione="20">02JNULM</opzione>
+					<opzione nome="Laboratorio_di_internet" crediti="6.0" correlazione="95">01UEJLM</opzione>
+					<opzione nome="Machine_dynamics" crediti="6.0" correlazione="20">01NHYLM</opzione>
+					<opzione nome="Matematica_applicata" crediti="6.0" correlazione="20">02BNYLM</opzione>
+					<opzione nome="Meccanica_Lagrangiana" crediti="6.0" correlazione="20">01DYELM</opzione>
+					<opzione nome="Open_and_virtualized_networks" crediti="6.0" correlazione="20">01UEGLM</opzione>
+					<opzione nome="Ottimizzazione_per_il_problem_solving" crediti="6.0" correlazione="95">01QNKLM</opzione>
+					<opzione nome="Processi_dell'industria_alimentare" crediti="6.0" correlazione="20">03BXYLM</opzione>
+					<opzione nome="Reti_e_sistemi_complessi:_fenomeni_fisici_e_interazioni_sociali" crediti="6.0" correlazione="20">01QFXLM</opzione>
+					<opzione nome="Rischio_sismico" crediti="6.0" correlazione="20">01QZJLM</opzione>
+					<opzione nome="Sicurezza_e_legislazione_dell'ambiente_e_del_territorio" crediti="6.0" correlazione="20">01NJALM</opzione>
+					<opzione nome="Sistemi_di_propulsione_elettrica_per_i_trasporti" crediti="6.0" correlazione="20">02NMLLM</opzione>
+					<opzione nome="Sperimentazione_e_progettazione_di_tecnologie_energetiche" crediti="6.0" correlazione="20">01QMCLM</opzione>
+					<opzione nome="Tecnologie_per_IoT" crediti="6.0" correlazione="95">01UEILM</opzione>
+					<opzione nome="Visualizzazione_dell'informazione_quantitativa" crediti="6.0" correlazione="95">01QZNLM</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Applied_electronics">03MZGLM</insegnamento>
+				<insegnamento nome="Automatic_control">06LSLLM</insegnamento>
+				<insegnamento nome="Object_oriented_programming">04JEYLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Orientamento &quot;Information technology engineering&quot; - Shanghai">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Chemistry">06KWRLM</insegnamento>
+				<insegnamento nome="Computer_sciences">07JCJLM</insegnamento>
+				<insegnamento nome="English_Language_1st_level">02MCCLM</insegnamento>
+				<insegnamento nome="Mathematical_analysis_I">04KWQLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Chinese_language">10LOELM</insegnamento>
+				<insegnamento nome="Linear_algebra_and_geometry">03KXTLM</insegnamento>
+				<insegnamento nome="Physics_I">04KXVLM</insegnamento>
+				<insegnamento nome="Programming_techniques">02OJPLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Information_technology_engineering_I">02PBBLM</insegnamento>
+				<insegnamento nome="Information_technology_engineering_II">02PBCLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Information_technology_engineering_I">02PBBLM</insegnamento>
+				<insegnamento nome="Information_technology_engineering_II">02PBCLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_networks">08KSILM</insegnamento>
+				<insegnamento nome="Electronic_systems,_technologies_and_measurements">06QXWLM</insegnamento>
+				<insegnamento nome="Operating_systems">04JEZLM</insegnamento>
+				<insegnamento nome="Signal_analysis_and_processing">02OGGLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>3</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Automatic_control">06LSLLM</insegnamento>
+				<insegnamento nome="Introduction_to_databases">01RKWLM</insegnamento>
+				<insegnamento nome="Object_oriented_programming">04JEYLM</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>

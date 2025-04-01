@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Cybersecurity   (Torino)">
+	<orientamento nome="Cyber Designer">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures_and_operating_systems">01GYKUV</insegnamento>
+				<insegnamento nome="Information_systems_security">01TYMUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDUV</opzione>
+					<opzione nome="Machine_learning_for_networking" crediti="6.0" correlazione="20">02DSMUV</opzione>
+					<opzione nome="Quantum_computing" crediti="6.0" correlazione="20">04TAHUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Blockchain_e_criptoeconomia" crediti="6.0" correlazione="20">01UWTUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+				<insegnamento nome="Cryptography">06LPYUV</insegnamento>
+				<insegnamento nome="Hardware_&amp;_Wireless_Security">01GYSUV</insegnamento>
+				<insegnamento nome="Web_Applications">01GYOUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_Information_systems_security">01GYYUV</insegnamento>
+				<insegnamento nome="Advanced_cryptography">01GYRUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_3" crediti="12.0">
+					<opzione nome="Computer_Forensics_and_cyber_crime_analysis" crediti="8.0" correlazione="20">01GZDUV</opzione>
+					<opzione nome="Corporate_cybersecurity_evaluation" crediti="6.0" correlazione="20">01GZCUV</opzione>
+					<opzione nome="Cybersecurity_laws_and_regulations" crediti="6.0" correlazione="20">01GZBUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Security_verification_and_testing">02TYAUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_3" crediti="12.0"/>
+				<insegnamento nome="Advanced_data_protection,_and_methods_for_privacy_and_anonymity">01GZAUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Cyber Analyst">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures_and_operating_systems">01GYKUV</insegnamento>
+				<insegnamento nome="Information_systems_security">01TYMUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDUV</opzione>
+					<opzione nome="Machine_learning_for_networking" crediti="6.0" correlazione="20">02DSMUV</opzione>
+					<opzione nome="Quantum_computing" crediti="6.0" correlazione="20">04TAHUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Blockchain_e_criptoeconomia" crediti="6.0" correlazione="20">01UWTUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+				<insegnamento nome="Cryptography">06LPYUV</insegnamento>
+				<insegnamento nome="Hardware_&amp;_Wireless_Security">01GYSUV</insegnamento>
+				<insegnamento nome="Web_Applications">01GYOUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_Information_systems_security">01GYYUV</insegnamento>
+				<insegnamento nome="Advanced_cryptography">01GYRUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_3" crediti="12.0">
+					<opzione nome="Computer_Forensics_and_cyber_crime_analysis" crediti="8.0" correlazione="20">01GZDUV</opzione>
+					<opzione nome="Corporate_cybersecurity_evaluation" crediti="6.0" correlazione="20">01GZCUV</opzione>
+					<opzione nome="Cybersecurity_laws_and_regulations" crediti="6.0" correlazione="20">01GZBUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Security_verification_and_testing">02TYAUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_3" crediti="12.0"/>
+				<insegnamento nome="AI_and_Cybersecurity">01GYZUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Cryptography expert">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures_and_operating_systems">01GYKUV</insegnamento>
+				<insegnamento nome="Information_systems_security">01TYMUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDUV</opzione>
+					<opzione nome="Machine_learning_for_networking" crediti="6.0" correlazione="20">02DSMUV</opzione>
+					<opzione nome="Quantum_computing" crediti="6.0" correlazione="20">04TAHUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Blockchain_e_criptoeconomia" crediti="6.0" correlazione="20">01UWTUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+				<insegnamento nome="Cryptography">06LPYUV</insegnamento>
+				<insegnamento nome="Hardware_&amp;_Wireless_Security">01GYSUV</insegnamento>
+				<insegnamento nome="Web_Applications">01GYOUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_cryptography">01GYRUV</insegnamento>
+				<insegnamento nome="Computer_Forensics_and_cyber_crime_analysis">01GZDUV</insegnamento>
+				<insegnamento nome="Corporate_cybersecurity_evaluation">01GZCUV</insegnamento>
+				<insegnamento nome="Cybersecurity_laws_and_regulations">01GZBUV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Advanced_Information_systems_security" preferito_lingua="yes">01GYYUV</opzione>
+					<opzione nome="Security_verification_and_testing" preferito_lingua="yes">02TYAUV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Post-quantum_Cryptography">01GZEUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Cyber Legal and Compliance Officer">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures_and_operating_systems">01GYKUV</insegnamento>
+				<insegnamento nome="Information_systems_security">01TYMUV</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDUV</opzione>
+					<opzione nome="Machine_learning_for_networking" crediti="6.0" correlazione="20">02DSMUV</opzione>
+					<opzione nome="Quantum_computing" crediti="6.0" correlazione="20">04TAHUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="6.0">
+					<opzione nome="Blockchain_e_criptoeconomia" crediti="6.0" correlazione="20">01UWTUV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Networks,_cloud_and_application_security">01GYLUV</insegnamento>
+				<insegnamento nome="Cryptography">06LPYUV</insegnamento>
+				<insegnamento nome="Hardware_&amp;_Wireless_Security">01GYSUV</insegnamento>
+				<insegnamento nome="Web_Applications">01GYOUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_cryptography">01GYRUV</insegnamento>
+				<insegnamento nome="Computer_Forensics_and_cyber_crime_analysis">01GZDUV</insegnamento>
+				<insegnamento nome="Corporate_cybersecurity_evaluation">01GZCUV</insegnamento>
+				<insegnamento nome="Cybersecurity_laws_and_regulations">01GZBUV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Advanced_Information_systems_security" preferito_lingua="yes">01GYYUV</opzione>
+					<opzione nome="Security_verification_and_testing" preferito_lingua="yes">02TYAUV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_data_protection,_and_methods_for_privacy_and_anonymity">01GZAUV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>

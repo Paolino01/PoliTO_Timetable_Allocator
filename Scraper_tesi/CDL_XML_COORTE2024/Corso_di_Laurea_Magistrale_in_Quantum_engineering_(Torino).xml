@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Quantum  engineering  (Torino)">
+	<orientamento nome="Percorso">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Cybersecurity">01UDRUU</insegnamento>
+				<insegnamento nome="Quantum_Condensed_Matter_Physics_Quantum_Devices">01HFYUU</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Fundamentals_of_technological_processes" preferito_lingua="yes">01GZYUU</opzione>
+					<opzione nome="Programming_techniques" preferito_lingua="yes">02OJPUU</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Mathematics_for_Quantum_Engineering" preferito_lingua="yes">01GZZUU</opzione>
+					<opzione nome="Quantum_and_Matter_Physics_Introduction" preferito_lingua="yes">01HHOUU</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="HPC_(High_Performance_Computing)">01HEKUU</insegnamento>
+				<insegnamento nome="Materials_and_Processes_for_quantum_sensing,_metrology_and_qubit_devices_Qubit_Electronics">01HGBUU</insegnamento>
+				<insegnamento nome="Quantum_information">01HEJUU</insegnamento>
+				<insegnamento nome="Quantum_photonics">01HEDUU</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Labs_of_Quantum_technologies">01HEPUU</insegnamento>
+				<insegnamento nome="Quantum_Communications_and_Networks_and_Quantum_Cryptography">01HGEUU</insegnamento>
+				<insegnamento nome="Quantum_Hardware_Design_and_Optimization_and_Quantum_Computing">01HGHUU</insegnamento>
+				<scelta_tabella nome_tabella="Elective_courses" crediti="12.0">
+					<opzione nome="Professional_Training" crediti="6.0" correlazione="20">09MSYUU</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Elective_courses" crediti="12.0">
+					<opzione nome="Professional_Training" crediti="6.0" correlazione="20">09MSYUU</opzione>
+					<opzione nome="Machine_learning" crediti="6.0" correlazione="20">01HERUU</opzione>
+					<opzione nome="Quantum_response_theory" crediti="6.0" correlazione="20">01HEQUU</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>

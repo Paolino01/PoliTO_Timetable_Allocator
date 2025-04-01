@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Communications  and computer networks engineering (ingegneria telematica e delle comunicazioni)  (Torino)">
+	<orientamento nome="Challenge extracurricolari">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_CDP">01GCDBG</insegnamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_Ente_Turismo_LRM">01GCCBG</insegnamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_Lavazza">01GBYBG</insegnamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_Mista">01GCEBG</insegnamento>
+				<insegnamento nome="Challenge@Polito_by_Firms_-_Aral">01GCFBG</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_ArchLivIng">01GCJBG</insegnamento>
+				<insegnamento nome="Challenge@PoliTo_by_Firms_-_C2R">01GCKBG</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>
