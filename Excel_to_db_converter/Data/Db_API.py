@@ -8,12 +8,12 @@ class Db_API:
         Get all the teachings in the DB
         Return: list of teachings in format [titolo]
     '''
-    def get_teachings_names(self):
+    def get_teachings_ids(self):
         cur = self.db.cursor()
-        sql = "SELECT titolo FROM Insegnamento"
+        sql = "SELECT ID_INC FROM Insegnamento WHERE ID_INC IN (SELECT ID_INC FROM Insegnamento_in_Orientamento WHERE orientamento = 'MECHATRONIC ENGINEERING (')"
         cur.execute(sql)
-        teachings_names = cur.fetchall()
-        return teachings_names
+        teachings_ids = cur.fetchall()
+        return teachings_ids
 
     '''
         Deletes all the Teachers_Unavailability entries    

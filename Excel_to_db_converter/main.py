@@ -15,16 +15,19 @@ if __name__ == '__main__':
     '''
 
     # Load the Teaching IDs from the DB
-    '''
-    list_teachings_names = db_api.get_teachings_names()
+    list_teachings_ids = db_api.get_teachings_ids()
+
+    # Converting the data in the list
+    list_teachings_ids = [t[0] for t in list_teachings_ids]
 
     # Get all the Excel files in the "Courses Data" folder
     courses_files = glob.glob(os.path.join("../Data/Excels/Courses Data", "*.xls"))
 
     for f in courses_files:
         df = pandas.read_excel(f)
-        print(df["id_inc"].isin(list_teachings_names))
-    '''
+        filtered_df = df.loc[df["id_inc"].isin(list_teachings_ids)]
+
+
 
     '''
     Teachers
