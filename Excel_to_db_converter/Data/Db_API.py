@@ -10,10 +10,19 @@ class Db_API:
     '''
     def get_teachings_ids(self):
         cur = self.db.cursor()
-        sql = "SELECT ID_INC FROM Insegnamento WHERE ID_INC IN (SELECT ID_INC FROM Insegnamento_in_Orientamento WHERE orientamento = 'MECHATRONIC ENGINEERING (')"
+        sql = "SELECT ID_INC FROM Insegnamento"
         cur.execute(sql)
         teachings_ids = cur.fetchall()
         return teachings_ids
+
+    '''
+        Update a Teaching in the DB with the hours of lectures and laboratories
+    '''
+    def add_lecture_hours_to_course(self, id_inc, lecture_hours, lab_hours):
+        cur = self.db.cursor()
+        sql = "UPDATE Insegnamento SET oreLez = ?, oreLab = ? WHERE ID_INC = ?"
+        cur.execute(sql, (lecture_hours, lab_hours, id_inc))
+        self.db.commit()
 
     '''
         Deletes all the Teachers_Unavailability entries    

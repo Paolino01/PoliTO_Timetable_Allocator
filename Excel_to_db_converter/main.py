@@ -1,10 +1,29 @@
 import math
-
 import pandas
 import glob
 import os
 
 from Data.Db_API import Db_API
+
+'''
+    Given a practice/lab lecture in format "Type hours*#teachers*#slots", returns the total number of hours for that lecture.
+'''
+def split_slot_hours(slot):
+    slot_hours = slot.split()
+    if slot_hours[0] != '0' and len(slot_hours) == 2:
+        slot_hours = slot_hours[1].split('*')
+        slot_hours = float(slot_hours[0].replace(",", ".")) * int(slot_hours[2])
+    else:
+        slot_hours = 0
+
+    return slot_hours
+
+'''
+    Given a Teaching, returns the total number of hours for lectures of that course.
+'''
+def calculate_lecture_hours_for_course(row):
+    practice_hours = split_slot_hours(row["h_ese"])
+    return float(row["h_lez"]) + practice_hours
 
 if __name__ == '__main__':
     db_api = Db_API()
@@ -24,8 +43,18 @@ if __name__ == '__main__':
     courses_files = glob.glob(os.path.join("../Data/Excels/Courses Data", "*.xls"))
 
     for f in courses_files:
+        # For each file, getting only the courses that are in the DB
         df = pandas.read_excel(f)
         filtered_df = df.loc[df["id_inc"].isin(list_teachings_ids)]
+        for index, row in filtered_df.iterrows():
+            # Retrieving the information about hours of lectures and laboratories for each Teaching
+            lecture_hours = calculate_lecture_hours_for_course(row)
+            lab_hours = split_slot_hours(row["h_lab"])
+
+            # Adding the information about hours of lectures and laboratories to a Teaching
+            db_api.add_lecture_hours_to_course(row["id_inc"], lecture_hours, lab_hours)
+
+    print("Teachings hours inserted in the DB")
 
 
 
@@ -45,3 +74,5 @@ if __name__ == '__main__':
             for slot in range(0, 35, 5):
                 if df.iloc[i, day+slot] == "Indisponibile" or df.iloc[i, day+slot] == "Unavailable":
                     db_api.insert_unavailable_slot(teacher, ((day-5)*7) + math.floor(slot/5))
+
+    print("Teachers unavailabilities inserted in the DB")
