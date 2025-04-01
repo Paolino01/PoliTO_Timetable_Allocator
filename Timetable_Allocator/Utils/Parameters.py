@@ -2,7 +2,7 @@
 class Parameters:
     def __init__(self):
         # DB created by the Scraper
-        self.DB = "../Data/GoodDB.db"
+        self.DB = "../Data/Courses_DB.db"
 
         # Number of lecture Slots per each day, 5 days per week
         self.slot_per_day: int = 7

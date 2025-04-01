@@ -138,7 +138,7 @@ if __name__ == '__main__':
         for t in teacher.teachings:
             for s in teacher.unaivalable_slots:
                 model.add(timetable_matrix[t.id_teaching, s] == 0)
-
+MovingChanging DBFixing DB
     # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
     for teacher in teachers:
         for d in days:

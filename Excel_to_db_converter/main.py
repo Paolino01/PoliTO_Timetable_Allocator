@@ -43,5 +43,5 @@ if __name__ == '__main__':
         # 8:30-10:00 Monday; 8:30-10:00 Tuesday; 8:30-10:00 Wednesday; ...; 10:00-11:30 Monday; 10:00-11:30 Tuesday; ...; 17:30-19:00 Thursday; 17:30-19:00 Friday
         for day in range(5, 10):
             for slot in range(0, 35, 5):
-                if df.iloc[i, day+slot] == "Indisponibile" or df.iloc[i, day+slot] == "Unaivalable":
+                if df.iloc[i, day+slot] == "Indisponibile" or df.iloc[i, day+slot] == "Unavailable":
                     db_api.insert_unavailable_slot(teacher, ((day-5)*7) + math.floor(slot/5))
