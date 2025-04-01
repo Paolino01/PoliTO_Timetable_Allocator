@@ -8,12 +8,5 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../Data/Courses_DB.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="GoodDB.db" uuid="39e1650a-a783-49a4-80eb-abdb5bfeae88">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../Data/GoodDB.db</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>
