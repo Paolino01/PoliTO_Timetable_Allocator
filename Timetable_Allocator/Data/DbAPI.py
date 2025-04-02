@@ -12,9 +12,6 @@ class DbAPI:
         self.params = Parameters()
         self.db = sqlite3.connect(self.params.DB)
 
-        # TODO: this DB is used to show the results in a comprehensive way using the GUI. In the final version it would be better to have only one DB with all the informations
-        self.gui_db = sqlite3.connect("../../GUI_orario_Tesi/interface-server/Db_finale_postModifiche.db")
-
     '''Teachings'''
 
     '''
@@ -99,7 +96,7 @@ class DbAPI:
     '''
     # TODO: in the final version of the project it would be better to have only one DB
     def save_results_to_db(self, solution, timetable_matrix, slots: list[int], teachings: list[Teaching]):
-        cur = self.gui_db.cursor()
+        cur = self.db.cursor()
 
         # Deleting previous data from the DB
         sql = "DELETE FROM Slot WHERE pianoAllocazione='Mechatronic_timetable'"
@@ -125,6 +122,6 @@ class DbAPI:
         sql = "INSERT INTO PianoAllocazione (pianoAllocazione) VALUES ('Mechatronic_timetable') "
         cur.execute(sql)
 
-        self.gui_db.commit()
+        self.db.commit()
 
         print("\nResults saved in the DB")
