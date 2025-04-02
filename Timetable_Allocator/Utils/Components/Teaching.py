@@ -1,12 +1,13 @@
 class Teaching:
     '''It contains the data of a Teaching taken from the database'''
 
-    def __init__(self, id_teaching: str, title: str, cfu: int, hours_lect: int,
-                 main_teacher: str, didactic_period: str):
+    def __init__(self, id_teaching: str, title: str, cfu: int, lect_hours: int,
+                 lab_hours: int, main_teacher: str, didactic_period: str):
         self.id_teaching: str = id_teaching
         self.title: str = title
         self.cfu: int = cfu
-        self.hours_lect: int = hours_lect
+        self.lect_hours: int = lect_hours
+        self.lab_hours = lab_hours
         self.main_teacher: str = main_teacher
         self.didactic_period: str = didactic_period
 
