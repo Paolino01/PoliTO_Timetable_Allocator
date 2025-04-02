@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Ingegneria  informatica (computer engineering)  (Torino)">
+	<orientamento nome="Artificial Intelligence and Data Analytics">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Big_data_processing_and_analytics">01DSHOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Computer_network_technologies_and_services" preferito_lingua="yes">01OTWOV</opzione>
+					<opzione nome="Tecnologie_e_servizi_di_rete">02KPNOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Machine_learning_and_pattern_recognition">01URTOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Ingegneria_del_software">05BIDOV</opzione>
+					<opzione nome="Software_engineering" preferito_lingua="yes">04GSPOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applicazioni_Web_I">01UDFOV</opzione>
+					<opzione nome="Web_Applications_I" preferito_lingua="yes">01TXYOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_Machine_Learning">01URWOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="95">01URROV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Robot_Learning" crediti="6.0" correlazione="20">01HFNOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0"/>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Information_systems_security" preferito_lingua="yes">01TYMOV</opzione>
+					<opzione nome="Sicurezza_dei_sistemi_informativi">01UDUOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="95">01URROV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="20">01NWPOV</opzione>
+					<opzione nome="Energy_management_for_IoT" crediti="6.0" correlazione="20">01UDGOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="20">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="95">01OUVOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Robot_Learning" crediti="6.0" correlazione="20">01HFNOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+					<opzione nome="Specification_and_simulation_of_digital_systems" crediti="6.0" correlazione="20">02LQDOV</opzione>
+					<opzione nome="System-on-chip_architecture" crediti="6.0" correlazione="20">01QYHOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0">
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Explainable_and_trustworthy_AI" crediti="6.0" correlazione="20">01HFOOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_in_applications" crediti="6.0" correlazione="95">01URXOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="95">01OVFOV</opzione>
+					<opzione nome="Cybersecurity_for_Embedded_Systems" crediti="6.0" correlazione="20">01UDNOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Explainable_and_trustworthy_AI" crediti="6.0" correlazione="20">01HFOOV</opzione>
+					<opzione nome="Game_design" crediti="6.0" correlazione="20">01URUOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_in_applications" crediti="6.0" correlazione="95">01URXOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti" crediti="6.0" correlazione="20">01NNEOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Automation and Intelligent Cyber-Physical Systems">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Convex_optimization_and_engineering_applications">01OUWOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Computer_network_technologies_and_services" preferito_lingua="yes">01OTWOV</opzione>
+					<opzione nome="Tecnologie_e_servizi_di_rete">02KPNOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Modeling_and_control_of_cyberphysical_systems">01UDSOV</insegnamento>
+				<insegnamento nome="Nonlinear_control_and_aerospace_applications">01RKXOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Machine_learning_for_vision_and_multimedia">01URPOV</insegnamento>
+				<insegnamento nome="Network_Dynamics_and_Learning">02TXLOV</insegnamento>
+				<insegnamento nome="Sistemi_robotici">01UDOOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQOV</opzione>
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Cybersecurity" crediti="6.0" correlazione="20">01UDROV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Osservazione,_simulazione_e_regolazione_del_traffico" crediti="6.0" correlazione="20">01HIIOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Image_Processing_and_Computer_vision" crediti="6.0" correlazione="20">01TUJOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Automation_and_planning_of_production_systems" crediti="6.0" correlazione="20">01PEDOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Estimation,_filtering,_and_system_identification" crediti="6.0" correlazione="20">01RKYOV</opzione>
+					<opzione nome="Image_Processing_and_Computer_vision" crediti="6.0" correlazione="20">01TUJOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti">01NNEOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Bio and Health Informatics">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Introduzione_alle_Scienze_della_Vita">01HFMOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Computer_network_technologies_and_services" preferito_lingua="yes">01OTWOV</opzione>
+					<opzione nome="Tecnologie_e_servizi_di_rete">02KPNOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Bioinformatics">01OVFOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Ingegneria_del_software">05BIDOV</opzione>
+					<opzione nome="Software_engineering" preferito_lingua="yes">04GSPOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applicazioni_Web_I">01UDFOV</opzione>
+					<opzione nome="Web_Applications_I" preferito_lingua="yes">01TXYOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Computer Networks and Cloud Computing">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Cloud_Computing_Technologies">01HFPOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="95">01TXZOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Software_Networking">01SQPOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="95">01TXZOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="20">01NWPOV</opzione>
+					<opzione nome="Energy_management_for_IoT" crediti="6.0" correlazione="20">01UDGOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="20">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="95">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="95">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+					<opzione nome="Specification_and_simulation_of_digital_systems" crediti="6.0" correlazione="20">02LQDOV</opzione>
+					<opzione nome="System-on-chip_architecture" crediti="6.0" correlazione="20">01QYHOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0">
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Cloud_Programming" crediti="6.0" correlazione="20">01HFSOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="95">01TXSOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Cloud_Programming" crediti="6.0" correlazione="20">01HFSOV</opzione>
+					<opzione nome="Cybersecurity_for_Embedded_Systems" crediti="6.0" correlazione="20">01UDNOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Game_design" crediti="6.0" correlazione="20">01URUOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="95">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti" crediti="6.0" correlazione="20">01NNEOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="95">01TXSOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Cybersecurity">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Cybersecurity">01UDROV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="95">01QYDOV</opzione>
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Security_verification_and_testing">01TYAOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="95">01QYDOV</opzione>
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="20">01NWPOV</opzione>
+					<opzione nome="Energy_management_for_IoT" crediti="6.0" correlazione="20">01UDGOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="20">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+					<opzione nome="Specification_and_simulation_of_digital_systems" crediti="6.0" correlazione="20">02LQDOV</opzione>
+					<opzione nome="System-on-chip_architecture" crediti="6.0" correlazione="20">01QYHOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0">
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Cybersecurity_for_Embedded_Systems" crediti="6.0" correlazione="20">01UDNOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti" crediti="6.0" correlazione="20">01NNEOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Cybersecurity_for_Embedded_Systems" crediti="6.0" correlazione="20">01UDNOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Game_design" crediti="6.0" correlazione="20">01URUOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti" crediti="6.0" correlazione="20">01NNEOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Computing and Network Infrastructures">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Cloud_Computing_Technologies">01HFPOV</insegnamento>
+				<insegnamento nome="Internet_Architecture_and_Technologies">01HFQOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Enterprise_Network_Technologies">01HFROV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Ingegneria_del_software">05BIDOV</opzione>
+					<opzione nome="Software_engineering" preferito_lingua="yes">04GSPOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applicazioni_Web_I">01UDFOV</opzione>
+					<opzione nome="Web_Applications_I" preferito_lingua="yes">01TXYOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Embedded systems">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures">02LSEOV</insegnamento>
+				<insegnamento nome="Electronics_for_embedded_systems">01NWMOV</insegnamento>
+				<insegnamento nome="Operating_systems_for_embedded_systems">02NPSOV</insegnamento>
+				<insegnamento nome="Specification_and_simulation_of_digital_systems">02LQDOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Microelectronic_systems">01NOYOV</insegnamento>
+				<insegnamento nome="Software_engineering">04GSPOV</insegnamento>
+				<insegnamento nome="Synthesis_and_optimization_of_digital_systems">02LVNOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Energy_management_for_IoT">01UDGOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Electronic_systems_engineering" crediti="6.0" correlazione="20">01NOKOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Modeling_and_optimization_of_embedded_systems" crediti="6.0" correlazione="20">01NWNOV</opzione>
+					<opzione nome="Programming_for_IoT_applications" crediti="6.0" correlazione="20">03QWROV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="System-on-chip_architecture">01QYHOV</insegnamento>
+				<insegnamento nome="Testing_and_fault_tolerance">01RKZOV</insegnamento>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Electronic_systems_engineering" crediti="6.0" correlazione="20">01NOKOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="95">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Modeling_and_optimization_of_embedded_systems" crediti="6.0" correlazione="20">01NWNOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Programming_for_IoT_applications" crediti="6.0" correlazione="20">03QWROV</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Grafica e Multimedia">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Informatica_grafica">02BHIOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Computer_network_technologies_and_services" preferito_lingua="yes">01OTWOV</opzione>
+					<opzione nome="Tecnologie_e_servizi_di_rete">02KPNOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_animation">01NPZOV</insegnamento>
+				<insegnamento nome="Image_Processing_and_Computer_vision">01TUJOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Ingegneria_del_software">05BIDOV</opzione>
+					<opzione nome="Software_engineering" preferito_lingua="yes">04GSPOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Realta'_virtuale">02KQEOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="95">01NWPOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="20">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="95">01URPOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Information_systems_security" preferito_lingua="yes">01TYMOV</opzione>
+					<opzione nome="Sicurezza_dei_sistemi_informativi">01UDUOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="95">01NWPOV</opzione>
+					<opzione nome="Energy_management_for_IoT" crediti="6.0" correlazione="20">01UDGOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="95">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="20">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="95">01URPOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+					<opzione nome="Software_Engineering_II" crediti="6.0" correlazione="20">01SQNOV</opzione>
+					<opzione nome="Specification_and_simulation_of_digital_systems" crediti="6.0" correlazione="20">02LQDOV</opzione>
+					<opzione nome="System-on-chip_architecture" crediti="6.0" correlazione="20">01QYHOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Applicazioni_Web_I" crediti="6.0" correlazione="20">01UDFOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Web_Applications_I" crediti="6.0" correlazione="20">01TXYOV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Internet_video_streaming">01URSOV</insegnamento>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Applicazioni_Web_I" crediti="6.0" correlazione="20">01UDFOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Cybersecurity_for_Embedded_Systems" crediti="6.0" correlazione="20">01UDNOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Game_design" crediti="6.0" correlazione="95">01URUOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="20">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+					<opzione nome="Web_Applications_I" crediti="6.0" correlazione="20">01TXYOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Software">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Information_systems">01PDWOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Architetture_dei_sistemi_di_elaborazione">02GOLOV</opzione>
+					<opzione nome="Computer_architectures" preferito_lingua="yes">02LSEOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Data_Science_and_Database_Technology" preferito_lingua="yes">01SQJOV</opzione>
+					<opzione nome="Data_Science_e_Tecnologie_per_le_Basi_di_Dati">01SQMOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Computer_network_technologies_and_services" preferito_lingua="yes">01OTWOV</opzione>
+					<opzione nome="Tecnologie_e_servizi_di_rete">02KPNOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Formal_languages_and_compilers">02JEUOV</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Ingegneria_del_software">05BIDOV</opzione>
+					<opzione nome="Software_engineering" preferito_lingua="yes">04GSPOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applicazioni_Web_I">01UDFOV</opzione>
+					<opzione nome="Web_Applications_I" preferito_lingua="yes">01TXYOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programmazione_di_sistema">02GRSOV</opzione>
+					<opzione nome="System_and_device_programming" preferito_lingua="yes">01NYHOV</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="95">02JSKOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Software_Engineering_II">01SQNOV</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0"/>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Information_systems_security" preferito_lingua="yes">01TYMOV</opzione>
+					<opzione nome="Sicurezza_dei_sistemi_informativi">01UDUOV</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Big_data:_architectures_and_data_analytics" crediti="6.0" correlazione="20">01QYDOV</opzione>
+					<opzione nome="Cloud_Computing_Technologies" crediti="6.0" correlazione="20">01HFPOV</opzione>
+					<opzione nome="Computational_intelligence" crediti="6.0" correlazione="20">01URROV</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWOV</opzione>
+					<opzione nome="Digital_control_technologies_and_architectures" crediti="6.0" correlazione="20">01PDCOV</opzione>
+					<opzione nome="Distributed_systems_programming" crediti="6.0" correlazione="20">01TXZOV</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDOV</opzione>
+					<opzione nome="Elaborazione_dell'audio_digitale" crediti="6.0" correlazione="20">01NWPOV</opzione>
+					<opzione nome="Energy_management_for_IoT" crediti="6.0" correlazione="20">01UDGOV</opzione>
+					<opzione nome="GPU_programming" crediti="6.0" correlazione="20">01URVOV</opzione>
+					<opzione nome="Human_Computer_Interaction" crediti="6.0" correlazione="95">02JSKOV</opzione>
+					<opzione nome="Internet_Performance_and_Troubleshooting_Lab" crediti="6.0" correlazione="20">01HFTOV</opzione>
+					<opzione nome="Introduzione_alle_Scienze_della_Vita" crediti="6.0" correlazione="20">01HFMOV</opzione>
+					<opzione nome="Machine_learning_for_vision_and_multimedia" crediti="6.0" correlazione="20">01URPOV</opzione>
+					<opzione nome="Modern_design_of_control_systems" crediti="6.0" correlazione="20">01PDXOV</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOOV</opzione>
+					<opzione nome="Optimization_methods_and_algorithms" crediti="6.0" correlazione="20">01OUVOV</opzione>
+					<opzione nome="Progettazione_di_software_medicali" crediti="6.0" correlazione="20">01SQFOV</opzione>
+					<opzione nome="Robotica" crediti="6.0" correlazione="20">04CFIOV</opzione>
+					<opzione nome="Security_verification_and_testing" crediti="6.0" correlazione="20">01TYAOV</opzione>
+					<opzione nome="Specification_and_simulation_of_digital_systems" crediti="6.0" correlazione="20">02LQDOV</opzione>
+					<opzione nome="System-on-chip_architecture" crediti="6.0" correlazione="20">01QYHOV</opzione>
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_1" crediti="6.0"/>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_2" crediti="6.0">
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="95">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="20">01TXSOV</opzione>
+				</scelta_tabella>
+				<scelta_tabella nome_tabella="Crediti_liberi" crediti="6.0">
+					<opzione nome="Sound_&amp;_sonic_interaction_design" crediti="6.0" correlazione="20">01RSXOV</opzione>
+					<opzione nome="Teoria_e_tecnica_del_segnale_audio_digitale" crediti="6.0" correlazione="20">01RSWOV</opzione>
+					<opzione nome="Algoritmi_e_analisi_dei_dati_in_medicina_e_scienze_della_vita" crediti="6.0" correlazione="20">01VIWOV</opzione>
+					<opzione nome="Bioinformatics" crediti="6.0" correlazione="20">01OVFOV</opzione>
+					<opzione nome="Engineering_Empathy" crediti="6.0" correlazione="20">01TZFOV</opzione>
+					<opzione nome="Game_design" crediti="6.0" correlazione="95">01URUOV</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEOV</opzione>
+					<opzione nome="Internet_video_streaming" crediti="6.0" correlazione="20">01URSOV</opzione>
+					<opzione nome="Machine_learning_and_pattern_recognition" crediti="6.0" correlazione="20">01URTOV</opzione>
+					<opzione nome="Mobile_application_development" crediti="6.0" correlazione="95">01PFPOV</opzione>
+					<opzione nome="Model-based_software_design" crediti="6.0" correlazione="20">01OUZOV</opzione>
+					<opzione nome="Modelli_e_sistemi_a_eventi_discreti" crediti="6.0" correlazione="20">01NNEOV</opzione>
+					<opzione nome="Responsible_Artificial_Intelligence" crediti="6.0" correlazione="20">01DTEOV</opzione>
+					<opzione nome="Soluzioni_di_grafica_3D_in_applicazioni_biometriche" crediti="6.0" correlazione="20">01UDTOV</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">01SQHOV</opzione>
+					<opzione nome="Technologies_for_the_Metaverse" crediti="6.0" correlazione="20">01HFUOV</opzione>
+					<opzione nome="Web_Applications_II" crediti="6.0" correlazione="95">01TXSOV</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="EMECS - Path 1">
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Energy_management_for_IoT">01UDGOV</insegnamento>
+				<insegnamento nome="Modeling_and_optimization_of_embedded_systems">01NWNOV</insegnamento>
+				<insegnamento nome="System-on-chip_architecture">01QYHOV</insegnamento>
+				<insegnamento nome="Testing_and_fault_tolerance">01RKZOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Model-based_software_design">01OUZOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="EMECS - Path 2">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Computer_architectures">02LSEOV</insegnamento>
+				<insegnamento nome="Electronics_for_embedded_systems">01NWMOV</insegnamento>
+				<insegnamento nome="Operating_systems_for_embedded_systems">02NPSOV</insegnamento>
+				<insegnamento nome="Specification_and_simulation_of_digital_systems">02LQDOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Cybersecurity_for_Embedded_Systems">01UDNOV</insegnamento>
+				<insegnamento nome="Microelectronic_systems">01NOYOV</insegnamento>
+				<insegnamento nome="Software_engineering">04GSPOV</insegnamento>
+				<insegnamento nome="Synthesis_and_optimization_of_digital_systems">02LVNOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Orientamento &quot;Eurecom&quot;">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Embedded_Systems_-_Smart_objects">01RDEOV</insegnamento>
+				<insegnamento nome="Grafica_e_Multimedia_-_Data_science">01RDGOV</insegnamento>
+				<insegnamento nome="Grafica_e_Multimedia_-_Multimedia">02RDFOV</insegnamento>
+				<insegnamento nome="Reti_-_Data_science">01RDJOV</insegnamento>
+				<insegnamento nome="Reti_-_Security">01RDIOV</insegnamento>
+				<insegnamento nome="Reti_-_Smart_objects">01RDHOV</insegnamento>
+				<insegnamento nome="Software_-_Data_science">01RDMOV</insegnamento>
+				<insegnamento nome="Software_-_Security">01RDLOV</insegnamento>
+				<insegnamento nome="Software_-_Smart_objects">01RDKOV</insegnamento>
+				<insegnamento nome="Software_e_sistemi_digitali_-_Data_science">01RDOOV</insegnamento>
+				<insegnamento nome="Software_e_sistemi_digitali_-_Smart_objects">01RDNOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Embedded_Systems_-_Smart_objects">01RDEOV</insegnamento>
+				<insegnamento nome="Grafica_e_Multimedia_-_Data_science">01RDGOV</insegnamento>
+				<insegnamento nome="Grafica_e_Multimedia_-_Multimedia">02RDFOV</insegnamento>
+				<insegnamento nome="Reti_-_Data_science">01RDJOV</insegnamento>
+				<insegnamento nome="Reti_-_Security">01RDIOV</insegnamento>
+				<insegnamento nome="Reti_-_Smart_objects">01RDHOV</insegnamento>
+				<insegnamento nome="Software_-_Data_science">01RDMOV</insegnamento>
+				<insegnamento nome="Software_-_Security">01RDLOV</insegnamento>
+				<insegnamento nome="Software_-_Smart_objects">01RDKOV</insegnamento>
+				<insegnamento nome="Software_e_sistemi_digitali_-_Data_science">01RDOOV</insegnamento>
+				<insegnamento nome="Software_e_sistemi_digitali_-_Smart_objects">01RDNOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Master of Science in Electrical and Computer Engineering (TOP-UIC)">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="TOP-UIC_-_Informatica">01PAJOV</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>

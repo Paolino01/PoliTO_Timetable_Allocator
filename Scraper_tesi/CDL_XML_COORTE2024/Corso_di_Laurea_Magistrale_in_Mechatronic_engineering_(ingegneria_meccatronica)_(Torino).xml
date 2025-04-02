@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Mechatronic  engineering (ingegneria meccatronica)  (Torino)">
+	<orientamento nome="Control Technologies for Industry 4.0">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Digital_control_technologies_and_architectures">01PDCQW</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0">
+					<opzione nome="Electrical_machines" crediti="8.0" correlazione="20">02LONQW</opzione>
+					<opzione nome="Electronics_Fundamentals_and_Applications" crediti="8.0" correlazione="20">01RXOQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modelling_and_simulation_of_mechatronic_systems">02PCYQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applied_mechanics_and_machine_design" preferito_lingua="yes">01PCZQW</opzione>
+					<opzione nome="Automatic_control" preferito_lingua="yes">04LSLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0"/>
+				<insegnamento nome="Electronic_systems_for_mechatronics">01PDFQW</insegnamento>
+				<insegnamento nome="Model-based_software_design">01OUZQW</insegnamento>
+				<insegnamento nome="Robotics">01PEEQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYQW</opzione>
+					<opzione nome="Fluid_Automation" preferito_lingua="yes">02MPLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Convex_optimization_and_engineering_applications">01OUWQW</insegnamento>
+				<insegnamento nome="Laboratory_of_robust_identification_and_control">01QYEQW</insegnamento>
+				<scelta_tabella nome_tabella="Free_choice_CONTR" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQQW</opzione>
+					<opzione nome="Dynamic_design_of_machines" crediti="6.0" correlazione="20">03OAIQW</opzione>
+					<opzione nome="Electronic_Systems_for_Sensor_Acquisition" crediti="6.0" correlazione="20">01TWNQW</opzione>
+					<opzione nome="Industrial_Photonics" crediti="6.0" correlazione="20">02TVPQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Networking_technologies_for_connected_vehicles" crediti="6.0" correlazione="20">01TVRQW</opzione>
+					<opzione nome="Operating_systems_for_embedded_systems" crediti="6.0" correlazione="20">01NPSQW</opzione>
+					<opzione nome="Power_electronics" crediti="6.0" correlazione="20">02LPNQW</opzione>
+					<opzione nome="Satellite_navigation_systems" crediti="6.0" correlazione="20">02LPXQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECQW</opzione>
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Modern_design_of_control_systems" preferito_lingua="yes">01PDXQW</opzione>
+					<opzione nome="Optimization_for_machine_learning" preferito_lingua="yes">01TVOQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Free_choice_CONTR" crediti="6.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+					<opzione nome="Electric_Motor_Drives_for_ePowertrains" crediti="6.0" correlazione="20">01HIJQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Automation_and_planning_of_production_systems" preferito_lingua="yes">01PEDQW</opzione>
+					<opzione nome="Nonlinear_control_and_aerospace_applications" preferito_lingua="yes">01RKXQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Software Technologies for Automation">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Digital_control_technologies_and_architectures">01PDCQW</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0">
+					<opzione nome="Electrical_machines" crediti="8.0" correlazione="20">02LONQW</opzione>
+					<opzione nome="Electronics_Fundamentals_and_Applications" crediti="8.0" correlazione="20">01RXOQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modelling_and_simulation_of_mechatronic_systems">02PCYQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applied_mechanics_and_machine_design" preferito_lingua="yes">01PCZQW</opzione>
+					<opzione nome="Automatic_control" preferito_lingua="yes">04LSLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0"/>
+				<insegnamento nome="Electronic_systems_for_mechatronics">01PDFQW</insegnamento>
+				<insegnamento nome="Model-based_software_design">01OUZQW</insegnamento>
+				<insegnamento nome="Robotics">01PEEQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYQW</opzione>
+					<opzione nome="Fluid_Automation" preferito_lingua="yes">02MPLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Operating_systems_for_embedded_systems">01NPSQW</insegnamento>
+				<insegnamento nome="Software_architecture_for_automation">01PECQW</insegnamento>
+				<scelta_tabella nome_tabella="Free_choice_SW" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQQW</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWQW</opzione>
+					<opzione nome="Dynamic_design_of_machines" crediti="6.0" correlazione="20">03OAIQW</opzione>
+					<opzione nome="Electronic_Systems_for_Sensor_Acquisition" crediti="6.0" correlazione="20">01TWNQW</opzione>
+					<opzione nome="Industrial_Photonics" crediti="6.0" correlazione="20">02TVPQW</opzione>
+					<opzione nome="Laboratory_of_robust_identification_and_control" crediti="6.0" correlazione="20">01QYEQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Networking_technologies_for_connected_vehicles" crediti="6.0" correlazione="20">01TVRQW</opzione>
+					<opzione nome="Power_electronics" crediti="6.0" correlazione="20">02LPNQW</opzione>
+					<opzione nome="Programming_for_IoT_applications" crediti="6.0" correlazione="20">03QWRQW</opzione>
+					<opzione nome="Satellite_navigation_systems" crediti="6.0" correlazione="20">02LPXQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+					<opzione nome="Testing_and_fault_tolerance" crediti="6.0" correlazione="20">01RKZQW</opzione>
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Modern_design_of_control_systems" preferito_lingua="yes">01PDXQW</opzione>
+					<opzione nome="Optimization_for_machine_learning" preferito_lingua="yes">01TVOQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Free_choice_SW" crediti="6.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+					<opzione nome="Electric_Motor_Drives_for_ePowertrains" crediti="6.0" correlazione="20">01HIJQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Automation_and_planning_of_production_systems" preferito_lingua="yes">01PEDQW</opzione>
+					<opzione nome="Nonlinear_control_and_aerospace_applications" preferito_lingua="yes">01RKXQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="HW &amp; Embedded Systems for Industry 4.0">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Digital_control_technologies_and_architectures">01PDCQW</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0">
+					<opzione nome="Electrical_machines" crediti="8.0" correlazione="20">02LONQW</opzione>
+					<opzione nome="Electronics_Fundamentals_and_Applications" crediti="8.0" correlazione="20">01RXOQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modelling_and_simulation_of_mechatronic_systems">02PCYQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applied_mechanics_and_machine_design" preferito_lingua="yes">01PCZQW</opzione>
+					<opzione nome="Automatic_control" preferito_lingua="yes">04LSLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0"/>
+				<insegnamento nome="Electronic_systems_for_mechatronics">01PDFQW</insegnamento>
+				<insegnamento nome="Mobile_and_sensor_networks">01NWDQW</insegnamento>
+				<insegnamento nome="Robotics">01PEEQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYQW</opzione>
+					<opzione nome="Fluid_Automation" preferito_lingua="yes">02MPLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Electronic_Systems_for_Sensor_Acquisition">01TWNQW</insegnamento>
+				<insegnamento nome="Power_electronics">02LPNQW</insegnamento>
+				<scelta_tabella nome_tabella="Free_choice_HW" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQQW</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWQW</opzione>
+					<opzione nome="Dynamic_design_of_machines" crediti="6.0" correlazione="20">03OAIQW</opzione>
+					<opzione nome="Edge_Computing_Systems_for_AI_and_ML" crediti="6.0" correlazione="20">01DTDQW</opzione>
+					<opzione nome="Industrial_Photonics" crediti="6.0" correlazione="20">02TVPQW</opzione>
+					<opzione nome="Laboratory_of_robust_identification_and_control" crediti="6.0" correlazione="20">01QYEQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Networking_technologies_for_connected_vehicles" crediti="6.0" correlazione="20">01TVRQW</opzione>
+					<opzione nome="Operating_systems_for_embedded_systems" crediti="6.0" correlazione="20">01NPSQW</opzione>
+					<opzione nome="Satellite_navigation_systems" crediti="6.0" correlazione="20">02LPXQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECQW</opzione>
+					<opzione nome="Testing_and_fault_tolerance" crediti="6.0" correlazione="20">01RKZQW</opzione>
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Modern_design_of_control_systems" preferito_lingua="yes">01PDXQW</opzione>
+					<opzione nome="Optimization_for_machine_learning" preferito_lingua="yes">01TVOQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Free_choice_HW" crediti="6.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+					<opzione nome="Advanced_electronic_drives" crediti="6.0" correlazione="20">01PEGQW</opzione>
+					<opzione nome="Electric_Motor_Drives_for_ePowertrains" crediti="6.0" correlazione="20">01HIJQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Automation_and_planning_of_production_systems" preferito_lingua="yes">01PEDQW</opzione>
+					<opzione nome="Nonlinear_control_and_aerospace_applications" preferito_lingua="yes">01RKXQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Technologies for eMobility">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Digital_control_technologies_and_architectures">01PDCQW</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0">
+					<opzione nome="Electrical_machines" crediti="8.0" correlazione="20">02LONQW</opzione>
+					<opzione nome="Electronics_Fundamentals_and_Applications" crediti="8.0" correlazione="20">01RXOQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modelling_and_simulation_of_mechatronic_systems">02PCYQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applied_mechanics_and_machine_design" preferito_lingua="yes">01PCZQW</opzione>
+					<opzione nome="Automatic_control" preferito_lingua="yes">04LSLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0"/>
+				<insegnamento nome="Electrical_Technologies_for_eMobility">01TVEQW</insegnamento>
+				<insegnamento nome="Electronic_systems_for_mechatronics">01PDFQW</insegnamento>
+				<insegnamento nome="Robotics">01PEEQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYQW</opzione>
+					<opzione nome="Fluid_Automation" preferito_lingua="yes">02MPLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Automotive_control_systems">03MIQQW</insegnamento>
+				<scelta_tabella nome_tabella="Free_choice_AUTO" crediti="6.0">
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWQW</opzione>
+					<opzione nome="Dynamic_design_of_machines" crediti="6.0" correlazione="20">03OAIQW</opzione>
+					<opzione nome="Electronic_Systems_for_Sensor_Acquisition" crediti="6.0" correlazione="20">01TWNQW</opzione>
+					<opzione nome="Industrial_Photonics" crediti="6.0" correlazione="20">02TVPQW</opzione>
+					<opzione nome="Laboratory_of_robust_identification_and_control" crediti="6.0" correlazione="20">01QYEQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Operating_systems_for_embedded_systems" crediti="6.0" correlazione="20">01NPSQW</opzione>
+					<opzione nome="Power_electronics" crediti="6.0" correlazione="20">02LPNQW</opzione>
+					<opzione nome="Satellite_navigation_systems" crediti="6.0" correlazione="20">02LPXQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECQW</opzione>
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Modern_design_of_control_systems" preferito_lingua="yes">01PDXQW</opzione>
+					<opzione nome="Optimization_for_machine_learning" preferito_lingua="yes">01TVOQW</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Networking_technologies_for_connected_vehicles" preferito_lingua="yes">01TVRQW</opzione>
+					<opzione nome="Electric_Motor_Drives_for_ePowertrains" preferito_lingua="yes">01HIJQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Free_choice_AUTO" crediti="6.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+					<opzione nome="Technologies_for_Autonomous_Vehicles" crediti="6.0" correlazione="20">02SQHQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Automation_and_planning_of_production_systems" preferito_lingua="yes">01PEDQW</opzione>
+					<opzione nome="Nonlinear_control_and_aerospace_applications" preferito_lingua="yes">01RKXQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Industrial Technologies &amp; Applications">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Digital_control_technologies_and_architectures">01PDCQW</insegnamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0">
+					<opzione nome="Electrical_machines" crediti="8.0" correlazione="20">02LONQW</opzione>
+					<opzione nome="Electronics_Fundamentals_and_Applications" crediti="8.0" correlazione="20">01RXOQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modelling_and_simulation_of_mechatronic_systems">02PCYQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Applied_mechanics_and_machine_design" preferito_lingua="yes">01PCZQW</opzione>
+					<opzione nome="Automatic_control" preferito_lingua="yes">04LSLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="8.0"/>
+				<insegnamento nome="Additive_Manufacturing_Systems_and_materials">05SQSQW</insegnamento>
+				<insegnamento nome="Electronic_systems_for_mechatronics">01PDFQW</insegnamento>
+				<insegnamento nome="Robotics">01PEEQW</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Estimation,_filtering,_and_system_identification" preferito_lingua="yes">01RKYQW</opzione>
+					<opzione nome="Fluid_Automation" preferito_lingua="yes">02MPLQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Dynamic_design_of_machines">03OAIQW</insegnamento>
+				<insegnamento nome="Industrial_Photonics">02TVPQW</insegnamento>
+				<scelta_tabella nome_tabella="Free_choice_IND" crediti="6.0">
+					<opzione nome="Automotive_control_systems" crediti="6.0" correlazione="20">03MIQQW</opzione>
+					<opzione nome="Convex_optimization_and_engineering_applications" crediti="6.0" correlazione="20">01OUWQW</opzione>
+					<opzione nome="Electronic_Systems_for_Sensor_Acquisition" crediti="6.0" correlazione="20">01TWNQW</opzione>
+					<opzione nome="Laboratory_of_robust_identification_and_control" crediti="6.0" correlazione="20">01QYEQW</opzione>
+					<opzione nome="Networked_Control_Systems" crediti="8.0" correlazione="20">01HFVQW</opzione>
+					<opzione nome="Networking_technologies_for_connected_vehicles" crediti="6.0" correlazione="20">01TVRQW</opzione>
+					<opzione nome="Operating_systems_for_embedded_systems" crediti="6.0" correlazione="20">01NPSQW</opzione>
+					<opzione nome="Power_electronics" crediti="6.0" correlazione="20">02LPNQW</opzione>
+					<opzione nome="Satellite_navigation_systems" crediti="6.0" correlazione="20">02LPXQW</opzione>
+					<opzione nome="Sensors,_embedded_systems_and_algorithms_for_Service_Robotics" crediti="8.0" correlazione="20">01HFWQW</opzione>
+					<opzione nome="Software_architecture_for_automation" crediti="6.0" correlazione="20">01PECQW</opzione>
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Modern_design_of_control_systems" preferito_lingua="yes">01PDXQW</opzione>
+					<opzione nome="Optimization_for_machine_learning" preferito_lingua="yes">01TVOQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Free_choice_IND" crediti="6.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWQW</opzione>
+					<opzione nome="Advanced_electronic_drives" crediti="6.0" correlazione="20">01PEGQW</opzione>
+					<opzione nome="Electric_Motor_Drives_for_ePowertrains" crediti="6.0" correlazione="20">01HIJQW</opzione>
+				</scelta_tabella>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Automation_and_planning_of_production_systems" preferito_lingua="yes">01PEDQW</opzione>
+					<opzione nome="Nonlinear_control_and_aerospace_applications" preferito_lingua="yes">01RKXQW</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="Master of Science in Electrical and Computer Engineering (TOP-UIC)">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="TOP-UIC_-_Mechatronic_Engineering">01SEWQW</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>
