@@ -21,10 +21,29 @@ class DbAPI:
     def get_teachings(self):
         # TODO: for now I'm getting only the mechatronic teachings, instead of the whole DB
         cur = self.db.cursor()
-        sql =   ("SELECT Insegnamento.ID_INC, titolo, CFU, oreLez, oreLab, titolare, periodoDidattico FROM Insegnamento, Insegnamento_in_Orientamento "
+        sql =   ("SELECT "
+                    "Insegnamento.ID_INC, "
+                    "titolo, "
+                    "CFU, "
+                    "titolare, "
+                    "periodoDidattico, "                    
+                    "oreLez, "
+                    "n_min_double_slots_lecture, "
+                    "n_min_single_slots_lecture, "
+                    "practice_hours, "
+                    "n_practice_groups, "
+                    "n_min_double_slots_practice, "
+                    "n_min_single_slots_practice, "
+                    "lab_hours, "
+                    "n_lab_groups, "
+                    "n_blocks_lab, "
+                    "n_weekly_groups_lab, "
+                    "n_min_double_slots_lab, "
+                    "n_min_single_slots_lab "
+                 "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
                     "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
-                        "AND orientamento='Control Technologies for Industry 4.0'")
+                    "AND orientamento='Control Technologies for Industry 4.0'")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
