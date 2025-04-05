@@ -67,6 +67,6 @@ if __name__ == '__main__':
             '''
 
         # Saving the results to the DB
-        db_api.save_resAdding Practice lectures to the timetableults_to_db(solution, timetable_matrix, slots, teachings)
+        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)
     else:
         print("\nNo solution found.")
