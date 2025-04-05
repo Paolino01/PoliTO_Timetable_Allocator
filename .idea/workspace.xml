@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8643597-5fac-4ed8-84d7-6b399de36b05" name="Changes" comment="Adding new parameters">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Components/Slots.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Components/Write_Results.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DbAPI.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/Components/Teaching.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/Hooks/Teachings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/Parameters.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="mechatronic-timetable-counting-empty-slots" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Paolino01&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Paolino01/PoliTO_Timetable_Allocator.git&quot;,
+    &quot;accountId&quot;: &quot;1c2c37ed-aef0-4f11-97f9-c6325cfb0aa8&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2uJKbtkIIJi3h4xCEFSgkMTPxI4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.DbAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mechatronic-timetable&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Paolo\Desktop\Progetti POLI\Tesi\PoliTO_Timetable_Allocator\Utils" />
+      <recent name="D:\Paolo\Desktop\Progetti POLI\Tesi\PoliTO_Timetable_Allocator\Utils\Interfaces" />
+      <recent name="D:\Paolo\Desktop\Progetti POLI\Tesi\PoliTO_Timetable_Allocator\TimetableParams" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PoliTO_Timetable_Allocator" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Timetable_Allocator/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="false" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8643597-5fac-4ed8-84d7-6b399de36b05" name="Changes" comment="" />
+      <created>1741961311990</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741961311990</updated>
+      <workItem from="1741961313045" duration="381000" />
+      <workItem from="1741961703346" duration="5719000" />
+      <workItem from="1741974351798" duration="267000" />
+      <workItem from="1742132292547" duration="11264000" />
+      <workItem from="1742150635526" duration="104000" />
+      <workItem from="1742200698817" duration="1537000" />
+      <workItem from="1742375799228" duration="691000" />
+      <workItem from="1742563940880" duration="9384000" />
+      <workItem from="1742634260838" duration="6059000" />
+      <workItem from="1742649392935" duration="6315000" />
+      <workItem from="1742722938098" duration="2900000" />
+      <workItem from="1742737961910" duration="6412000" />
+      <workItem from="1742977871739" duration="8166000" />
+      <workItem from="1743151130333" duration="1755000" />
+      <workItem from="1743153730851" duration="4404000" />
+    </task>
+    <task id="LOCAL-00001" summary="Basic implementation of CPLEX. Lecture Slots are working, Teachings WIP">
+      <option name="closed" value="true" />
+      <created>1741974462867</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741974462867</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Retrieving Teachings and Correlations from DB">
+      <option name="closed" value="true" />
+      <created>1742150718116</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742150718116</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Experimenting an implementation with docplex.cp">
+      <option name="closed" value="true" />
+      <created>1742202911069</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742202911069</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding consecutive slot constraint to the timetable">
+      <option name="closed" value="true" />
+      <created>1742574549489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742574549489</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Saving the timetable to the GUI DB">
+      <option name="closed" value="true" />
+      <created>1742641918499</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742641918499</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding a constraint on maximum number of same Teachings in a day">
+      <option name="closed" value="true" />
+      <created>1742723631695</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742723631695</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adding a constraint on maximum number of days in which a Teaching can appear">
+      <option name="closed" value="true" />
+      <created>1742741671592</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742741671592</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refining parameters to create a better timetable">
+      <option name="closed" value="true" />
+      <created>1742744600834</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742744600834</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Parametrized the number of consecutive slots">
+      <option name="closed" value="true" />
+      <created>1742980036730</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742980036731</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Trying idea with counting the number of empty slots (WIP)">
+      <option name="closed" value="true" />
+      <created>1742983184227</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742983184227</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Refining parameters for consecutive lectures">
+      <option name="closed" value="true" />
+      <created>1742985441020</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742985441020</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Adding new parameters">
+      <option name="closed" value="true" />
+      <created>1743157462955</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743157462955</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basic implementation of CPLEX. Lecture Slots are working, Teachings WIP" />
+    <MESSAGE value="Retrieving Teachings and Correlations from DB" />
+    <MESSAGE value="Experimenting an implementation with docplex.cp" />
+    <MESSAGE value="Adding consecutive slot constraint to the timetable" />
+    <MESSAGE value="Saving the timetable to the GUI DB" />
+    <MESSAGE value="Adding a constraint on maximum number of same Teachings in a day" />
+    <MESSAGE value="Adding a constraint on maximum number of days in which a Teaching can appear" />
+    <MESSAGE value="Refining parameters to create a better timetable" />
+    <MESSAGE value="Parametrized the number of consecutive slots" />
+    <MESSAGE value="Trying idea with counting the number of empty slots (WIP)" />
+    <MESSAGE value="Refining parameters for consecutive lectures" />
+    <MESSAGE value="Adding new parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding new parameters" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$DbAPI.coverage" NAME="DbAPI Coverage Results" MODIFIED="1742135349689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Data" />
+    <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$main.coverage" NAME="main Coverage Results" MODIFIED="1743158019057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
