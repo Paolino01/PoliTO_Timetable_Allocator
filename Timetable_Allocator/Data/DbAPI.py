@@ -126,16 +126,23 @@ class DbAPI:
         cur.execute(sql)
 
         for s in slots:
-            for t in teachings:
-                if solution[timetable_matrix[t.id_teaching, s]] == 1:
+            for teaching in teachings:
+                if solution[timetable_matrix[teaching.id_teaching, s]] == 1:
                     # Assigning the slots to each Teaching
                     sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
-                           "VALUES ('Mechatronic_timetable', '" + str(t.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + t.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                           "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
                     cur.execute(sql)
 
                     # Assigning the main Teacher of a Teaching to its Slot
-                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + t.main_teacher + "', '" + str(t.id_teaching) + "_slot_" + str(s) + "', 'Mechatronic_timetable')"
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', 'Mechatronic_timetable')"
                     cur.execute(sql)
+
+                # Adding Practice hours to the DB
+                if teaching.practice_hours != 0:
+                    if solution[timetable_matrix[teaching.id_teaching + "_practice", s]] == 1:
+                        sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
+                               "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + "_practice_slot_" + str(s) + "', -1, 'EA', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                        cur.execute(sql)
 
         # Inserting the new Allocation Plan
         sql = "INSERT INTO PianoAllocazione (pianoAllocazione) VALUES ('Mechatronic_timetable') "

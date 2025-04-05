@@ -43,8 +43,6 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
     Add the constraints for the Teachers to the model
 '''
 def add_teachers_constraints(model, timetable_matrix, teachers, slots, days):
-    params = Parameters()
-
     for teacher in teachers:
         # Constraint: Teachings taught by the same Teacher cannot overlap
         add_no_overlap_constraint(model, timetable_matrix, teacher, slots)

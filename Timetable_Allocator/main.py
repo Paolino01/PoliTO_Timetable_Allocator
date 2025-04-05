@@ -31,14 +31,14 @@ if __name__ == '__main__':
     '''Variables for the model'''
     # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
     timetable_matrix = dict()
-    for t in teachings:
+    for teaching in teachings:
         for s in slots:
-            timetable_matrix[(t.id_teaching, s)] = model.binary_var(name=f"x_{t.id_teaching}_{s}")
+            timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"x_{teaching.id_teaching}_{s}")
 
-            '''
-            if t.lab_hours != 0:
-                timetable_matrix[(t.id_teaching + '_lab', s)] = model.binary_var(name=f"x_{t.id_teaching + '_lab'}_{s}")
-            '''
+            if teaching.practice_hours != 0:
+                timetable_matrix[(teaching.id_teaching + '_practice', s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice'}_{s}")
+            if teaching.lab_hours != 0:
+                timetable_matrix[(teaching.id_teaching + '_lab', s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab'}_{s}")
 
 
     '''Teachings Constraints'''
@@ -55,8 +55,11 @@ if __name__ == '__main__':
     # Printing the results
     if solution:
         print("\nSolution found:")
-        for t in teachings:
-            print(f"{t.id_teaching}: {[int(solution[timetable_matrix[t.id_teaching, s]]) for s in slots]}")
+        for teaching in teachings:
+            print(f"{teaching.id_teaching}: {[int(solution[timetable_matrix[teaching.id_teaching, s]]) for s in slots]}")
+
+            if teaching.practice_hours != 0:
+                print(f"{teaching.id_teaching + '_practice'}: {[int(solution[timetable_matrix[teaching.id_teaching + '_practice', s]]) for s in slots]}")
             '''
             if t.lab_hours != 0:
                 lab_id = t.id_teaching + "_lab"
@@ -64,6 +67,6 @@ if __name__ == '__main__':
             '''
 
         # Saving the results to the DB
-        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)
+        db_api.save_resAdding Practice lectures to the timetableults_to_db(solution, timetable_matrix, slots, teachings)
     else:
         print("\nNo solution found.")
