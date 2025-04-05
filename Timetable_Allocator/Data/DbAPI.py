@@ -12,9 +12,6 @@ class DbAPI:
         self.params = Parameters()
         self.db = sqlite3.connect(self.params.DB)
 
-        # TODO: this DB is used to show the results in a comprehensive way using the GUI. In the final version it would be better to have only one DB with all the informations
-        self.gui_db = sqlite3.connect("../../GUI_orario_Tesi/interface-server/Db_finale_postModifiche.db")
-
     '''Teachings'''
 
     '''
@@ -24,10 +21,29 @@ class DbAPI:
     def get_teachings(self):
         # TODO: for now I'm getting only the mechatronic teachings, instead of the whole DB
         cur = self.db.cursor()
-        sql =   ("SELECT Insegnamento.ID_INC, titolo, CFU, oreLez, titolare, periodoDidattico FROM Insegnamento, Insegnamento_in_Orientamento "
+        sql =   ("SELECT "
+                    "Insegnamento.ID_INC, "
+                    "titolo, "
+                    "CFU, "
+                    "titolare, "
+                    "periodoDidattico, "                    
+                    "oreLez, "
+                    "n_min_double_slots_lecture, "
+                    "n_min_single_slots_lecture, "
+                    "practice_hours, "
+                    "n_practice_groups, "
+                    "n_min_double_slots_practice, "
+                    "n_min_single_slots_practice, "
+                    "lab_hours, "
+                    "n_lab_groups, "
+                    "n_blocks_lab, "
+                    "n_weekly_groups_lab, "
+                    "n_min_double_slots_lab, "
+                    "n_min_single_slots_lab "
+                 "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
                     "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
-                        "AND orientamento='Control Technologies for Industry 4.0'")
+                    "AND orientamento='Control Technologies for Industry 4.0'")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -99,7 +115,7 @@ class DbAPI:
     '''
     # TODO: in the final version of the project it would be better to have only one DB
     def save_results_to_db(self, solution, timetable_matrix, slots: list[int], teachings: list[Teaching]):
-        cur = self.gui_db.cursor()
+        cur = self.db.cursor()
 
         # Deleting previous data from the DB
         sql = "DELETE FROM Slot WHERE pianoAllocazione='Mechatronic_timetable'"
@@ -110,21 +126,28 @@ class DbAPI:
         cur.execute(sql)
 
         for s in slots:
-            for t in teachings:
-                if solution[timetable_matrix[t.id_teaching, s]] == 1:
+            for teaching in teachings:
+                if solution[timetable_matrix[teaching.id_teaching, s]] == 1:
                     # Assigning the slots to each Teaching
                     sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
-                           "VALUES ('Mechatronic_timetable', '" + str(t.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + t.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                           "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
                     cur.execute(sql)
 
                     # Assigning the main Teacher of a Teaching to its Slot
-                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + t.main_teacher + "', '" + str(t.id_teaching) + "_slot_" + str(s) + "', 'Mechatronic_timetable')"
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', 'Mechatronic_timetable')"
                     cur.execute(sql)
+
+                # Adding Practice hours to the DB
+                if teaching.practice_hours != 0:
+                    if solution[timetable_matrix[teaching.id_teaching + "_practice", s]] == 1:
+                        sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
+                               "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + "_practice_slot_" + str(s) + "', -1, 'EA', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                        cur.execute(sql)
 
         # Inserting the new Allocation Plan
         sql = "INSERT INTO PianoAllocazione (pianoAllocazione) VALUES ('Mechatronic_timetable') "
         cur.execute(sql)
 
-        self.gui_db.commit()
+        self.db.commit()
 
         print("\nResults saved in the DB")
