@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8643597-5fac-4ed8-84d7-6b399de36b05" name="Changes" comment="Adding new parameters">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Components/Slots.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Components/Write_Results.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/DbAPI.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Components/Teaching.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Hooks/Teachings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Parameters.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-    </list>
+    <list default="true" id="e8643597-5fac-4ed8-84d7-6b399de36b05" name="Changes" comment="Merging Scraper with Allocator repository" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,6 +138,7 @@
       <workItem from="1742977871739" duration="8166000" />
       <workItem from="1743151130333" duration="1755000" />
       <workItem from="1743153730851" duration="4404000" />
+      <workItem from="1743838766033" duration="114000" />
     </task>
     <task id="LOCAL-00001" summary="Basic implementation of CPLEX. Lecture Slots are working, Teachings WIP">
       <option name="closed" value="true" />
@@ -275,7 +266,8 @@
     <MESSAGE value="Trying idea with counting the number of empty slots (WIP)" />
     <MESSAGE value="Refining parameters for consecutive lectures" />
     <MESSAGE value="Adding new parameters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding new parameters" />
+    <MESSAGE value="Merging Scraper with Allocator repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merging Scraper with Allocator repository" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$DbAPI.coverage" NAME="DbAPI Coverage Results" MODIFIED="1742135349689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Data" />
