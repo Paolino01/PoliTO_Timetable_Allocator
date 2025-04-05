@@ -1,0 +1,212 @@
+<!-- <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="insegnamento">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="nome" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="anno" type="xs:byte"/>
+  <xs:element name="semestre" type="xs:byte"/>
+  <xs:element name="insegnamenti_in_orientamento">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="insegnamento"/>
+        <xs:element ref="scelta_tabella"/>
+        <xs:element ref="scelta_tabella_lingua"/>
+        <xs:element ref="scelta_obbligatoria_lingua"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tabella_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="insegnamento" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome_tabella" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="scelta_tabella">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="opzione" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome_tabella" use="optional"/>
+      <xs:attribute type="xs:float" name="crediti" use="optional"/>
+      <xs:attribute type="xs:string" name="nome" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="scelta_tabella_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tabella_lingua" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="opzione">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="nome" use="optional"/>
+          <xs:attribute type="xs:float" name="crediti" use="optional"/>
+          <xs:attribute type="xs:byte" name="correlazione" use="optional"/>
+          <xs:attribute type="xs:string" name="preferito_lingua" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="scelta_obbligatoria_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="opzione" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="periodo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="anno"/>
+        <xs:element ref="semestre"/>
+        <xs:element ref="insegnamenti_in_orientamento"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="orientamento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="periodo" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CDL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="orientamento" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema> -->
+
+
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Defines a single course element with an optional "nome" (name) attribute -->
+  <xs:element name="insegnamento">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="nome" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines the academic year as a byte value -->
+  <xs:element name="anno" type="xs:byte"/>
+
+  <!-- Defines the semester as a byte value -->
+  <xs:element name="semestre" type="xs:byte"/>
+
+  <!-- Container for courses and elective choices within an orientation -->
+  <xs:element name="insegnamenti_in_orientamento">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="insegnamento"/>
+        <xs:element ref="scelta_tabella"/>
+        <xs:element ref="scelta_tabella_lingua"/>
+        <xs:element ref="scelta_obbligatoria_lingua"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines a language-based table containing courses -->
+  <xs:element name="tabella_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="insegnamento" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome_tabella" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines an elective table where students can choose courses -->
+  <xs:element name="scelta_tabella">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="opzione" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome_tabella" use="optional"/>
+      <xs:attribute type="xs:float" name="crediti" use="optional"/>
+      <xs:attribute type="xs:string" name="nome" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines a language-based elective table containing multiple language tables -->
+  <xs:element name="scelta_tabella_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tabella_lingua" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Represents an elective course option -->
+  <xs:element name="opzione">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute type="xs:string" name="nome" use="optional"/>
+          <xs:attribute type="xs:float" name="crediti" use="optional"/>
+          <xs:attribute type="xs:byte" name="correlazione" use="optional"/>
+          <xs:attribute type="xs:string" name="preferito_lingua" use="optional"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines a mandatory language-based course choice -->
+  <xs:element name="scelta_obbligatoria_lingua">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="opzione" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines an academic period (year and semester) containing courses -->
+  <xs:element name="periodo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="anno"/>
+        <xs:element ref="semestre"/>
+        <xs:element ref="insegnamenti_in_orientamento"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines an orientation (track) within a degree program -->
+  <xs:element name="orientamento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="periodo" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Defines the root element for the degree program containing multiple orientations -->
+  <xs:element name="CDL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="orientamento" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="nome"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Nanotechnologies  for icts (nanotecnologie per le ict)  (Torino/Grenoble/Losanna)">
+	<orientamento nome="MNIS - Micro and Nanotechnologies for Integrated Systems">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Materials_and_characterizations_for_Micro_and_Nanotechnologies">01RZYPE</insegnamento>
+				<insegnamento nome="Physics_of_technological_processes_Design_of_microsystems">01UCCPE</insegnamento>
+				<insegnamento nome="Solid_state_physics_Electronic_devices">01RLUPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Advanced_microsystems_and_LABS">06NPHPE</insegnamento>
+				<insegnamento nome="Advanced_tools_for_nanoelectronics">01ASUPE</insegnamento>
+				<insegnamento nome="Elective_subject_(Grenoble)">01NPNPE</insegnamento>
+				<insegnamento nome="Nanophysics_and_Nanostructures">01APBPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Analog_circuits,_VLSI_and_modelling">01NPKPE</insegnamento>
+				<insegnamento nome="Elective_subject_(Losanna)">01PBUPE</insegnamento>
+				<insegnamento nome="From_micro_to_nanosystems:_nanoelectronics_and_optoelectronics">01NPLPE</insegnamento>
+				<insegnamento nome="Labs">01NPMPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="N4SIS - Nanotechnologies for Smart and Integrated Systems">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="6.0">
+					<opzione nome="Finite_element_modelling" crediti="6.0" correlazione="20">01NNMPE</opzione>
+					<opzione nome="Materials_and_characterizations_for_Micro_and_Nanotechnologies" crediti="6.0" correlazione="20">02RZYPE</opzione>
+					<opzione nome="Statistical_learning_and_neural_networks" crediti="6.0" correlazione="20">01SOVPE</opzione>
+				</scelta_tabella>
+				<insegnamento nome="Modern_Optics">01RXXPE</insegnamento>
+				<insegnamento nome="Physics_of_technological_processes">01VJXPE</insegnamento>
+				<insegnamento nome="Solid_state_physics_Electronic_devices">01RLUPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Insegnamento_a_scelta_da_Tabella_A" crediti="6.0"/>
+				<insegnamento nome="Advanced_Technologies_and_Applications">01VJAPE</insegnamento>
+				<insegnamento nome="Elective_course">07NZAPE</insegnamento>
+				<insegnamento nome="Electronic_transport_in_crystalline_and_organic_semiconductors">01UAZPE</insegnamento>
+				<insegnamento nome="Micro_and_Nanoelectronic_Devices">01UAXPE</insegnamento>
+				<insegnamento nome="Physics_of_NanoBiosystems">01UCXPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="CAD_of_semiconductor_devices">01UAYPE</insegnamento>
+				<insegnamento nome="Nanosurfaces_and_Nanostructures:_from_synthesis_to_applications">01UCYPE</insegnamento>
+				<insegnamento nome="Photonic_devices">01NOPPE</insegnamento>
+				<insegnamento nome="Technology_for_Nanoelectronic_Systems_&amp;_Nanoelectronic_Systems">01UCZPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+	<orientamento nome="PSRS - Photonics for Security, Reliability and Safety">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Algorithmic_and_Programming">01DFOPE</insegnamento>
+				<insegnamento nome="Digital_Image_Processing_and_Analysis">01DFNPE</insegnamento>
+				<insegnamento nome="Laser_Physics">01DFRPE</insegnamento>
+				<insegnamento nome="Optical_Engineering">01DFIPE</insegnamento>
+				<insegnamento nome="Physical_and_Fourier_Optics">01DFFPE</insegnamento>
+				<insegnamento nome="Scientific_Computing_with_Matlab">01DFQPE</insegnamento>
+				<insegnamento nome="Scientific_Methodology_and_Project_Management">01DFPPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="From_photonics_to_applications">01DFXPE</insegnamento>
+				<insegnamento nome="Light_and_Matter">01DFVPE</insegnamento>
+				<insegnamento nome="Material_Physics">01DFWPE</insegnamento>
+				<insegnamento nome="Photonics_Lab">01DFUPE</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Physics_of_technological_processes">01VJXPE</insegnamento>
+				<insegnamento nome="Solid_state_physics_Electronic_devices">01RLUPE</insegnamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="12.0">
+					<opzione nome="Finite_element_modelling" crediti="6.0" correlazione="20">01NNMPE</opzione>
+					<opzione nome="Materials_and_characterizations_for_Micro_and_Nanotechnologies" crediti="6.0" correlazione="20">02RZYPE</opzione>
+					<opzione nome="Modern_Optics" crediti="6.0" correlazione="20">01RXXPE</opzione>
+					<opzione nome="Nanosurfaces_and_Nanostructures:_from_synthesis_to_applications" crediti="6.0" correlazione="20">01UCYPE</opzione>
+					<opzione nome="Open_Optical_Networks" crediti="6.0" correlazione="20">01TWOPE</opzione>
+					<opzione nome="Photonic_devices" crediti="6.0" correlazione="20">01NOPPE</opzione>
+					<opzione nome="Statistical_learning_and_neural_networks" crediti="6.0" correlazione="20">01SOVPE</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Choice_from_table_1" crediti="12.0"/>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>

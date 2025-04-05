@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CDL nome="Corso di Laurea Magistrale in Agritech  engineering  (Torino)">
+	<orientamento nome="Percorso">
+		<periodo>
+			<anno>1</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Introduction_to_arable_and_fruit_cropping_systems">01HESUT</insegnamento>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Circuits_and_electrical_engineering_and_Electronic_systems" preferito_lingua="yes">01HHWUT</opzione>
+					<opzione nome="Organic_and_environmental_chemistry_and_Sustainability_and_safety" preferito_lingua="yes">01HHQUT</opzione>
+				</scelta_obbligatoria_lingua>
+				<scelta_obbligatoria_lingua>
+					<opzione nome="Programming_techniques" preferito_lingua="yes">02OJPUT</opzione>
+					<opzione nome="Water_systems" preferito_lingua="yes">01HHPUT</opzione>
+				</scelta_obbligatoria_lingua>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>1</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Mechanics_for_Agriculture">01HETUT</insegnamento>
+				<insegnamento nome="Sensors_and_Data_Transmission_IoT_for_Agriculture">01HHYUT</insegnamento>
+				<insegnamento nome="Sustainable_water_use_in_agriculture">01HEWUT</insegnamento>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>1</semestre>
+			<insegnamenti_in_orientamento>
+				<insegnamento nome="Agricultural_Waste_Management">01HEXUT</insegnamento>
+				<insegnamento nome="Mechatronics_for_Agriculture">01HEVUT</insegnamento>
+				<insegnamento nome="Survey_and_Monitoring_for_Agriculture">01HEUUT</insegnamento>
+				<insegnamento nome="Technology_and_Innovation_Management_Agri-food_law_and_safety">01HIBUT</insegnamento>
+				<scelta_tabella nome_tabella="Elective_courses(Free_choice_Courses)" crediti="12.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWUT</opzione>
+					<opzione nome="Bioeconomy_and_bioenergy_for_the_Mediterranean_area_and_third_Countries" crediti="6.0" correlazione="20">01DURUT</opzione>
+					<opzione nome="Professional_Training" crediti="6.0" correlazione="20">09MSYUT</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+		<periodo>
+			<anno>2</anno>
+			<semestre>2</semestre>
+			<insegnamenti_in_orientamento>
+				<scelta_tabella nome_tabella="Elective_courses(Free_choice_Courses)" crediti="12.0">
+					<opzione nome="Challenge" crediti="8.0" correlazione="20">03UEWUT</opzione>
+					<opzione nome="Agricultural_Machine_Design_for_Sustainable_Energy" crediti="6.0" correlazione="20">01HIGUT</opzione>
+					<opzione nome="Environmental_Spatial_Analysis" crediti="6.0" correlazione="20">05SQZUT</opzione>
+					<opzione nome="Innovative_wireless_platforms_for_the_internet_of_things" crediti="6.0" correlazione="20">01OVEUT</opzione>
+					<opzione nome="Laboratories_of_Smart_Systems_for_Agriculture" crediti="6.0" correlazione="20">01HIFUT</opzione>
+					<opzione nome="Law_and_technology" crediti="8.0" correlazione="20">01URBUT</opzione>
+					<opzione nome="Remediation_of_contaminated_sites" crediti="6.0" correlazione="20">01HIHUT</opzione>
+					<opzione nome="Water_resources_planning_and_management" crediti="6.0" correlazione="20">01VKTUT</opzione>
+					<opzione nome="Professional_Training" crediti="6.0" correlazione="20">09MSYUT</opzione>
+				</scelta_tabella>
+			</insegnamenti_in_orientamento>
+		</periodo>
+	</orientamento>
+</CDL>
