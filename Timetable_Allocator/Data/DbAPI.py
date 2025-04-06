@@ -146,7 +146,7 @@ class DbAPI:
                             cur.execute(sql)
 
                             # Assigning the main Teacher of a Teaching to its Slot
-                            # TODO: we sould not have the main Teacher but the lab Teacher(s)
+                            # TODO: we should not have the main Teacher but the lab Teacher(s)
                             sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "','" + str(
                                 teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', 'Mechatronic_timetable')"
                             cur.execute(sql)
