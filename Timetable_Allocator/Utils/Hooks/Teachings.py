@@ -7,7 +7,7 @@ from Utils.Parameters import Parameters
 
 class Teachings:
     def __init__(self):
-        self.teachings:list[Teaching] = []
+        self.teachings_list:list[Teaching] = []
         self.db_api = DbAPI()
 
         self.load_teachings_from_db()
@@ -20,7 +20,7 @@ class Teachings:
         list_teachings = self.db_api.get_teachings()
 
         for row in list_teachings:
-            self.teachings.append(Teaching(
+            self.teachings_list.append(Teaching(
                 id_teaching=str(row[0]),
                 title=row[1],
                 cfu=int(row[2]),
@@ -49,8 +49,8 @@ class Teachings:
 
         for row in list_correlations:
             # Get the item in self.teaching with the ID equal to ID_INC_1 and adds an element in the dictionary as [ID_INC_2] = correlation}
-            teaching1 = next((t for t in self.teachings if t.id_teaching == str(row[0])), None)
-            teaching2 = next((t for t in self.teachings if t.id_teaching == str(row[1])), None)
+            teaching1 = next((t for t in self.teachings_list if t.id_teaching == str(row[0])), None)
+            teaching2 = next((t for t in self.teachings_list if t.id_teaching == str(row[1])), None)
 
             if teaching1 is not None and teaching2 is not None:
                 teaching1.set_correlations(teaching2, int(row[2]))

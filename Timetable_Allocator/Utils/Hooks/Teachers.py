@@ -5,7 +5,7 @@ from Utils.Components.Teaching import Teaching
 
 class Teachers:
     def __init__(self, all_teachings:list[Teaching]):
-        self.teachers:list[Teacher] = []
+        self.teachers_list:list[Teacher] = []
         self.db_api = DbAPI()
 
         self.load_teachers_from_db()
@@ -17,18 +17,18 @@ class Teachers:
         list_teachers = self.db_api.get_teachers()
 
         for row in list_teachers:
-            self.teachers.append(Teacher(str(row[0])))
+            self.teachers_list.append(Teacher(str(row[0])))
 
     def load_teachings_for_teacher(self, all_teachings:list[Teaching]):
-        for t in self.teachers:
-            list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(t.teacher)
+        for t in self.teachers_list:
+            list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(t.name)
 
             for row in list_teachings_for_teacher:
                 t.add_teachings(str(row[0]), all_teachings)
 
     def load_unaivalable_slots(self):
-        for t in self.teachers:
-            list_unavalable_slots = self.db_api.get_teachers_unavailabilities(t.teacher)
+        for t in self.teachers_list:
+            list_unavalable_slots = self.db_api.get_teachers_unavailabilities(t.name)
 
             for row in list_unavalable_slots:
                 t.add_unaivalable_slots(int(row[0]))

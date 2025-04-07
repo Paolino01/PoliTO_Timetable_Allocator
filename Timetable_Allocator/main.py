@@ -17,11 +17,11 @@ if __name__ == '__main__':
 
     # List of Teachings that I need to allocate
     teachings_class = Teachings()
-    teachings = teachings_class.teachings
+    teachings = teachings_class.teachings_list
 
     # List of Teachers with their Teachings
     teachers_class = Teachers(teachings)
-    teachers = teachers_class.teachers
+    teachers = teachers_class.teachers_list
 
     # Number of slots per week
     slots = get_slots_per_week()

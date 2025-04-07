@@ -3,7 +3,7 @@ from Utils.Components.Teaching import Teaching
 
 class Teacher:
     def __init__(self, teacher:str):
-        self.teacher = teacher
+        self.name = teacher
         self.teachings: list[Teaching] = []
         self.unaivalable_slots = []
 
