@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fa7f07eb-f4e1-41a0-a650-12340c1636fe" name="Changes" comment="Refining parameters">
+      <change beforePath="$PROJECT_DIR$/.idea/PoliTO_Timetable_Allocator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PoliTO_Timetable_Allocator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Excel_to_db_converter/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Excel_to_db_converter/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Timetable_Allocator/Utils/Components/Teacher.py" beforeDir="false" afterPath="$PROJECT_DIR$/Timetable_Allocator/Utils/Components/Teacher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Timetable_Allocator/Utils/Hooks/Teachers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Timetable_Allocator/Utils/Hooks/Teachers.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Paolino01&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Paolino01/PoliTO_Timetable_Allocator.git&quot;,
+    &quot;accountId&quot;: &quot;981f0de9-5f4d-4095-9614-89bc8fa3d3d7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2uU3TgUN3MwhB9TMoDHkUQqjG82" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.DbAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mechatronic-timetable&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/paolocagliero/Desktop/PoliTO/Tesi/PoliTO_Timetable_Allocator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Database&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PoliTO_Timetable_Allocator" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Excel_to_db_converter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Excel_to_db_converter/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="PoliTO_Timetable_Allocator" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Timetable_Allocator" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Timetable_Allocator/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main (1)" />
+      <item itemvalue="Python.main" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-PY-243.24978.54" />
+        <option value="bundled-python-sdk-91e3b7efe1d4-466328ff949b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.24978.54" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fa7f07eb-f4e1-41a0-a650-12340c1636fe" name="Changes" comment="" />
+      <created>1742289335108</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742289335108</updated>
+      <workItem from="1742289336238" duration="1225000" />
+      <workItem from="1742290849730" duration="4872000" />
+      <workItem from="1742306062983" duration="427000" />
+      <workItem from="1742393635083" duration="2717000" />
+      <workItem from="1742463659859" duration="271000" />
+      <workItem from="1742465758960" duration="3339000" />
+      <workItem from="1742547811729" duration="4671000" />
+      <workItem from="1742824461489" duration="3330000" />
+      <workItem from="1742830136514" duration="1055000" />
+      <workItem from="1742995108439" duration="3221000" />
+      <workItem from="1742998847280" duration="15000" />
+      <workItem from="1742998885640" duration="1439000" />
+      <workItem from="1743151378302" duration="673000" />
+      <workItem from="1743263410491" duration="166000" />
+      <workItem from="1743264031030" duration="1637000" />
+    </task>
+    <task id="LOCAL-00001" summary="Limiting the maximum number of consecutive lecture slots (to be tested)">
+      <option name="closed" value="true" />
+      <created>1742306109887</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742306109887</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Generating a timetable for mechatronic. Instead of limiting the number con consecutive slots, I'm limiting the number of &quot;correlations&quot; in a day (WIP)">
+      <option name="closed" value="true" />
+      <created>1742553435650</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742553435650</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Minor bug fixing">
+      <option name="closed" value="true" />
+      <created>1742830165136</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742830165136</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refining parameters">
+      <option name="closed" value="true" />
+      <created>1743151463508</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1743151463508</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Limiting the maximum number of consecutive lecture slots (to be tested)" />
+    <MESSAGE value="Generating a timetable for mechatronic. Instead of limiting the number con consecutive slots, I'm limiting the number of &quot;correlations&quot; in a day (WIP)" />
+    <MESSAGE value="Minor bug fixing" />
+    <MESSAGE value="Refining parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refining parameters" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$DbAPI.coverage" NAME="DbAPI Coverage Results" MODIFIED="1742825107491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Data" />
+    <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$main.coverage" NAME="main Coverage Results" MODIFIED="1743264760634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Timetable_Allocator" />
+    <SUITE FILE_PATH="coverage/PoliTO_Timetable_Allocator$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1743266099570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Excel_to_db_converter" />
+  </component>
+</project>

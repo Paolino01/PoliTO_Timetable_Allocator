@@ -6,6 +6,10 @@ class Parameters:
 
         # Number of lecture Slots per each day, 5 days per week
         self.slot_per_day: int = 7
+        # Number of weeks in a semester
+        self.n_weeks_in_semester = 14
+        # Number of hours that are in a slot
+        self.hours_in_slot = 1.5
 
         #Boolean variable that tells if we can allocate lectures on Saturday or not. Default is false
         self.saturday_enabled: bool = False
@@ -19,7 +23,7 @@ class Parameters:
         # Number of minimum correlated lectures in self.n_consecutive_slots slots
         self.min_corr_in_slots = 80
         # Number of maximum correlation value between first and last slot of a day
-        self.max_corr_first_last_slot = 0
+        self.max_corr_first_last_slot = 50
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2
