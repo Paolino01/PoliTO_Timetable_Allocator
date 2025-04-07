@@ -38,8 +38,7 @@ class DbAPI:
                     "n_lab_groups, "
                     "n_blocks_lab, "
                     "n_weekly_groups_lab, "
-                    "n_min_double_slots_lab, "
-                    "n_min_single_slots_lab "
+                    "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
                     "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
@@ -129,7 +128,7 @@ class DbAPI:
             for teaching in teachings:
                 if solution[timetable_matrix[teaching.id_teaching, s]] == 1:
                     # Assigning the slots to each Teaching
-                    sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
+                    sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche) "
                            "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
                     cur.execute(sql)
 

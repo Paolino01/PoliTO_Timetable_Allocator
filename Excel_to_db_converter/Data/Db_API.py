@@ -41,8 +41,7 @@ class Db_API:
             n_lab_groups,
             n_blocks_lab,
             n_weekly_groups_lab,
-            n_min_double_slots_lab,
-            n_min_single_slots_lab,
+            double_slots_lab,
     ):
         cur = self.db.cursor()
         sql = ("UPDATE Insegnamento SET "
@@ -56,8 +55,7 @@ class Db_API:
                "n_lab_groups = ?,"
                "n_blocks_lab = ?,"
                "n_weekly_groups_lab = ?,"
-               "n_min_double_slots_lab = ?,"
-               "n_min_single_slots_lab = ?"
+               "double_slots_lab = ?"
                "WHERE lower(titolo) = ? AND lower(titolare) = ?")
 
         cur.execute(sql, (
@@ -71,8 +69,7 @@ class Db_API:
             n_lab_groups,
             n_blocks_lab,
             n_weekly_groups_lab,
-            n_min_double_slots_lab,
-            n_min_single_slots_lab,
+            double_slots_lab,
             title.lower(),
             main_teacher.lower(),   # NOTE: the information about the main teacher is saved uppercase in the Excel file
         ))

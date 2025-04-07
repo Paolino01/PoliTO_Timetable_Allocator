@@ -40,8 +40,7 @@ class Teachings:
                 n_lab_groups=int(row[13]),
                 n_blocks_lab=int(row[14]),
                 n_weekly_groups_lab=int(row[15]),
-                n_min_double_slots_lab=int(row[16]),
-                n_min_single_slots_lab=int(row[17]),
+                double_slots_lab=int(row[16])
             ))
 
     '''Load the correlations info from the db.'''

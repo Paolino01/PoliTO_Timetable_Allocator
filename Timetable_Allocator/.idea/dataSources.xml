@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Courses_DB.db" uuid="b5e9f03d-d33c-44ed-a0cb-1215566194e6">
+    <data-source source="LOCAL" name="Courses_DB.db" uuid="cb4a87c1-c78a-4b21-b331-4af8b9a86a27">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:/Paolo/Desktop/Progetti POLI/Tesi/PoliTO_Timetable_Allocator/Data/Courses_DB.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../Data/Courses_DB.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

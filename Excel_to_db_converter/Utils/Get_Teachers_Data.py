@@ -24,10 +24,10 @@ practice_slot_preferences_dict = {
 }
 
 lab_slot_preferences_dict = {
-    "blocchi da 3h per ciascuna squadra": [1, 0],
-    "blocchi da 1,5h per ciascuna squadra": [0, 1],
-    "indifferente": [0, 0],
-    "nan": [0, 0]
+    "blocchi da 3h per ciascuna squadra": 1,
+    "blocchi da 1,5h per ciascuna squadra": 0,
+    "indifferente": 0,
+    "nan": 0
 }
 
 def get_teachers_preferences(teachings):
@@ -69,24 +69,18 @@ def get_teachers_preferences(teachings):
                         row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
                     n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) if str(
                         row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
-                    n_min_double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])][
-                        0]
-                    n_min_single_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])][
-                        1]
+                    double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])]
                 else:
                     n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
                         row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
                     n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
                         row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
-                    n_min_double_slots_lab = \
-                    lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])][0]
-                    n_min_single_slots_lab = \
-                    lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])][1]
+                    double_slots_lab = \
+                    lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])]
             else:
                 n_blocks_lab = 0
                 n_weekly_groups_lab = 0
-                n_min_double_slots_lab = 0
-                n_min_single_slots_lab = 0
+                double_slots_lab = 0
 
             # Insert the data retrieved from the Excel files in the DB
             db_api.insert_teaching_preference(
@@ -102,8 +96,7 @@ def get_teachers_preferences(teachings):
                 n_lab_groups,
                 n_blocks_lab,
                 n_weekly_groups_lab,
-                n_min_double_slots_lab,
-                n_min_single_slots_lab,
+                double_slots_lab
             )
 
     print("Teachers preferences inserted in the DB")

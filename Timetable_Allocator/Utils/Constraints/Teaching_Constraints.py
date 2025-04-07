@@ -22,12 +22,14 @@ def add_slots_per_week_teaching(model, timetable_matrix, teachings, slots):
         '''
         if teaching.lab_slots != 0:
             # Considering the Groups for Lab Slots
-            for i in range(1, teaching.n_lab_groups):
-                model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] for s in slots) == teaching.lab_slots)
+            for i in range(1, teaching.n_weekly_groups_lab):
+                # The number of Slots that I need to allocate depends on teaching.double_slots_lab. If 1, I have to allocate blocks of 2 Slots, otherwise I allocate blocks of 1 Slot
+                model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] for s in slots) == teaching.n_blocks_lab * (2 if teaching.double_slots_lab != 0 else 1))
         '''
 
 '''
-    Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
+    Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive.
+    We also take into account the Teacher's preferences about Slot allocations for the Teachings
 '''
 def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days):
     # Note: this constraint should only be applied to Lecture Slots and not Laboratory Slots
@@ -91,10 +93,11 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
                             model.add(model.logical_or(timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0, (timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] + timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]) == 2))
 
         # Constraint: if the Teaching has to have at least 1 double Slot, then I impose that condition
-        if teaching.n_min_double_slots_lecture >= 1 and teaching.lect_slots >= teaching.n_min_double_slots_practice+1:
+        if teaching.n_min_double_slots_lecture >= 1 and teaching.lect_slots >= teaching.n_min_single_slots_lecture+1:
             model.add(model.sum(double_slots_in_day[teaching.id_teaching, d] for d in days) >= 1)
 
         '''Practice Slots'''
+        # Same as above but for practice
         if teaching.practice_slots != 0 and teaching.n_min_double_slots_practice >= 1 and teaching.practice_slots >= 2:
             for i in range(1, teaching.n_practice_groups + 1):
                 model.add(model.sum(double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] for d in days) >= 1)
@@ -202,7 +205,7 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
     # Note: moving the following constraints in a single "for teaching in teachings" will result in a different solution
     # We need to apply a constraint to all the teachings before applying the next constraint
 
-    # Constraint: each Teaching must have exactly (lect_slots/params.n_weeks_in_semester) / params.hours_in_slot Slots per week
+    # Constraint: each Teaching must have exactly lect_slots Slots per week
     add_slots_per_week_teaching(model, timetable_matrix, teachings, slots)
 
     # Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
