@@ -1,4 +1,3 @@
-import math
 from docplex.cp.model import CpoModel
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
