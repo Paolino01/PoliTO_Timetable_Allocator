@@ -297,7 +297,6 @@ def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slot
     # Variable that saves the difference between the first and last lecture Slot, for each Day and Teaching
     lectures_dispersion_of_day = {(t.id_teaching, d): model.integer_var(0, params.slot_per_day - 1, name=f"lecture_dispersion_{t.id_teaching}_{d}") for t in teachings for d in days}
 
-    # TODO: cannot be tested with the free version of CPLEX due to its limitations, we need the server
     # Not applying this for the practice lectures and laboratories, since they are probably divided in groups. Need to verify that the timetable generated is good of if we need to apply this constraint to practices and labs as well
     
     for d in days:
