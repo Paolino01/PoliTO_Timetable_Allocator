@@ -141,14 +141,29 @@ class DbAPI:
                     for i in range(1, teaching.n_practice_groups + 1):
                         if solution[timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s]] == 1:
                             sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
-                                   "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', -1, 'EA', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                                   "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', -1, 'EA', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'Squadra" + str(i) + "', 'No')")
                             cur.execute(sql)
 
                             # Assigning the main Teacher of a Teaching to its Slot
-                            # TODO: we should not have the main Teacher but the lab Teacher(s)
+                            # TODO: we should not have the main Teacher but the Practice Teacher(s)
                             sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "','" + str(
                                 teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', 'Mechatronic_timetable')"
                             cur.execute(sql)
+
+                # Adding Lab hours to the DB
+                if teaching.lab_slots != 0:
+                    for i in range(1, teaching.n_lab_groups + 1):
+                        if solution[timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s]] == 1:
+                            sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
+                                    "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}" + "', -1, 'EL', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Laboratorio', 'Presenza', 'NonDisponibile', 'Squadra" + str(i) + "', 'No')")
+                            cur.execute(sql)
+
+                            # Assigning the main Teacher of a Teaching to its Slot
+                            # TODO: we should not have the main Teacher but the Lab Teacher(s)
+                            sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "','" + str(
+                                teaching.id_teaching) + f"_lab_group{i}_slot_{s}" + "', 'Mechatronic_timetable')"
+                            cur.execute(sql)
+
 
         # Inserting the new Allocation Plan
         sql = "INSERT INTO PianoAllocazione (pianoAllocazione) VALUES ('Mechatronic_timetable') "
