@@ -42,8 +42,6 @@ class Teachings:
 
     '''Load all the teachings from the db.'''
     def load_teachings_from_db(self):
-        params = Parameters()
-
         list_teachings = self.db_api.get_teachings()
 
         for row in list_teachings:
