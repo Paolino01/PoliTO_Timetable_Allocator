@@ -1,10 +1,10 @@
 import math
 
 from Utils.Constraints.Lab_Constraints import add_double_slots_constraint_lab, add_slots_per_week_lab, \
-    define_double_slots_in_day_lab, count_double_slots_in_day_lab
+    define_double_slots_in_day_lab, count_double_slots_in_day_lab, add_lab_overlaps_constraint
 from Utils.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
     add_min_double_slots_contraint_practice, define_double_slots_in_day_practice, count_double_slots_in_day_practice, \
-    count_days_with_double_slots_practice
+    count_days_with_double_slots_practice, add_practice_overlaps_constraint
 from Utils.Parameters import Parameters
 
 '''
@@ -12,7 +12,6 @@ from Utils.Parameters import Parameters
 '''
 def add_slots_per_week_teaching(model, timetable_matrix, teachings, slots):
     for teaching in teachings:
-        # lect_hours/params.n_weeks_in_semester gives the number of hours per week for a Teaching. Dividing this number by 1.5 returns the number of Slots in a week
         model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching, s] for s in slots) == teaching.lect_slots)
 
         '''Practice Slots'''
@@ -166,27 +165,11 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
 
                 '''Practice Slots'''
                 # Adding the constraint to the Practice Slots
-                if t1.practice_slots != 0:
-                    for i in range(1, t1.n_practice_groups + 1):
-                        model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                        # Note: the same Groups of Practice Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group2 of TeachingB
-                        if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
-                        # Note: Practice Lectures can not overlap with the same group of Lab Lecture of another Teaching (e.g. Group1 of Practice TeachingA can not overlap with Group1 of Lab TeachingB, but Group1 of Practice TeachingA CAN overlap with Group2 of Lab TeachingB
-                        if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
+                add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s)
 
                 '''Lab Slots'''
                 # Adding the constraint to the Lab Slots
-                if t1.lab_slots != 0:
-                    for i in range(1, t1.n_lab_groups + 1):
-                        model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                        # Note: Lab Lectures can not overlap with the same group of Practice Lecture of another Teaching (e.g. Group1 of Lab TeachingA can not overlap with Group1 of Practice TeachingB, but Group1 of Lab TeachingA CAN overlap with Group2 of Practice TeachingB
-                        if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
-                        # Note: the same Groups of Lab Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group1 of TeachingB
-                        if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
+                add_lab_overlaps_constraint(model, timetable_matrix, t1, t2, s)
 
 '''
     Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day

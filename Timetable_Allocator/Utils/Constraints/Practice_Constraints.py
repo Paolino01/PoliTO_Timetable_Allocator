@@ -4,7 +4,9 @@
 from Utils.Components.Teaching import Teaching
 from Utils.Parameters import Parameters
 
-
+'''
+    Add the constraint about the number of Slots that each Teaching should have in a week
+'''
 def add_slots_per_week_practice(model, timetable_matrix, teaching, slots):
     if teaching.practice_slots != 0:
         # Considering the Groups for Practice Slots
@@ -90,3 +92,17 @@ def count_days_with_double_slots_practice(model, teaching, d, n_slots_in_day_tea
                 n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] >=
                 2 * double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d]
             )
+
+'''
+    Constraint: a Teaching cannot overlap with the others, according to the correlations
+'''
+def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
+    if t1.practice_slots != 0:
+        for i in range(1, t1.n_practice_groups + 1):
+            model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
+            # Note: the same Groups of Practice Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group2 of TeachingB
+            if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
+                model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
+            # Note: Practice Lectures can not overlap with the same group of Lab Lecture of another Teaching (e.g. Group1 of Practice TeachingA can not overlap with Group1 of Lab TeachingB, but Group1 of Practice TeachingA CAN overlap with Group2 of Lab TeachingB
+            if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
+                model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
