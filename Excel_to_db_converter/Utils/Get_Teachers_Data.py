@@ -30,6 +30,53 @@ lab_slot_preferences_dict = {
     "nan": 0
 }
 
+'''
+    Get Practice organization preferences from the Excel file
+'''
+def get_practice_preferences(row):
+    practice_hours = int(row["NUM_ORE_ESE"]) if str(row["NUM_ORE_ESE"]) != "nan" else 0
+    n_practice_groups = int(row["NUM_SQU_ESE"]) if str(row["NUM_SQU_ESE"]) != "nan" else 0
+    if practice_hours != 0:
+        n_min_double_slots_practice = \
+            practice_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE"])][0]
+        n_min_single_slots_practice = \
+            practice_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE"])][1]
+    else:
+        n_min_double_slots_practice = 0
+        n_min_single_slots_practice = 0
+
+    return practice_hours, n_practice_groups, n_min_double_slots_practice, n_min_single_slots_practice
+
+'''
+    Get Lab organization preferences from the Excel file
+'''
+def get_lab_preferences(row):
+    lab_hours = int(row["NUM_ORE_LAB"]) if str(row["NUM_ORE_LAB"]) != "nan" else 0
+    n_lab_groups = int(row["NUM_SQU_LAB"]) if str(row["NUM_SQU_LAB"]) != "nan" else 0
+    if lab_hours != 0:
+        if str(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan":
+            n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) if str(
+                row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
+            n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) if str(
+                row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
+            double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])]
+        else:
+            n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
+                row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
+            n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
+                row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
+            double_slots_lab = \
+                lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])]
+    else:
+        n_blocks_lab = 0
+        n_weekly_groups_lab = 0
+        double_slots_lab = 0
+
+    return lab_hours, n_lab_groups, n_blocks_lab, n_weekly_groups_lab, double_slots_lab
+
+'''
+    Get Lecture organization preferences from the Excel file
+'''
 def get_teachers_preferences(teachings):
     db_api = Db_API()
 
@@ -49,38 +96,10 @@ def get_teachers_preferences(teachings):
             n_min_single_slots_lecture = lecture_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LEZIONE"])][1]
 
             # Practices
-            practice_hours = int(row["NUM_ORE_ESE"]) if str(row["NUM_ORE_ESE"]) != "nan" else 0
-            n_practice_groups = int(row["NUM_SQU_ESE"]) if str(row["NUM_SQU_ESE"]) != "nan" else 0
-            if practice_hours != 0:
-                n_min_double_slots_practice = \
-                practice_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE"])][0]
-                n_min_single_slots_practice = \
-                practice_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE"])][1]
-            else:
-                n_min_double_slots_practice = 0
-                n_min_single_slots_practice = 0
+            practice_hours, n_practice_groups, n_min_double_slots_practice, n_min_single_slots_practice = get_practice_preferences(row)
 
             # Labs
-            lab_hours = int(row["NUM_ORE_LAB"]) if str(row["NUM_ORE_LAB"]) != "nan" else 0
-            n_lab_groups = int(row["NUM_SQU_LAB"]) if str(row["NUM_SQU_LAB"]) != "nan" else 0
-            if lab_hours != 0:
-                if str(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan":
-                    n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) if str(
-                        row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
-                    n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) if str(
-                        row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
-                    double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])]
-                else:
-                    n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
-                        row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
-                    n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
-                        row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
-                    double_slots_lab = \
-                    lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])]
-            else:
-                n_blocks_lab = 0
-                n_weekly_groups_lab = 0
-                double_slots_lab = 0
+            lab_hours, n_lab_groups, n_blocks_lab, n_weekly_groups_lab, double_slots_lab = get_lab_preferences(row)
 
             # Insert the data retrieved from the Excel files in the DB
             db_api.insert_teaching_preference(
@@ -101,7 +120,9 @@ def get_teachers_preferences(teachings):
 
     print("Teachers preferences inserted in the DB")
 
-
+'''
+    Get Teacher's unavailabilities from the JOTFORM
+'''
 def get_teachers_unavailabilities():
     db_api = Db_API()
 

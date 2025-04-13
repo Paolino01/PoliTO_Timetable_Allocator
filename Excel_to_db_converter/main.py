@@ -1,6 +1,6 @@
 from Data.Db_API import Db_API
 from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities
-from Utils.Get_Teachings_Data import get_lecture_hours
+from Utils.Get_Teachings_Data import get_teaching_information
 from Utils.Teaching import Teaching
 
 if __name__ == '__main__':
@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     '''Teachings'''
     # Get the number of lecture hours from the Excel files and insert it in the database
-    get_lecture_hours(teachings)
+    get_teaching_information(teachings)
 
 
     '''Teachers'''
