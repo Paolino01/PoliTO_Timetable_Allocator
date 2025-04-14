@@ -253,7 +253,6 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
     add_slots_per_week_teaching(model, timetable_matrix, teachings, slots)
 
     # Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
-    # Constraint: each Teaching must appear in a maximum of params.max_days_teaching days
     add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
 
     # Constraint: limiting the number of correlated lectures in a day

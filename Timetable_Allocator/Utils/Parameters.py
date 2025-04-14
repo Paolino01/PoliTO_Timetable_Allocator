@@ -27,8 +27,6 @@ class Parameters:
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2
-        # Number of maximum days in a week for a Teaching (used to avoid that a teaching has 1 slot in each day)
-        self.max_days_teaching = 4
 
         # Number of maximum consecutive slots for a Teacher
         self.max_consecutive_slots_teacher = 3
