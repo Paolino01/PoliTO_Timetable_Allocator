@@ -1,4 +1,6 @@
 import sqlite3
+from tkinter.constants import INSERT
+
 
 class Db_API:
     def __init__(self):
@@ -16,12 +18,26 @@ class Db_API:
         return teachings_ids
 
     '''
-        Update a Teaching in the DB with the hours of lectures
+        Delete all records from Docente_in_Insegnamento
     '''
-    def add_lecture_hours_to_course(self, id_inc, lecture_hours):
+    def delete_teacher_in_teaching(self):
         cur = self.db.cursor()
-        sql = "UPDATE Insegnamento SET oreLez = ? WHERE ID_INC = ?"
-        cur.execute(sql, (lecture_hours, id_inc))
+        sql = "DELETE FROM Docente_in_Insegnamento"
+        cur.execute(sql)
+
+        self.db.commit()
+
+    '''
+        Update a Teaching in the DB with the hours of lectures and the name of the main teacher
+    '''
+    def add_teacher_and_lecture_hours_to_course(self, id_inc, lecture_hours, main_teacher):
+        cur = self.db.cursor()
+        sql = "UPDATE Insegnamento SET oreLez = ?, titolare = ? WHERE ID_INC = ?"
+        cur.execute(sql, (lecture_hours, main_teacher, id_inc))
+
+        sql = "INSERT INTO Docente_in_Insegnamento (Cognome, ID_INC, nOre, tipoLez) VALUES (?, ?, 0, 'L')"
+        cur.execute(sql, (main_teacher, id_inc))
+
         self.db.commit()
 
     '''

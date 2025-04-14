@@ -1,5 +1,10 @@
 import math
 
+from Utils.Constraints.Lab_Constraints import add_double_slots_constraint_lab, add_slots_per_week_lab, \
+    define_double_slots_in_day_lab, count_double_slots_in_day_lab, add_lab_overlaps_constraint
+from Utils.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
+    add_min_double_slots_contraint_practice, define_double_slots_in_day_practice, count_double_slots_in_day_practice, \
+    count_days_with_double_slots_practice, add_practice_overlaps_constraint
 from Utils.Parameters import Parameters
 
 '''
@@ -7,21 +12,13 @@ from Utils.Parameters import Parameters
 '''
 def add_slots_per_week_teaching(model, timetable_matrix, teachings, slots):
     for teaching in teachings:
-        # lect_hours/params.n_weeks_in_semester gives the number of hours per week for a Teaching. Dividing this number by 1.5 returns the number of Slots in a week
         model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching, s] for s in slots) == teaching.lect_slots)
 
         '''Practice Slots'''
-        if teaching.practice_slots != 0:
-            # Considering the Groups for Practice Slots
-            for i in range(1, teaching.n_practice_groups + 1):
-                model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] for s in slots) == teaching.practice_slots)
-        # TODO: Needs to be implemented and tested with a Pro version of CPLEX
+        add_slots_per_week_practice(model, timetable_matrix, teaching, slots)
+                
         '''Lab Slots'''
-        if teaching.lab_slots != 0:
-            # Considering the Groups for Lab Slots
-            for i in range(1, teaching.n_weekly_groups_lab):
-                # The number of Slots that I need to allocate depends on teaching.double_slots_lab. If 1, I have to allocate blocks of 2 Slots, otherwise I allocate blocks of 1 Slot
-                model.add_constraint(model.sum(timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] for s in slots) == teaching.n_blocks_lab * (2 if teaching.double_slots_lab != 0 else 1))
+        add_slots_per_week_lab(model, timetable_matrix, teaching, slots)
 
 '''
     Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day
@@ -70,56 +67,10 @@ def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_s
             )
 
             '''Practice Slots'''
-            for i in range(1, teaching.n_practice_groups + 1):
-                # If teaching.n_min_double_slots_practice >= 1, then I impose that the Teaching must have at leat 2 consecutive practice hours
-                # I check that there are at least 2 Slots of practice (to be sure that I can have 2 consecutive Slots)
-                if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice >= 1 and teaching.n_min_single_slots_practice == 0:
-                    model.add(
-                        model.logical_or(
-                            timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
-                            (
-                                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
-                                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
-                            )
-                            == 2
-                        )
-                    )
-                # If I don't have any constraint about the minimum number of double Slots, I just impose that if there are any double Slots the are consecutive
-                else:
-                    if teaching.practice_slots > 0:
-                        model.logical_or(
-                            timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
-                            (
-                                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
-                                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
-                            )
-                            >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d])
-                        )
+            add_double_slots_constraint_practice(model, timetable_matrix, teaching, s, d, n_slots_in_day_teaching)
 
             '''Lab Slots'''
-            for i in range(1, teaching.n_lab_groups + 1):
-                # Same as above, but for Lab Slots
-                if teaching.double_slots_lab != 0 and teaching.lab_slots >= 2:
-                    model.add(
-                        model.logical_or(
-                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0,
-                            (
-                                timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
-                                timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
-                            )
-                            == 2
-                        )
-                    )
-                else:
-                    if teaching.lab_slots > 0:
-                        model.logical_or(
-                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0,
-                            (
-                                timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
-                                timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
-                            )
-                            >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d])
-                        )
+            add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_slots_in_day_teaching)
 
 '''
     Constraint: if the Teaching has to have at least 1 double Slot, then I impose that condition
@@ -130,10 +81,7 @@ def add_min_double_slots_contraint(model, days, teaching, double_slots_in_day):
 
     '''Practice Slots'''
     # Same as above but for practice
-    if teaching.practice_slots != 0 and teaching.n_min_double_slots_practice >= 1 and teaching.practice_slots >= 2:
-        for i in range(1, teaching.n_practice_groups + 1):
-            model.add(
-                model.sum(double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] for d in days) >= 1)
+    add_min_double_slots_contraint_practice(model, teaching, days, double_slots_in_day)
 
 '''
     Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive.
@@ -147,7 +95,7 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
     # Variable that counts how many hours a teaching has in a day
     n_slots_in_day_teaching = {}
 
-    # double_slots_in_day = 1 if the Lecture/Practice/Lab has at least 2 Slots in that Day
+    # double_slots_in_day = 1 if the Lecture/Practice has at least 2 Slots in that Day
     double_slots_in_day = {}
     for teaching in teachings:
         for d in days:
@@ -155,15 +103,10 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
             double_slots_in_day[teaching.id_teaching, d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching}_{d}")
 
             '''Practice Slots'''
-            if teaching.practice_slots != 0:
-                for i in range(1, teaching.n_practice_groups + 1):
-                    n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"y_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
-                    double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
+            define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day)
 
             '''Lab Slots'''
-            if teaching.lab_slots != 0:
-                for i in range(1, teaching.n_lab_groups + 1):
-                    n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"y_{teaching.id_teaching + '_lab_group' + str(i)}_{d}")
+            define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching)
 
     for teaching in teachings:
         for d in days:
@@ -174,38 +117,19 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
                     for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day)
                 )
             )
+
             '''Practice Slots'''
-            if teaching.practice_slots != 0:
-                for i in range(1, teaching.n_practice_groups + 1):
-                    model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] ==
-                        model.sum
-                        (
-                            timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s]
-                            for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day)
-                        )
-                    )
+            count_double_slots_in_day_practice(model, timetable_matrix, teaching, d, n_slots_in_day_teaching)
+
             '''Lab Slots'''
-            if teaching.lab_slots != 0:
-                for i in range(1, teaching.n_lab_groups + 1):
-                    model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d] ==
-                        model.sum
-                        (
-                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s]
-                            for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day)
-                        )
-                    )
+            count_double_slots_in_day_lab(model, timetable_matrix, teaching, d, n_slots_in_day_teaching)
 
             # Counting how many days have 2 or more Slots of the same lecture
             model.add(
                 n_slots_in_day_teaching[teaching.id_teaching, d] >= 2 * double_slots_in_day[teaching.id_teaching, d]
             )
             '''Practice Slots'''
-            if teaching.practice_slots != 0:
-                for i in range(1, teaching.n_practice_groups + 1):
-                    model.add(
-                        n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] >=
-                        2 * double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d]
-                    )
+            count_days_with_double_slots_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day)
 
             # Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day (only for Lectures and not for Laboratories)
             add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching)
@@ -241,27 +165,20 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
 
                 '''Practice Slots'''
                 # Adding the constraint to the Practice Slots
-                if t1.practice_slots != 0:
-                    for i in range(1, t1.n_practice_groups + 1):
-                        model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                        # Note: the same Groups of Practice Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group2 of TeachingB
-                        if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
-                        # Note: Practice Lectures can not overlap with the same group of Lab Lecture of another Teaching (e.g. Group1 of Practice TeachingA can not overlap with Group1 of Lab TeachingB, but Group1 of Practice TeachingA CAN overlap with Group2 of Lab TeachingB
-                        if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
+                add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s)
 
                 '''Lab Slots'''
                 # Adding the constraint to the Lab Slots
-                if t1.lab_slots != 0:
-                    for i in range(1, t1.n_lab_groups + 1):
-                        model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                        # Note: Lab Lectures can not overlap with the same group of Practice Lecture of another Teaching (e.g. Group1 of Lab TeachingA can not overlap with Group1 of Practice TeachingB, but Group1 of Lab TeachingA CAN overlap with Group2 of Practice TeachingB
-                        if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
-                        # Note: the same Groups of Lab Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group1 of TeachingB
-                        if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
-                            model.add(timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
+                add_lab_overlaps_constraint(model, timetable_matrix, t1, t2, s)
+
+            # Constraint: a Lab cannot overlap with the same group of a Practice of the same lecture
+            if t1.practice_slots != 0 and t1.lab_slots != 0:
+                for i in range(1, min(t1.n_practice_groups, t1.n_lab_groups) + 1):
+                    model.add(
+                        timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
+                        timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
+                        <= 1
+                    )
 
 '''
     Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day

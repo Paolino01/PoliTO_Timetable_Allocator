@@ -42,13 +42,31 @@ class Teachings:
 
     '''Load all the teachings from the db.'''
     def load_teachings_from_db(self):
-        params = Parameters()
-
         list_teachings = self.db_api.get_teachings()
 
         for row in list_teachings:
             # Calculate the number of Slots in a week for Lectures, Practices and Labs
             slots_lecture, slots_practice, slots_lab = calculate_slots_per_week(int(row[5]), int(row[8]), int(row[12]))
+
+            if slots_practice > 0:
+                n_practice_groups = int(row[9])
+                n_min_double_slots_practice = int(row[10])
+                n_min_single_slots_practice = int(row[11])
+            else:
+                n_practice_groups = 0
+                n_min_double_slots_practice = 0
+                n_min_single_slots_practice = 0
+
+            if slots_lab > 0:
+                n_lab_groups = int(row[13])
+                n_blocks_lab = int(row[14])
+                n_weekly_groups_lab = int(row[15])
+                double_slots_lab = int(row[16])
+            else:
+                n_lab_groups = 0
+                n_blocks_lab = 0
+                n_weekly_groups_lab = 0
+                double_slots_lab = 0
 
             if slots_lecture > 0:
                 self.teachings_list.append(Teaching(
@@ -63,15 +81,15 @@ class Teachings:
                     n_min_single_slots_lecture=int(row[7]),
 
                     practice_slots=slots_practice,
-                    n_practice_groups=int(row[9]) if slots_practice > 0 else 0,
-                    n_min_double_slots_practice=int(row[10]) if slots_practice > 0 else 0,
-                    n_min_single_slots_practice=int(row[11]) if slots_practice > 0 else 0,
+                    n_practice_groups=n_practice_groups,
+                    n_min_double_slots_practice=n_min_double_slots_practice,
+                    n_min_single_slots_practice=n_min_single_slots_practice,
 
                     lab_slots=slots_lab,
-                    n_lab_groups=int(row[13]) if slots_lab > 0 else 0,
-                    n_blocks_lab=int(row[14]) if slots_lab > 0 else 0,
-                    n_weekly_groups_lab=int(row[15]) if slots_lab > 0 else 0,
-                    double_slots_lab=int(row[16]) if slots_lab > 0 else 0
+                    n_lab_groups=n_lab_groups,
+                    n_blocks_lab=n_blocks_lab,
+                    n_weekly_groups_lab=n_weekly_groups_lab,
+                    double_slots_lab=double_slots_lab
                 ))
 
     '''Load the correlations info from the db.'''
