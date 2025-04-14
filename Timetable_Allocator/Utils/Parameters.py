@@ -23,7 +23,7 @@ class Parameters:
         # Number of minimum correlated lectures in self.n_consecutive_slots slots
         self.min_corr_in_slots = 80
         # Number of maximum correlation value between first and last slot of a day
-        self.max_corr_first_last_slot = 0
+        self.max_corr_first_last_slot = 30
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2

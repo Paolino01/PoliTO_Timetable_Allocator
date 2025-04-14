@@ -21,7 +21,7 @@ class DbAPI:
     def get_teachings(self):
         # TODO: for now I'm getting only the mechatronic teachings, instead of the whole DB
         cur = self.db.cursor()
-        sql =   ("SELECT "
+        sql =   ("SELECT DISTINCT "
                     "Insegnamento.ID_INC, "
                     "titolo, "
                     "CFU, "

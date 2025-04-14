@@ -160,7 +160,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
             for t2, corr in t1.correlations.items():
                 # I need this if in order to not impose the same constraint twice (e.g. one from TeachingA to TeachingB and the other from TeachingB to TeachingA)
-                if t1.id_teaching < t2.id_teaching:
+                if t1.id_teaching < t2.id_teaching and corr > 50:
                     model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
 
                 '''Practice Slots'''
