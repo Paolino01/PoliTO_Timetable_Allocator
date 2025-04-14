@@ -26,7 +26,7 @@ class DbAPI:
                     "titolo, "
                     "CFU, "
                     "titolare, "
-                    "periodoDidattico, "                    
+                    "periodoDidattico, "
                     "oreLez, "
                     "n_min_double_slots_lecture, "
                     "n_min_single_slots_lecture, "
@@ -41,8 +41,7 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
-                    "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' "
-                    "AND orientamento='Control Technologies for Industry 4.0'")
+                    "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' ")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -57,12 +56,10 @@ class DbAPI:
         sql = ( "SELECT * FROM Info_correlazioni "
                 "WHERE id_inc_1 IN "
                     "(SELECT id_inc FROM Insegnamento_in_Orientamento "
-                        "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'"
-                        "AND orientamento='Control Technologies for Industry 4.0')"
+                        "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')"
                 "AND id_inc_2 IN "
                     "(SELECT id_inc FROM Insegnamento_in_Orientamento "
-                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'"
-                        "AND orientamento='Control Technologies for Industry 4.0')")
+                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')")
         cur.execute(sql)
         correlations = cur.fetchall()
         return correlations
@@ -89,8 +86,7 @@ class DbAPI:
         cur = self.db.cursor()
         sql = ("SELECT ID_INC FROM Insegnamento WHERE titolare=? AND ID_INC IN"
                     "(SELECT ID_INC FROM main.Insegnamento_in_Orientamento "
-                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'"
-                        "AND orientamento='Control Technologies for Industry 4.0')")
+                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')")
         cur.execute(sql, (teacher,))
         teachings_ids = cur.fetchall()
         return teachings_ids
