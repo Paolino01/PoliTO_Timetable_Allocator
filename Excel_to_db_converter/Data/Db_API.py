@@ -1,6 +1,4 @@
 import sqlite3
-from tkinter.constants import INSERT
-
 
 class Db_API:
     def __init__(self):

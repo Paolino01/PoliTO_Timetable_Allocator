@@ -160,7 +160,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
             for t2, corr in t1.correlations.items():
                 # I need this if in order to not impose the same constraint twice (e.g. one from TeachingA to TeachingB and the other from TeachingB to TeachingA)
-                if t1.id_teaching < t2.id_teaching:
+                if t1.id_teaching < t2.id_teaching and corr > 20:
                     model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
 
                 '''Practice Slots'''
@@ -253,7 +253,6 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
     add_slots_per_week_teaching(model, timetable_matrix, teachings, slots)
 
     # Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
-    # Constraint: each Teaching must appear in a maximum of params.max_days_teaching days
     add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days)
 
     # Constraint: limiting the number of correlated lectures in a day
@@ -264,7 +263,7 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
     add_consecutive_slots_constraint(model, timetable_matrix, teachings, slots)
 
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
-    add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
+    #add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
 
     # Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
     add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots)

@@ -9,7 +9,7 @@ from Utils.Parameters import Parameters
 def add_slots_per_week_lab(model, timetable_matrix, teaching, slots):
     if teaching.lab_slots != 0:
         # Considering the Groups for Lab Slots
-        for i in range(1, teaching.n_weekly_groups_lab):
+        for i in range(1, teaching.n_weekly_groups_lab+1):
             # The number of Slots that I need to allocate depends on teaching.double_slots_lab. If 1, I have to allocate blocks of 2 Slots, otherwise I allocate blocks of 1 Slot
             model.add_constraint(
                 model.sum(timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] for s in slots)
