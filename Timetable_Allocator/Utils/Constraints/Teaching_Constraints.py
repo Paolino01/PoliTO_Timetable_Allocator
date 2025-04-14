@@ -171,6 +171,15 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                 # Adding the constraint to the Lab Slots
                 add_lab_overlaps_constraint(model, timetable_matrix, t1, t2, s)
 
+            # Constraint: a Lab cannot overlap with the same group of a Practice of the same lecture
+            if t1.practice_slots != 0 and t1.lab_slots != 0:
+                for i in range(1, min(t1.n_practice_groups, t1.n_lab_groups) + 1):
+                    model.add(
+                        timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
+                        timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
+                        <= 1
+                    )
+
 '''
     Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
 '''
