@@ -23,7 +23,7 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
     for i in range(1, teaching.n_practice_groups + 1):
         # If teaching.n_min_double_slots_practice >= 1, then I impose that the Teaching must have at leat 2 consecutive practice hours
         # I check that there are at least 2 Slots of practice (to be sure that I can have 2 consecutive Slots)
-        if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice >= 1 and teaching.n_min_single_slots_practice == 0:
+        if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice == 1 and teaching.n_min_single_slots_practice == 0:
             model.add(
                 model.logical_or(
                     timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
@@ -50,7 +50,7 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
     Constraint: if the Practice Lecture has to have at least 1 double Slot, then I impose that condition
 '''
 def add_min_double_slots_contraint_practice(model, teaching, days, double_slots_in_day):
-    if teaching.practice_slots != 0 and teaching.n_min_double_slots_practice >= 1 and teaching.practice_slots >= 2:
+    if teaching.n_min_double_slots_practice >= 1 and teaching.practice_slots >= 2:
         for i in range(1, teaching.n_practice_groups + 1):
             model.add(
                 model.sum(double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] for d in days) >= 1)

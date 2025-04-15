@@ -26,7 +26,7 @@ class DbAPI:
                     "titolo, "
                     "CFU, "
                     "titolare, "
-                    "periodoDidattico, "
+                    "substring(periodoDidattico, 3, 1) AS periodoDidattico, "
                     "oreLez, "
                     "n_min_double_slots_lecture, "
                     "n_min_single_slots_lecture, "
@@ -40,8 +40,7 @@ class DbAPI:
                     "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
-                 "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC AND "
-                    "nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)' ")
+                 "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -53,13 +52,7 @@ class DbAPI:
     def get_correlations_info(self):
         # TODO: getting only the correlations for mechatronic teachings, instead of the whole DB. The final query should be: SELECT * FROM Info_correlazioni
         cur = self.db.cursor()
-        sql = ( "SELECT * FROM Info_correlazioni "
-                "WHERE id_inc_1 IN "
-                    "(SELECT id_inc FROM Insegnamento_in_Orientamento "
-                        "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')"
-                "AND id_inc_2 IN "
-                    "(SELECT id_inc FROM Insegnamento_in_Orientamento "
-                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')")
+        sql = "SELECT * FROM Info_correlazioni"
         cur.execute(sql)
         correlations = cur.fetchall()
         return correlations
@@ -84,9 +77,7 @@ class DbAPI:
     def get_teachings_for_teacher(self, teacher):
         # TODO: getting only the teachings from Mechatronic Engineering, instead of the whole DB. The final query should be: SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '"
         cur = self.db.cursor()
-        sql = ("SELECT ID_INC FROM Insegnamento WHERE titolare=? AND ID_INC IN"
-                    "(SELECT ID_INC FROM main.Insegnamento_in_Orientamento "
-                    "WHERE nomeCdl='MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)')")
+        sql = "SELECT ID_INC FROM Insegnamento WHERE titolare=?"
         cur.execute(sql, (teacher,))
         teachings_ids = cur.fetchall()
         return teachings_ids
@@ -129,22 +120,22 @@ class DbAPI:
                     cur.execute(sql)
 
                     # Assigning the main Teacher of a Teaching to its Slot
-                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "', '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', 'Mechatronic_timetable')"
-                    cur.execute(sql)
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, 'Mechatronic_timetable')"
+                    cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + "_slot_" + str(s)))
 
                 # Adding Practice hours to the DB
                 if teaching.practice_slots != 0:
                     for i in range(1, teaching.n_practice_groups + 1):
                         if solution[timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s]] == 1:
-                            sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
-                                   "VALUES ('Mechatronic_timetable', '" + str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', -1, 'EA', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'Squadra" + str(i) + "', 'No')")
-                            cur.execute(sql)
+                            sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche) "
+                                   "VALUES ('Mechatronic_timetable', ?, -1, 'EA', 1, ?, ?, ?, 'Aula', 'Presenza', 'NonDisponibile', 'Squadra" + str(i) + "', 'No')")
+                            cur.execute(sql, (str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}", teaching.id_teaching, self.params.days[math.floor(s / self.params.slot_per_day)], self.params.time_slots[s % self.params.slot_per_day]))
 
                             # Assigning the main Teacher of a Teaching to its Slot
                             # TODO: we should not have the main Teacher but the Practice Teacher(s)
-                            sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "','" + str(
-                                teaching.id_teaching) + f"_practice_group{i}_slot_{s}" + "', 'Mechatronic_timetable')"
-                            cur.execute(sql)
+                            sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
+                                   "VALUES (?,?, 'Mechatronic_timetable')")
+                            cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}"))
 
                 # Adding Lab hours to the DB
                 if teaching.lab_slots != 0:
@@ -156,9 +147,9 @@ class DbAPI:
 
                             # Assigning the main Teacher of a Teaching to its Slot
                             # TODO: we should not have the main Teacher but the Lab Teacher(s)
-                            sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES ('" + teaching.main_teacher + "','" + str(
-                                teaching.id_teaching) + f"_lab_group{i}_slot_{s}" + "', 'Mechatronic_timetable')"
-                            cur.execute(sql)
+                            sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
+                                   "VALUES (?, ?, 'Mechatronic_timetable')")
+                            cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}"))
 
 
         # Inserting the new Allocation Plan
