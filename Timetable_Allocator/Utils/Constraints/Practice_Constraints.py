@@ -104,5 +104,5 @@ def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
             if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
                 model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
             # Note: Practice Lectures can not overlap with the same group of Lab Lecture of another Teaching (e.g. Group1 of Practice TeachingA can not overlap with Group1 of Lab TeachingB, but Group1 of Practice TeachingA CAN overlap with Group2 of Lab TeachingB
-            if t2.lab_slots != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
+            if t2.n_blocks_lab != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
                 model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)

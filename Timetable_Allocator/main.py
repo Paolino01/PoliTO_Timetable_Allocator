@@ -37,7 +37,7 @@ if __name__ == '__main__':
             if teaching.practice_slots != 0:
                 for i in range(1, teaching.n_practice_groups + 1):
                     timetable_matrix[(teaching.id_teaching + f"_practice_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice_group' + str(i)}_{s}")
-            if teaching.lab_slots != 0:
+            if teaching.n_blocks_lab != 0:
                 for i in range(1, teaching.n_lab_groups + 1):
                     timetable_matrix[(teaching.id_teaching + f"_lab_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
                 for i in range(1, teaching.n_practice_groups + 1):
                     print(f"{teaching.id_teaching + '_practice_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_practice_group' + str(i), s]]) for s in slots]}")
 
-            if teaching.lab_slots != 0:
+            if teaching.n_blocks_lab != 0:
                 for i in range(1, teaching.n_lab_groups + 1):
                     print(f"{teaching.id_teaching + '_lab_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_lab_group' + str(i), s]]) for s in slots]}")
 

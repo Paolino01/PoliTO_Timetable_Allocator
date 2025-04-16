@@ -39,6 +39,29 @@ class Db_API:
         self.db.commit()
 
     '''
+        Update the Teacher of a Teaching and add their hours
+    '''
+    def add_teacher_hours(self, teacher, hours, lecture_type, teaching_id):
+        cur = self.db.cursor()
+        sql = "UPDATE Docente_in_Insegnamento SET nOre = ? WHERE Cognome = ? AND ID_INC = ? AND TipoLez = ?"
+        cur.execute(sql, (hours,teacher, teaching_id, lecture_type))
+        self.db.commit()
+
+    '''
+        Insert a Teacher in a Teaching with its hours
+    '''
+    def add_teacher_in_teaching(self, teacher_surname, hours, lecture_type, teaching_id):
+        # Note: we have to retrieve the full name of the Teacher starting from teacher_surname
+        cur = self.db.cursor()
+
+        sql = "SELECT Cognome FROM Docente WHERE Cognome LIKE ?"
+        cur.execute(sql, ('%' + teacher_surname + '%',))
+        print(cur.fetchall())
+
+        sql = "INSERT INTO Docente_in_Insegnamento (Cognome, ID_INC, nOre, tipoLez) VALUES (?, ?, ?, ?)"
+        self.db.commit()
+
+    '''
         Update a Teaching in the DB with the info about organizations of lecture, practice, and lab hours
     '''
     def insert_teaching_preference(
@@ -91,7 +114,7 @@ class Db_API:
         self.db.commit()
 
     '''
-        Deletes all the Teachers_Unavailability entries    
+        Delete all the Teachers_Unavailability entries    
     '''
     def clear_teachers_unavailabilities(self):
         cur = self.db.cursor()

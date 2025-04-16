@@ -138,7 +138,7 @@ class DbAPI:
                             cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}"))
 
                 # Adding Lab hours to the DB
-                if teaching.lab_slots != 0:
+                if teaching.n_blocks_lab != 0:
                     for i in range(1, teaching.n_lab_groups + 1):
                         if solution[timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s]] == 1:
                             sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche)"
