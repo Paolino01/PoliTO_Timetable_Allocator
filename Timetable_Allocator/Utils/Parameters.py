@@ -11,9 +11,11 @@ class Parameters:
         # Number of hours that are in a slot
         self.hours_in_slot = 1.5
 
-        #Boolean variable that tells if we can allocate lectures on Saturday or not. Default is false
+        # Boolean variable that tells if we start from an existing solution or not
+        self.start_from_previous_solution = False
+        # Boolean variable that tells if we can allocate lectures on Saturday or not. Default is false
         self.saturday_enabled: bool = False
-        #Saves the number of slots on Saturday. Minimum is 1, maximum is 7, default is 4
+        # Saves the number of slots on Saturday. Minimum is 1, maximum is 7, default is 4
         self.n_slots_saturday: int = 4
 
         # Number of maximum correlated lectures in a day

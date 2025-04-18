@@ -19,7 +19,6 @@ class DbAPI:
         Return: list of teachings in format [ID_INC, nStudenti, nStudentiFreq, collegio, titolo, CFU, oreLez, titolare]
     '''
     def get_teachings(self):
-        # TODO: for now I'm getting only the mechatronic teachings, instead of the whole DB
         cur = self.db.cursor()
         sql =   ("SELECT DISTINCT "
                     "Insegnamento.ID_INC, "
@@ -40,7 +39,7 @@ class DbAPI:
                     "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
-                 "WHERE Insegnamento.ID_INC == Insegnamento_in_Orientamento.ID_INC")
+                 "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -50,12 +49,22 @@ class DbAPI:
         Return: list of correlations info in format [ID_INC_1, ID_INC_2, Correlazione, Correlazione_finale]
     '''
     def get_correlations_info(self):
-        # TODO: getting only the correlations for mechatronic teachings, instead of the whole DB. The final query should be: SELECT * FROM Info_correlazioni
         cur = self.db.cursor()
         sql = "SELECT * FROM Info_correlazioni"
         cur.execute(sql)
         correlations = cur.fetchall()
         return correlations
+
+    '''
+        Get a previous solution that will be used as starting point to generate a new one
+        Return: previous solution in format [allocationPlan, ID_INC, lectureType, day, timeSlot, lectGroup]
+    '''
+    def get_previous_solution(self):
+        cur = self.db.cursor()
+        sql = "SELECT * FROM PreviousSolution"
+        cur.execute(sql)
+        previous_solution = cur.fetchall()
+        return previous_solution
 
     '''Teachers'''
 
@@ -75,7 +84,6 @@ class DbAPI:
         Return: list of Teachings in format [ID_INC]
     '''
     def get_teachings_for_teacher(self, teacher):
-        # TODO: getting only the teachings from Mechatronic Engineering, instead of the whole DB. The final query should be: SELECT ID_INC FROM Docente_in_Insegnamento WHERE Cognome="' + teacher_surname + '"
         cur = self.db.cursor()
         sql = "SELECT ID_INC FROM Insegnamento WHERE titolare=?"
         cur.execute(sql, (teacher,))
@@ -97,9 +105,8 @@ class DbAPI:
     '''Timetable'''
 
     '''
-        Saving the generated timetable to the GUI DB
+        Saving the generated timetable in the DB
     '''
-    # TODO: in the final version of the project it would be better to have only one DB
     def save_results_to_db(self, solution, timetable_matrix, slots: list[int], teachings: list[Teaching]):
         cur = self.db.cursor()
 

@@ -1,4 +1,7 @@
 from docplex.cp.model import CpoModel
+from docplex.cp.solution import CpoModelSolution
+
+from Components.Previous_Solution import get_previous_solution
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
 from Utils.Constraints.Teacher_Constraints import add_teachers_constraints
@@ -32,7 +35,7 @@ if __name__ == '__main__':
     timetable_matrix = dict()
     for teaching in teachings:
         for s in slots:
-            timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"x_{teaching.id_teaching}_{s}")
+            timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"timetable_matrix_{teaching.id_teaching}_{s}")
 
             if teaching.practice_slots != 0:
                 for i in range(1, teaching.n_practice_groups + 1):
@@ -41,6 +44,8 @@ if __name__ == '__main__':
                 for i in range(1, teaching.n_lab_groups + 1):
                     timetable_matrix[(teaching.id_teaching + f"_lab_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
 
+    # Ask the user if they want to start from an existing solution and, if affermative, load that solution
+    start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
 
     '''Teachings Constraints'''
     add_teachings_constraints(model, timetable_matrix, teachings, slots, days)
