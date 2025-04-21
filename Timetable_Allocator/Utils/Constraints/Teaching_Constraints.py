@@ -404,10 +404,10 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
 
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     lectures_dispersion_of_day = {}
-    lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
+    #lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
 
     # Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
     add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots)
 
     # Add an objective function that minimizes the soft constraints
-    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day)
+    #add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day)

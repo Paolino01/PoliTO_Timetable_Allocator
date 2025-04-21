@@ -39,8 +39,9 @@ class DbAPI:
                     "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
-                 "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC")
-        cur.execute(sql)
+                 "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
+                 "AND nomeCdl IN (?, ?, ?, ?, ?, ?, ?)")
+        cur.execute(sql, ("MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)", "INGEGNERIA INFORMATICA", "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE", "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)", "DATA SCIENCE AND ENGINEERING", "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)"))
         teachings = cur.fetchall()
         return teachings
 
