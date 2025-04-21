@@ -23,6 +23,7 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
     for i in range(1, teaching.n_practice_groups + 1):
         # If teaching.n_min_double_slots_practice >= 1, then I impose that the Teaching must have at leat 2 consecutive practice hours
         # I check that there are at least 2 Slots of practice (to be sure that I can have 2 consecutive Slots)
+        '''
         if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice == 1 and teaching.n_min_single_slots_practice == 0:
             model.add(
                 model.logical_or(
@@ -36,15 +37,16 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
             )
         # If I don't have any constraint about the minimum number of double Slots, I just impose that if there are any double Slots the are consecutive
         else:
-            if teaching.practice_slots > 0:
-                model.logical_or(
-                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
-                    (
-                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
-                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
-                    )
-                    >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d])
+        '''
+        if teaching.practice_slots > 0:
+            model.logical_or(
+                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
+                (
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
                 )
+                >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d])
+            )
 
 '''
     Constraint: if the Practice Lecture has to have at least 1 double Slot, then I impose that condition
@@ -64,7 +66,7 @@ def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teach
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
             n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"y_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
-            double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
+            #double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
 
 '''
     Adds the number of Practice Slots in a day to the variable n_slots_in_day_teaching
@@ -106,3 +108,81 @@ def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
             # Note: Practice Lectures can not overlap with the same group of Lab Lecture of another Teaching (e.g. Group1 of Practice TeachingA can not overlap with Group1 of Lab TeachingB, but Group1 of Practice TeachingA CAN overlap with Group2 of Lab TeachingB
             if t2.n_blocks_lab != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
                 model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
+
+'''
+    Constraint: limiting the number of correlated lectures in a day
+'''
+def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids):
+    params = Parameters()
+
+    if t1.practice_slots != 0:
+        for i in range(1, t1.n_practice_groups + 1):
+            model.add(model.sum(
+                corr * (timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] * timetable_matrix[
+                    t_id, s + slot_offset])
+                for slot_offset in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + slot_offset in slots
+                for t_id, corr in teaching_ids.items()) <= params.max_corr_in_day)
+
+'''
+    Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
+'''
+def add_consecutive_slots_constraint_practice(model, timetable_matrix, t1, s, teaching_ids):
+    params = Parameters()
+
+    if t1.practice_slots != 0:
+        for i in range(1, t1.n_practice_groups + 1):
+            correlations_in_slots = model.sum(
+                corr * (timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] * timetable_matrix[
+                    t_id, s + slot_offset])
+                for slot_offset in range(1, params.n_consecutive_slots)
+                for t_id, corr in teaching_ids.items())
+
+            model.add(
+                1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))
+
+'''
+    Define the variables that manage the lectures dispersion in a day
+'''
+def define_lecture_dispersion_variables_practice(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day):
+    params = Parameters()
+
+    if t.practice_slots != 0:
+        for i in range(1, t.n_practice_groups + 1):
+            first_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"first_lecture_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
+            last_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"last_lecture_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
+            lectures_dispersion_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.slot_per_day - 1, name=f"lecture_dispersion_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
+
+'''
+    Assign first and last Slot of Day for each Teaching
+'''
+def assign_first_last_slot_of_day_practice(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day):
+    params = Parameters()
+
+    if t.practice_slots != 0:
+        for i in range(1, t.n_practice_groups + 1):
+            model.add(first_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] <= model.max(s * model.max(timetable_matrix[t_id, s]
+                for t_id, corr in teaching_ids.items())
+                for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots))
+            model.add(last_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] >= model.max(s * model.max(timetable_matrix[t_id, s]
+                for t_id, corr in teaching_ids.items())
+                for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots))
+
+'''
+    Calculate lecture dispersion as fisrt_slot - last_slot
+'''
+def calculate_lecture_dispersion_practice(model, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day):
+    if t.practice_slots != 0:
+        for i in range(1, t.n_practice_groups + 1):
+            model.add(lectures_dispersion_of_day[t.id_teaching + f"_practice_group{i}", d] == last_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] - first_lecture_of_day[t.id_teaching + f"_practice_group{i}", d])
+
+'''
+    Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
+'''
+def add_first_last_slot_correlation_limit_practice(model, timetable_matrix, slots, t1, t2_id, corr):
+    params = Parameters()
+
+    if t1.practice_slots != 0:
+        for i in range(1, t1.n_practice_groups + 1):
+            model.add(model.sum(
+                corr * (timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] * timetable_matrix[t2_id, s + (params.slot_per_day - 1)])
+                for s in range(0, len(slots), 7) if s + (params.slot_per_day - 1) in slots) <= params.max_corr_first_last_slot)
