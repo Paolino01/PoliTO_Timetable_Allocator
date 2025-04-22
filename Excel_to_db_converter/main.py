@@ -1,3 +1,4 @@
+import pandas
 from Data.Db_API import Db_API
 from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities
 from Utils.Get_Teachings_Data import get_teaching_information
@@ -25,3 +26,8 @@ if __name__ == '__main__':
 
     # Get the information about unavailable Slots for each Teacher from the JotForm Excel file and insert them in the database
     get_teachers_unavailabilities()
+
+    '''Other'''
+    df = pandas.read_excel("../Data/Excels/personale attivo.xlsx")
+    for index, row in df.iterrows():
+

@@ -24,16 +24,12 @@ def get_teaching_teachers(row, main_teacher):
         coll_info = c.strip().split(' ')
 
         offset = 0
-        second_surname = ""
         if coll_info[2][0] != '(':
             offset = 1
-            second_surname = " " + coll_info[2]
             if coll_info[3][0] != '(':
                 offset = 2
-                second_surname = " " + coll_info[3]
                 if coll_info[4][0] != '(':
                     offset = 3
-                    second_surname = " " + coll_info[4]
                     
         # Considering only the Teachers who have title = "IN" and didactic type = "L", "EA" or "EL"
         # Or the Main Teacher independently of the title
@@ -42,10 +38,10 @@ def get_teaching_teachers(row, main_teacher):
                 db_api.add_teacher_hours(main_teacher, coll_info[12 + offset], "L", row["id_inc"])
             else:
                 if coll_info[7 + offset].split(":")[1] in ("EA", "EL"):
-                    db_api.add_teacher_in_teaching(coll_info[1] + second_surname, coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
+                    db_api.add_teacher_in_teaching(coll_info[1], coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
         else:
             if coll_info[5 + offset] == "IN" and coll_info[7 + offset].split(":")[1] in ("L", "EA", "EL"):
-                db_api.add_teacher_in_teaching(coll_info[1] + second_surname, coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
+                db_api.add_teacher_in_teaching(coll_info[1], coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
     '''
 
 
