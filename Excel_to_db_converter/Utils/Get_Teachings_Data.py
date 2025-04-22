@@ -10,13 +10,11 @@ from Data.Db_API import Db_API
     PAY ATTENTION TO THE SPACES, SOME FIELDS HAVE SPACES OTHER DON'T. After "h:" there is a double space
     I'm interested only to the teachers who have tit=IN
 '''
-def get_teaching_teachers(row, main_teacher):
+def get_teaching_teachers(row, main_teacher_id):
     collaborators_string = row['Collaboratori']
     if collaborators_string == "" or collaborators_string == "No coll.":
         return
 
-    # TODO: need to find a way to retrieve the Teachers from their surnames/IDs (there are multiple Teachers with the same surname)
-    '''
     db_api = Db_API()
 
     collaborators = collaborators_string.split(';')
@@ -30,20 +28,26 @@ def get_teaching_teachers(row, main_teacher):
                 offset = 2
                 if coll_info[4][0] != '(':
                     offset = 3
-                    
+
+        # NOTE: sometimes in the column number 3 there might be the department instead of the keywork "tit:".
+        # If so, I delete the column number 3
+        if coll_info[3 + offset] != 'tit:':
+            del(coll_info[3 + offset])
+
+        # The Teacher ID is in the format (ID) in the DB. I convert it to the format 0000ID
+        teacher_id = coll_info[0][1:-1].zfill(6)
+
         # Considering only the Teachers who have title = "IN" and didactic type = "L", "EA" or "EL"
         # Or the Main Teacher independently of the title
-        if main_teacher.split(' ')[0].upper() == coll_info[1].upper():
-            if coll_info[7 + offset].split(":")[1] == "L":
-                db_api.add_teacher_hours(main_teacher, coll_info[12 + offset], "L", row["id_inc"])
+        if main_teacher_id == coll_info[0]:
+            if coll_info[6 + offset].split(":")[1] == "L":
+                db_api.add_teacher_hours(main_teacher_id, coll_info[-1], "L", row["id_inc"])
             else:
-                if coll_info[7 + offset].split(":")[1] in ("EA", "EL"):
-                    db_api.add_teacher_in_teaching(coll_info[1], coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
+                if coll_info[6 + offset].split(":")[1] in ("EA", "EL"):
+                    db_api.add_teacher_in_teaching(main_teacher_id, coll_info[-1], coll_info[6 + offset].split(":")[1], row["id_inc"])
         else:
-            if coll_info[5 + offset] == "IN" and coll_info[7 + offset].split(":")[1] in ("L", "EA", "EL"):
-                db_api.add_teacher_in_teaching(coll_info[1], coll_info[12 + offset], coll_info[7 + offset].split(":")[1], row["id_inc"])
-    '''
-
+            if coll_info[4 + offset] == "IN" and coll_info[6 + offset].split(":")[1] in ("L", "EA", "EL"):
+                db_api.add_teacher_in_teaching(teacher_id, coll_info[-1], coll_info[6 + offset].split(":")[1], row["id_inc"])
 
 def get_teaching_information(teachings):
     db_api = Db_API()
@@ -59,12 +63,13 @@ def get_teaching_information(teachings):
         filtered_df = df.loc[df["id_inc"].isin([t.id_teaching for t in teachings])]
 
         for index, row in filtered_df.iterrows():
-            # Getting the main teacher's name for a Teaching
-            main_teacher = row["cognome"] + " " + row["nome"]
-            main_teacher = main_teacher.title()
             # Adding the information about hours of lectures to a Teaching
-            db_api.add_teacher_and_lecture_hours_to_course(row["id_inc"], row["h_lez"], main_teacher)
 
-            get_teaching_teachers(row, main_teacher)
+            # Getting the Main Teacher ID
+            # Need to convert to int first and then to string, since row["matricola"] is considered a float
+            main_teacher_id = str(int(row["matricola"])).zfill(6)
+            db_api.add_teacher_and_lecture_hours_to_course(row["id_inc"], row["h_lez"], main_teacher_id)
+
+            get_teaching_teachers(row, main_teacher_id)
 
     print("Lecture and Teachers hours inserted in the DB")

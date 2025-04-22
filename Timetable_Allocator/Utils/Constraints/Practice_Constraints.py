@@ -65,7 +65,7 @@ def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teach
 
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
-            n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"y_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
+            n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"n_slots_in_day_teaching_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
             #double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
 
 '''

@@ -85,10 +85,11 @@ def get_teachers_preferences(teachings):
     for f in preferences_files:
         # For each file, getting only the courses that are in the DB
         df = pandas.read_excel(f)
+        df["MATRICOLA_TITOLARE"] = df["MATRICOLA_TITOLARE"].astype(str)
 
         # Filtering by Course name and Main Teacher's name, since we do not have the id_inc in the Teachers preferences files
-        filtered_df = df.loc[df["TITOLO_MATERIA"].str.lower().isin([t.title.lower() for t in teachings]) & df[
-            "DOCENTE_TITOLARE"].str.lower().isin([t.main_teacher.lower() for t in teachings])]
+        filtered_df = df.loc[df["TITOLO_MATERIA"].str.lower().isin([t.title.lower() for t in teachings]) &
+                             df["MATRICOLA_TITOLARE"].str.zfill(6).isin([t.main_teacher for t in teachings])]
 
         for index, row in filtered_df.iterrows():
             # Lectures
@@ -104,7 +105,7 @@ def get_teachers_preferences(teachings):
             # Insert the data retrieved from the Excel files in the DB
             db_api.insert_teaching_preference(
                 row["TITOLO_MATERIA"],
-                row["DOCENTE_TITOLARE"],
+                row["MATRICOLA_TITOLARE"].zfill(6),
                 n_min_double_slots_lecture,
                 n_min_single_slots_lecture,
                 practice_hours,
@@ -132,19 +133,25 @@ def get_teachers_unavailabilities():
         teacher = df.loc[i]['Docente titolare']
         n_unavailabilities = 0
 
-        # I have to do it like this because the data in the JotForm is in the format:
-        # 8:30-10:00 Monday; 8:30-10:00 Tuesday; 8:30-10:00 Wednesday; ...; 10:00-11:30 Monday; 10:00-11:30 Tuesday; ...; 17:30-19:00 Thursday; 17:30-19:00 Friday
-        # And starts from column 5
-        for day in range(5, 10):
-            for slot in range(0, 35, 5):
-                if df.iloc[i, day + slot] == "Indisponibile" or df.iloc[i, day + slot] == "Unavailable":
-                    db_api.insert_unavailable_slot(teacher, ((day - 5) * 7) + math.floor(slot / 5))
-                    # Counting the number of unavailablities in order to insert the first 4 only
-                    n_unavailabilities += 1
-                    if n_unavailabilities >= 4:
-                        break
+        # Getting the Teacher's ID form the Teacher's name
+        teacher_ids = db_api.get_teacher_id(teacher.title())
+        if len(teacher_ids) > 0:
+            #Inserting unavailability only if the Teacher is in the DB
+            teacher_id = teacher_ids[0][0]
 
-            if n_unavailabilities >= 4:
-                break
+            # I have to do it like this because the data in the JotForm is in the format:
+            # 8:30-10:00 Monday; 8:30-10:00 Tuesday; 8:30-10:00 Wednesday; ...; 10:00-11:30 Monday; 10:00-11:30 Tuesday; ...; 17:30-19:00 Thursday; 17:30-19:00 Friday
+            # And starts from column 5
+            for day in range(5, 10):
+                for slot in range(0, 35, 5):
+                    if df.iloc[i, day + slot] == "Indisponibile" or df.iloc[i, day + slot] == "Unavailable":
+                        db_api.insert_unavailable_slot(teacher_id, ((day - 5) * 7) + math.floor(slot / 5))
+                        # Counting the number of unavailablities in order to insert the first 4 only
+                        n_unavailabilities += 1
+                        if n_unavailabilities >= 4:
+                            break
+
+                if n_unavailabilities >= 4:
+                    break
 
     print("Teachers unavailabilities inserted in the DB")

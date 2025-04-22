@@ -28,38 +28,40 @@ class Db_API:
     '''
         Update a Teaching in the DB with the hours of lectures and the name of the main teacher
     '''
-    def add_teacher_and_lecture_hours_to_course(self, id_inc, lecture_hours, main_teacher):
+    def add_teacher_and_lecture_hours_to_course(self, id_inc, lecture_hours, main_teacher_id):
         cur = self.db.cursor()
         sql = "UPDATE Insegnamento SET oreLez = ?, titolare = ? WHERE ID_INC = ?"
-        cur.execute(sql, (lecture_hours, main_teacher, id_inc))
+        cur.execute(sql, (lecture_hours, main_teacher_id, id_inc))
 
         sql = "INSERT INTO Docente_in_Insegnamento (Cognome, ID_INC, nOre, tipoLez) VALUES (?, ?, 0, 'L')"
-        cur.execute(sql, (main_teacher, id_inc))
+        cur.execute(sql, (main_teacher_id, id_inc))
 
         self.db.commit()
 
     '''
         Update the Teacher of a Teaching and add their hours
     '''
-    def add_teacher_hours(self, teacher, hours, lecture_type, teaching_id):
+    def add_teacher_hours(self, teacher_id, hours, lecture_type, teaching_id):
         cur = self.db.cursor()
         sql = "UPDATE Docente_in_Insegnamento SET nOre = ? WHERE Cognome = ? AND ID_INC = ? AND TipoLez = ?"
-        cur.execute(sql, (hours,teacher, teaching_id, lecture_type))
+        cur.execute(sql, (hours, teacher_id, teaching_id, lecture_type))
         self.db.commit()
 
     '''
         Insert a Teacher in a Teaching with its hours
     '''
-    def add_teacher_in_teaching(self, teacher_surname, hours, lecture_type, teaching_id):
+    def add_teacher_in_teaching(self, teacher_id, hours, lecture_type, teaching_id):
         # Note: we have to retrieve the full name of the Teacher starting from teacher_surname
         cur = self.db.cursor()
+        sql = "SELECT * FROM Docente_in_Insegnamento WHERE Cognome = ? AND ID_INC = ? AND tipoLez = ?"
+        cur.execute(sql, (teacher_id, teaching_id, lecture_type))
 
-        sql = "SELECT Cognome FROM Docente WHERE Cognome LIKE ?"
-        cur.execute(sql, ('%' + teacher_surname + '%',))
-        print(cur.fetchall())
-
-        sql = "INSERT INTO Docente_in_Insegnamento (Cognome, ID_INC, nOre, tipoLez) VALUES (?, ?, ?, ?)"
-        self.db.commit()
+        if len(cur.fetchall()) == 0:
+            sql = "INSERT INTO Docente_in_Insegnamento (Cognome, ID_INC, nOre, tipoLez) VALUES (?, ?, ?, ?)"
+            cur.execute(sql, (teacher_id, teaching_id, hours, lecture_type))
+            self.db.commit()
+        else:
+            self.add_teacher_hours(teacher_id, hours, lecture_type, teaching_id)
 
     '''
         Update a Teaching in the DB with the info about organizations of lecture, practice, and lab hours
@@ -67,7 +69,7 @@ class Db_API:
     def insert_teaching_preference(
             self,
             title,
-            main_teacher,
+            main_teacher_id,
             n_min_double_slots_lecture,
             n_min_single_slots_lecture,
             practice_hours,
@@ -93,7 +95,7 @@ class Db_API:
                "n_blocks_lab = ?,"
                "n_weekly_groups_lab = ?,"
                "double_slots_lab = ?"
-               "WHERE lower(titolo) = ? AND lower(titolare) = ?")
+               "WHERE lower(titolo) = ? AND titolare = ?")
 
         cur.execute(sql, (
             n_min_double_slots_lecture,
@@ -108,7 +110,7 @@ class Db_API:
             n_weekly_groups_lab,
             double_slots_lab,
             title.lower(),
-            main_teacher.lower(),   # NOTE: the information about the main teacher is saved uppercase in the Excel file
+            main_teacher_id,
         ))
 
         self.db.commit()
@@ -123,16 +125,26 @@ class Db_API:
         self.db.commit()
 
     '''
+        Given a Teacher's name, get their ID
+    '''
+    def get_teacher_id(self, teacher):
+        cur = self.db.cursor()
+        sql = "SELECT ID_DOC FROM Docente WHERE Cognome = ?"
+        cur.execute(sql, (teacher,))
+        teacher_id = cur.fetchall()
+        return teacher_id
+
+    '''
         Insert an unavailable Slot for a Teacher
     '''
-    def insert_unavailable_slot(self, teacher, slot):
+    def insert_unavailable_slot(self, teacher_id, slot):
         cur = self.db.cursor()
 
         # Check that the couple Teacher, Unavailable_Slot does not already exists in the database
         sql = "SELECT count(*) FROM Teachers_Unavailability WHERE Teacher = ? AND Unavailable_Slot = ?"
-        cur.execute(sql, (teacher, slot))
+        cur.execute(sql, (teacher_id, slot))
 
         if cur.fetchone()[0] == 0:
             sql = "INSERT INTO Teachers_Unavailability VALUES (?, ?)"
-            cur.execute(sql, (teacher, slot))
+            cur.execute(sql, (teacher_id, slot))
             self.db.commit()

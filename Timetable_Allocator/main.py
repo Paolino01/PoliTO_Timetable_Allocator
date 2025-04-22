@@ -1,5 +1,4 @@
 from docplex.cp.model import CpoModel
-from docplex.cp.solution import CpoModelSolution
 
 from Components.Previous_Solution import get_previous_solution
 from Components.Slots import get_slots_per_week

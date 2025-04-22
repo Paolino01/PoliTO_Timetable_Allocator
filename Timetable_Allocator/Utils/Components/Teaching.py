@@ -6,7 +6,7 @@ class Teaching:
         id_teaching: str,
         title: str,
         cfu: int,
-        main_teacher: str,
+        main_teacher_id: str,
         didactic_period: str,
 
         lect_slots: int,
@@ -27,7 +27,7 @@ class Teaching:
         self.id_teaching: str = id_teaching
         self.title: str = title
         self.cfu: int = cfu
-        self.main_teacher: str = main_teacher
+        self.main_teacher_id: str = main_teacher_id
         self.didactic_period: str = didactic_period
 
         self.lect_slots: int = lect_slots

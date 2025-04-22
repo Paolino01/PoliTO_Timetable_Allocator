@@ -78,19 +78,19 @@ class DbAPI:
     '''
     def get_teachers(self):
         cur = self.db.cursor()
-        sql = "SELECT Cognome FROM Docente"
+        sql = "SELECT Cognome, ID_DOC FROM Docente"
         cur.execute(sql)
         teachers = cur.fetchall()
         return teachers
 
     '''
-        Given a Teacher's surname, get all the Teachings in which they are the Main Teacher
+        Given a Teacher's ID, get all the Teachings in which they are the Main Teacher
         Return: list of Teachings in format [ID_INC]
     '''
-    def get_teachings_for_teacher(self, teacher):
+    def get_teachings_for_teacher(self, teacher_id):
         cur = self.db.cursor()
         sql = "SELECT ID_INC FROM Insegnamento WHERE titolare=?"
-        cur.execute(sql, (teacher,))
+        cur.execute(sql, (teacher_id,))
         teachings_ids = cur.fetchall()
         return teachings_ids
 
@@ -98,10 +98,10 @@ class DbAPI:
         Given a Teacher, get all the Slots in which they are unavailable
         Return: list of Slots in format [Unavailable_Slot]
     '''
-    def get_teachers_unavailabilities(self, teacher):
+    def get_teachers_unavailabilities(self, teacher_id):
         cur = self.db.cursor()
         sql = "SELECT Unavailable_Slot FROM Teachers_Unavailability WHERE Teacher=?"
-        cur.execute(sql, (teacher,))
+        cur.execute(sql, (teacher_id,))
         teachers_unavailabilities = cur.fetchall()
         return teachers_unavailabilities
 
@@ -132,7 +132,7 @@ class DbAPI:
 
                     # Assigning the main Teacher of a Teaching to its Slot
                     sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, 'Mechatronic_timetable')"
-                    cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + "_slot_" + str(s)))
+                    cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + "_slot_" + str(s)))
 
                 # Adding Practice hours to the DB
                 if teaching.practice_slots != 0:
@@ -146,7 +146,7 @@ class DbAPI:
                             # TODO: we should not have the main Teacher but the Practice Teacher(s)
                             sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
                                    "VALUES (?,?, 'Mechatronic_timetable')")
-                            cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}"))
+                            cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}"))
 
                 # Adding Lab hours to the DB
                 if teaching.n_blocks_lab != 0:
@@ -160,7 +160,7 @@ class DbAPI:
                             # TODO: we should not have the main Teacher but the Lab Teacher(s)
                             sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
                                    "VALUES (?, ?, 'Mechatronic_timetable')")
-                            cur.execute(sql, (teaching.main_teacher, str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}"))
+                            cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}"))
 
 
         # Inserting the new Allocation Plan
