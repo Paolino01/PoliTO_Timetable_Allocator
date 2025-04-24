@@ -14,7 +14,7 @@ from Utils.Parameters import Parameters
 
 '''
     Get the IDs of the Teachings, considering Practices and Labs as well
-    Returns a lsit of Teaching IDs
+    Returns a list of Teaching IDs
 '''
 def get_teaching_ids(teachings):
     teaching_ids = []
@@ -400,14 +400,14 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
     add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps)
 
     # Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
-    add_consecutive_slots_constraint(model, timetable_matrix, teachings, slots)
+    #add_consecutive_slots_constraint(model, timetable_matrix, teachings, slots)
 
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     lectures_dispersion_of_day = {}
     #lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
 
     # Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
-    add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots)
+    #add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots)
 
     # Add an objective function that minimizes the soft constraints
     #add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day)

@@ -6,7 +6,7 @@ from Data.Db_API import Db_API
 
 '''
     Get the information about the teachers, they hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
-    Collaborators are in the format: (ID) NAME (SOMETHING) DEPARTMENT tit: TITLE tipo did:LECTURE_TYPE lin:LANGUAGE - h:  hh.mm;
+    Collaborators are in the format: (ID) NAME (SOMETHING) [DEPARTMENT] tit: TITLE tipo did:LECTURE_TYPE lin:LANGUAGE - h:  hh.mm;
     PAY ATTENTION TO THE SPACES, SOME FIELDS HAVE SPACES OTHER DON'T. After "h:" there is a double space
     I'm interested only to the teachers who have tit=IN
 '''
@@ -29,7 +29,7 @@ def get_teaching_teachers(row, main_teacher_id):
                 if coll_info[4][0] != '(':
                     offset = 3
 
-        # NOTE: sometimes in the column number 3 there might be the department instead of the keywork "tit:".
+        # NOTE: sometimes in the column number 3 there might be the department instead of the keyword "tit:" (titolo).
         # If so, I delete the column number 3
         if coll_info[3 + offset] != 'tit:':
             del(coll_info[3 + offset])

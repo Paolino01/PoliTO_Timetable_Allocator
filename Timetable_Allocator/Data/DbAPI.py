@@ -15,8 +15,8 @@ class DbAPI:
     '''Teachings'''
 
     '''
-        Get all the teachings in the DB
-        Return: list of teachings in format [ID_INC, nStudenti, nStudentiFreq, collegio, titolo, CFU, oreLez, titolare]
+        Get all the first semester Teachings in the DB
+        Return: list of teachings
     '''
     def get_teachings(self):
         cur = self.db.cursor()
@@ -39,7 +39,8 @@ class DbAPI:
                     "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
-                 "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC")
+                 "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
+                    "AND substring(periodoDidattico, 3, 1) = '1'")
         cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
@@ -80,12 +81,13 @@ class DbAPI:
         return teachers
 
     '''
-        Given a Teacher's ID, get all the Teachings in which they are the Main Teacher
-        Return: list of Teachings in format [ID_INC]
+        Given a Teacher's ID, get all their Teachings
+        Return: list of Teachings in format [ID_INC, tipoLez]
     '''
     def get_teachings_for_teacher(self, teacher_id):
+        # I only consider courses where the Teacher has more than 7 hours, otherwise it would not be worth allocating a Slot
         cur = self.db.cursor()
-        sql = "SELECT ID_INC FROM Insegnamento WHERE titolare=?"
+        sql = "SELECT ID_INC, tipoLez FROM Docente_in_Insegnamento WHERE Cognome=? AND nOre > 7"
         cur.execute(sql, (teacher_id,))
         teachings_ids = cur.fetchall()
         return teachings_ids

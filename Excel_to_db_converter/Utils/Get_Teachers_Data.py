@@ -85,6 +85,8 @@ def get_teachers_preferences(teachings):
     for f in preferences_files:
         # For each file, getting only the courses that are in the DB
         df = pandas.read_excel(f)
+
+        # Converting the column with Teachers' IDs to string (it would be considered float otherwise)
         df["MATRICOLA_TITOLARE"] = df["MATRICOLA_TITOLARE"].astype(str)
 
         # Filtering by Course name and Main Teacher's name, since we do not have the id_inc in the Teachers preferences files

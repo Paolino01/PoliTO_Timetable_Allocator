@@ -6,12 +6,12 @@ from Utils.Teaching import Teaching
 if __name__ == '__main__':
     db_api = Db_API()
 
-    # Load the Teaching IDs from the DB
-    list_teachings_ids = db_api.get_teachings()
+    # Load the Teachings from the DB
+    list_teachings = db_api.get_teachings()
     teachings = []
 
     # Converting the data in the list
-    for row in list_teachings_ids:
+    for row in list_teachings:
         teachings.append(Teaching(id_teaching=row[0], title=row[1], main_teacher=row[2]))
 
     '''Teachings'''

@@ -24,7 +24,7 @@ class Teachers:
             list_teachings_for_teacher = self.db_api.get_teachings_for_teacher(teacher.teacher_id)
 
             for row in list_teachings_for_teacher:
-                teacher.add_teachings(str(row[0]), all_teachings)
+                teacher.add_teachings(str(row[0]), str(row[1]), all_teachings)
 
     def load_unaivalable_slots(self):
         for teacher in self.teachers_list:

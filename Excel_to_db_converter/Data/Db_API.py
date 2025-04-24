@@ -10,7 +10,7 @@ class Db_API:
     '''
     def get_teachings(self):
         cur = self.db.cursor()
-        sql = "SELECT ID_INC,titolo, titolare FROM Insegnamento"
+        sql = "SELECT ID_INC, titolo, titolare FROM Insegnamento"
         cur.execute(sql)
         teachings_ids = cur.fetchall()
         return teachings_ids
