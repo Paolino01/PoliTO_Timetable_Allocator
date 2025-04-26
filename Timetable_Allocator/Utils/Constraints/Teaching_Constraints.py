@@ -225,7 +225,6 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                     # If the correlation between 2 Teachings is > params.min_corr_overlaps I guarantee that there will be no overlaps for those Teachings. Otherwise, I minimize the amount of overlaps between Teachings
                     if corr > params.min_corr_overlaps:
                         model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                    '''
                     else:
                         # If the correlation is <= params.min_corr_overlaps, I add a soft constraint to minimize the overlaps between correlated lectures 
                         teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] = (
@@ -237,7 +236,6 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                                   timetable_matrix[t1.id_teaching, s])
                         model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
                                   timetable_matrix[t2.id_teaching, s])
-                    '''
 
                 if corr > params.min_corr_overlaps:
                     '''Practice Slots'''
@@ -360,15 +358,6 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
     teaching_ids = get_teaching_ids(teachings)
 
     model.minimize(
-        params.lecture_dispersion_penalty *
-        model.sum(
-            lectures_dispersion_of_day[t_id, d]
-            for t_id in teaching_ids
-            for d in days
-        )
-    )
-
-    '''
         params.teaching_overlaps_penalty *
         model.sum(
             teaching_overlaps[t1.id_teaching, t2.id_teaching, s]
@@ -378,7 +367,13 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for s in slots
         )
         +
-    '''
+        params.lecture_dispersion_penalty *
+        model.sum(
+            lectures_dispersion_of_day[t_id, d]
+            for t_id in teaching_ids
+            for d in days
+        )
+    )
 
 '''
     Add the constraints for the Teachings to the model.
