@@ -218,7 +218,7 @@ class DbAPI:
                                     sql,
                                     (
                                         teacher.teacher_id,
-                                        str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}",
+                                        str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
                                         self.params.timetable_name
                                     )
                                 )
