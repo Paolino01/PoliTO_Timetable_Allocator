@@ -148,9 +148,9 @@ def define_lecture_dispersion_variables_practice(model, slots, t, d, first_lectu
 
     if t.practice_slots != 0:
         for i in range(1, t.n_practice_groups + 1):
-            first_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"first_lecture_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
-            last_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"last_lecture_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
-            lectures_dispersion_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.slot_per_day - 1, name=f"lecture_dispersion_{t.id_teaching + '_practice_group{i}' + str(i)}_{d}")
+            first_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"first_lecture_{t.id_teaching + '_practice_group' + str(i)}_{d}")
+            last_lecture_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, len(slots) - 1, name=f"last_lecture_{t.id_teaching + '_practice_group' + str(i)}_{d}")
+            lectures_dispersion_of_day[t.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.slot_per_day - 1, name=f"lecture_dispersion_{t.id_teaching + '_practice_group' + str(i)}_{d}")
 
 '''
     Assign first and last Slot of Day for each Teaching

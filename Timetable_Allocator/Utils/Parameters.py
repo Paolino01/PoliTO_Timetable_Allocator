@@ -40,7 +40,7 @@ class Parameters:
         self.lecture_dispersion_penalty = 50
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
+        self.timetable_name = "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]

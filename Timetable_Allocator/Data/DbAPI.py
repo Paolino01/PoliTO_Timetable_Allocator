@@ -41,8 +41,8 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND nomeCdl = 'MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)'")
-        cur.execute(sql)
+                    "AND nomeCdl = ?")
+        cur.execute(sql, ("INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", ))
         teachings = cur.fetchall()
         return teachings
 
