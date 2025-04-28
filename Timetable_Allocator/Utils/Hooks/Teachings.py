@@ -73,7 +73,7 @@ class Teachings:
                     id_teaching=str(row[0]),
                     title=row[1],
                     cfu=int(row[2]),
-                    main_teacher=row[3],
+                    main_teacher_id=row[3],
                     didactic_period=row[4],
 
                     lect_slots=slots_lecture,
@@ -97,7 +97,7 @@ class Teachings:
         list_correlations = self.db_api.get_correlations_info()
 
         for row in list_correlations:
-            # Get the item in self.teaching with the ID equal to ID_INC_1 and adds an element in the dictionary as [ID_INC_2] = correlation}
+            # Get the item in self.teaching with the ID equal to ID_INC_1 and adds an element in the dictionary as [ID_INC_2] = correlation
             teaching1 = next((t for t in self.teachings_list if t.id_teaching == str(row[0])), None)
             teaching2 = next((t for t in self.teachings_list if t.id_teaching == str(row[1])), None)
 

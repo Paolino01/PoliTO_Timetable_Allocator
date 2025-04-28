@@ -1,4 +1,3 @@
-import pandas
 from Data.Db_API import Db_API
 from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities
 from Utils.Get_Teachings_Data import get_teaching_information
@@ -7,12 +6,12 @@ from Utils.Teaching import Teaching
 if __name__ == '__main__':
     db_api = Db_API()
 
-    # Load the Teaching IDs from the DB
-    list_teachings_ids = db_api.get_teachings()
+    # Load the Teachings from the DB
+    list_teachings = db_api.get_teachings()
     teachings = []
 
     # Converting the data in the list
-    for row in list_teachings_ids:
+    for row in list_teachings:
         teachings.append(Teaching(id_teaching=row[0], title=row[1], main_teacher=row[2]))
 
     '''Teachings'''
@@ -26,8 +25,3 @@ if __name__ == '__main__':
 
     # Get the information about unavailable Slots for each Teacher from the JotForm Excel file and insert them in the database
     get_teachers_unavailabilities()
-
-    '''Other'''
-    df = pandas.read_excel("../Data/Excels/personale attivo.xlsx")
-    for index, row in df.iterrows():
-
