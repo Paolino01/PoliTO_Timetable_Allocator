@@ -16,7 +16,7 @@ class DbAPI:
     '''Teachings'''
 
     '''
-        Get all the first semester Teachings in the DB
+        Get all the Teachings in the DB
         Return: list of teachings
     '''
     def get_teachings(self):

@@ -33,7 +33,7 @@ class Parameters:
         self.max_consecutive_slots_teaching = 2
 
         # Number of maximum consecutive slots for a Teacher
-        self.max_consecutive_slots_teacher = 2
+        self.max_consecutive_slots_teacher = 4
 
         # Penalties for soft contraints
         self.teaching_overlaps_penalty = 80

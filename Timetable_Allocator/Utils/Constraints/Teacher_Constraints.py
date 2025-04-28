@@ -45,7 +45,7 @@ def add_no_overlap_constraint(model, timetable_matrix, teacher, slots):
         model.add(model.sum(timetable_matrix[t_id, s] for t_id in teaching_ids_1) <= 1)
 
         # Constraints for the second semester
-        model.add(model.sum(timetable_matrix[t_id, s] for t_id in teaching_ids_2) <= 1)
+        # model.add(model.sum(timetable_matrix[t_id, s] for t_id in teaching_ids_2) <= 1)
 
 '''
     A Teacher cannot have lectures in a Slot in which they are unavailable
@@ -77,7 +77,7 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
     for d in days:
         # First semester
         model.add(model.sum(timetable_matrix[t_id, s + i]
-            for t_id in teaching_ids_1
+            for t_id in teaching_ids_1 if 'lab' not in t_id
             for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
             for i in range(0, (params.max_consecutive_slots_teacher + 1))
             )
@@ -85,6 +85,7 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
         )
 
         # Second semester
+        '''
         model.add(model.sum(timetable_matrix[t_id, s + i]
             for t_id in teaching_ids_2
             for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
@@ -92,6 +93,7 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
             )
         <= params.max_consecutive_slots_teacher
         )
+        '''
 
 
 '''
