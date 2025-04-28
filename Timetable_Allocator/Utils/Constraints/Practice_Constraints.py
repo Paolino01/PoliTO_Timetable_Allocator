@@ -17,6 +17,14 @@ def add_slots_per_week_practice(model, timetable_matrix, teaching, slots):
             )
 
 '''
+    Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day
+'''
+def add_max_consecutive_slots_constraint_practice(model, teaching, d, max_consecutive_slots, n_slots_in_day_teaching):
+    if teaching.practice_slots != 0:
+        for i in range(1, teaching.n_practice_groups + 1):
+            model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] <= max_consecutive_slots)
+
+'''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
 '''
 def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teaching, s, d, n_slots_in_day_teaching):
@@ -39,13 +47,15 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
         else:
         '''
         if teaching.practice_slots > 0:
-            model.logical_or(
-                timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
-                (
-                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
-                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
+            model.add(
+                model.logical_or(
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
+                    (
+                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
+                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
+                    )
+                    >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d])
                 )
-                >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d])
             )
 
 '''
@@ -71,7 +81,7 @@ def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teach
 '''
     Adds the number of Practice Slots in a day to the variable n_slots_in_day_teaching
 '''
-def count_double_slots_in_day_practice(model, timetable_matrix, teaching, d, n_slots_in_day_teaching):
+def count_double_slots_in_day_practice(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching):
     params = Parameters()
 
     if teaching.practice_slots != 0:
@@ -80,7 +90,7 @@ def count_double_slots_in_day_practice(model, timetable_matrix, teaching, d, n_s
                 model.sum
                 (
                     timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s]
-                    for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day)
+                    for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots
                 )
             )
 

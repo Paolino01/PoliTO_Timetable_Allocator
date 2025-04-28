@@ -19,7 +19,7 @@ class Parameters:
         self.n_slots_saturday: int = 4
 
         # Number of maximum correlated lectures in a day
-        self.max_corr_in_day = 500
+        self.max_corr_in_day = 700
         # Number of consecutive slots on which we calculate the minimum correlated lectures
         self.n_consecutive_slots = 3
         # Number of minimum correlated lectures in self.n_consecutive_slots slots
@@ -27,7 +27,7 @@ class Parameters:
         # Number of maximum correlation value between first and last slot of a day
         self.max_corr_first_last_slot = 0
         # Minimum correlation for which overlaps must be avoided
-        self.min_corr_overlaps = 20
+        self.min_corr_overlaps = 30
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2
@@ -40,7 +40,7 @@ class Parameters:
         self.lecture_dispersion_penalty = 50
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)"
+        self.timetable_name = "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]

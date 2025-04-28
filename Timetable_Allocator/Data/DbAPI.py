@@ -42,7 +42,7 @@ class DbAPI:
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
                     "AND nomeCdl = ?")
-        cur.execute(sql, ("NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)", ))
+        cur.execute(sql, ("INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", ))
         teachings = cur.fetchall()
         return teachings
 
@@ -202,8 +202,8 @@ class DbAPI:
                         cur.execute(
                             sql,
                             (
-                                teaching.id_teaching + "_lab_teacher",
-                                str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
+                                teaching.id_teaching + "_practice_teacher",
+                                str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}",
                                 self.params.timetable_name
                             )
                         )
