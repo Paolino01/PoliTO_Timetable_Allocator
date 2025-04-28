@@ -42,7 +42,7 @@ class DbAPI:
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
                     "AND nomeCdl = ?")
-        cur.execute(sql, ("INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", ))
+        cur.execute(sql, ("NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)", ))
         teachings = cur.fetchall()
         return teachings
 
@@ -129,14 +129,19 @@ class DbAPI:
                            "VALUES (?, '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
                     cur.execute(sql, (self.params.timetable_name,))
 
+                    # Assigning the Main Teacher to the Teaching's Slots
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
+                    cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name))
+
                     # Assigning the collaborators of a Teaching to its Slots
                     for teacher in teachers:
-                        for t in teacher.teachings:
-                            # For each Teacher I check that the Teaching ID and Teaching Type matches.
-                            # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
-                            if t[0].id_teaching == teaching.id_teaching and t[1] == "L":
-                                sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
-                                cur.execute(sql, (teacher.teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name))
+                        if teacher.teacher_id != teaching.main_teacher_id:
+                            for t in teacher.teachings:
+                                # For each Teacher I check that the Teaching ID and Teaching Type matches.
+                                # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
+                                if t[0].id_teaching == teaching.id_teaching and t[1] == "L":
+                                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
+                                    cur.execute(sql, (teacher.teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name))
 
                 '''Practice Slots'''
                 self.save_practice_results_to_db(solution, timetable_matrix, teachers, teaching, s, cur)
@@ -172,11 +177,14 @@ class DbAPI:
                     )
 
                     # Assigning the collaborators of a Teaching to its Slots
+                    # This variable is used to know if the Teaching has Collaborators. If not, we insert a temporary Teacher as collaborator
+                    has_coll = False
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
                             # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EA":
+                                has_coll = True
                                 sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
                                        "VALUES (?,?, ?)")
                                 cur.execute(
@@ -187,6 +195,18 @@ class DbAPI:
                                         self.params.timetable_name
                                     )
                                 )
+
+                    if not has_coll:
+                        sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
+                               "VALUES (?,?, ?)")
+                        cur.execute(
+                            sql,
+                            (
+                                teaching.id_teaching + "_lab_teacher",
+                                str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
+                                self.params.timetable_name
+                            )
+                        )
 
     def save_lab_results_to_db(self, solution, timetable_matrix, teachers, teaching, s, cur):
         # Adding Lab hours to the DB
@@ -207,11 +227,15 @@ class DbAPI:
                     )
 
                     # Assigning the collaborators of a Teaching to its Slots
+                    # This variable is used to know if the Teaching has Collaborators. If not, we insert a temporary Teacher as collaborator
+                    has_coll = False
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
                             # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EL":
+                                has_coll = True
+
                                 sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
                                        "VALUES (?,?, ?)")
                                 cur.execute(
@@ -222,3 +246,15 @@ class DbAPI:
                                         self.params.timetable_name
                                     )
                                 )
+
+                    if not has_coll:
+                        sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
+                               "VALUES (?,?, ?)")
+                        cur.execute(
+                            sql,
+                            (
+                                teaching.id_teaching + "_lab_teacher",
+                                str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
+                                self.params.timetable_name
+                            )
+                        )
