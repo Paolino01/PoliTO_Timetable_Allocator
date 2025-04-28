@@ -72,6 +72,6 @@ if __name__ == '__main__':
                     print(f"{teaching.id_teaching + '_lab_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_lab_group' + str(i), s]]) for s in slots]}")
 
         # Saving the results to the DB
-        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings)
+        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings, teachers)
     else:
         print("\nNo solution found.")

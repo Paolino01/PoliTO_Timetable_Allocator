@@ -78,7 +78,7 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
         # First semester
         model.add(model.sum(timetable_matrix[t_id, s + i]
             for t_id in teaching_ids_1
-            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) if s in slots
+            for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
             for i in range(0, (params.max_consecutive_slots_teacher + 1))
             )
         <= params.max_consecutive_slots_teacher
@@ -87,7 +87,7 @@ def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots
         # Second semester
         model.add(model.sum(timetable_matrix[t_id, s + i]
             for t_id in teaching_ids_2
-            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) if s in slots
+            for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
             for i in range(0, (params.max_consecutive_slots_teacher + 1))
             )
         <= params.max_consecutive_slots_teacher
@@ -106,5 +106,5 @@ def add_teachers_constraints(model, timetable_matrix, teachers, slots, days):
         add_unavailable_slots_constraint(model, timetable_matrix, teacher)
 
         # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
-        add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots, days)
+        #add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots, days)
 
