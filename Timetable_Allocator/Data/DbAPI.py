@@ -16,7 +16,7 @@ class DbAPI:
     '''Teachings'''
 
     '''
-        Get all the first semester Teachings in the DB
+        Get all the Teachings in the DB
         Return: list of teachings
     '''
     def get_teachings(self):
@@ -41,8 +41,8 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND nomeCdl = ?")
-        cur.execute(sql, ("INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", ))
+                    "AND substring(periodoDidattico, 3, 1) == '1'")
+        cur.execute(sql)
         teachings = cur.fetchall()
         return teachings
 
