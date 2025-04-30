@@ -134,6 +134,18 @@ def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, 
                 for t_id, corr in teaching_ids.items()) <= params.max_corr_in_day)
 
 '''
+    Constraint: limiting the number of correlated lectures in 5 consecutive Slots
+'''
+def add_max_consecutive_correlations_constraint_practice(model, timetable_matrix, t1, s, slots, teaching_ids):
+    params = Parameters()
+    if t1.practice_slots != 0:
+        for i in range(1, t1.n_practice_groups + 1):
+            model.add(model.sum(
+                corr * (timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] * timetable_matrix[t_id, s + slot_offset])
+                for slot_offset in range(1, 5) if s + slot_offset in slots
+                for t_id, corr in teaching_ids.items()) <= params.max_corr_consecutive_slots)
+
+'''
     Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
 '''
 def add_consecutive_slots_constraint_practice(model, timetable_matrix, t1, s, teaching_ids):
