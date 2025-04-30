@@ -13,6 +13,8 @@ if __name__ == '__main__':
     # Problem definition
     model = CpoModel(name="PoliTO_Timetable_Scheduling")
 
+    model.parameters.emphasis.memory = True
+
     params = Parameters()
     db_api = DbAPI()
 
