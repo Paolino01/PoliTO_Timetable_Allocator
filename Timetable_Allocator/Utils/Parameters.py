@@ -20,6 +20,8 @@ class Parameters:
 
         # Number of maximum correlated lectures in a day
         self.max_corr_in_day = 700
+        # Nuber of maximum correlated lectures in 5 consecutive Slots
+        self.max_corr_consecutive_slots = 420
         # Number of consecutive slots on which we calculate the minimum correlated lectures
         self.n_consecutive_slots = 3
         # Number of minimum correlated lectures in self.n_consecutive_slots slots
@@ -40,7 +42,7 @@ class Parameters:
         self.lecture_dispersion_penalty = 50
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All Courses Timetable"
+        self.timetable_name = "All courses except Computer Engineering"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]

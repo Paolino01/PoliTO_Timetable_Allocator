@@ -15,6 +15,17 @@ def add_slots_per_week_lab(model, timetable_matrix, teaching, slots):
                 model.sum(timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] for s in slots)
                 == teaching.n_blocks_lab * (2 if teaching.double_slots_lab != 0 else 1))
 
+'''
+    Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day
+'''
+def add_max_consecutive_slots_constraint_lab(model, teaching, d, max_consecutive_slots, n_slots_in_day_teaching):
+    if teaching.n_blocks_lab != 0:
+        for i in range(1, teaching.n_lab_groups + 1):
+            model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d] <= max_consecutive_slots)
+
+'''
+    Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
+'''
 def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_slots_in_day_teaching):
     for i in range(1, teaching.n_lab_groups + 1):
         # Same as Practice, but for Lab Slots
@@ -34,13 +45,15 @@ def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_s
         else:
         '''
         if teaching.n_blocks_lab > 0:
-            model.logical_or(
-                timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0,
-                (
-                        timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
-                        timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
+            model.add(
+                model.logical_or(
+                    timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0,
+                    (
+                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
+                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
+                    )
+                    >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d])
                 )
-                >= model.min(2, n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d])
             )
 
 '''
@@ -56,7 +69,7 @@ def define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching):
 '''
     Adds the number of Lab Slots in a day to the variable n_slots_in_day_teaching
 '''
-def count_double_slots_in_day_lab(model, timetable_matrix, teaching, d, n_slots_in_day_teaching):
+def count_double_slots_in_day_lab(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching):
     params = Parameters()
 
     if teaching.n_blocks_lab != 0:
@@ -65,7 +78,7 @@ def count_double_slots_in_day_lab(model, timetable_matrix, teaching, d, n_slots_
                 model.sum
                 (
                     timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s]
-                    for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day)
+                    for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots
                 )
             )
 
@@ -96,6 +109,18 @@ def add_correlations_constraint_lab(model, timetable_matrix, slots, t1, s, teach
                     t_id, s + slot_offset])
                 for slot_offset in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + slot_offset in slots
                 for t_id, corr in teaching_ids.items()) <= params.max_corr_in_day)
+
+'''
+    Constraint: limiting the number of correlated lectures in 5 consecutive Slots
+'''
+def add_max_consecutive_correlations_constraint_lab(model, timetable_matrix, t1, s, slots, teaching_ids):
+    params = Parameters()
+    if t1.n_blocks_lab != 0:
+        for i in range(1, t1.n_lab_groups + 1):
+            model.add(model.sum(
+                corr * (timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] * timetable_matrix[t_id, s + slot_offset])
+                for slot_offset in range(1, 5) if s + slot_offset in slots
+                for t_id, corr in teaching_ids.items()) <= params.max_corr_consecutive_slots)
 
 '''
     Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day

@@ -1,3 +1,3 @@
-cd ./Interface-server
+cd ./interface-server
 npm install --silent
 npm start
