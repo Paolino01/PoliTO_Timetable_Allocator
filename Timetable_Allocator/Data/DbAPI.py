@@ -41,7 +41,7 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND nomeCdl NOT IN ('INGEGNERIA INFORMATICA') AND orientamento NOT IN (?)")
+                    "AND orientamento NOT IN (?)")
         cur.execute(sql, ("Cybersecurity", ))
         teachings = cur.fetchall()
         return teachings
