@@ -41,8 +41,8 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND (nomeCdl NOT IN ('INGEGNERIA INFORMATICA', 'INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') OR (nomeCdl IN ('INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') AND tipoCdl = 'Z')) AND orientamento NOT IN (?, ?, ?)")
-        cur.execute(sql, ("Cybersecurity", "Grafica e Multimedia", "Software"))
+                    "AND (nomeCdl NOT IN ('INGEGNERIA INFORMATICA', 'INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') OR (nomeCdl IN ('INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') AND tipoCdl = 'Z')) AND orientamento NOT IN (?)")
+        cur.execute(sql, ("Cybersecurity", ))
         teachings = cur.fetchall()
         return teachings
 
