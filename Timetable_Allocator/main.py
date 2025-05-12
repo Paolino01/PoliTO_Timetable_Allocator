@@ -1,5 +1,7 @@
 from docplex.cp.model import CpoModel
+from docplex.cp.solver import solver
 
+from Components.Generated_Solution import add_generated_courses
 from Components.Previous_Solution import get_previous_solution
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
@@ -12,6 +14,7 @@ from Utils.Parameters import Parameters
 if __name__ == '__main__':
     # Problem definition
     model = CpoModel(name="PoliTO_Timetable_Scheduling")
+    slv = solver.CpoSolver(model)
 
     params = Parameters()
     db_api = DbAPI()
@@ -46,6 +49,9 @@ if __name__ == '__main__':
     # Ask the user if they want to start from an existing solution and, if affermative, load that solution
     start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
 
+    # Add courses of an already generated timetable
+    add_generated_courses(model, timetable_matrix, slots)
+
     '''Teachings Constraints'''
     add_teachings_constraints(model, timetable_matrix, teachings, slots, days)
 
@@ -55,7 +61,10 @@ if __name__ == '__main__':
 
 
     # Solving the problem
-    solution = model.solve(log_output=True)
+    try:
+        solution = model.solve(log_output=True)
+    except KeyboardInterrupt:
+        solution = slv.end_search()
 
     # Printing the results
     if solution:

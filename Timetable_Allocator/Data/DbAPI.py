@@ -41,8 +41,8 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND nomeCdl NOT IN (?, ?)")
-        cur.execute(sql, ("INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)", "INGEGNERIA INFORMATICA", ))
+                    "AND (nomeCdl NOT IN ('INGEGNERIA INFORMATICA', 'INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') OR (nomeCdl IN ('INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)') AND tipoCdl = 'Z')) AND orientamento NOT IN (?, ?, ?)")
+        cur.execute(sql, ("Cybersecurity", "Grafica e Multimedia", "Software"))
         teachings = cur.fetchall()
         return teachings
 
@@ -67,6 +67,17 @@ class DbAPI:
         cur.execute(sql)
         previous_solution = cur.fetchall()
         return previous_solution
+
+    '''
+        Get the courses from a previously generated timetable
+        Return: list of courses and their Slots in format [allocationPlan, ID_INC, lectureType, day, timeSlot, lectGroup]
+    '''
+    def get_generated_courses(self):
+        cur = self.db.cursor()
+        sql = "SELECT pianoAllocazione, ID_INC, tipoLez, giorno, fasciaOraria, squadra FROM Slot WHERE pianoAllocazione = ?"
+        cur.execute(sql, (self.params.timetable_name, ))
+        generated_courses = cur.fetchall()
+        return generated_courses
 
     '''Teachers'''
 
