@@ -29,7 +29,7 @@ class Parameters:
         # Number of maximum correlation value between first and last slot of a day
         self.max_corr_first_last_slot = 20
         # Minimum correlation for which overlaps must be avoided
-        self.min_corr_overlaps = 40
+        self.min_corr_overlaps = 20
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2
@@ -42,7 +42,7 @@ class Parameters:
         self.lecture_dispersion_penalty = 50
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses except Computer Engineering"
+        self.timetable_name = "All courses timetable"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
