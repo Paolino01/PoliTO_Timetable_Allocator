@@ -4,6 +4,14 @@ import pandas
 
 from Data.Db_API import Db_API
 
+def get_degree_courses():
+    db_api = Db_API()
+    df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx')
+    filtered_df = df.loc[df["ID_COLLEGIO"].isin(["CL003", "CL006"])]
+
+    for index, row in filtered_df.iterrows():
+        db_api.insert_teachings(row["TIPO_LAUREA"], row["NOME_CDL"], row["DESC_ORI"])
+
 '''
     Get the information about the teachers, they hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
     Collaborators are in the format: (ID) NAME (SOMETHING) [DEPARTMENT] tit: TITLE tipo did:LECTURE_TYPE lin:LANGUAGE - h:  hh.mm;

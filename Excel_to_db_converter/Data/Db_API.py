@@ -5,6 +5,46 @@ class Db_API:
         self.db = sqlite3.connect("../Data/Courses_DB.db")
 
     '''
+        Insert a Degree Course with its type in DB, if not present.
+        Then, add the orientations to that Degree.
+        Finally, add the Teaching to the Orientation
+    '''
+    def insert_teachings(self, course_type, course_name, orientation, ID_INC, id_teaching, college, teaching_name, cfu, main_teacher, teaching_type, didactic_period, alphabetic_number):
+        cur = self.db.cursor()
+
+        sql = "DELETE FROM Corso_di_laurea"
+        cur.execute(sql)
+
+        sql = "DELETE FROM Orientamento"
+        cur.execute(sql)
+
+        sql = "DELETE FROM Insegnamento_listCodIns"
+        cur.execute(sql)
+
+        sql = "DELETE FROM Insegnamento"
+        cur.execute(sql)
+
+        sql = "DELETE FROM Insegnamento_in_Orientamento"
+        cur.execute(sql)
+
+        sql = "INSERT OR IGNORE INTO Corso_di_laurea(tipoCdl, nomeCdl) VALUES (?, ?)"
+        cur.execute(sql, (course_type, course_name))
+
+        sql = "INSERT OR IGNORE INTO Orientamento(orientamento, nomeCdl, tipoCdl) VALUES (?, ?, ?)"
+        cur.execute(sql, (orientation, course_type, course_name))
+
+        sql = "INSERT OR IGNORE INTO Insegnamento_listCodIns(ID_INC, codIns) VALUES (?, ?)"
+        cur.execute(sql, (ID_INC, id_teaching))
+
+        sql = "INSERT OR IGNORE INTO Insegnamento(ID_INC, collegio, titolo, CFU,titolare) VALUES (?, ?, ?, ?, ?)"
+        cur.execute(sql, (ID_INC, college, teaching_name, cfu, main_teacher))
+
+        sql = "INSERT OR IGNORE INTO Insegnamento_in_Orientamento(ID_INC, orientamento, nomeCdl, tipoInsegnamento, tipoCdl, periodoDidattico, alfabetica) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        cur.execute(sql, (ID_INC, orientation, course_name, teaching_type, course_type, didactic_period, alphabetic_number))
+
+        self.db.commit()
+
+    '''
         Get all the teachings in the DB
         Return: list of teachings in format [titolo]
     '''

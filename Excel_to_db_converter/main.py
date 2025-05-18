@@ -1,6 +1,6 @@
 from Data.Db_API import Db_API
 from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities
-from Utils.Get_Teachings_Data import get_teaching_information
+from Utils.Get_Teachings_Data import get_teaching_information, get_degree_courses
 from Utils.Teaching import Teaching
 
 if __name__ == '__main__':
@@ -15,6 +15,12 @@ if __name__ == '__main__':
         teachings.append(Teaching(id_teaching=row[0], title=row[1], main_teacher=row[2]))
 
     '''Teachings'''
+    # Get the Degree Courses related to DAUIN and DET departments (IDs CL003 and CL006
+    get_degree_courses()
+    # Get the Orientations for the Degree Courses of interest
+    get_orientations()
+    # Get all the Teachings for each Orientation
+
     # Get the number of lecture hours from the Excel files and insert it in the database
     get_teaching_information(teachings)
 
