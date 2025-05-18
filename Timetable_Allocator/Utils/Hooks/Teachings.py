@@ -37,12 +37,10 @@ class Teachings:
         self.teachings_list:list[Teaching] = []
         self.db_api = DbAPI()
 
-        self.load_teachings_from_db()
-        self.load_correlations_info_from_db()
 
     '''Load all the teachings from the db.'''
-    def load_teachings_from_db(self):
-        list_teachings = self.db_api.get_teachings()
+    def load_teachings_from_db(self, courses):
+        list_teachings = self.db_api.get_teachings(courses)
 
         for row in list_teachings:
             # Calculate the number of Slots in a week for Lectures, Practices and Labs
@@ -91,6 +89,8 @@ class Teachings:
                     n_weekly_groups_lab=n_weekly_groups_lab,
                     double_slots_lab=double_slots_lab
                 ))
+
+        self.load_correlations_info_from_db()
 
     '''Load the correlations info from the db.'''
     def load_correlations_info_from_db(self):

@@ -1,5 +1,7 @@
+'''
+    In this file we set the constraints related to the Teachers
+'''
 from Utils.Parameters import Parameters
-
 
 '''
     Get the IDs of the Teachings, considering Practices and Labs as well, divided per didactic period

@@ -1,8 +1,65 @@
 '''This class contains all the parameters of the program (e.g. number of slots per day, is saturday enabled, etc.). These parameters will be used in the generation of the timetable.'''
 class Parameters:
     def __init__(self):
-        # DB created by the Scraper
+        # DB witth the information about the courses
         self.DB = "../Data/Courses_DB.db"
+
+        # Data structure that is used to decide the order of the courses when generating a timetable
+        self.course_order = [
+            {
+                "courses": ["ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)", "DATA SCIENCE AND ENGINEERING",
+                            "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                            "INGEGNERIA ELETTRONICA",
+                            "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
+                            "CYBERSECURITY", "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+                            "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                            "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE", "INGEGNERIA FISICA",
+                            "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
+                            "COMMUNICATIONS ENGINEERING", "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                            "QUANTUM ENGINEERING", "AGRITECH ENGINEERING"],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 500,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": ["Artificial Intelligence and Data Analytics",
+                                 "Automation and Intelligent Cyber-Physical Systems",
+                                 "Bio and Health Informatics", "Computer Networks and Cloud Computing",
+                                 "Computing and Network Infrastructures", "EMECS - Path 1", "EMECS - Path 2", "ESCP",
+                                 "Embedded systems"],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": ["Software", "Grafica e Multimedia"],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA"],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            }
+        ]
 
         # Number of lecture Slots per each day, 5 days per week
         self.slot_per_day: int = 7
@@ -20,12 +77,6 @@ class Parameters:
 
         # Number of maximum correlated lectures in a day
         self.max_corr_in_day = 800
-        # Nuber of maximum correlated lectures in 5 consecutive Slots
-        self.max_corr_consecutive_slots = 420
-        # Number of consecutive slots on which we calculate the minimum correlated lectures
-        self.n_consecutive_slots = 3
-        # Number of minimum correlated lectures in self.n_consecutive_slots slots
-        self.min_corr_in_slots = 80
         # Number of maximum correlation value between first and last slot of a day
         self.max_corr_first_last_slot = 20
         # Minimum correlation for which overlaps must be avoided
@@ -40,6 +91,7 @@ class Parameters:
         # Penalties for soft contraints
         self.teaching_overlaps_penalty = 80
         self.lecture_dispersion_penalty = 50
+        self.correlation_in_day_penalty = 20
 
         # Name of the timetable saved in the DB
         self.timetable_name = "All courses timetable"

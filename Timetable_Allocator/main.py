@@ -12,75 +12,94 @@ from Utils.Hooks.Teachings import Teachings
 from Utils.Parameters import Parameters
 
 if __name__ == '__main__':
-    # Problem definition
-    model = CpoModel(name="PoliTO_Timetable_Scheduling")
-    slv = solver.CpoSolver(model)
-
     params = Parameters()
     db_api = DbAPI()
-
-    # List of Teachings that I need to allocate
-    teachings_class = Teachings()
-    teachings = teachings_class.teachings_list
-
-    # List of Teachers with their Teachings
-    teachers_class = Teachers(teachings)
-    teachers = teachers_class.teachers_list
 
     # Number of slots per week
     slots = get_slots_per_week()
     # Number of days per week
     days = range(5 if params.saturday_enabled == False else 6)
 
-    '''Variables for the model'''
-    # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
-    timetable_matrix = dict()
-    for teaching in teachings:
-        for s in slots:
-            timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"timetable_matrix_{teaching.id_teaching}_{s}")
+    teachings_class = Teachings()
 
-            if teaching.practice_slots != 0:
-                for i in range(1, teaching.n_practice_groups + 1):
-                    timetable_matrix[(teaching.id_teaching + f"_practice_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice_group' + str(i)}_{s}")
-            if teaching.n_blocks_lab != 0:
-                for i in range(1, teaching.n_lab_groups + 1):
-                    timetable_matrix[(teaching.id_teaching + f"_lab_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
+    solution_found = True
 
-    # Ask the user if they want to start from an existing solution and, if affermative, load that solution
-    start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
+    for i in range(0, len(params.course_order)):
+        # Problem definition
+        model = CpoModel(name="PoliTO_Timetable_Scheduling")
+        slv = solver.CpoSolver(model)
 
-    # Add courses of an already generated timetable
-    add_generated_courses(model, timetable_matrix, slots)
+        # List of Teachings that I need to allocate
+        teachings_class.load_teachings_from_db(params.course_order[i])
+        teachings = teachings_class.teachings_list
+        # TODO: we need to test that teachings has the correct Teachings in it
+    
+        # List of Teachers with their Teachings
+        teachers_class = Teachers(teachings)
+        teachers = teachers_class.teachers_list
 
-    '''Teachings Constraints'''
-    add_teachings_constraints(model, timetable_matrix, teachings, slots, days)
-
-
-    '''Teachers Contraints'''
-    add_teachers_constraints(model, timetable_matrix, teachers, slots, days)
-
-
-    # Solving the problem
-    try:
-        solution = model.solve(log_output=True)
-    except KeyboardInterrupt:
-        solution = slv.end_search()
-
-    # Printing the results
-    if solution:
-        print("\nSolution found:")
+        '''Variables for the model'''
+        # Binary variables timetable_matrix[t,s] = 1 if the Teaching 't' is assigned to Slot 's'
+        timetable_matrix = dict()
         for teaching in teachings:
-            print(f"{teaching.id_teaching}: {[int(solution[timetable_matrix[teaching.id_teaching, s]]) for s in slots]}")
+            for s in slots:
+                timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"timetable_matrix_{teaching.id_teaching}_{s}")
+    
+                if teaching.practice_slots != 0:
+                    for i in range(1, teaching.n_practice_groups + 1):
+                        timetable_matrix[(teaching.id_teaching + f"_practice_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice_group' + str(i)}_{s}")
+                if teaching.n_blocks_lab != 0:
+                    for i in range(1, teaching.n_lab_groups + 1):
+                        timetable_matrix[(teaching.id_teaching + f"_lab_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
 
-            if teaching.practice_slots != 0:
-                for i in range(1, teaching.n_practice_groups + 1):
-                    print(f"{teaching.id_teaching + '_practice_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_practice_group' + str(i), s]]) for s in slots]}")
+        # Ask the user if they want to start from an existing solution and, if affermative, load that solution
+        # start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
+    
+        # Add courses of an already generated timetable
+        if i != 0:
+            add_generated_courses(model, timetable_matrix, slots)
 
-            if teaching.n_blocks_lab != 0:
-                for i in range(1, teaching.n_lab_groups + 1):
-                    print(f"{teaching.id_teaching + '_lab_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_lab_group' + str(i), s]]) for s in slots]}")
+        # Set parameters according to the the current course generation schema
+        params.max_corr_in_day = params.course_order[i]["max_corr_in_day"]
+        params.max_corr_first_last_slot = params.course_order[i]["max_corr_first_last_slot"]
+        params.min_corr_overlaps = params.course_order[i]["min_corr_overlaps"]
 
-        # Saving the results to the DB
-        db_api.save_results_to_db(solution, timetable_matrix, slots, teachings, teachers)
+        '''Teachings Constraints'''
+        add_teachings_constraints(model, timetable_matrix, teachings, slots, days)
+
+        '''Teachers Contraints'''
+        add_teachers_constraints(model, timetable_matrix, teachers, slots, days)
+
+
+        # Solving the problem
+        solution = model.solve(log_output=True)
+    
+        # Printing the results
+        if solution:
+            print("\nSolution found:")
+            for teaching in teachings:
+                print(f"{teaching.id_teaching}: {[int(solution[timetable_matrix[teaching.id_teaching, s]]) for s in slots]}")
+    
+                if teaching.practice_slots != 0:
+                    for i in range(1, teaching.n_practice_groups + 1):
+                        print(f"{teaching.id_teaching + '_practice_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_practice_group' + str(i), s]]) for s in slots]}")
+    
+                if teaching.n_blocks_lab != 0:
+                    for i in range(1, teaching.n_lab_groups + 1):
+                        print(f"{teaching.id_teaching + '_lab_group' + str(i)}: {[int(solution[timetable_matrix[teaching.id_teaching + '_lab_group' + str(i), s]]) for s in slots]}")
+    
+            # Saving the results to the DB
+            db_api.save_results_to_db(solution, timetable_matrix, slots, teachings, teachers)
+        else:
+            print("\nNo solution found.")
+            solution_found = False
+            break
+
+    if solution_found:
+        db_api.remove_previous_solution()
+        db_api.rename_temp_solution()
+
+        print("\nTimetable generated successfully.")
     else:
-        print("\nNo solution found.")
+        db_api.remove_temp_solution()
+        print("DB cleaned")

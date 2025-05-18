@@ -106,12 +106,35 @@ def count_days_with_double_slots_practice(model, teaching, d, n_slots_in_day_tea
             )
 
 '''
+    Constraint: different groups of Practice lectures can not overlap with each other
+    Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
+'''
+def add_practice_group_constraint(model, timetable_matrix, t1, s):
+    # TODO: needs to be tested
+    if t1.practice_slots != 0:
+        # Constraint: different groups of Practice lectures can not overlap with each other
+        for i in range(1, t1.n_practice_groups + 1):
+            for j in range(1, i):
+                model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[
+                    t1.id_teaching + f"_practice_group{j}", s] <= 1)
+
+        # Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
+        if t1.n_blocks_lab != 0:
+            for i in range(1, min(t1.n_practice_groups, t1.n_lab_groups) + 1):
+                model.add(
+                    timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
+                    timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
+                    <= 1
+                )
+
+'''
     Constraint: a Teaching cannot overlap with the others, according to the correlations
 '''
 def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
     if t1.practice_slots != 0:
         for i in range(1, t1.n_practice_groups + 1):
             model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching, s] <= 1)
+
             # Note: the same Groups of Practice Lectures can not overlap (e.g. Group1 of TeachingA can not overlap with Group1 of TeachingB, but Group1 of TeachingA CAN overlap with Group2 of TeachingB
             if t2.practice_slots != 0 and i <= t2.n_practice_groups and t1.id_teaching < t2.id_teaching:
                 model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_practice_group{i}", s] <= 1)
