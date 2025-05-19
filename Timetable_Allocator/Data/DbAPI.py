@@ -49,7 +49,7 @@ class DbAPI:
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
-                    "AND (tipoCdl != '1' OR (tipoCdl = '1' AND substring(periodoDidattico, 0, 1) != '1')) AND substring(periodoDidattico, 3, 1) == '1' "
+                    "AND (tipoCdl != '1' OR (tipoCdl = '1' AND substring(periodoDidattico, 1, 1) != '1')) AND substring(periodoDidattico, 3, 1) = '1' "
                     "AND nomeCdl IN (%s)" % placeholders)
 
         # If I have orientations and course_type as well, I add them to the SQL query
