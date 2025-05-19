@@ -7,16 +7,26 @@ class Parameters:
         # Data structure that is used to decide the order of the courses when generating a timetable
         self.course_order = [
             {
-                "courses": ["ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)", "DATA SCIENCE AND ENGINEERING",
-                            "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                            "INGEGNERIA ELETTRONICA",
-                            "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                            "CYBERSECURITY", "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
-                            "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                            "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE", "INGEGNERIA FISICA",
-                            "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
-                            "COMMUNICATIONS ENGINEERING", "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
-                            "QUANTUM ENGINEERING", "AGRITECH ENGINEERING"],
+                "courses": [
+                    "ICT ENGINEERING FOR SMART SOCIETIES"
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "DATA SCIENCE AND ENGINEERING",
+                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                    "INGEGNERIA ELETTRONICA",
+                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
+                    "CYBERSECURITY",
+                    "CYBERSECURITY ENGINEERING",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "INGEGNERIA FISICA",
+                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
+                    "COMMUNICATIONS ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                    "QUANTUM ENGINEERING",
+                    "AGRITECH ENGINEERING"
+                ],
                 "orientations": [],
                 "course_type": "",
                 "max_corr_in_day": 500,

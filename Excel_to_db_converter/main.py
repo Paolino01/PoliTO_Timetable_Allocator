@@ -8,9 +8,9 @@ if __name__ == '__main__':
 
     '''Teachings'''
     # Get the Degree Courses related to DAUIN and DET departments (IDs CL003 and CL006)
-    #get_teachings()
+    get_teachings()
     # Calculate the correlation for each Teaching
-    #calculate_correlations()
+    calculate_correlations()
 
     # Load the Teachings from the DB
     list_teachings = db_api.get_teachings()

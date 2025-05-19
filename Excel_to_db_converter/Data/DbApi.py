@@ -44,7 +44,7 @@ class DbApi:
         sql = "INSERT OR IGNORE INTO Insegnamento_listCodIns(ID_INC, codIns) VALUES (?, ?)"
         cur.execute(sql, (ID_INC, id_teaching))
 
-        sql = "INSERT OR IGNORE INTO Insegnamento(ID_INC, collegio, titolo, CFU,titolare) VALUES (?, ?, ?, ?, ?)"
+        sql = "INSERT OR IGNORE INTO Insegnamento(ID_INC, collegio, titolo, CFU, titolare, oreLez) VALUES (?, ?, ?, ?, ?, 0)"
         cur.execute(sql, (ID_INC, college, teaching_name, cfu, main_teacher))
 
         sql = "INSERT OR IGNORE INTO Insegnamento_in_Orientamento(ID_INC, orientamento, nomeCdl, tipoInsegnamento, tipoCdl, periodoDidattico, alfabetica) VALUES (?, ?, ?, ?, ?, ?, ?)"
