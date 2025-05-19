@@ -155,7 +155,8 @@ def calculate_correlations():
                             # TODO: ask if this is good of if Obbligatorio_a_scelta and Tabella_a_scelta should have a correlation of 90
                             corr = 20
 
-                    db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr)
+                    if str(t1["TITOLO_S"]) != "nan" and str(t2["TITOLO_S"]) != "nan":
+                        db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr)
 
     print("Correlations inserted in the DB")
 

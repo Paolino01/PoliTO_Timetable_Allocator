@@ -46,11 +46,11 @@ if __name__ == '__main__':
                 timetable_matrix[(teaching.id_teaching, s)] = model.binary_var(name=f"timetable_matrix_{teaching.id_teaching}_{s}")
     
                 if teaching.practice_slots != 0:
-                    for i in range(1, teaching.n_practice_groups + 1):
-                        timetable_matrix[(teaching.id_teaching + f"_practice_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice_group' + str(i)}_{s}")
+                    for practice_group in range(1, teaching.n_practice_groups + 1):
+                        timetable_matrix[(teaching.id_teaching + f"_practice_group{practice_group}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_practice_group' + str(practice_group)}_{s}")
                 if teaching.n_blocks_lab != 0:
-                    for i in range(1, teaching.n_lab_groups + 1):
-                        timetable_matrix[(teaching.id_teaching + f"_lab_group{i}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
+                    for lab_group in range(1, teaching.n_lab_groups + 1):
+                        timetable_matrix[(teaching.id_teaching + f"_lab_group{lab_group}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(lab_group)}_{s}")
 
         # Ask the user if they want to start from an existing solution and, if affermative, load that solution
         # start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
