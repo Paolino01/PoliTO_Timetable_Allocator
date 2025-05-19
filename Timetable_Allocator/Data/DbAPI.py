@@ -56,7 +56,7 @@ class DbAPI:
         if len(courses["orientations"]) > 0:
             placeholders = ', '.join(['?'] * len(courses["orientations"]))
             sql += " AND orientamento IN (%s)" % placeholders
-            parameters.append(courses["orientations"])
+            parameters.extend(courses["orientations"])
         if courses["course_type"] != "":
             sql += " AND tipoCdl = ?"
             parameters.append(courses["course_type"])
