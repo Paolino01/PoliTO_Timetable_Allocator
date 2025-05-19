@@ -20,11 +20,14 @@ practice_slot_preferences_dict = {
     "un blocco da 3h e gli altri da 1,5h per ciascuna squadra": [1, 1],
     "tutti i blocchi da 1,5h per ciascuna squadra": [0, 1],
     "un blocco da 4,5h (Atelier per Architettura) per ciascuna squadra": [2, 0],
+    "Non applicabile": [0, 0],
     "nan": [0, 0]
 }
 
 lab_slot_preferences_dict = {
     "blocchi da 3h per ciascuna squadra": 1,
+    "blocchi da 3 h per ciascuna squadra": 1,
+    "blocchi da 1.5 h per ciascuna squadra": 0,
     "blocchi da 1,5h per ciascuna squadra": 0,
     "indifferente": 0,
     "nan": 0
@@ -80,7 +83,7 @@ def get_lab_preferences(row):
 def get_teachers_preferences(teachings):
     db_api = DbApi()
 
-    preferences_files = glob.glob(os.path.join("../Data/Excels/Teachers Data/Teachers Preferences", "*.xls"))
+    preferences_files = glob.glob(os.path.join("../Data/Excels/Teachers Data/Teachers Preferences", "*.xlsx"))
 
     for f in preferences_files:
         # For each file, getting only the courses that are in the DB

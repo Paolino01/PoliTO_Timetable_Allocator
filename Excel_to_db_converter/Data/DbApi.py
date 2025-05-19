@@ -5,11 +5,9 @@ class DbApi:
         self.db = sqlite3.connect("../Data/Courses_DB.db")
 
     '''
-        Insert a Degree Course with its type in DB, if not present.
-        Then, add the orientations to that Degree.
-        Finally, add the Teaching to the Orientation
+        Delete all the Teachings from the DB, in order to be ready to insert new ones
     '''
-    def insert_teachings(self, course_type, course_name, orientation, ID_INC, id_teaching, college, teaching_name, cfu, main_teacher, teaching_type, didactic_period, alphabetic_number):
+    def delete_all_teachings(self):
         cur = self.db.cursor()
 
         sql = "DELETE FROM Corso_di_laurea"
@@ -26,6 +24,16 @@ class DbApi:
 
         sql = "DELETE FROM Insegnamento_in_Orientamento"
         cur.execute(sql)
+
+        self.db.commit()
+
+    '''
+        Insert a Degree Course with its type in DB, if not present.
+        Then, add the orientations to that Degree.
+        Finally, add the Teaching to the Orientation
+    '''
+    def insert_teachings(self, course_type, course_name, orientation, ID_INC, id_teaching, college, teaching_name, cfu, main_teacher, teaching_type, didactic_period, alphabetic_number):
+        cur = self.db.cursor()
 
         sql = "INSERT OR IGNORE INTO Corso_di_laurea(tipoCdl, nomeCdl) VALUES (?, ?)"
         cur.execute(sql, (course_type, course_name))
@@ -78,11 +86,20 @@ class DbApi:
         return teachings
 
     '''
+        Remove the Correlation Info from the DB
+    '''
+    def remove_correlation_info(self):
+        cur = self.db.cursor()
+        sql = "DELETE FROM Info_correlazioni"
+        cur.execute(sql)
+        self.db.commit()
+
+    '''
         Insert the correlation between two Teachings in the DB
     '''
     def insert_correlation(self, ID_INC_1, ID_INC_2, correlation):
         cur = self.db.cursor()
-        sql = "INSERT INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione) VALUES (?, ?, ?)"
+        sql = "INSERT OR IGNORE INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione) VALUES (?, ?, ?)"
         cur.execute(sql, (ID_INC_1, ID_INC_2, correlation))
         self.db.commit()
 

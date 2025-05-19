@@ -10,25 +10,34 @@ from Data.DbApi import DbApi
 '''
 def get_teachings():
     db_api = DbApi()
-    df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx')
+    df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
     filtered_df = df.loc[df["ID_COLLEGIO"].isin(["CL003", "CL006"])]
+
+    db_api.delete_all_teachings()
 
     teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio", "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi", "Final project work", "TOP-UIC - Informatica"]
 
-    teaching_name = ""
-    id_teaching = 0
-
     for index, row in filtered_df.iterrows():
-        print(row["TITOLO_SS"])
-        if row["TITOLO_SS"] != "" and row["TITOLO_SS"] != "nan" and row["TITOLO_SS"] not in teachings_to_exclude:
-            id_teaching = row["COD_INS_SS"]
-            teaching_name = row["TITOLO_SS"]
-        else:
-            if row["TITOLO_S"] != "" and row["TITOLO_S"] != "nan" and row["TITOLO_S"] not in teachings_to_exclude:
-                id_teaching = row["COD_INS_S"]
-                teaching_name = row["TITOLO_S"]
+        # Get the name and ID of a Teaching
+        teaching_name = ""
+        id_teaching = 0
+        if row["TITOLO_SS"] != "" and str(row["TITOLO_SS"]) != "nan":
+            if row["TITOLO_SS"] in teachings_to_exclude or "Challenge" in row["TITOLO_SS"]:
+                teaching_name = ""
+                id_teaching = 0
             else:
-                if row["TITOLO"] not in teachings_to_exclude:
+                id_teaching = row["COD_INS_SS"]
+                teaching_name = row["TITOLO_SS"]
+        else:
+            if row["TITOLO_S"] != "" and str(row["TITOLO_S"]) != "nan":
+                if row["TITOLO_S"] in teachings_to_exclude or "Challenge" in row["TITOLO_S"]:
+                    teaching_name = ""
+                    id_teaching = 0
+                else:
+                    id_teaching = row["COD_INS_S"]
+                    teaching_name = row["TITOLO_S"]
+            else:
+                if row["TITOLO"] not in teachings_to_exclude and "Challenge" not in row["TITOLO"]:
                     id_teaching = row["COD_INS"]
                     teaching_name = row["TITOLO"]
 
@@ -37,6 +46,30 @@ def get_teachings():
             teacher_id = "Docente_" + row["ID_INC"]
         else:
             teacher_id = row["MATRICOLA"]
+
+        # Get the Type of Teaching
+        # TODO: I don't have the "Credito_libero_consigliato" category
+        if (
+            "Insegnamento a scelta" not in row["TITOLO"] and
+            "Crediti liberi" not in row["TITOLO"] and
+            "Choice from table" not in row["TITOLO"] and
+            "Free ECTS credits" not in row["TITOLO"]  and
+            "Free choice" not in row["TITOLO"] and
+            "Introductive Seminars" not in row["TITOLO"] and
+            "Elective course" not in row["TITOLO"]
+        ):
+            teaching_type = "Obbligatorio"
+        else:
+            if (
+                str(row["TITOLO_S"]) != "nan" and
+                "Crediti liberi" not in row["TITOLO_S"] and
+                "Choice from table" not in row["TITOLO_S"] and
+                "Free ECTS credits" not in row["TITOLO_S"] and
+                "Free choice" not in row["TITOLO_S"]
+            ):
+                teaching_type = "Obbligatorio_a_scelta"
+            else:
+                teaching_type = "Tabella_a_scelta"
 
         if teaching_name != "":
             db_api.insert_teachings(
@@ -48,12 +81,13 @@ def get_teachings():
                 row["ID_COLLEGIO"],
                 teaching_name,
                 row["CFU"],
-                row["MATRICOLA"],
                 teacher_id,
-                # TODO: we need the information about the Teaching Type
+                teaching_type,
                 row["ANNO"] + "-" + row["PERIODO_INI"],
                 row["NUMCOR"]
             )
+
+    print("Teachings inserted in the DB")
 
 '''
     Calculate the correlation between Teachings according to the Teaching Type
@@ -61,32 +95,72 @@ def get_teachings():
 def calculate_correlations():
     db_api = DbApi()
 
+    db_api.remove_correlation_info()
+
     orientations = db_api.get_orientations()
+    df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
 
     for orientation in orientations:
-        teachings = db_api.get_teachings_in_orientation(orientation)
-        for t1 in teachings:
-            for t2 in teachings:
-                corr = 0
-
-                # 0: ID_INC, 1: Teaching type, 2: Didactic Period, 3: Alphabetic
-                # TODO: we need to check if two Teachings have the same language
-                if t1[0] > t2[0] and t1[2] == t2[2] and t1[3] == t2[3]:
-                    if t1[1] == "Obbligatorio" or t2[1] == "Obbligatorio":
+        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["TIPO_LAUREA"] == orientation[1]) & (df["NOME_CDL"] == orientation[2])]
+        for index1, t1 in filtered_df.iterrows():
+            for index2, t2 in filtered_df.iterrows():
+                if (
+                    str(t1["ID_INC"]) != "nan" and str(t2["ID_INC"]) != "nan" and
+                    t1["ID_INC"] > t2["ID_INC"] and
+                    t1["PERIODO_INI"] == t2["PERIODO_INI"] and
+                    t1["ANNO"] == t2["ANNO"] and
+                    (t1["NUMCOR"] == t2["NUMCOR"] or t1["NUMCOR"] == "0" or t2["NUMCOR"] == "0") and
+                    t1["TITOLO"] != t2["TITOLO"]
+                ):
+                    if (
+                        (
+                        "Insegnamento a scelta" not in t1["TITOLO"] and
+                        "Crediti liberi" not in t1["TITOLO"] and
+                        "Choice from table" not in t1["TITOLO"] and
+                        "Free ECTS credits" not in t1["TITOLO"] and
+                        "Free choice" not in t1["TITOLO"] and
+                        "Introductive Seminars" not in t1["TITOLO"] and
+                        "Elective course" not in t1["TITOLO"]
+                        )
+                        or
+                        (
+                        "Insegnamento a scelta" not in t2["TITOLO"] and
+                        "Crediti liberi" not in t2["TITOLO"] and
+                        "Choice from table" not in t2["TITOLO"] and
+                        "Free ECTS credits" not in t2["TITOLO"] and
+                        "Free choice" not in t2["TITOLO"] and
+                        "Introductive Seminars" not in t2["TITOLO"] and
+                        "Elective course" not in t2["TITOLO"]
+                        )
+                    ):
+                        # At least one of the two Teachings is "Obbligatorio"
                         corr = 100
                     else:
-                        if t1[1] == "Credito_libero_consigliato" or t2[1] == "Credito_libero_consigliato":
-                            corr = 95
+                        if (
+                            str(t1["TITOLO_S"]) != "nan" and
+                            "Crediti liberi" not in t1["TITOLO_S"] and
+                            "Choice from table" not in t1["TITOLO_S"] and
+                            "Free ECTS credits" not in t1["TITOLO_S"] and
+                            "Free choice" not in t1["TITOLO_S"] and
+                            str(t2["TITOLO_S"]) != "nan" and
+                            "Crediti liberi" not in t2["TITOLO_S"] and
+                            "Choice from table" not in t2["TITOLO_S"] and
+                            "Free ECTS credits" not in t2["TITOLO_S"] and
+                            "Free choice" not in t2["TITOLO_S"]
+                        ):
+                            # Both Teachings are "Obbligatori_a_scelta"
+                            corr = 90
                         else:
-                            if t1[1] == "Obbligatorio_a_scelta" or t2[1] == "Obbligatorio_a_scelta":
-                                corr = 90
-                            else:
-                                corr = 20
+                            # At least on of the two Teachings is "Tabella_a_scelta", and the other is either "Tabella_a_scelta" or "Obbligatorio_a_scelta"
+                            # TODO: ask if this is good of if Obbligatorio_a_scelta and Tabella_a_scelta should have a correlation of 90
+                            corr = 20
 
-                db_api.insert_correlation(t1[0], t2[0], corr)
+                    db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr)
+
+    print("Correlations inserted in the DB")
 
 '''
-    Get the information about the teachers, they hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
+    Get the information about the teachers, their hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
     Collaborators are in the format: (ID) NAME (SOMETHING) [DEPARTMENT] tit: TITLE tipo did:LECTURE_TYPE lin:LANGUAGE - h:  hh.mm;
     PAY ATTENTION TO THE SPACES, SOME FIELDS HAVE SPACES OTHER DON'T. After "h:" there is a double space
     I'm interested only to the teachers who have tit=IN
