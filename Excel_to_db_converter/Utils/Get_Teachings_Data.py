@@ -1,16 +1,89 @@
 import glob
 import os
 import pandas
+from openpyxl.styles.builtins import title
 
-from Data.Db_API import Db_API
+from Data.DbApi import DbApi
 
-def get_degree_courses():
-    db_api = Db_API()
+'''
+    Get the list of all Teachings from the Excel file "Percorsi-gruppi-insegnamenti aa 2026.xlsx" and insert them in the DB
+'''
+def get_teachings():
+    db_api = DbApi()
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx')
     filtered_df = df.loc[df["ID_COLLEGIO"].isin(["CL003", "CL006"])]
 
+    teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio", "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi", "Final project work", "TOP-UIC - Informatica"]
+
+    teaching_name = ""
+    id_teaching = 0
+
     for index, row in filtered_df.iterrows():
-        db_api.insert_teachings(row["TIPO_LAUREA"], row["NOME_CDL"], row["DESC_ORI"])
+        print(row["TITOLO_SS"])
+        if row["TITOLO_SS"] != "" and row["TITOLO_SS"] != "nan" and row["TITOLO_SS"] not in teachings_to_exclude:
+            id_teaching = row["COD_INS_SS"]
+            teaching_name = row["TITOLO_SS"]
+        else:
+            if row["TITOLO_S"] != "" and row["TITOLO_S"] != "nan" and row["TITOLO_S"] not in teachings_to_exclude:
+                id_teaching = row["COD_INS_S"]
+                teaching_name = row["TITOLO_S"]
+            else:
+                if row["TITOLO"] not in teachings_to_exclude:
+                    id_teaching = row["COD_INS"]
+                    teaching_name = row["TITOLO"]
+
+        # If the Teacher's ID is 11518, then that teacher has not been assigned yet
+        if row["MATRICOLA"] == 11518:
+            teacher_id = "Docente_" + row["ID_INC"]
+        else:
+            teacher_id = row["MATRICOLA"]
+
+        if teaching_name != "":
+            db_api.insert_teachings(
+                row["TIPO_LAUREA"],
+                row["NOME_CDL"],
+                row["DESC_ORI"],
+                row["ID_INC"],
+                id_teaching,
+                row["ID_COLLEGIO"],
+                teaching_name,
+                row["CFU"],
+                row["MATRICOLA"],
+                teacher_id,
+                # TODO: we need the information about the Teaching Type
+                row["ANNO"] + "-" + row["PERIODO_INI"],
+                row["NUMCOR"]
+            )
+
+'''
+    Calculate the correlation between Teachings according to the Teaching Type
+'''
+def calculate_correlations():
+    db_api = DbApi()
+
+    orientations = db_api.get_orientations()
+
+    for orientation in orientations:
+        teachings = db_api.get_teachings_in_orientation(orientation)
+        for t1 in teachings:
+            for t2 in teachings:
+                corr = 0
+
+                # 0: ID_INC, 1: Teaching type, 2: Didactic Period, 3: Alphabetic
+                # TODO: we need to check if two Teachings have the same language
+                if t1[0] > t2[0] and t1[2] == t2[2] and t1[3] == t2[3]:
+                    if t1[1] == "Obbligatorio" or t2[1] == "Obbligatorio":
+                        corr = 100
+                    else:
+                        if t1[1] == "Credito_libero_consigliato" or t2[1] == "Credito_libero_consigliato":
+                            corr = 95
+                        else:
+                            if t1[1] == "Obbligatorio_a_scelta" or t2[1] == "Obbligatorio_a_scelta":
+                                corr = 90
+                            else:
+                                corr = 20
+
+                db_api.insert_correlation(t1[0], t2[0], corr)
 
 '''
     Get the information about the teachers, they hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
@@ -23,7 +96,7 @@ def get_teaching_teachers(row, main_teacher_id):
     if collaborators_string == "" or collaborators_string == "No coll.":
         return
 
-    db_api = Db_API()
+    db_api = DbApi()
 
     collaborators = collaborators_string.split(';')
     for c in collaborators:
@@ -58,7 +131,7 @@ def get_teaching_teachers(row, main_teacher_id):
                 db_api.add_teacher_in_teaching(teacher_id, coll_info[-1], coll_info[6 + offset].split(":")[1], row["id_inc"])
 
 def get_teaching_information(teachings):
-    db_api = Db_API()
+    db_api = DbApi()
 
     # Get all the Excel files in the "Courses Data" folder
     courses_files = glob.glob(os.path.join("../Data/Excels/Courses Data", "*.xls"))

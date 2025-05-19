@@ -1,10 +1,10 @@
-from Data.Db_API import Db_API
+from Data.DbApi import DbApi
 from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities
-from Utils.Get_Teachings_Data import get_teaching_information, get_degree_courses
+from Utils.Get_Teachings_Data import get_teaching_information, get_teachings, calculate_correlations
 from Utils.Teaching import Teaching
 
 if __name__ == '__main__':
-    db_api = Db_API()
+    db_api = DbApi()
 
     # Load the Teachings from the DB
     list_teachings = db_api.get_teachings()
@@ -15,11 +15,10 @@ if __name__ == '__main__':
         teachings.append(Teaching(id_teaching=row[0], title=row[1], main_teacher=row[2]))
 
     '''Teachings'''
-    # Get the Degree Courses related to DAUIN and DET departments (IDs CL003 and CL006
-    get_degree_courses()
-    # Get the Orientations for the Degree Courses of interest
-    get_orientations()
-    # Get all the Teachings for each Orientation
+    # Get the Degree Courses related to DAUIN and DET departments (IDs CL003 and CL006)
+    get_teachings()
+    # Calculate the correlation for each Teaching
+    calculate_correlations()
 
     # Get the number of lecture hours from the Excel files and insert it in the database
     get_teaching_information(teachings)
