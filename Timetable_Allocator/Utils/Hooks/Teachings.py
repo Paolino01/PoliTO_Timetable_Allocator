@@ -67,28 +67,29 @@ class Teachings:
                 double_slots_lab = 0
 
             if slots_lecture > 0:
-                self.teachings_list.append(Teaching(
-                    id_teaching=str(row[0]),
-                    title=row[1],
-                    cfu=int(row[2]),
-                    main_teacher_id=row[3],
-                    didactic_period=row[4],
+                if str(row[0]) not in [t.id_teaching for t in self.teachings_list]:
+                    self.teachings_list.append(Teaching(
+                        id_teaching=str(row[0]),
+                        title=row[1],
+                        cfu=int(row[2]),
+                        main_teacher_id=row[3],
+                        didactic_period=row[4],
 
-                    lect_slots=slots_lecture,
-                    n_min_double_slots_lecture=int(row[6]),
-                    n_min_single_slots_lecture=int(row[7]),
+                        lect_slots=slots_lecture,
+                        n_min_double_slots_lecture=int(row[6]),
+                        n_min_single_slots_lecture=int(row[7]),
 
-                    practice_slots=slots_practice,
-                    n_practice_groups=n_practice_groups,
-                    n_min_double_slots_practice=n_min_double_slots_practice,
-                    n_min_single_slots_practice=n_min_single_slots_practice,
+                        practice_slots=slots_practice,
+                        n_practice_groups=n_practice_groups,
+                        n_min_double_slots_practice=n_min_double_slots_practice,
+                        n_min_single_slots_practice=n_min_single_slots_practice,
 
-                    lab_slots=slots_lab,
-                    n_lab_groups=n_lab_groups,
-                    n_blocks_lab=n_blocks_lab,
-                    n_weekly_groups_lab=n_weekly_groups_lab,
-                    double_slots_lab=double_slots_lab
-                ))
+                        lab_slots=slots_lab,
+                        n_lab_groups=n_lab_groups,
+                        n_blocks_lab=n_blocks_lab,
+                        n_weekly_groups_lab=n_weekly_groups_lab,
+                        double_slots_lab=double_slots_lab
+                    ))
 
         self.load_correlations_info_from_db()
 

@@ -44,60 +44,61 @@ def get_teaching_type(teaching_row):
 def get_teachings():
     db_api = DbApi()
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
-    filtered_df = df.loc[df["ID_COLLEGIO"].isin(["CL003", "CL006"])]
+    filtered_df = df[(df["ID_COLLEGIO"].isin(["CL003", "CL006"])) & (df["PERIODO_INI"] == "1")]
 
     db_api.delete_all_teachings()
 
     teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio", "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi", "Final project work", "TOP-UIC - Informatica"]
 
     for index, row in filtered_df.iterrows():
-        # Get the name and ID of a Teaching
-        teaching_name = ""
-        id_teaching = 0
-        if row["TITOLO_SS"] != "" and str(row["TITOLO_SS"]) != "nan":
-            if row["TITOLO_SS"] in teachings_to_exclude or "Challenge" in row["TITOLO_SS"]:
-                teaching_name = ""
-                id_teaching = 0
-            else:
-                id_teaching = row["COD_INS_SS"]
-                teaching_name = row["TITOLO_SS"]
-        else:
-            if row["TITOLO_S"] != "" and str(row["TITOLO_S"]) != "nan":
-                if row["TITOLO_S"] in teachings_to_exclude or "Challenge" in row["TITOLO_S"]:
+        if str(row["ID_INC"]) != "nan":
+            # Get the name and ID of a Teaching
+            teaching_name = ""
+            id_teaching = 0
+            if row["TITOLO_SS"] != "" and str(row["TITOLO_SS"]) != "nan":
+                if row["TITOLO_SS"] in teachings_to_exclude or "Challenge" in row["TITOLO_SS"]:
                     teaching_name = ""
                     id_teaching = 0
                 else:
-                    id_teaching = row["COD_INS_S"]
-                    teaching_name = row["TITOLO_S"]
+                    id_teaching = row["COD_INS_SS"]
+                    teaching_name = row["TITOLO_SS"]
             else:
-                if row["TITOLO"] not in teachings_to_exclude and "Challenge" not in row["TITOLO"]:
-                    id_teaching = row["COD_INS"]
-                    teaching_name = row["TITOLO"]
+                if row["TITOLO_S"] != "" and str(row["TITOLO_S"]) != "nan":
+                    if row["TITOLO_S"] in teachings_to_exclude or "Challenge" in row["TITOLO_S"]:
+                        teaching_name = ""
+                        id_teaching = 0
+                    else:
+                        id_teaching = row["COD_INS_S"]
+                        teaching_name = row["TITOLO_S"]
+                else:
+                    if row["TITOLO"] not in teachings_to_exclude and "Challenge" not in row["TITOLO"]:
+                        id_teaching = row["COD_INS"]
+                        teaching_name = row["TITOLO"]
 
-        # If the Teacher's ID is 11518, then that teacher has not been assigned yet
-        if row["MATRICOLA"] == 11518:
-            teacher_id = "Docente_" + row["ID_INC"]
-        else:
-            teacher_id = row["MATRICOLA"]
+            # If the Teacher's ID is 11518, then that teacher has not been assigned yet
+            if teaching_name != "":
+                if row["MATRICOLA"] == "11518" or str(row["MATRICOLA"]) == 'nan':
+                    teacher_id = "Docente_" + row["ID_INC"]
+                else:
+                    teacher_id = row["MATRICOLA"].zfill(6)
 
-        # Get the Type of Teaching
-        teaching_type = get_teaching_type(row)
+                # Get the Type of Teaching
+                teaching_type = get_teaching_type(row)
 
-        if teaching_name != "":
-            db_api.insert_teachings(
-                row["TIPO_LAUREA"],
-                row["NOME_CDL"],
-                row["DESC_ORI"],
-                row["ID_INC"],
-                id_teaching,
-                row["ID_COLLEGIO"],
-                teaching_name,
-                row["CFU"],
-                teacher_id,
-                teaching_type,
-                row["ANNO"] + "-" + row["PERIODO_INI"],
-                row["NUMCOR"]
-            )
+                db_api.insert_teachings(
+                    row["TIPO_LAUREA"],
+                    row["NOME_CDL"],
+                    row["DESC_ORI"],
+                    row["ID_INC"],
+                    id_teaching,
+                    row["ID_COLLEGIO"],
+                    teaching_name,
+                    row["CFU"],
+                    teacher_id,
+                    teaching_type,
+                    row["ANNO"] + "-" + row["PERIODO_INI"],
+                    row["NUMCOR"]
+                )
 
     print("Teachings inserted in the DB")
 
@@ -113,7 +114,7 @@ def calculate_correlations():
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
 
     for orientation in orientations:
-        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["TIPO_LAUREA"] == orientation[1]) & (df["NOME_CDL"] == orientation[2])]
+        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["NOME_CDL"] == orientation[1]) & (df["TIPO_LAUREA"] == orientation[2]) & (df["PERIODO_INI"] == "1")]
         for index1, t1 in filtered_df.iterrows():
             for index2, t2 in filtered_df.iterrows():
                 # This variable is needed to know if at least one of the two correlated Teachings is mandatory
@@ -146,8 +147,7 @@ def calculate_correlations():
                             if t1_type == "Obbligatorio" or t2_type == "Obbligatorio":
                                 mandatory = 1
 
-                    if str(t1["TITOLO_S"]) != "nan" and str(t2["TITOLO_S"]) != "nan":
-                        db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr, mandatory)
+                    db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr, mandatory)
 
     print("Correlations inserted in the DB")
 

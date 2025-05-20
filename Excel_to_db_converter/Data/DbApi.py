@@ -39,7 +39,7 @@ class DbApi:
         cur.execute(sql, (course_type, course_name))
 
         sql = "INSERT OR IGNORE INTO Orientamento(orientamento, nomeCdl, tipoCdl) VALUES (?, ?, ?)"
-        cur.execute(sql, (orientation, course_type, course_name))
+        cur.execute(sql, (orientation, course_name, course_type))
 
         sql = "INSERT OR IGNORE INTO Insegnamento_listCodIns(ID_INC, codIns) VALUES (?, ?)"
         cur.execute(sql, (ID_INC, id_teaching))
@@ -99,8 +99,19 @@ class DbApi:
     '''
     def insert_correlation(self, ID_INC_1, ID_INC_2, correlation, mandatory):
         cur = self.db.cursor()
-        sql = "INSERT OR IGNORE INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione, Obbligatorio) VALUES (?, ?, ?, ?)"
-        cur.execute(sql, (ID_INC_1, ID_INC_2, correlation, mandatory))
+
+        sql = "SELECT Correlazione FROM Info_correlazioni WHERE ID_INC_1=? AND ID_INC_2=?"
+        cur.execute(sql, (ID_INC_1, ID_INC_2))
+        corr = cur.fetchone()
+
+        if corr is None:
+            sql = "INSERT INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione, Obbligatorio) VALUES (?, ?, ?, ?)"
+            cur.execute(sql, (ID_INC_1, ID_INC_2, correlation, mandatory))
+        else:
+            if corr[0] < correlation:
+                sql = "UPDATE Info_correlazioni SET Correlazione = ? WHERE ID_INC_1=? AND ID_INC_2=?"
+                cur.execute(sql, (correlation, ID_INC_1, ID_INC_2))
+
         self.db.commit()
 
     '''

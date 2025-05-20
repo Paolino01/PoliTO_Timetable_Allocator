@@ -26,24 +26,23 @@ def add_max_consecutive_slots_constraint_lab(model, teaching, d, max_consecutive
 '''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
 '''
-def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_slots_in_day_teaching):
+def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_slots_in_day_teaching, teacher_preferences_respected):
     for i in range(1, teaching.n_lab_groups + 1):
         # Same as Practice, but for Lab Slots
         # I don't check Lab Slots since I don't use them (I set the number of Slots in add_slots_per_week_lab)
-        '''
-        if teaching.double_slots_lab != 0:
+
+        # TODO: needs review and testing
+        if teaching.double_slots_lab != 0 and teaching.double_slots_lab == 1:
             model.add(
-                model.logical_or(
-                    timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0,
+                teacher_preferences_respected[teaching.id_teaching + f"_lab_group{i}", d] == (
+                    (timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] == 0) |
                     (
-                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
-                            timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
-                    )
-                    == 2
+                        (timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] +
+                        timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1])
+                    == 2)
                 )
             )
-        else:
-        '''
+
         if teaching.n_blocks_lab > 0:
             model.add(
                 model.logical_or(
@@ -59,12 +58,13 @@ def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_s
 '''
     Defines variable n_slots_in_day_teaching which contains the number of Slots in a day for each Lab Group
 '''
-def define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching):
+def define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected):
     params = Parameters()
 
     if teaching.n_blocks_lab != 0:
         for i in range(1, teaching.n_lab_groups + 1):
             n_slots_in_day_teaching[teaching.id_teaching + f"_lab_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"y_{teaching.id_teaching + '_lab_group' + str(i)}_{d}")
+            teacher_preferences_respected[teaching.id_teaching + f"_lab_group{i}", d] = model.binary_var(name=f"y_{teaching.id_teaching + '_lab_group' + str(i)}_{d}")
 
 '''
     Adds the number of Lab Slots in a day to the variable n_slots_in_day_teaching

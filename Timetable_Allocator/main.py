@@ -100,6 +100,6 @@ if __name__ == '__main__':
         db_api.rename_temp_solution()
 
         print("\nTimetable generated successfully.")
-    else:
-        db_api.remove_temp_solution()
-        print("DB cleaned")
+    #else:
+        #db_api.remove_temp_solution()
+        #print("DB cleaned")

@@ -27,25 +27,23 @@ def add_max_consecutive_slots_constraint_practice(model, teaching, d, max_consec
 '''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
 '''
-def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teaching, s, d, n_slots_in_day_teaching):
+def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teaching, s, d, n_slots_in_day_teaching, teacher_preferences_respected):
     for i in range(1, teaching.n_practice_groups + 1):
         # If teaching.n_min_double_slots_practice >= 1, then I impose that the Teaching must have at leat 2 consecutive practice hours
         # I check that there are at least 2 Slots of practice (to be sure that I can have 2 consecutive Slots)
-        '''
+
+        # TODO: needs review and testing
         if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice == 1 and teaching.n_min_single_slots_practice == 0:
             model.add(
-                model.logical_or(
-                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0,
+                teacher_preferences_respected[teaching.id_teaching + f"_practice_group{i}", d] == (
+                    (timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] == 0) |
                     (
-                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
-                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
-                    )
-                    == 2
+                        (timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] +
+                        timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1])
+                    == 2)
                 )
             )
-        # If I don't have any constraint about the minimum number of double Slots, I just impose that if there are any double Slots the are consecutive
-        else:
-        '''
+
         if teaching.practice_slots > 0:
             model.add(
                 model.logical_or(
@@ -61,22 +59,23 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
 '''
     Constraint: if the Practice Lecture has to have at least 1 double Slot, then I impose that condition
 '''
-def add_min_double_slots_contraint_practice(model, teaching, days, double_slots_in_day):
+def add_min_double_slots_contraint_practice(model, teaching, days, double_slots_in_day, teacher_preferences_respected):
     if teaching.n_min_double_slots_practice >= 1 and teaching.practice_slots >= 2:
         for i in range(1, teaching.n_practice_groups + 1):
-            model.add(
-                model.sum(double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] for d in days) >= 1)
+            for d in days:
+                model.add(teacher_preferences_respected[teaching.id_teaching + f"_practice_group{i}", d] >= double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d])
 
 '''
     Defines the variables n_slots_in_day_teaching and double_slots_in_day which contain the number of Practice Slots in a day and days with double Practice Slots
 '''
-def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day):
+def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day, teacher_preferences_respected):
     params = Parameters()
 
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
             n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] = model.integer_var(0, params.max_consecutive_slots_teaching, name=f"n_slots_in_day_teaching_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
-            #double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
+            double_slots_in_day[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
+            teacher_preferences_respected[teaching.id_teaching + f"_practice_group{i}", d] = model.binary_var(name=f"double_slots_in_day_{teaching.id_teaching + '_practice_group' + str(i)}_{d}")
 
 '''
     Adds the number of Practice Slots in a day to the variable n_slots_in_day_teaching
