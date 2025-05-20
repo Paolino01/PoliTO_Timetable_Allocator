@@ -97,10 +97,10 @@ class DbApi:
     '''
         Insert the correlation between two Teachings in the DB
     '''
-    def insert_correlation(self, ID_INC_1, ID_INC_2, correlation):
+    def insert_correlation(self, ID_INC_1, ID_INC_2, correlation, mandatory):
         cur = self.db.cursor()
-        sql = "INSERT OR IGNORE INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione) VALUES (?, ?, ?)"
-        cur.execute(sql, (ID_INC_1, ID_INC_2, correlation))
+        sql = "INSERT OR IGNORE INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione, Obbligatorio) VALUES (?, ?, ?, ?)"
+        cur.execute(sql, (ID_INC_1, ID_INC_2, correlation, mandatory))
         self.db.commit()
 
     '''

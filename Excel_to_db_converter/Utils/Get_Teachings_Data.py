@@ -6,6 +6,39 @@ from openpyxl.styles.builtins import title
 from Data.DbApi import DbApi
 
 '''
+    Given a row of the Excel file that represents a Teaching, return the type of that Teaching
+'''
+
+def get_teaching_type(teaching_row):
+    # TODO: I don't have the "Credito_libero_consigliato" category
+
+    teaching_type = ""
+
+    if (
+            "Insegnamento a scelta" not in teaching_row["TITOLO"] and
+            "Crediti liberi" not in teaching_row["TITOLO"] and
+            "Choice from table" not in teaching_row["TITOLO"] and
+            "Free ECTS credits" not in teaching_row["TITOLO"] and
+            "Free choice" not in teaching_row["TITOLO"] and
+            "Introductive Seminars" not in teaching_row["TITOLO"] and
+            "Elective course" not in teaching_row["TITOLO"]
+    ):
+        teaching_type = "Obbligatorio"
+    else:
+        if (
+                str(teaching_row["TITOLO_S"]) != "nan" and
+                "Crediti liberi" not in teaching_row["TITOLO_S"] and
+                "Choice from table" not in teaching_row["TITOLO_S"] and
+                "Free ECTS credits" not in teaching_row["TITOLO_S"] and
+                "Free choice" not in teaching_row["TITOLO_S"]
+        ):
+            teaching_type = "Obbligatorio_a_scelta"
+        else:
+            teaching_type = "Tabella_a_scelta"
+
+    return teaching_type
+
+'''
     Get the list of all Teachings from the Excel file "Percorsi-gruppi-insegnamenti aa 2026.xlsx" and insert them in the DB
 '''
 def get_teachings():
@@ -48,28 +81,7 @@ def get_teachings():
             teacher_id = row["MATRICOLA"]
 
         # Get the Type of Teaching
-        # TODO: I don't have the "Credito_libero_consigliato" category
-        if (
-            "Insegnamento a scelta" not in row["TITOLO"] and
-            "Crediti liberi" not in row["TITOLO"] and
-            "Choice from table" not in row["TITOLO"] and
-            "Free ECTS credits" not in row["TITOLO"]  and
-            "Free choice" not in row["TITOLO"] and
-            "Introductive Seminars" not in row["TITOLO"] and
-            "Elective course" not in row["TITOLO"]
-        ):
-            teaching_type = "Obbligatorio"
-        else:
-            if (
-                str(row["TITOLO_S"]) != "nan" and
-                "Crediti liberi" not in row["TITOLO_S"] and
-                "Choice from table" not in row["TITOLO_S"] and
-                "Free ECTS credits" not in row["TITOLO_S"] and
-                "Free choice" not in row["TITOLO_S"]
-            ):
-                teaching_type = "Obbligatorio_a_scelta"
-            else:
-                teaching_type = "Tabella_a_scelta"
+        teaching_type = get_teaching_type(row)
 
         if teaching_name != "":
             db_api.insert_teachings(
@@ -104,6 +116,9 @@ def calculate_correlations():
         filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["TIPO_LAUREA"] == orientation[1]) & (df["NOME_CDL"] == orientation[2])]
         for index1, t1 in filtered_df.iterrows():
             for index2, t2 in filtered_df.iterrows():
+                # This variable is needed to know if at least one of the two correlated Teachings is mandatory
+                mandatory = 0
+
                 if (
                     str(t1["ID_INC"]) != "nan" and str(t2["ID_INC"]) != "nan" and
                     t1["ID_INC"] > t2["ID_INC"] and
@@ -112,51 +127,27 @@ def calculate_correlations():
                     (t1["NUMCOR"] == t2["NUMCOR"] or t1["NUMCOR"] == "0" or t2["NUMCOR"] == "0") and
                     t1["TITOLO"] != t2["TITOLO"]
                 ):
-                    if (
-                        (
-                        "Insegnamento a scelta" not in t1["TITOLO"] and
-                        "Crediti liberi" not in t1["TITOLO"] and
-                        "Choice from table" not in t1["TITOLO"] and
-                        "Free ECTS credits" not in t1["TITOLO"] and
-                        "Free choice" not in t1["TITOLO"] and
-                        "Introductive Seminars" not in t1["TITOLO"] and
-                        "Elective course" not in t1["TITOLO"]
-                        )
-                        or
-                        (
-                        "Insegnamento a scelta" not in t2["TITOLO"] and
-                        "Crediti liberi" not in t2["TITOLO"] and
-                        "Choice from table" not in t2["TITOLO"] and
-                        "Free ECTS credits" not in t2["TITOLO"] and
-                        "Free choice" not in t2["TITOLO"] and
-                        "Introductive Seminars" not in t2["TITOLO"] and
-                        "Elective course" not in t2["TITOLO"]
-                        )
-                    ):
-                        # At least one of the two Teachings is "Obbligatorio"
-                        corr = 100
+                    t1_type = get_teaching_type(t1)
+                    t2_type = get_teaching_type(t2)
+
+                    if t1_type == "Tabella_a_scelta" or t2_type == "Tabella_a_scelta":
+                        # At least on of the two Teachings is "Tabella_a_scelta"
+                        corr = 20
+                        if t1_type == "Obbligatorio" or t2_type == "Obbligatorio":
+                            mandatory = 1
                     else:
-                        if (
-                            str(t1["TITOLO_S"]) != "nan" and
-                            "Crediti liberi" not in t1["TITOLO_S"] and
-                            "Choice from table" not in t1["TITOLO_S"] and
-                            "Free ECTS credits" not in t1["TITOLO_S"] and
-                            "Free choice" not in t1["TITOLO_S"] and
-                            str(t2["TITOLO_S"]) != "nan" and
-                            "Crediti liberi" not in t2["TITOLO_S"] and
-                            "Choice from table" not in t2["TITOLO_S"] and
-                            "Free ECTS credits" not in t2["TITOLO_S"] and
-                            "Free choice" not in t2["TITOLO_S"]
-                        ):
-                            # Both Teachings are "Obbligatori_a_scelta"
-                            corr = 90
+                        if t1_type == "Obbligatorio" and t2_type == "Obbligatorio":
+                            # Both Teachings are "Obbligatori"
+                            corr = 100
+                            mandatory = 1
                         else:
-                            # At least on of the two Teachings is "Tabella_a_scelta", and the other is either "Tabella_a_scelta" or "Obbligatorio_a_scelta"
-                            # TODO: ask if this is good of if Obbligatorio_a_scelta and Tabella_a_scelta should have a correlation of 90
-                            corr = 20
+                            # One "Obbligatorio" and one "Obbligatorio_a_scelta" or both "Obbligatorio_a_scelta"
+                            corr = 90
+                            if t1_type == "Obbligatorio" or t2_type == "Obbligatorio":
+                                mandatory = 1
 
                     if str(t1["TITOLO_S"]) != "nan" and str(t2["TITOLO_S"]) != "nan":
-                        db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr)
+                        db_api.insert_correlation(t1["ID_INC"], t2["ID_INC"], corr, mandatory)
 
     print("Correlations inserted in the DB")
 

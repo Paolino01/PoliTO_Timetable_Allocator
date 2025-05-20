@@ -119,36 +119,7 @@ def add_correlations_constraint_lab(model, timetable_matrix, slots, t1, s, teach
                 corr * (timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] * timetable_matrix[
                     t_id, s + slot_offset])
                 for slot_offset in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + slot_offset in slots
-                for t_id, corr in teaching_ids.items()) <= params.max_corr_in_day)
-
-'''
-    Constraint: limiting the number of correlated lectures in 5 consecutive Slots
-'''
-def add_max_consecutive_correlations_constraint_lab(model, timetable_matrix, t1, s, slots, teaching_ids):
-    params = Parameters()
-    if t1.n_blocks_lab != 0:
-        for i in range(1, t1.n_lab_groups + 1):
-            model.add(model.sum(
-                corr * (timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] * timetable_matrix[t_id, s + slot_offset])
-                for slot_offset in range(1, 5) if s + slot_offset in slots
-                for t_id, corr in teaching_ids.items()) <= params.max_corr_consecutive_slots)
-
-'''
-    Constraint: I consider params.n_consecutive_slots consecutive slots. I impose a minimum number of correlated lectures in those slots, in order to limit the number of empty slots in a day
-'''
-def add_consecutive_slots_constraint_lab(model, timetable_matrix, t1, s, teaching_ids):
-    params = Parameters()
-
-    if t1.n_blocks_lab != 0:
-        for i in range(1, t1.n_lab_groups + 1):
-            correlations_in_slots = model.sum(
-                corr * (timetable_matrix[t1.id_teaching + f"_lab_group{i}", s] * timetable_matrix[
-                    t_id, s + slot_offset])
-                for slot_offset in range(1, params.n_consecutive_slots)
-                for t_id, corr in teaching_ids.items())
-
-            model.add(
-                1 == model.logical_or(correlations_in_slots == 0, correlations_in_slots >= params.min_corr_in_slots))
+                for t_id, (corr, mandatory) in teaching_ids.items()) <= params.max_corr_in_day)
 
 '''
     Define the variables that manage the lectures dispersion in a day
@@ -171,10 +142,10 @@ def assign_first_last_slot_of_day_lab(model, timetable_matrix, slots, t, d, teac
     if t.n_blocks_lab != 0:
         for i in range(1, t.n_lab_groups + 1):
             model.add(first_lecture_of_day[t.id_teaching + f"_lab_group{i}", d] <= model.max(s * model.max(timetable_matrix[t_id, s]
-                for t_id, corr in teaching_ids.items())
+                for t_id, (corr, mandatory) in teaching_ids.items())
                 for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots))
             model.add(last_lecture_of_day[t.id_teaching + f"_lab_group{i}", d] >= model.max(s * model.max(timetable_matrix[t_id, s]
-                for t_id, corr in teaching_ids.items())
+                for t_id, (corr, mandatory) in teaching_ids.items())
                 for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day) if s in slots))
 
 '''

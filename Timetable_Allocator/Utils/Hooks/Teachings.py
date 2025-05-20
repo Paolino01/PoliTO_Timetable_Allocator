@@ -102,7 +102,7 @@ class Teachings:
             teaching2 = next((t for t in self.teachings_list if t.id_teaching == str(row[1])), None)
 
             if teaching1 is not None and teaching2 is not None:
-                teaching1.set_correlations(teaching2, int(row[2]))
+                teaching1.set_correlations(teaching2, int(row[2]), bool(row[4]))
 
                 # In the DB we only have teaching1, teaching2, corr and not teaching2, teaching1, corr. I add the second option to the Python structures
-                teaching2.set_correlations(teaching1, int(row[2]))
+                teaching2.set_correlations(teaching1, int(row[2]), bool(row[4]))

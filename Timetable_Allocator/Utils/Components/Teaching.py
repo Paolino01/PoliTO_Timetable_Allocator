@@ -47,7 +47,10 @@ class Teaching:
 
         # Correlations between teachings. I have a dictionary where the key is a teaching and the value is the weight of the correlation for that teaching
         # As default I set the correlation of a Teaching with itself to 100
-        self.correlations: dict = {self: 100}
+        self.correlations: dict = {self: (100, True)}
 
-    def set_correlations(self, teaching, correlation: int):
-        self.correlations[teaching] = correlation
+    '''
+        Set the correlations between the teachings. Mandatory is True if one of the Teachings is "Obbligatorio"
+    '''
+    def set_correlations(self, teaching, correlation: int, mandatory: bool = False):
+        self.correlations[teaching] = (correlation, mandatory)
