@@ -169,7 +169,6 @@ class DbAPI:
                         if teacher.teacher_id != teaching.main_teacher_id:
                             for t in teacher.teachings:
                                 # For each Teacher I check that the Teaching ID and Teaching Type matches.
-                                # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
                                 if t[0].id_teaching == teaching.id_teaching and t[1] == "L":
                                     sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
                                     cur.execute(sql, (teacher.teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name + "_temp"))
@@ -213,7 +212,6 @@ class DbAPI:
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
-                            # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EA":
                                 has_coll = True
                                 sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
@@ -263,7 +261,6 @@ class DbAPI:
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
-                            # TODO: We can also add the Teachers related to a Teaching in the Teaching class, but we need to evaluate if it is better or not
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EL":
                                 has_coll = True
 

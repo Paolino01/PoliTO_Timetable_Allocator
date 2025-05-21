@@ -32,7 +32,6 @@ if __name__ == '__main__':
         # List of Teachings that I need to allocate
         teachings_class.load_teachings_from_db(params.course_order[i])
         teachings = teachings_class.teachings_list
-        # TODO: we need to test that teachings has the correct Teachings in it
     
         # List of Teachers with their Teachings
         teachers_class = Teachers(teachings)

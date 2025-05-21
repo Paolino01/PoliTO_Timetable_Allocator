@@ -8,13 +8,66 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
+                    "ICT ENGINEERING FOR SMART SOCIETIES"
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "DATA SCIENCE AND ENGINEERING",
+                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                    "INGEGNERIA ELETTRONICA",
+                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
+                    "CYBERSECURITY",
+                    "CYBERSECURITY ENGINEERING",
                     "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "INGEGNERIA FISICA",
+                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
+                    "COMMUNICATIONS ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                    "QUANTUM ENGINEERING",
+                    "AGRITECH ENGINEERING"
                 ],
                 "orientations": [],
                 "course_type": "",
-                "max_corr_in_day": 1200,
-                "max_corr_first_last_slot": 50,
-                "min_corr_overlaps": 50
+                "max_corr_in_day": 500,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": ["Artificial Intelligence and Data Analytics",
+                                 "Automation and Intelligent Cyber-Physical Systems",
+                                 "Bio and Health Informatics", "Computer Networks and Cloud Computing",
+                                 "Computing and Network Infrastructures", "EMECS - Path 1", "EMECS - Path 2", "ESCP",
+                                 "Embedded systems"],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": ["Software", "Grafica e Multimedia"],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": ["INGEGNERIA INFORMATICA"],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
             }
         ]
 

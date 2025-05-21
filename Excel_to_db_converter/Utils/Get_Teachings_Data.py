@@ -44,7 +44,7 @@ def get_teaching_type(teaching_row):
 def get_teachings():
     db_api = DbApi()
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
-    filtered_df = df[(df["ID_COLLEGIO"].isin(["CL003", "CL006"])) & (df["PERIODO_INI"] == "1")]
+    filtered_df = df[(df["ID_COLLEGIO"].isin(["CL003", "CL006"])) & (df["PERIODO_INI"] == "1") & ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1")))]
 
     db_api.delete_all_teachings()
 
@@ -114,7 +114,7 @@ def calculate_correlations():
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
 
     for orientation in orientations:
-        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["NOME_CDL"] == orientation[1]) & (df["TIPO_LAUREA"] == orientation[2]) & (df["PERIODO_INI"] == "1")]
+        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["NOME_CDL"] == orientation[1]) & (df["TIPO_LAUREA"] == orientation[2]) & (df["PERIODO_INI"] == "1") & ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1")))]
         for index1, t1 in filtered_df.iterrows():
             for index2, t2 in filtered_df.iterrows():
                 # This variable is needed to know if at least one of the two correlated Teachings is mandatory
