@@ -2,7 +2,7 @@ from docplex.cp.model import CpoModel
 from docplex.cp.solver import solver
 
 from Components.Generated_Solution import add_generated_courses
-from Components.Previous_Solution import get_previous_solution
+from Components.Previous_Solution import get_previous_solution, ask_previous_solution
 from Components.Slots import get_slots_per_week
 from Data.DbAPI import DbAPI
 from Utils.Constraints.Teacher_Constraints import add_teachers_constraints
@@ -19,6 +19,9 @@ if __name__ == '__main__':
     slots = get_slots_per_week()
     # Number of days per week
     days = range(5 if params.saturday_enabled == False else 6)
+
+    # Ask the user if they want to start from an existing solution
+    ask_previous_solution()
 
     teachings_class = Teachings()
 
@@ -51,8 +54,8 @@ if __name__ == '__main__':
                     for lab_group in range(1, teaching.n_lab_groups + 1):
                         timetable_matrix[(teaching.id_teaching + f"_lab_group{lab_group}", s)] = model.binary_var(name=f"x_{teaching.id_teaching + '_lab_group' + str(lab_group)}_{s}")
 
-        # Ask the user if they want to start from an existing solution and, if affermative, load that solution
-        # start_dict = get_previous_solution(model, timetable_matrix, teachings, slots)
+        # If the user wants to start from a previous solution, load it from the DB
+        get_previous_solution(model, timetable_matrix, teachings, slots)
     
         # Add courses of an already generated timetable
         if i != 0:

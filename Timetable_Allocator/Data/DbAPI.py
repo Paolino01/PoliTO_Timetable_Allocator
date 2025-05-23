@@ -82,7 +82,7 @@ class DbAPI:
     '''
     def get_previous_solution(self):
         cur = self.db.cursor()
-        sql = "SELECT * FROM PreviousSolution"
+        sql = "SELECT * FROM PreviousSolution WHERE ID_INC IN (SELECT ID_INC FROM Insegnamento)"
         cur.execute(sql)
         previous_solution = cur.fetchall()
         return previous_solution

@@ -1,4 +1,5 @@
 import glob
+import math
 import os
 import pandas
 from openpyxl.styles.builtins import title
@@ -43,12 +44,24 @@ def get_teaching_type(teaching_row):
 '''
 def get_teachings():
     db_api = DbApi()
+    teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio",
+                            "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi",
+                            "Final project work", "TOP-UIC - Informatica"]
+
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
-    filtered_df = df[(df["ID_COLLEGIO"].isin(["CL003", "CL006"])) & (df["PERIODO_INI"] == "1") & ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1")))]
+    filtered_df = df[
+        (df["ID_COLLEGIO"].isin(["CL003", "CL006"])) &
+        (df["PERIODO_INI"] == "1") &
+        ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1"))) &
+        (~df["TITOLO"].isin(teachings_to_exclude)) &
+        (~df["TITOLO_S"].isin(teachings_to_exclude)) &
+        (~df["TITOLO_SS"].isin(teachings_to_exclude)) &
+        (~df["TITOLO"].str.contains("Challenge", regex=False, na=False)) &
+        (~df["TITOLO_S"].str.contains("Challenge", regex=False, na=False)) &
+        (~df["TITOLO_SS"].str.contains("Challenge", regex=False, na=False))
+    ]
 
     db_api.delete_all_teachings()
-
-    teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio", "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi", "Final project work", "TOP-UIC - Informatica"]
 
     for index, row in filtered_df.iterrows():
         if str(row["ID_INC"]) != "nan":
@@ -56,24 +69,15 @@ def get_teachings():
             teaching_name = ""
             id_teaching = 0
             if row["TITOLO_SS"] != "" and str(row["TITOLO_SS"]) != "nan":
-                if row["TITOLO_SS"] in teachings_to_exclude or "Challenge" in row["TITOLO_SS"]:
-                    teaching_name = ""
-                    id_teaching = 0
-                else:
                     id_teaching = row["COD_INS_SS"]
                     teaching_name = row["TITOLO_SS"]
             else:
                 if row["TITOLO_S"] != "" and str(row["TITOLO_S"]) != "nan":
-                    if row["TITOLO_S"] in teachings_to_exclude or "Challenge" in row["TITOLO_S"]:
-                        teaching_name = ""
-                        id_teaching = 0
-                    else:
                         id_teaching = row["COD_INS_S"]
                         teaching_name = row["TITOLO_S"]
                 else:
-                    if row["TITOLO"] not in teachings_to_exclude and "Challenge" not in row["TITOLO"]:
-                        id_teaching = row["COD_INS"]
-                        teaching_name = row["TITOLO"]
+                    id_teaching = row["COD_INS"]
+                    teaching_name = row["TITOLO"]
 
             # If the Teacher's ID is 11518, then that teacher has not been assigned yet
             if teaching_name != "":
@@ -107,6 +111,9 @@ def get_teachings():
 '''
 def calculate_correlations():
     db_api = DbApi()
+    teachings_to_exclude = ["Prova finale", "Lingua inglese I livello", "Lingua cinese", "Tirocinio",
+                            "English Language 1st level", "Final Project", "Thesis", "Internship", "Challenge", "Tesi",
+                            "Final project work", "TOP-UIC - Informatica"]
 
     db_api.remove_correlation_info()
 
@@ -114,7 +121,20 @@ def calculate_correlations():
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
 
     for orientation in orientations:
-        filtered_df = df[(df["DESC_ORI"] == orientation[0]) & (df["NOME_CDL"] == orientation[1]) & (df["TIPO_LAUREA"] == orientation[2]) & (df["PERIODO_INI"] == "1") & ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1")))]
+        filtered_df = df[
+            (df["DESC_ORI"] == orientation[0]) &
+            (df["NOME_CDL"] == orientation[1]) &
+            (df["TIPO_LAUREA"] == orientation[2]) &
+            (df["PERIODO_INI"] == "1") &
+            ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1"))) &
+            (~df["TITOLO"].isin(teachings_to_exclude)) &
+            (~df["TITOLO_S"].isin(teachings_to_exclude)) &
+            (~df["TITOLO_SS"].isin(teachings_to_exclude)) &
+            (~df["TITOLO"].str.contains("Challenge", regex=False, na=False)) &
+            (~df["TITOLO_S"].str.contains("Challenge", regex=False, na=False)) &
+            (~df["TITOLO_SS"].str.contains("Challenge", regex=False, na=False))
+        ]
+
         for index1, t1 in filtered_df.iterrows():
             for index2, t2 in filtered_df.iterrows():
                 # This variable is needed to know if at least one of the two correlated Teachings is mandatory
@@ -143,7 +163,11 @@ def calculate_correlations():
                             mandatory = 1
                         else:
                             # One "Obbligatorio" and one "Obbligatorio_a_scelta" or both "Obbligatorio_a_scelta"
-                            corr = 90
+                            if t1_type == "Obbligatorio_a_scelta":
+                                corr = math.floor(100/(filtered_df["TITOLO"] == t1["TITOLO"]).sum())
+                            else:
+                                corr = math.floor(100/(filtered_df["TITOLO"] == t2["TITOLO"]).sum())
+
                             if t1_type == "Obbligatorio" or t2_type == "Obbligatorio":
                                 mandatory = 1
 

@@ -43,7 +43,7 @@ class Parameters:
                 "course_type": "Z",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 0,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 30
             },
             {
                 "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
@@ -51,7 +51,7 @@ class Parameters:
                 "course_type": "Z",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 30
             },
             {
                 "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
@@ -59,7 +59,7 @@ class Parameters:
                 "course_type": "1",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 30
             },
             {
                 "courses": ["INGEGNERIA INFORMATICA"],

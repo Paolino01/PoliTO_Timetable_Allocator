@@ -227,22 +227,19 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                 # I need this if in order to not impose the same constraint twice (e.g. one from TeachingA to TeachingB and the other from TeachingB to TeachingA)
                 if t1.id_teaching < t2.id_teaching:
                     # If the correlation between 2 Teachings is > params.min_corr_overlaps I guarantee that there will be no overlaps for those Teachings. Otherwise, I minimize the amount of overlaps between Teachings
-                    if corr > params.min_corr_overlaps:
+                    if corr > params.min_corr_overlaps or mandatory:
                         model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
                     else:
-                        if mandatory:
-                            model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
-                        else:
-                            # If the correlation is <= params.min_corr_overlaps, I add a soft constraint to minimize the overlaps between correlated lectures
-                            teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] = (
-                                model.binary_var(name=f"overlap_{t1.id_teaching}_{t2.id_teaching}_{s}"))
-                            model.add(
-                                teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] >=
-                                timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] - 1)
-                            model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
-                                      timetable_matrix[t1.id_teaching, s])
-                            model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
-                                      timetable_matrix[t2.id_teaching, s])
+                        # If the correlation is <= params.min_corr_overlaps, I add a soft constraint to minimize the overlaps between correlated lectures
+                        teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] = (
+                            model.binary_var(name=f"overlap_{t1.id_teaching}_{t2.id_teaching}_{s}"))
+                        model.add(
+                            teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] >=
+                            timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] - 1)
+                        model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
+                                  timetable_matrix[t1.id_teaching, s])
+                        model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
+                                  timetable_matrix[t2.id_teaching, s])
 
                 if corr > params.min_corr_overlaps:
                     '''Practice Slots'''
@@ -356,14 +353,17 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for t_id in teaching_ids
             for d in days
         )
-        +
-        params.correlation_in_day_penalty *
-        model.sum(
-            teaching_correlations_in_day[t1.id_teaching, s]
-            for t1 in teachings
-            for s in slots
-        )
     )
+
+    '''
+    +
+    params.correlation_in_day_penalty *
+    model.sum(
+        teaching_correlations_in_day[t1.id_teaching, s]
+        for t1 in teachings
+        for s in slots
+    )
+    '''
 
     '''
     model.maximize(

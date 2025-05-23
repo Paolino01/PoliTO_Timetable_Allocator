@@ -2,13 +2,22 @@ from Data.DbAPI import DbAPI
 from Utils.Components.Teaching import Teaching
 from Utils.Parameters import Parameters
 
+'''
+    Ask the user if they want to start from an existing solution
+'''
+def ask_previous_solution():
+    params = Parameters()
 
+    print("Do you want to start from an existing solution? (y/n): ")
+    params.start_from_previous_solution = input().lower() == "y"
+
+'''
+    If the user wants to start from an existing solution, load it from the DB
+'''
 def get_previous_solution(model, timetable_matrix: dict, teachings: list[Teaching], slots: range):
     params = Parameters()
     db_api = DbAPI()
 
-    print("Do you want to start from an existing solution? (y/n): ")
-    params.start_from_previous_solution = input().lower() == "y"
     if params.start_from_previous_solution:
         previous_solution_string = db_api.get_previous_solution()
 
