@@ -8,66 +8,82 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
-                    "ICT ENGINEERING FOR SMART SOCIETIES"
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
+                ],
+                "orientations": [
+                    "Artificial Intelligence and Data Analytics",
+                    "Automation and Intelligent Cyber-Physical Systems",
+                    "Bio and Health Informatics",
+                    "Computing and Network Infrastructures",
+                    "Embedded & Smart System Design",
+                    "Embedded systems",
+                    "EMECS - Path 1 - Erasmus Mundus Joint Master",
+                    "EMECS - Path 2 - Erasmus Mundus Joint Master",
+                    "Orientamento \"Eurecom\""
+                ],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 30
+            },
+            {
+                "courses": [
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
+                ],
+                "orientations": [
+                    "Software",
+                    "Grafica e Multimedia"
+                ],
+                "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 30
+            },
+            {
+                "courses": [
                     "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
                     "DATA SCIENCE AND ENGINEERING",
                     "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "INGEGNERIA ELETTRONICA",
                     "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                    "CYBERSECURITY",
-                    "CYBERSECURITY ENGINEERING",
-                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
                     "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
                     "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
-                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
                     "INGEGNERIA FISICA",
                     "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
                     "COMMUNICATIONS ENGINEERING",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
                     "QUANTUM ENGINEERING",
-                    "AGRITECH ENGINEERING"
+                    "AGRITECH ENGINEERING",
+                    "CYBERSECURITY"
                 ],
                 "orientations": [],
                 "course_type": "",
-                "max_corr_in_day": 500,
-                "max_corr_first_last_slot": 0,
-                "min_corr_overlaps": 20
-            },
-            {
-                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
-                "orientations": ["Artificial Intelligence and Data Analytics",
-                                 "Automation and Intelligent Cyber-Physical Systems",
-                                 "Bio and Health Informatics", "Computer Networks and Cloud Computing",
-                                 "Computing and Network Infrastructures", "EMECS - Path 1", "EMECS - Path 2", "ESCP",
-                                 "Embedded systems"],
-                "course_type": "Z",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 0,
-                "min_corr_overlaps": 30
-            },
-            {
-                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
-                "orientations": ["Software", "Grafica e Multimedia"],
-                "course_type": "Z",
-                "max_corr_in_day": 700,
+                "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 30
+                "min_corr_overlaps": 35
             },
             {
-                "courses": ["INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"],
+                "courses": [
+                    "ICT ENGINEERING FOR SMART SOCIETIES",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                    "INGEGNERIA ELETTRONICA",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
+                ],
                 "orientations": [],
-                "course_type": "1",
-                "max_corr_in_day": 700,
+                "course_type": "",
+                "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 30
+                "min_corr_overlaps": 35
             },
             {
-                "courses": ["INGEGNERIA INFORMATICA"],
+                "courses": [
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
+                ],
                 "orientations": [],
                 "course_type": "1",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 35
             }
         ]
 
@@ -104,7 +120,7 @@ class Parameters:
         self.correlation_in_day_penalty = 20
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses timetable"
+        self.timetable_name = "All courses except Ingegneria Informatica"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
