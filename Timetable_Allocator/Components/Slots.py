@@ -1,9 +1,8 @@
 from Utils.Parameters import Parameters
 
 '''Slots. I ask the user if they want to allocate lectures on Saturday or not. If yes, I need to know how many slots are available on Saturday (min. 0, max 7)'''
-def get_slots_per_week():
+def get_slots_per_week(params):
     #Getting the program parameters
-    params = Parameters()
 
     print("Do you want to enable lectures on Saturday? (y/n): ")
     params.enable_saturday = input().lower() == "y"

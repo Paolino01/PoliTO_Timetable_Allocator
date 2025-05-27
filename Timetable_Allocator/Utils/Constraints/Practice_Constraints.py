@@ -68,8 +68,7 @@ def add_min_double_slots_contraint_practice(model, teaching, days, double_slots_
 '''
     Defines the variables n_slots_in_day_teaching and double_slots_in_day which contain the number of Practice Slots in a day and days with double Practice Slots
 '''
-def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day, teacher_preferences_respected):
-    params = Parameters()
+def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day, teacher_preferences_respected, params):
 
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
@@ -80,8 +79,7 @@ def define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teach
 '''
     Adds the number of Practice Slots in a day to the variable n_slots_in_day_teaching
 '''
-def count_double_slots_in_day_practice(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching):
-    params = Parameters()
+def count_double_slots_in_day_practice(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, params):
 
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
@@ -144,8 +142,7 @@ def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
 '''
     Constraint: limiting the number of correlated lectures in a day
 '''
-def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids):
-    params = Parameters()
+def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params):
 
     if t1.practice_slots != 0:
         for i in range(1, t1.n_practice_groups + 1):
@@ -158,8 +155,7 @@ def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, 
 '''
     Define the variables that manage the lectures dispersion in a day
 '''
-def define_lecture_dispersion_variables_practice(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day):
-    params = Parameters()
+def define_lecture_dispersion_variables_practice(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day, params):
 
     if t.practice_slots != 0:
         for i in range(1, t.n_practice_groups + 1):
@@ -170,8 +166,7 @@ def define_lecture_dispersion_variables_practice(model, slots, t, d, first_lectu
 '''
     Assign first and last Slot of Day for each Teaching
 '''
-def assign_first_last_slot_of_day_practice(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day):
-    params = Parameters()
+def assign_first_last_slot_of_day_practice(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day, params):
 
     if t.practice_slots != 0:
         for i in range(1, t.n_practice_groups + 1):
@@ -193,8 +188,7 @@ def calculate_lecture_dispersion_practice(model, t, d, first_lecture_of_day, las
 '''
     Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
 '''
-def add_first_last_slot_correlation_limit_practice(model, timetable_matrix, slots, t1, t2_id, corr):
-    params = Parameters()
+def add_first_last_slot_correlation_limit_practice(model, timetable_matrix, slots, t1, t2_id, corr, params):
 
     if t1.practice_slots != 0:
         for i in range(1, t1.n_practice_groups + 1):

@@ -4,9 +4,9 @@ from Utils.Components.Teaching import Teaching
 
 
 class Teachers:
-    def __init__(self, all_teachings:list[Teaching]):
+    def __init__(self, all_teachings:list[Teaching], params):
         self.teachers_list:list[Teacher] = []
-        self.db_api = DbAPI()
+        self.db_api = DbAPI(params)
 
         self.load_teachers_from_db()
         self.load_teachings_for_teacher(all_teachings)

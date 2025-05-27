@@ -9,9 +9,8 @@ from Utils.Parameters import Parameters
 class DbAPI:
     '''API to interface with the DB'''
 
-    def __init__(self):
-        self.params = Parameters()
-        self.db = sqlite3.connect(self.params.DB)
+    def __init__(self, params):
+        self.db = sqlite3.connect(params.DB)
 
     '''Teachings'''
 
@@ -91,11 +90,11 @@ class DbAPI:
         Get the courses from a previously generated timetable
         Return: list of courses and their Slots in format [allocationPlan, ID_INC, lectureType, day, timeSlot, lectGroup]
     '''
-    def get_generated_courses(self):
+    def get_generated_courses(self, params):
         cur = self.db.cursor()
         sql = ("SELECT pianoAllocazione, ID_INC, tipoLez, giorno, fasciaOraria, squadra FROM Slot WHERE pianoAllocazione = ? "
                "AND ID_INC IN (SELECT ID_INC FROM Insegnamento_in_Orientamento WHERE nomeCdl NOT IN ('INGEGNERIA INFORMATICA'))")
-        cur.execute(sql, (self.params.timetable_name + "_temp", ))
+        cur.execute(sql, (params.timetable_name + "_temp", ))
         generated_courses = cur.fetchall()
         return generated_courses
 
@@ -141,28 +140,28 @@ class DbAPI:
     '''
         Saving the generated timetable in the DB
     '''
-    def save_results_to_db(self, solution, timetable_matrix, slots: list[int], teachings: list[Teaching], teachers: list[Teacher]):
+    def save_results_to_db(self, solution, timetable_matrix, slots: list[int], teachings: list[Teaching], teachers: list[Teacher], params):
         cur = self.db.cursor()
 
         # Deleting previous data from the DB
         sql = "DELETE FROM Slot WHERE pianoAllocazione=?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
         sql = "DELETE FROM PianoAllocazione WHERE pianoAllocazione=?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
         sql = "DELETE FROM Docente_in_Slot WHERE pianoAllocazione=?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
 
         for s in slots:
             for teaching in teachings:
                 if solution[timetable_matrix[teaching.id_teaching, s]] == 1:
                     # Assigning the Slots to each Teaching
                     sql = ("INSERT INTO Slot (pianoAllocazione, idSlot, nStudentiAssegnati, tipoLez, numSlotConsecutivi, ID_INC, giorno, fasciaOraria, tipoLocale, tipoErogazione, capienzaAula, squadra, preseElettriche) "
-                           "VALUES (?, '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + self.params.days[math.floor(s / self.params.slot_per_day)] + "', '" + self.params.time_slots[s % self.params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
-                    cur.execute(sql, (self.params.timetable_name + "_temp",))
+                           "VALUES (?, '" + str(teaching.id_teaching) + "_slot_" + str(s) + "', -1, 'L', 1, " + teaching.id_teaching + ", '" + params.days[math.floor(s / params.slot_per_day)] + "', '" + params.time_slots[s % params.slot_per_day] + "', 'Aula', 'Presenza', 'NonDisponibile', 'No squadra', 'No')")
+                    cur.execute(sql, (params.timetable_name + "_temp",))
 
                     # Assigning the Main Teacher to the Teaching's Slots
                     sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
-                    cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name + "_temp"))
+                    cur.execute(sql, (teaching.main_teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), params.timetable_name + "_temp"))
 
                     # Assigning the collaborators of a Teaching to its Slots
                     for teacher in teachers:
@@ -171,24 +170,24 @@ class DbAPI:
                                 # For each Teacher I check that the Teaching ID and Teaching Type matches.
                                 if t[0].id_teaching == teaching.id_teaching and t[1] == "L":
                                     sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?, ?, ?)"
-                                    cur.execute(sql, (teacher.teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), self.params.timetable_name + "_temp"))
+                                    cur.execute(sql, (teacher.teacher_id, str(teaching.id_teaching) + "_slot_" + str(s), params.timetable_name + "_temp"))
 
                 '''Practice Slots'''
-                self.save_practice_results_to_db(solution, timetable_matrix, teachers, teaching, s, cur)
+                self.save_practice_results_to_db(solution, timetable_matrix, teachers, teaching, s, cur, params)
 
                 '''Lab Slots'''
-                self.save_lab_results_to_db(solution, timetable_matrix, teachers, teaching, s, cur)
+                self.save_lab_results_to_db(solution, timetable_matrix, teachers, teaching, s, cur, params)
 
 
         # Inserting the new Allocation Plan
         sql = "INSERT INTO PianoAllocazione (pianoAllocazione) VALUES (?) "
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
 
         self.db.commit()
 
         print("\nResults saved in the DB")
 
-    def save_practice_results_to_db(self, solution, timetable_matrix, teachers, teaching, s, cur):
+    def save_practice_results_to_db(self, solution, timetable_matrix, teachers, teaching, s, cur, params):
         # Adding Practice hours to the DB
         if teaching.practice_slots != 0:
             for i in range(1, teaching.n_practice_groups + 1):
@@ -198,11 +197,11 @@ class DbAPI:
                     cur.execute(
                         sql,
                         (
-                            self.params.timetable_name + "_temp",
+                            params.timetable_name + "_temp",
                             str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}",
                             teaching.id_teaching,
-                            self.params.days[math.floor(s / self.params.slot_per_day)],
-                            self.params.time_slots[s % self.params.slot_per_day]
+                            params.days[math.floor(s / params.slot_per_day)],
+                            params.time_slots[s % params.slot_per_day]
                         )
                     )
 
@@ -221,7 +220,7 @@ class DbAPI:
                                     (
                                         teacher.teacher_id,
                                         str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}",
-                                        self.params.timetable_name + "_temp"
+                                        params.timetable_name + "_temp"
                                     )
                                 )
 
@@ -233,11 +232,11 @@ class DbAPI:
                             (
                                 teaching.id_teaching + "_practice_teacher",
                                 str(teaching.id_teaching) + f"_practice_group{i}_slot_{s}",
-                                self.params.timetable_name + "_temp"
+                                params.timetable_name + "_temp"
                             )
                         )
 
-    def save_lab_results_to_db(self, solution, timetable_matrix, teachers, teaching, s, cur):
+    def save_lab_results_to_db(self, solution, timetable_matrix, teachers, teaching, s, cur, params):
         # Adding Lab hours to the DB
         if teaching.n_blocks_lab != 0:
             for i in range(1, teaching.n_lab_groups + 1):
@@ -247,11 +246,11 @@ class DbAPI:
                     cur.execute(
                         sql,
                         (
-                            self.params.timetable_name + "_temp",
+                            params.timetable_name + "_temp",
                             str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
                             teaching.id_teaching,
-                            self.params.days[math.floor(s / self.params.slot_per_day)],
-                            self.params.time_slots[s % self.params.slot_per_day]
+                            params.days[math.floor(s / params.slot_per_day)],
+                            params.time_slots[s % params.slot_per_day]
                         )
                     )
 
@@ -271,7 +270,7 @@ class DbAPI:
                                     (
                                         teacher.teacher_id,
                                         str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
-                                        self.params.timetable_name + "_temp"
+                                        params.timetable_name + "_temp"
                                     )
                                 )
 
@@ -283,54 +282,54 @@ class DbAPI:
                             (
                                 teaching.id_teaching + "_lab_teacher",
                                 str(teaching.id_teaching) + f"_lab_group{i}_slot_{s}",
-                                self.params.timetable_name + "_temp"
+                                params.timetable_name + "_temp"
                             )
                         )
 
     '''Managing temporary solutions'''
 
     '''Removing temporary solution'''
-    def remove_temp_solution(self):
+    def remove_temp_solution(self, params):
         cur = self.db.cursor()
 
         sql = "DELETE FROM Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
 
         sql = "DELETE FROM Docente_in_Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
 
         sql = "DELETE FROM PianoAllocazione WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name + "_temp",))
+        cur.execute(sql, (params.timetable_name + "_temp",))
 
         self.db.commit()
 
 
     '''Removing previous solution with the same name as this one'''
-    def remove_previous_solution(self):
+    def remove_previous_solution(self, params):
         cur = self.db.cursor()
 
         sql = "DELETE FROM Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name,))
+        cur.execute(sql, (params.timetable_name,))
 
         sql = "DELETE FROM Docente_in_Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name,))
+        cur.execute(sql, (params.timetable_name,))
 
         sql = "DELETE FROM PianoAllocazione WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name,))
+        cur.execute(sql, (params.timetable_name,))
 
         self.db.commit()
 
     '''Renaming temporary solution'''
-    def rename_temp_solution(self):
+    def rename_temp_solution(self, params):
         cur = self.db.cursor()
 
         sql = "UPDATE Slot SET pianoAllocazione = ? WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name, self.params.timetable_name + "_temp"))
+        cur.execute(sql, (params.timetable_name, params.timetable_name + "_temp"))
 
         sql = "UPDATE Docente_in_Slot SET pianoAllocazione = ? WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name, self.params.timetable_name + "_temp"))
+        cur.execute(sql, (params.timetable_name, params.timetable_name + "_temp"))
 
         sql = "UPDATE PianoAllocazione SET pianoAllocazione = ? WHERE pianoAllocazione = ?"
-        cur.execute(sql, (self.params.timetable_name, self.params.timetable_name + "_temp"))
+        cur.execute(sql, (params.timetable_name, params.timetable_name + "_temp"))
 
         self.db.commit()

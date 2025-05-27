@@ -4,11 +4,10 @@ from Utils.Parameters import Parameters
 '''
     Get the courses from a previously generated timetable and add them to the model as fixed variables
 '''
-def add_generated_courses(model, timetable_matrix, slots):
-    params = Parameters()
-    dbapi = DbAPI()
+def add_generated_courses(model, timetable_matrix, slots, params):
+    dbapi = DbAPI(params)
 
-    generated_courses_string = dbapi.get_generated_courses()
+    generated_courses_string = dbapi.get_generated_courses(params)
 
     for row in generated_courses_string:
         for s in slots:

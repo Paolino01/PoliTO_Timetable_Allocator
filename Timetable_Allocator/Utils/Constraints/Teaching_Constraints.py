@@ -99,8 +99,7 @@ def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teac
 '''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
 '''
-def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected):
-    params = Parameters()
+def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params):
 
     for s in range(len(slots) - 1):
         if math.floor(s / params.slot_per_day) == d and math.floor((s + 1) / params.slot_per_day) == d:
@@ -139,10 +138,8 @@ def add_min_double_slots_contraint(model, days, teaching, double_slots_in_day, t
     Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive.
     We also take into account the Teacher's preferences about Slot allocations for the Teachings
 '''
-def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days, teacher_preferences_respected):
+def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days, teacher_preferences_respected, params):
     # Note: this constraint should only be applied to Lecture Slots and not Laboratory Slots
-
-    params = Parameters()
 
     # Variable that counts how many hours a teaching has in a day
     n_slots_in_day_teaching = {}
@@ -156,10 +153,10 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
             teacher_preferences_respected[teaching.id_teaching, d] = model.binary_var(name=f"first_lecture_{teaching.id_teaching}_{d}")
 
             '''Practice Slots'''
-            define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day, teacher_preferences_respected)
+            define_double_slots_in_day_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day, teacher_preferences_respected, params)
 
             '''Lab Slots'''
-            define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected)
+            define_double_slots_in_day_lab(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params)
 
     for teaching in teachings:
         for d in days:
@@ -172,10 +169,10 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
             )
 
             '''Practice Slots'''
-            count_double_slots_in_day_practice(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching)
+            count_double_slots_in_day_practice(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, params)
 
             '''Lab Slots'''
-            count_double_slots_in_day_lab(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching)
+            count_double_slots_in_day_lab(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, params)
 
             # Counting how many days have 2 or more Slots of the same lecture
             model.add(
@@ -189,7 +186,7 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
             add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected)
 
             # If n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
-            add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected)
+            add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params)
 
         # Constraint: if the Teaching has to have at least 1 double Slot, then I impose that condition
         add_min_double_slots_contraint(model, days, teaching, double_slots_in_day, teacher_preferences_respected)
@@ -198,8 +195,7 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
     Constraint: limiting the number of correlated lectures in a day
     Constraint: a Teaching cannot overlap with the others, according to the correlations
 '''
-def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day):
-    params = Parameters()
+def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day, params):
 
     for t1 in teachings:
         for s in slots:
@@ -216,10 +212,10 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
             #model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
 
             '''Practice Slots'''
-            add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids)
+            add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params)
 
             '''Lab Slots'''
-            add_correlations_constraint_lab(model, timetable_matrix, slots, t1, s, teaching_ids)
+            add_correlations_constraint_lab(model, timetable_matrix, slots, t1, s, teaching_ids, params)
 
 
             # Constraint: a Teaching cannot overlap with the others, according to the correlations
@@ -260,8 +256,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
 '''
     Constraint: the difference between the first and last lecture slot of the day should be minimized
 '''
-def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days):
-    params = Parameters()
+def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days, params):
 
     # Variables that save the first and last lecture Slots, for each Day and Teaching
     first_lecture_of_day = {}
@@ -277,10 +272,10 @@ def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slot
             lectures_dispersion_of_day[t.id_teaching, d] = model.integer_var(0, params.slot_per_day - 1, name=f"lecture_dispersion_{t.id_teaching}_{d}")
 
             '''Practice Slots'''
-            define_lecture_dispersion_variables_practice(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day)
+            define_lecture_dispersion_variables_practice(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day, params)
 
             '''Lab Slots'''
-            define_lecture_dispersion_variables_lab(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day)
+            define_lecture_dispersion_variables_lab(model, slots, t, d, first_lecture_of_day, last_lecture_of_day, lectures_dispersion_of_day, params)
 
     # Assign first and last slot of the day for each Teaching
     for d in days:
@@ -290,10 +285,10 @@ def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slot
             model.add(last_lecture_of_day[t.id_teaching, d] >= model.max(s * model.max(timetable_matrix[t_id, s] for t_id, (corr, mandatory) in teaching_ids.items()) for s in range(d*params.slot_per_day, (d+1)*params.slot_per_day) if s in slots))
 
             '''Practice Slots'''
-            assign_first_last_slot_of_day_practice(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day)
+            assign_first_last_slot_of_day_practice(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day, params)
 
             '''Lab Slots'''
-            assign_first_last_slot_of_day_lab(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day)
+            assign_first_last_slot_of_day_lab(model, timetable_matrix, slots, t, d, teaching_ids, first_lecture_of_day, last_lecture_of_day, params)
 
     # Calculate lecture dispersion as fisrt_slot - last_slot
     for d in days:
@@ -312,8 +307,7 @@ def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slot
 '''
     Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
 '''
-def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots):
-    params = Parameters()
+def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots, params):
 
     for t1 in teachings:
         teaching_ids = get_correlated_teaching_ids(t1)
@@ -324,16 +318,15 @@ def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, sl
                 for s in range(0, len(slots), 7) if s + (params.slot_per_day - 1) in slots) <= params.max_corr_first_last_slot)
 
             '''Practice Slots'''
-            add_first_last_slot_correlation_limit_practice(model, timetable_matrix, slots, t1, t2_id, corr)
+            add_first_last_slot_correlation_limit_practice(model, timetable_matrix, slots, t1, t2_id, corr, params)
 
             '''Lab Slots'''
-            add_first_last_slot_correlation_limit_lab(model, timetable_matrix, slots, t1, t2_id, corr)
+            add_first_last_slot_correlation_limit_lab(model, timetable_matrix, slots, t1, t2_id, corr, params)
 
 '''
     Add an objective function that minimizes the soft constraints
 '''
-def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected):
-    params = Parameters()
+def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected, params):
 
     teaching_ids = get_teaching_ids(teachings)
 
@@ -379,7 +372,7 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
     Add the constraints for the Teachings to the model.
     This function calls the functions above one by one.
 '''
-def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
+def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, params):
     # Note: moving the following constraints in a single "for teaching in teachings" will result in a different solution
     # We need to apply a constraint to all the teachings before applying the next constraint
 
@@ -388,20 +381,20 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days):
 
     # Constraint: each Teaching must have 0..2 Slots per day and, if it has 2 Slots, they should be consecutive
     teacher_preferences_respected = {}
-    add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days, teacher_preferences_respected)
+    add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days, teacher_preferences_respected, params)
 
     # Constraint: limiting the number of correlated lectures in a day
     # Constraint: a Teaching cannot overlap with the others, according to the correlations
     teaching_overlaps = {}
     teaching_correlations_in_day = {}
-    add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day)
+    add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day, params)
 
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     lectures_dispersion_of_day = {}
-    lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days)
+    lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days, params)
 
     # Constraint: the correlation between teachings in the first and last slot of the day should be <= params.max_corr_first_last_slot, in order to avoid that the majority of students starts at 8:30 and finishes at 19:00
-    add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots)
+    add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots, params)
 
     # Add an objective function that minimizes the soft constraints
-    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected)
+    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected, params)

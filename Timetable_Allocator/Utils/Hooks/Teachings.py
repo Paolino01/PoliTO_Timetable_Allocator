@@ -9,8 +9,7 @@ from Utils.Parameters import Parameters
     Calculate the number of Slots per week per Lecture, Practice, and Lab
     Return the number of slots per week
 '''
-def calculate_slots_per_week(total_lecture_hours, total_practice_hours, total_lab_hours):
-    params = Parameters()
+def calculate_slots_per_week(total_lecture_hours, total_practice_hours, total_lab_hours, params):
 
     slots_fract_lecture = (total_lecture_hours / params.n_weeks_in_semester) / params.hours_in_slot
     slots_fract_practice = (total_practice_hours / params.n_weeks_in_semester) / params.hours_in_slot
@@ -33,18 +32,18 @@ def calculate_slots_per_week(total_lecture_hours, total_practice_hours, total_la
     return slots_lecture, slots_practice, slots_lab
 
 class Teachings:
-    def __init__(self):
+    def __init__(self, params):
         self.teachings_list:list[Teaching] = []
-        self.db_api = DbAPI()
+        self.db_api = DbAPI(params)
 
 
     '''Load all the teachings from the db.'''
-    def load_teachings_from_db(self, courses):
+    def load_teachings_from_db(self, courses, params):
         list_teachings = self.db_api.get_teachings(courses)
 
         for row in list_teachings:
             # Calculate the number of Slots in a week for Lectures, Practices and Labs
-            slots_lecture, slots_practice, slots_lab = calculate_slots_per_week(int(row[5]), int(row[8]), int(row[12]))
+            slots_lecture, slots_practice, slots_lab = calculate_slots_per_week(int(row[5]), int(row[8]), int(row[12]), params)
 
             if slots_practice > 0:
                 n_practice_groups = int(row[9])

@@ -51,7 +51,7 @@ def get_teachings():
     df = pandas.read_excel('../Data/Excels/Courses Data/Courses List/Percorsi-gruppi-insegnamenti aa 2026.xlsx', dtype=str, na_values="")
     filtered_df = df[
         (df["ID_COLLEGIO"].isin(["CL003", "CL006"])) &
-        (df["PERIODO_INI"] == "1") &
+        ((df["PERIODO_INI"] == "1") & (df["PERIODO_INI_S"] != "2") & (df["PERIODO_INI_SS"] != "2")) &
         ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1"))) &
         (~df["TITOLO"].isin(teachings_to_exclude)) &
         (~df["TITOLO_S"].isin(teachings_to_exclude)) &
@@ -86,6 +86,14 @@ def get_teachings():
                 else:
                     teacher_id = row["MATRICOLA"].zfill(6)
 
+                if str(row["PERIODO_INI_SS"]) != "nan" and str(row["PERIODO_INI_SS"]) != "":
+                    semester = row["PERIODO_INI_SS"]
+                else:
+                    if str(row["PERIODO_INI_S"]) != "nan" and str(row["PERIODO_INI_S"]) != "":
+                        semester = row["PERIODO_INI_S"]
+                    else:
+                        semester = row["PERIODO_INI"]
+
                 # Get the Type of Teaching
                 teaching_type = get_teaching_type(row)
 
@@ -100,7 +108,7 @@ def get_teachings():
                     row["CFU"],
                     teacher_id,
                     teaching_type,
-                    row["ANNO"] + "-" + row["PERIODO_INI"],
+                    row["ANNO"] + "-" + semester,
                     row["NUMCOR"]
                 )
 
@@ -125,7 +133,7 @@ def calculate_correlations():
             (df["DESC_ORI"] == orientation[0]) &
             (df["NOME_CDL"] == orientation[1]) &
             (df["TIPO_LAUREA"] == orientation[2]) &
-            (df["PERIODO_INI"] == "1") &
+            ((df["PERIODO_INI"] == "1") & (df["PERIODO_INI_S"] != "2") & (df["PERIODO_INI_SS"] != "2")) &
             ((df["TIPO_LAUREA"] == "Z") | ((df["TIPO_LAUREA"] == "1") & (df["ANNO"] != "1"))) &
             (~df["TITOLO"].isin(teachings_to_exclude)) &
             (~df["TITOLO_S"].isin(teachings_to_exclude)) &
