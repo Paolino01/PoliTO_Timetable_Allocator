@@ -86,12 +86,14 @@ def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teac
 
     model.add(n_slots_in_day_teaching[teaching.id_teaching, d] <= max_consecutive_slots)
 
+    '''
     if teaching.lect_slots % 2 == 0 and teaching.n_min_double_slots_lecture == 1:
         model.add(
             teacher_preferences_respected[teaching.id_teaching, d] == (
                 (n_slots_in_day_teaching[teaching.id_teaching, d] == 0) |
                 (n_slots_in_day_teaching[teaching.id_teaching, d] == max_consecutive_slots))
         )
+    '''
 
     '''Practice Slots'''
     add_max_consecutive_slots_constraint_practice(model, teaching, d, max_consecutive_slots, n_slots_in_day_teaching)
@@ -125,10 +127,12 @@ def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_s
     Constraint: if the Teaching has to have at least 1 double Slot, then I impose that condition
 '''
 def add_min_double_slots_contraint(model, days, teaching, double_slots_in_day, teacher_preferences_respected):
+    '''
     if teaching.n_min_double_slots_lecture >= 1 and teaching.lect_slots >= teaching.n_min_double_slots_lecture + 1:
         # TODO: needs review and testing
         for d in days:
             model.add(teacher_preferences_respected[teaching.id_teaching, d] >= double_slots_in_day[teaching.id_teaching, d])
+    '''
 
     '''Practice Slots'''
     # Same as above but for practice
@@ -209,7 +213,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
                 for t_id, (corr, mandatory) in teaching_ids.items()))
 
-            #model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
+            model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
 
             '''Practice Slots'''
             add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params)
@@ -237,7 +241,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                         model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
                                   timetable_matrix[t2.id_teaching, s])
 
-                if corr > params.min_corr_overlaps:
+                if corr > params.min_corr_overlaps and mandatory:
                     '''Practice Slots'''
                     # Adding the constraint to the Practice Slots
                     add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s)
@@ -346,27 +350,14 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for t_id in teaching_ids
             for d in days
         )
-    )
-
-    '''
-    +
-    params.correlation_in_day_penalty *
-    model.sum(
-        teaching_correlations_in_day[t1.id_teaching, s]
-        for t1 in teachings
-        for s in slots
-    )
-    '''
-
-    '''
-    model.maximize(
+        +
+        params.teacher_preferences_penalty *
         model.sum(
             teacher_preferences_respected[t1.id_teaching, d]
             for t1 in teachings
             for d in days
         )
     )
-    '''
 
 '''
     Add the constraints for the Teachings to the model.

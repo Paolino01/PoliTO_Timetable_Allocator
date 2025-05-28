@@ -117,12 +117,28 @@ def add_practice_group_constraint(model, timetable_matrix, t1, s):
 
         # Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
         if t1.n_blocks_lab != 0:
-            for i in range(1, min(t1.n_practice_groups, t1.n_lab_groups) + 1):
-                model.add(
-                    timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
-                    timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
-                    <= 1
-                )
+            if t1.n_practice_groups == 1:
+                for i in range(1, t1.n_lab_groups + 1):
+                    model.add(
+                        timetable_matrix[t1.id_teaching + "_practice_group1", s] +
+                        timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
+                        <= 1
+                    )
+            else:
+                if t1.n_lab_groups == 1:
+                    for i in range(1, t1.n_practice_groups + 1):
+                        model.add(
+                            timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
+                            timetable_matrix[t1.id_teaching + "_lab_group1", s]
+                            <= 1
+                        )
+                else:
+                    for i in range(1, min(t1.n_practice_groups, t1.n_lab_groups) + 1):
+                        model.add(
+                            timetable_matrix[t1.id_teaching + "_practice_group" + str(i), s] +
+                            timetable_matrix[t1.id_teaching + "_lab_group" + str(i), s]
+                            <= 1
+                        )
 
 '''
     Constraint: a Teaching cannot overlap with the others, according to the correlations

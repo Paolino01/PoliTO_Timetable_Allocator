@@ -8,6 +8,33 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "DATA SCIENCE AND ENGINEERING",
+                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "INGEGNERIA FISICA",
+                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
+                    "COMMUNICATIONS ENGINEERING",
+                    "QUANTUM ENGINEERING",
+                    "AGRITECH ENGINEERING",
+                    "CYBERSECURITY",
+                    "ICT ENGINEERING FOR SMART SOCIETIES",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                    "INGEGNERIA ELETTRONICA",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 0,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": [
                     "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
                 ],
                 "orientations": [
@@ -22,9 +49,9 @@ class Parameters:
                     "Orientamento \"Eurecom\""
                 ],
                 "course_type": "Z",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 0,
-                "min_corr_overlaps": 30
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
             },
             {
                 "courses": [
@@ -35,45 +62,9 @@ class Parameters:
                     "Grafica e Multimedia"
                 ],
                 "course_type": "Z",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 30
-            },
-            {
-                "courses": [
-                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
-                    "DATA SCIENCE AND ENGINEERING",
-                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
-                    "INGEGNERIA FISICA",
-                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
-                    "COMMUNICATIONS ENGINEERING",
-                    "QUANTUM ENGINEERING",
-                    "AGRITECH ENGINEERING",
-                    "CYBERSECURITY"
-                ],
-                "orientations": [],
-                "course_type": "",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35
-            },
-            {
-                "courses": [
-                    "ICT ENGINEERING FOR SMART SOCIETIES",
-                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
-                    "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
-                    "INGEGNERIA ELETTRONICA",
-                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
-                ],
-                "orientations": [],
-                "course_type": "",
-                "max_corr_in_day": 800,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35
+                "min_corr_overlaps": 20
             },
             {
                 "courses": [
@@ -82,6 +73,16 @@ class Parameters:
                 "orientations": [],
                 "course_type": "1",
                 "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20
+            },
+            {
+                "courses": [
+                    "INGEGNERIA INFORMATICA"
+                ],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 900,
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 35
             }
@@ -115,12 +116,14 @@ class Parameters:
         self.max_consecutive_slots_teacher = 4
 
         # Penalties for soft contraints
-        self.teaching_overlaps_penalty = 80
-        self.lecture_dispersion_penalty = 50
-        self.correlation_in_day_penalty = 20
+        self.teaching_overlaps_penalty = 55
+        self.lecture_dispersion_penalty = 25
+        self.correlation_in_day_penalty = 10
+        # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
+        self.teacher_preferences_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses except Ingegneria Informatica"
+        self.timetable_name = "All courses"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
