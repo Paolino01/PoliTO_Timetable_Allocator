@@ -241,7 +241,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                         model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
                                   timetable_matrix[t2.id_teaching, s])
 
-                if corr > params.min_corr_overlaps and mandatory:
+                if corr > params.min_corr_overlaps or mandatory:
                     '''Practice Slots'''
                     # Adding the constraint to the Practice Slots
                     add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s)
