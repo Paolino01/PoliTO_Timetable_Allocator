@@ -26,7 +26,9 @@ class Parameters:
                 "course_type": "Z",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 30
+                "min_corr_overlaps": 30,
+                "no_overlap_mandatory_practice_lab": True,
+                "no_overlap_groups": True
             },
             {
                 "courses": [
@@ -47,7 +49,9 @@ class Parameters:
                 "course_type": "",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": True,
+                "no_overlap_groups": True
             },
             {
                 "courses": [
@@ -62,7 +66,9 @@ class Parameters:
                 "course_type": "",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": True
             },
             {
                 "courses": [
@@ -72,7 +78,9 @@ class Parameters:
                 "course_type": "1",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": True
             },
             {
                 "courses": [
@@ -82,7 +90,9 @@ class Parameters:
                 "course_type": "1",
                 "max_corr_in_day": 900,
                 "max_corr_first_last_slot": 30,
-                "min_corr_overlaps": 35
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False
             }
         ]
 
@@ -106,6 +116,10 @@ class Parameters:
         self.max_corr_first_last_slot = 20
         # Minimum correlation for which overlaps must be avoided
         self.min_corr_overlaps = 20
+        # True if Practices and Labs of mandatory courses should not overlap with non mandatory courses
+        self.no_overlap_mandatory_practice_lab = True
+        # True if I don't want to overlap different Practice/Lab groups of the same Teaching
+        self.no_overlap_groups = True
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2

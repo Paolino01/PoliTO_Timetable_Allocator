@@ -65,6 +65,8 @@ if __name__ == '__main__':
         params.max_corr_in_day = params.course_order[i]["max_corr_in_day"]
         params.max_corr_first_last_slot = params.course_order[i]["max_corr_first_last_slot"]
         params.min_corr_overlaps = params.course_order[i]["min_corr_overlaps"]
+        params.no_overlap_mandatory_practice_lab = params.course_order[i]["no_overlap_mandatory_practice_lab"]
+        params.no_overlap_groups = params.course_order[i]["no_overlap_groups"]
 
         '''Teachings Constraints'''
         add_teachings_constraints(model, timetable_matrix, teachings, slots, days, params)

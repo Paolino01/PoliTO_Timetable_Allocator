@@ -205,7 +205,6 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
         for s in slots:
             # Constraint: limiting the number of correlated lectures in a day. For example, I impose that the sum of the correlations between lectures in a day should be <= params.max_corr_in_day
             # This way I don't limit the number of consecutive lecture slots
-            # TODO: needs to be tested
             teaching_ids = get_correlated_teaching_ids(t1)
             teaching_correlations_in_day[t1.id_teaching, s] = model.integer_var(0, 2000, name=f"teaching_correlations_in_day_{t1.id_teaching}_{s}")
             model.add(teaching_correlations_in_day[t1.id_teaching, s] == model.sum(
@@ -241,7 +240,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                         model.add(teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] <=
                                   timetable_matrix[t2.id_teaching, s])
 
-                if corr > params.min_corr_overlaps or mandatory:
+                if corr > params.min_corr_overlaps or (mandatory and params.no_overlap_mandatory_practice_lab):
                     '''Practice Slots'''
                     # Adding the constraint to the Practice Slots
                     add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s)
@@ -252,10 +251,10 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
 
             # Constraint: different groups of Practice lectures can not overlap with each other
             # Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
-            add_practice_group_constraint(model, timetable_matrix, t1, s)
+            add_practice_group_constraint(model, timetable_matrix, t1, s, params)
 
             # Constraint: different groups of Lab lectures can not overlap with each other
-            add_lab_group_constraint(model, timetable_matrix, t1, s)
+            add_lab_group_constraint(model, timetable_matrix, t1, s, params)
 
 '''
     Constraint: the difference between the first and last lecture slot of the day should be minimized

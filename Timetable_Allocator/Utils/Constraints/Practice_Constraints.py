@@ -106,14 +106,14 @@ def count_days_with_double_slots_practice(model, teaching, d, n_slots_in_day_tea
     Constraint: different groups of Practice lectures can not overlap with each other
     Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
 '''
-def add_practice_group_constraint(model, timetable_matrix, t1, s):
-    # TODO: needs to be tested
+def add_practice_group_constraint(model, timetable_matrix, t1, s, params):
     if t1.practice_slots != 0:
         # Constraint: different groups of Practice lectures can not overlap with each other
-        for i in range(1, t1.n_practice_groups + 1):
-            for j in range(1, i):
-                model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[
-                    t1.id_teaching + f"_practice_group{j}", s] <= 1)
+        if params.no_overlap_groups:
+            for i in range(1, t1.n_practice_groups + 1):
+                for j in range(1, i):
+                    model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[
+                        t1.id_teaching + f"_practice_group{j}", s] <= 1)
 
         # Constraint: a Practice cannot overlap with the same group of a Lab of the same lecture
         if t1.n_blocks_lab != 0:
