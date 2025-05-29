@@ -8,33 +8,6 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
-                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
-                    "DATA SCIENCE AND ENGINEERING",
-                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
-                    "INGEGNERIA FISICA",
-                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
-                    "COMMUNICATIONS ENGINEERING",
-                    "QUANTUM ENGINEERING",
-                    "AGRITECH ENGINEERING",
-                    "CYBERSECURITY",
-                    "ICT ENGINEERING FOR SMART SOCIETIES",
-                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
-                    "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
-                    "INGEGNERIA ELETTRONICA",
-                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
-                ],
-                "orientations": [],
-                "course_type": "",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 0,
-                "min_corr_overlaps": 20
-            },
-            {
-                "courses": [
                     "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
                 ],
                 "orientations": [
@@ -46,25 +19,50 @@ class Parameters:
                     "Embedded systems",
                     "EMECS - Path 1 - Erasmus Mundus Joint Master",
                     "EMECS - Path 2 - Erasmus Mundus Joint Master",
-                    "Orientamento \"Eurecom\""
-                ],
-                "course_type": "Z",
-                "max_corr_in_day": 800,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
-            },
-            {
-                "courses": [
-                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
-                ],
-                "orientations": [
+                    "Orientamento \"Eurecom\"",
                     "Software",
                     "Grafica e Multimedia"
                 ],
                 "course_type": "Z",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 30
+            },
+            {
+                "courses": [
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "DATA SCIENCE AND ENGINEERING",
+                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "INGEGNERIA FISICA",
+                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
+                    "COMMUNICATIONS ENGINEERING",
+                    "QUANTUM ENGINEERING",
+                    "AGRITECH ENGINEERING",
+                    "CYBERSECURITY"
+                ],
+                "orientations": [],
+                "course_type": "",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 35
+            },
+            {
+                "courses": [
+                    "ICT ENGINEERING FOR SMART SOCIETIES",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+                    "INGEGNERIA ELETTRONICA",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35
             },
             {
                 "courses": [
@@ -74,7 +72,7 @@ class Parameters:
                 "course_type": "1",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20
+                "min_corr_overlaps": 35
             },
             {
                 "courses": [
@@ -83,7 +81,7 @@ class Parameters:
                 "orientations": [],
                 "course_type": "1",
                 "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 20,
+                "max_corr_first_last_slot": 30,
                 "min_corr_overlaps": 35
             }
         ]

@@ -224,14 +224,25 @@ class DbApi:
         self.db.commit()
 
     '''
-        Given a Teacher's name, get their ID
+        Given a Teacher's ID, check if it's in the DB and, if so, check if their unavailabilites have not been inserted already.
+        Return: True if the Teacher exists and its unavailabilites have been inserted, False otherwise.
     '''
-    def get_teacher_id(self, teacher):
+    def check_teacher_id(self, teacher_id):
         cur = self.db.cursor()
-        sql = "SELECT ID_DOC FROM Docente WHERE Cognome = ?"
-        cur.execute(sql, (teacher,))
-        teacher_id = cur.fetchall()
-        return teacher_id
+        sql = "SELECT COUNT(*) FROM Docente WHERE ID_DOC = ?"
+        cur.execute(sql, (teacher_id,))
+        n_teachers = cur.fetchone()[0]
+
+        if n_teachers != 0:
+            sql = "SELECT COUNT(*) FROM Teachers_Unavailability WHERE Teacher = ?"
+            cur.execute(sql, (teacher_id,))
+            n_teachers = cur.fetchone()[0]
+            if n_teachers != 0:
+                return False
+            else:
+                return True
+        else:
+            return False
 
     '''
         Insert an unavailable Slot for a Teacher

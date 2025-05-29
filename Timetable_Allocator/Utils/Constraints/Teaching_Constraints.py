@@ -213,7 +213,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
                 for t_id, (corr, mandatory) in teaching_ids.items()))
 
-            model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
+            # model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
 
             '''Practice Slots'''
             add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params)

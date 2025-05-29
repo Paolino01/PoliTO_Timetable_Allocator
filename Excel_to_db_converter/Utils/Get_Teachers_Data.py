@@ -127,36 +127,28 @@ def get_teachers_preferences(teachings):
     print("Teachers preferences inserted in the DB")
 
 '''
-    Get Teacher's unavailabilities from the JOTFORM
+    Get Teacher's unavailabilities from the file PreferenzeDocenti.xlsx
 '''
 def get_teachers_unavailabilities():
     db_api = DbApi()
 
-    df = pandas.read_excel("../Data/Excels/Teachers Data/JOTFORM.xlsx")
+    # Support vectors needed to find the index of the Day and the Slot
+    days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
+    slots = ["08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"]
+
+    df = pandas.read_excel("../Data/Excels/Teachers Data/Teachers Preferences/PreferenzeDocenti.xlsx")
     db_api.clear_teachers_unavailabilities()
-    for i in df.index:
-        teacher = df.loc[i]['Docente titolare']
-        n_unavailabilities = 0
+    for index, row in df.iterrows():
+        teacher_id = str(row['MATRICOLA_TITOLARE']).zfill(6)
 
-        # Getting the Teacher's ID form the Teacher's name
-        teacher_ids = db_api.get_teacher_id(teacher.title())
-        if len(teacher_ids) > 0:
-            #Inserting unavailability only if the Teacher is in the DB
-            teacher_id = teacher_ids[0][0]
+        result = db_api.check_teacher_id(teacher_id)
 
-            # I have to do it like this because the data in the JotForm is in the format:
-            # 8:30-10:00 Monday; 8:30-10:00 Tuesday; 8:30-10:00 Wednesday; ...; 10:00-11:30 Monday; 10:00-11:30 Tuesday; ...; 17:30-19:00 Thursday; 17:30-19:00 Friday
-            # And starts from column 5
-            for day in range(5, 10):
-                for slot in range(0, 35, 5):
-                    if df.iloc[i, day + slot] == "Indisponibile" or df.iloc[i, day + slot] == "Unavailable":
-                        db_api.insert_unavailable_slot(teacher_id, ((day - 5) * 7) + math.floor(slot / 5))
-                        # Counting the number of unavailablities in order to insert the first 4 only
-                        n_unavailabilities += 1
-                        if n_unavailabilities >= 4:
-                            break
+        if result and str(row["INDISPONIBILITA_SETTIMANALI"]) != 'nan':
+            unavailabilities_list = str(row["INDISPONIBILITA_SETTIMANALI"]).split(',')
+            for i in range(0, min(len(unavailabilities_list), 4)):
+                unavailability = unavailabilities_list[i].split(' ')
 
-                if n_unavailabilities >= 4:
-                    break
+                # unavailability[0] contains the Day in format "Lunedì", "Martedì", etc. - unavailability[1] cointains the Slot in format "08:30", "10:00", etc.
+                db_api.insert_unavailable_slot(teacher_id, (days.index(unavailability[0]) * 7) + slots.index(unavailability[1]))
 
     print("Teachers unavailabilities inserted in the DB")
