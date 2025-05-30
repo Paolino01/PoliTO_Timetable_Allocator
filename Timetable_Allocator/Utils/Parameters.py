@@ -58,7 +58,6 @@ class Parameters:
                     "ICT ENGINEERING FOR SMART SOCIETIES",
                     "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
                     "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
                     "INGEGNERIA ELETTRONICA",
                     "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
                 ],

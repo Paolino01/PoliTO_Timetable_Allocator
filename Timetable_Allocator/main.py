@@ -28,6 +28,8 @@ if __name__ == '__main__':
     solution_found = True
 
     for i in range(0, len(params.course_order)):
+        print("Generating timetable for " + str(params.course_order[i]["courses"]))
+
         # Problem definition
         model = CpoModel(name="PoliTO_Timetable_Scheduling")
         slv = solver.CpoSolver(model)
