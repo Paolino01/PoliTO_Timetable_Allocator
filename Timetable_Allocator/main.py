@@ -77,8 +77,6 @@ if __name__ == '__main__':
         '''Teachers Contraints'''
         add_teachers_constraints(model, timetable_matrix, teachers, slots, days, params)
 
-
-        # Solving the problem, limiting the execution time to 6 hours
         solution = model.solve(log_output=True)
     
         # Printing the results
