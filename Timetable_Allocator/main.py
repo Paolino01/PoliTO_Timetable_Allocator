@@ -60,8 +60,8 @@ if __name__ == '__main__':
         get_previous_solution(model, timetable_matrix, teachings, slots, params)
     
         # Add courses of an already generated timetable
-        #if i != 0:
-        add_generated_courses(model, timetable_matrix, slots, params)
+        if i != 0:
+            add_generated_courses(model, timetable_matrix, slots, params)
 
         # Set parameters according to the the current course generation schema
         params.max_corr_in_day = params.course_order[i]["max_corr_in_day"]
