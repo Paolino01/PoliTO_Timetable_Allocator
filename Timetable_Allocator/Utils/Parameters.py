@@ -109,7 +109,7 @@ class Parameters:
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": False,
-                "teachers_unavailabilities": False
+                "teachers_unavailabilities": False  # Note: in order to be able to generate a timetable for Electronic Engineering, we must not consider the Teachers' unavailabilities
             }
         ]
 
