@@ -92,8 +92,7 @@ class DbAPI:
     '''
     def get_generated_courses(self, params):
         cur = self.db.cursor()
-        sql = ("SELECT pianoAllocazione, ID_INC, tipoLez, giorno, fasciaOraria, squadra FROM Slot WHERE pianoAllocazione = ? "
-               "AND ID_INC IN (SELECT ID_INC FROM Insegnamento_in_Orientamento WHERE nomeCdl NOT IN ('INGEGNERIA INFORMATICA'))")
+        sql = "SELECT pianoAllocazione, ID_INC, tipoLez, giorno, fasciaOraria, squadra FROM Slot WHERE pianoAllocazione = ?"
         cur.execute(sql, (params.timetable_name + "_temp", ))
         generated_courses = cur.fetchall()
         return generated_courses

@@ -105,8 +105,8 @@ def add_teachers_constraints(model, timetable_matrix, teachers, slots, days, par
         add_no_overlap_constraint(model, timetable_matrix, teacher, slots)
 
         # Constraint: a Teacher cannot have lectures in a Slot in which they are unavailable
-        add_unavailable_slots_constraint(model, timetable_matrix, teacher)
+        if params.teachers_unavailabilities:
+            add_unavailable_slots_constraint(model, timetable_matrix, teacher)
 
         # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
         #add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots, days, params)
-

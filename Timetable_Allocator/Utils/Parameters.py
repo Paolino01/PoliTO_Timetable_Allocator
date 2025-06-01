@@ -28,7 +28,8 @@ class Parameters:
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
             },
             {
                 "courses": [
@@ -51,7 +52,8 @@ class Parameters:
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
             },
             {
                 "courses": [
@@ -67,7 +69,8 @@ class Parameters:
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": True
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
             },
             {
                 "courses": [
@@ -79,7 +82,8 @@ class Parameters:
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": True
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
             },
             {
                 "courses": [
@@ -91,7 +95,21 @@ class Parameters:
                 "max_corr_first_last_slot": 30,
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": False
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 900,
+                "max_corr_first_last_slot": 30,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": False
             }
         ]
 
@@ -119,6 +137,8 @@ class Parameters:
         self.no_overlap_mandatory_practice_lab = True
         # True if I don't want to overlap different Practice/Lab groups of the same Teaching
         self.no_overlap_groups = True
+        # True if I want to consider the Teachers' unavailabilities
+        self.teachers_unavailabilities = True
 
         # Number of maximum consecutive Slots in a day for a Teaching
         self.max_consecutive_slots_teaching = 2
