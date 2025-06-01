@@ -26,7 +26,7 @@ class Parameters:
                 "course_type": "Z",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 30,
+                "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True
             },
@@ -49,7 +49,7 @@ class Parameters:
                 "course_type": "",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35,
+                "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True
             },
@@ -65,7 +65,7 @@ class Parameters:
                 "course_type": "",
                 "max_corr_in_day": 700,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35,
+                "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": True
             },

@@ -30,8 +30,6 @@ def add_double_slots_constraint_lab(model, timetable_matrix, teaching, s, d, n_s
     for i in range(1, teaching.n_lab_groups + 1):
         # Same as Practice, but for Lab Slots
         # I don't check Lab Slots since I don't use them (I set the number of Slots in add_slots_per_week_lab)
-
-        # TODO: needs review and testing
         if teaching.double_slots_lab != 0 and teaching.double_slots_lab == 1:
             model.add(
                 teacher_preferences_respected[teaching.id_teaching + f"_lab_group{i}", d] == (

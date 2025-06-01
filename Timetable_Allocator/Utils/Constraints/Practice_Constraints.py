@@ -31,8 +31,6 @@ def add_double_slots_constraint_practice(model, timetable_matrix, teaching: Teac
     for i in range(1, teaching.n_practice_groups + 1):
         # If teaching.n_min_double_slots_practice >= 1, then I impose that the Teaching must have at leat 2 consecutive practice hours
         # I check that there are at least 2 Slots of practice (to be sure that I can have 2 consecutive Slots)
-
-        # TODO: needs review and testing
         if teaching.practice_slots >= teaching.n_min_double_slots_practice + 1 and teaching.practice_slots % 2 == 0 and teaching.n_min_double_slots_practice == 1 and teaching.n_min_single_slots_practice == 0:
             model.add(
                 teacher_preferences_respected[teaching.id_teaching + f"_practice_group{i}", d] == (
