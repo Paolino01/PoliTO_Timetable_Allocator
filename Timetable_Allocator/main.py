@@ -1,5 +1,4 @@
 from docplex.cp.model import CpoModel
-from docplex.cp.solver import solver
 
 from Components.Generated_Solution import add_generated_courses
 from Components.Previous_Solution import get_previous_solution, ask_previous_solution
@@ -32,7 +31,6 @@ if __name__ == '__main__':
 
         # Problem definition
         model = CpoModel(name="PoliTO_Timetable_Scheduling")
-        slv = solver.CpoSolver(model)
 
         # List of Teachings that I need to allocate
         teachings_class.load_teachings_from_db(params.course_order[i], params)
