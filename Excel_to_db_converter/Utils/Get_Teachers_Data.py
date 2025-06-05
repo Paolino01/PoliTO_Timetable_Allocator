@@ -136,7 +136,7 @@ def get_teachers_unavailabilities():
     days = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
     slots = ["08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"]
 
-    df = pandas.read_excel("../Data/Excels/Teachers Data/Teachers Preferences/PreferenzeDocenti.xlsx")
+    df = pandas.read_excel("../Data/Excels/Teachers Data/PreferenzeDocenti.xlsx")
     db_api.clear_teachers_unavailabilities()
     for index, row in df.iterrows():
         teacher_id = str(row['MATRICOLA_TITOLARE']).zfill(6)

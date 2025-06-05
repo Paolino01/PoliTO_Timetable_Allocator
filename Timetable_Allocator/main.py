@@ -101,10 +101,14 @@ if __name__ == '__main__':
             break
 
     if solution_found:
-        db_api.remove_previous_solution(params)
+        # Solution found, I delete the previous solution with the same name and save this one
+        db_api.remove_solution(params.timetable_name)
         db_api.rename_temp_solution(params)
 
         print("\nTimetable generated successfully.")
-    #else:
-        #db_api.remove_temp_solution(params)
-        #print("DB cleaned")
+    else:
+        # No solution found, I ask the user if they want to keep or delete the partial results
+        print("No solution found, would you like to delete the partial results of this execution from the database (y/n)?")
+        if input().lower() == "y":
+            db_api.remove_solution(params.timetable_name + "_temp")
+            print("DB cleaned")

@@ -28,5 +28,5 @@ if __name__ == '__main__':
     # Get the Teachers preferences for the courses and save them in the database
     get_teachers_preferences(teachings)
 
-    # Get the information about unavailable Slots for each Teacher from the JotForm Excel file and insert them in the database
+    # Get the information about unavailable Slots for each Teacher from the PreferenzeDocenti.xlsx Excel file and insert them in the database
     get_teachers_unavailabilities()

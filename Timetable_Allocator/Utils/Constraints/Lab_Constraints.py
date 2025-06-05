@@ -1,7 +1,6 @@
 '''
     In this file there are the functions needed to add the Constraints about Lab Slots to the model
 '''
-from Utils.Parameters import Parameters
 
 '''
     Add the constraint about the number of Slots that each Teaching should have in a week

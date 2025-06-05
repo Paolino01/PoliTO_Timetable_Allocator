@@ -101,7 +101,7 @@ class DbAPI:
 
     '''
         Get all the Teachers in the DB
-        Return: list of Teachers in format [Surname]
+        Return: list of Teachers in format [Surname, ID]
     '''
     def get_teachers(self):
         cur = self.db.cursor()
@@ -287,34 +287,18 @@ class DbAPI:
 
     '''Managing temporary solutions'''
 
-    '''Removing temporary solution'''
-    def remove_temp_solution(self, params):
+    '''Removing the solution with the given name'''
+    def remove_solution(self, timetable_name):
         cur = self.db.cursor()
 
         sql = "DELETE FROM Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name + "_temp",))
+        cur.execute(sql, (timetable_name,))
 
         sql = "DELETE FROM Docente_in_Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name + "_temp",))
+        cur.execute(sql, (timetable_name,))
 
         sql = "DELETE FROM PianoAllocazione WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name + "_temp",))
-
-        self.db.commit()
-
-
-    '''Removing previous solution with the same name as this one'''
-    def remove_previous_solution(self, params):
-        cur = self.db.cursor()
-
-        sql = "DELETE FROM Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name,))
-
-        sql = "DELETE FROM Docente_in_Slot WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name,))
-
-        sql = "DELETE FROM PianoAllocazione WHERE pianoAllocazione = ?"
-        cur.execute(sql, (params.timetable_name,))
+        cur.execute(sql, (timetable_name,))
 
         self.db.commit()
 

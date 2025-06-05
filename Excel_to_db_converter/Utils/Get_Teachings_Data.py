@@ -11,10 +11,6 @@ from Data.DbApi import DbApi
 '''
 
 def get_teaching_type(teaching_row):
-    # TODO: I don't have the "Credito_libero_consigliato" category
-
-    teaching_type = ""
-
     if (
             "Insegnamento a scelta" not in teaching_row["TITOLO"] and
             "Crediti liberi" not in teaching_row["TITOLO"] and

@@ -8,13 +8,12 @@ from Utils.Constraints.Lab_Constraints import add_double_slots_constraint_lab, a
     define_double_slots_in_day_lab, count_double_slots_in_day_lab, add_lab_overlaps_constraint, \
     add_correlations_constraint_lab, define_lecture_dispersion_variables_lab, \
     assign_first_last_slot_of_day_lab, calculate_lecture_dispersion_lab, add_first_last_slot_correlation_limit_lab, \
-    add_max_consecutive_slots_constraint_lab, add_lab_group_constraint
+    add_lab_group_constraint
 from Utils.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
     add_min_double_slots_contraint_practice, define_double_slots_in_day_practice, count_double_slots_in_day_practice, \
     count_days_with_double_slots_practice, add_practice_overlaps_constraint, add_correlations_constraint_practice, define_lecture_dispersion_variables_practice, \
     assign_first_last_slot_of_day_practice, calculate_lecture_dispersion_practice, \
     add_first_last_slot_correlation_limit_practice, add_max_consecutive_slots_constraint_practice, add_practice_group_constraint
-from Utils.Parameters import Parameters
 
 '''
     Get the IDs of the Teachings, considering Practices and Labs as well
@@ -75,28 +74,22 @@ def add_slots_per_week_teaching(model, timetable_matrix, teachings, slots):
 '''
     Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day
 '''
-def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected):
-    # Assign max consecutive Slots for a lecture according to teaching.n_min_double_slots_lecture
-    '''
-    if teaching.n_min_double_slots_lecture+1 > 2:
-        max_consecutive_slots = teaching.n_min_double_slots_lecture+1
-    else:
-    '''
-    max_consecutive_slots = 2
+def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params):
 
-    model.add(n_slots_in_day_teaching[teaching.id_teaching, d] <= max_consecutive_slots)
+    model.add(n_slots_in_day_teaching[teaching.id_teaching, d] <= params.max_consecutive_slots_teaching)
 
+    # Uncomment the following part to add the Teacher's preferences about lectures to the objective function
     '''
     if teaching.lect_slots % 2 == 0 and teaching.n_min_double_slots_lecture == 1:
         model.add(
             teacher_preferences_respected[teaching.id_teaching, d] == (
                 (n_slots_in_day_teaching[teaching.id_teaching, d] == 0) |
-                (n_slots_in_day_teaching[teaching.id_teaching, d] == max_consecutive_slots))
+                (n_slots_in_day_teaching[teaching.id_teaching, d] == params.max_consecutive_slots_teaching))
         )
     '''
 
     '''Practice Slots'''
-    add_max_consecutive_slots_constraint_practice(model, teaching, d, max_consecutive_slots, n_slots_in_day_teaching)
+    add_max_consecutive_slots_constraint_practice(model, teaching, d, n_slots_in_day_teaching, params)
 
 '''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
@@ -127,9 +120,9 @@ def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_s
     Constraint: if the Teaching has to have at least 1 double Slot, then I impose that condition
 '''
 def add_min_double_slots_contraint(model, days, teaching, double_slots_in_day, teacher_preferences_respected):
+    # Uncomment the following part to add the Teacher's preferences about lectures to the objective function
     '''
     if teaching.n_min_double_slots_lecture >= 1 and teaching.lect_slots >= teaching.n_min_double_slots_lecture + 1:
-        # TODO: needs review and testing
         for d in days:
             model.add(teacher_preferences_respected[teaching.id_teaching, d] >= double_slots_in_day[teaching.id_teaching, d])
     '''
@@ -187,7 +180,7 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
             count_days_with_double_slots_practice(model, teaching, d, n_slots_in_day_teaching, double_slots_in_day)
 
             # Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day (only for Lectures and not for Laboratories)
-            add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected)
+            add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params)
 
             # If n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive
             add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_slots_in_day_teaching, teacher_preferences_respected, params)

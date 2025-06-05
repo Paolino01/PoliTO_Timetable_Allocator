@@ -2,7 +2,6 @@
     In this file there are the functions needed to add the Constraints about Practice Slots to the model
 '''
 from Utils.Components.Teaching import Teaching
-from Utils.Parameters import Parameters
 
 '''
     Add the constraint about the number of Slots that each Teaching should have in a week
@@ -19,10 +18,10 @@ def add_slots_per_week_practice(model, timetable_matrix, teaching, slots):
 '''
     Add the constraint that a Teaching should have a maximum of max_consecutive_slots Slots in a day
 '''
-def add_max_consecutive_slots_constraint_practice(model, teaching, d, max_consecutive_slots, n_slots_in_day_teaching):
+def add_max_consecutive_slots_constraint_practice(model, teaching, d, n_slots_in_day_teaching, params):
     if teaching.practice_slots != 0:
         for i in range(1, teaching.n_practice_groups + 1):
-            model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] <= max_consecutive_slots)
+            model.add(n_slots_in_day_teaching[teaching.id_teaching + f"_practice_group{i}", d] <= params.max_consecutive_slots_teaching)
 
 '''
     Add the constraint that if n_slots_in_day_teaching[t.id_teaching, d] >= 2, the Slots should be consecutive

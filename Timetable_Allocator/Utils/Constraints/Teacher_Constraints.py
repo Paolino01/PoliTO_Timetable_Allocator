@@ -67,34 +67,6 @@ def add_unavailable_slots_constraint(model, timetable_matrix, teacher):
                         for i in range(1, teaching[0].n_lab_groups + 1):
                             model.add(timetable_matrix[teaching[0].id_teaching + f"_lab_group{i}", s] == 0)
 
-'''
-    A Teacher cannot have more than params.max_consecutive_slot consecutive Slots.
-    The Teachings are considered separately for first and second semester
-'''
-def add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots, days, params):
-    teaching_ids_1, teaching_ids_2 = get_teaching_ids(teacher)
-
-    for d in days:
-        # First semester
-        model.add(model.sum(timetable_matrix[t_id, s + i]
-            for t_id in teaching_ids_1 if 'lab' not in t_id
-            for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
-            for i in range(0, (params.max_consecutive_slots_teacher + 1))
-            )
-        <= params.max_consecutive_slots_teacher
-        )
-
-        # Second semester
-        '''
-        model.add(model.sum(timetable_matrix[t_id, s + i]
-            for t_id in teaching_ids_2
-            for s in range(d * params.slot_per_day, (((d + 1) * params.slot_per_day) - params.max_consecutive_slots_teacher) - 1) if s in slots
-            for i in range(0, (params.max_consecutive_slots_teacher + 1))
-            )
-        <= params.max_consecutive_slots_teacher
-        )
-        '''
-
 
 '''
     Add the constraints for the Teachers to the model
@@ -107,6 +79,3 @@ def add_teachers_constraints(model, timetable_matrix, teachers, slots, days, par
         # Constraint: a Teacher cannot have lectures in a Slot in which they are unavailable
         if params.teachers_unavailabilities:
             add_unavailable_slots_constraint(model, timetable_matrix, teacher)
-
-        # Constraint: a Teacher cannot have more that params.max_consecutive_slots_teacher consecutive Slots of lectures
-        #add_max_consecutive_slots_constraint(model, timetable_matrix, teacher, slots, days, params)
