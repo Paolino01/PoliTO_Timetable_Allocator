@@ -32,7 +32,7 @@ class DbApi:
         Then, add the orientations to that Degree.
         Finally, add the Teaching to the Orientation
     '''
-    def insert_teachings(self, course_type, course_name, orientation, ID_INC, id_teaching, college, teaching_name, cfu, main_teacher, teaching_type, didactic_period, alphabetic_number):
+    def insert_teachings(self, course_type, course_name, orientation, id_inc, id_teaching, college, teaching_name, cfu, main_teacher, teaching_type, didactic_period, alphabetic_number):
         cur = self.db.cursor()
 
         sql = "INSERT OR IGNORE INTO Corso_di_laurea(tipoCdl, nomeCdl) VALUES (?, ?)"
@@ -42,13 +42,13 @@ class DbApi:
         cur.execute(sql, (orientation, course_name, course_type))
 
         sql = "INSERT OR IGNORE INTO Insegnamento_listCodIns(ID_INC, codIns) VALUES (?, ?)"
-        cur.execute(sql, (ID_INC, id_teaching))
+        cur.execute(sql, (id_inc, id_teaching))
 
         sql = "INSERT OR IGNORE INTO Insegnamento(ID_INC, collegio, titolo, CFU, titolare, oreLez) VALUES (?, ?, ?, ?, ?, 0)"
-        cur.execute(sql, (ID_INC, college, teaching_name, cfu, main_teacher))
+        cur.execute(sql, (id_inc, college, teaching_name, cfu, main_teacher))
 
         sql = "INSERT OR IGNORE INTO Insegnamento_in_Orientamento(ID_INC, orientamento, nomeCdl, tipoInsegnamento, tipoCdl, periodoDidattico, alfabetica) VALUES (?, ?, ?, ?, ?, ?, ?)"
-        cur.execute(sql, (ID_INC, orientation, course_name, teaching_type, course_type, didactic_period, alphabetic_number))
+        cur.execute(sql, (id_inc, orientation, course_name, teaching_type, course_type, didactic_period, alphabetic_number))
 
         self.db.commit()
 
@@ -97,20 +97,20 @@ class DbApi:
     '''
         Insert the correlation between two Teachings in the DB
     '''
-    def insert_correlation(self, ID_INC_1, ID_INC_2, correlation, mandatory):
+    def insert_correlation(self, id_inc_1, id_inc_2, correlation, mandatory):
         cur = self.db.cursor()
 
         sql = "SELECT Correlazione FROM Info_correlazioni WHERE ID_INC_1=? AND ID_INC_2=?"
-        cur.execute(sql, (ID_INC_1, ID_INC_2))
+        cur.execute(sql, (id_inc_1, id_inc_2))
         corr = cur.fetchone()
 
         if corr is None:
             sql = "INSERT INTO Info_correlazioni (ID_INC_1, ID_INC_2, Correlazione, Obbligatorio) VALUES (?, ?, ?, ?)"
-            cur.execute(sql, (ID_INC_1, ID_INC_2, correlation, mandatory))
+            cur.execute(sql, (id_inc_1, id_inc_2, correlation, mandatory))
         else:
             if corr[0] < correlation:
                 sql = "UPDATE Info_correlazioni SET Correlazione = ? WHERE ID_INC_1=? AND ID_INC_2=?"
-                cur.execute(sql, (correlation, ID_INC_1, ID_INC_2))
+                cur.execute(sql, (correlation, id_inc_1, id_inc_2))
 
         self.db.commit()
 

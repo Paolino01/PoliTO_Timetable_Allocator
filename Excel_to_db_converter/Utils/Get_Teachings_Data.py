@@ -7,9 +7,17 @@ from openpyxl.styles.builtins import title
 from Data.DbApi import DbApi
 
 '''
+    Returns true if the given value is not nan nor empty
+'''
+def check_nan_empty(value):
+    if value != "" and value != "nan":
+        return True
+    else:
+        return False
+
+'''
     Given a row of the Excel file that represents a Teaching, return the type of that Teaching
 '''
-
 def get_teaching_type(teaching_row):
     if (
             "Insegnamento a scelta" not in teaching_row["TITOLO"] and
@@ -60,15 +68,15 @@ def get_teachings():
     db_api.delete_all_teachings()
 
     for index, row in filtered_df.iterrows():
-        if str(row["ID_INC"]) != "nan":
+        if check_nan_empty(row["ID_INC"]):
             # Get the name and ID of a Teaching
             teaching_name = ""
             id_teaching = 0
-            if row["TITOLO_SS"] != "" and str(row["TITOLO_SS"]) != "nan":
+            if check_nan_empty(row["TITOLO_SS"]):
                     id_teaching = row["COD_INS_SS"]
                     teaching_name = row["TITOLO_SS"]
             else:
-                if row["TITOLO_S"] != "" and str(row["TITOLO_S"]) != "nan":
+                if check_nan_empty(row["TITOLO_S"]):
                         id_teaching = row["COD_INS_S"]
                         teaching_name = row["TITOLO_S"]
                 else:
@@ -82,10 +90,10 @@ def get_teachings():
                 else:
                     teacher_id = row["MATRICOLA"].zfill(6)
 
-                if str(row["PERIODO_INI_SS"]) != "nan" and str(row["PERIODO_INI_SS"]) != "":
+                if check_nan_empty(str(row["PERIODO_INI_SS"])):
                     semester = row["PERIODO_INI_SS"]
                 else:
-                    if str(row["PERIODO_INI_S"]) != "nan" and str(row["PERIODO_INI_S"]) != "":
+                    if check_nan_empty(str(row["PERIODO_INI_S"])):
                         semester = row["PERIODO_INI_S"]
                     else:
                         semester = row["PERIODO_INI"]
@@ -180,6 +188,21 @@ def calculate_correlations():
     print("Correlations inserted in the DB")
 
 '''
+    Returns the offset that should be applied when retrieving data from the collaborators column.
+    It depends on how many names and surnames the Teacher has
+'''
+def get_offset(coll_info):
+    offset = 0
+    if coll_info[2][0] != '(':
+        offset = 1
+        if coll_info[3][0] != '(':
+            offset = 2
+            if coll_info[4][0] != '(':
+                offset = 3
+
+    return offset
+
+'''
     Get the information about the teachers, their hours, and the type of their lectures for each Teaching, using the column "Collaboratori" (Collaborators)
     Collaborators are in the format: (ID) NAME (SOMETHING) [DEPARTMENT] tit: TITLE tipo did:LECTURE_TYPE lin:LANGUAGE - h:  hh.mm;
     PAY ATTENTION TO THE SPACES, SOME FIELDS HAVE SPACES OTHER DON'T. After "h:" there is a double space
@@ -196,13 +219,7 @@ def get_teaching_teachers(row, main_teacher_id):
     for c in collaborators:
         coll_info = c.strip().split(' ')
 
-        offset = 0
-        if coll_info[2][0] != '(':
-            offset = 1
-            if coll_info[3][0] != '(':
-                offset = 2
-                if coll_info[4][0] != '(':
-                    offset = 3
+        offset = get_offset(coll_info)
 
         # NOTE: sometimes in the column number 3 there might be the department instead of the keyword "tit:" (titolo).
         # If so, I delete the column number 3

@@ -40,14 +40,14 @@ def get_teaching_ids(teacher):
 '''
 def add_no_overlap_constraint(model, timetable_matrix, teacher, slots):
     # Getting the teaching IDs for the first semester and the second semester
-    teaching_ids_1, teaching_ids_2 = get_teaching_ids(teacher)
+    teaching_ids_1, _teaching_ids_2 = get_teaching_ids(teacher)
 
     for s in slots:
         # Constraints for the first semester
         model.add(model.sum(timetable_matrix[t_id, s] for t_id in teaching_ids_1) <= 1)
 
         # Constraints for the second semester
-        # model.add(model.sum(timetable_matrix[t_id, s] for t_id in teaching_ids_2) <= 1)
+        # model.add(model.sum(timetable_matrix[t_id, s] for t_id in _teaching_ids_2) <= 1)
 
 '''
     A Teacher cannot have lectures in a Slot in which they are unavailable
@@ -71,7 +71,7 @@ def add_unavailable_slots_constraint(model, timetable_matrix, teacher):
 '''
     Add the constraints for the Teachers to the model
 '''
-def add_teachers_constraints(model, timetable_matrix, teachers, slots, days, params):
+def add_teachers_constraints(model, timetable_matrix, teachers, slots, params):
     for teacher in teachers:
         # Constraint: Teachings taught by the same Teacher cannot overlap
         add_no_overlap_constraint(model, timetable_matrix, teacher, slots)
