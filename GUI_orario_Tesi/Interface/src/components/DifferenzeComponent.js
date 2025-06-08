@@ -5,8 +5,6 @@ const LEN_TITOLO = 18;
 
 function Slot(props) {
     const { slot, giorno, color } = props;
-    console.log(slot)
-    console.log(color)
   
     // console.log(slot)
     const strDoc = slot.listDocenti.reduce((prev, doc) => prev.concat(", ", doc));
