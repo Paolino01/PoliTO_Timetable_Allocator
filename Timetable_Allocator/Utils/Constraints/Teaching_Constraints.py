@@ -192,20 +192,18 @@ def add_daily_slots_constraints(model, timetable_matrix, teachings, slots, days,
     Constraint: limiting the number of correlated lectures in a day
     Constraint: a Teaching cannot overlap with the others, according to the correlations
 '''
-def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day, params):
+def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, params):
 
     for t1 in teachings:
         for s in slots:
             # Constraint: limiting the number of correlated lectures in a day. For example, I impose that the sum of the correlations between lectures in a day should be <= params.max_corr_in_day
             # This way I don't limit the number of consecutive lecture slots
             teaching_ids = get_correlated_teaching_ids(t1)
-            teaching_correlations_in_day[t1.id_teaching, s] = model.integer_var(0, 2000, name=f"teaching_correlations_in_day_{t1.id_teaching}_{s}")
-            model.add(teaching_correlations_in_day[t1.id_teaching, s] == model.sum(
+            model.add(model.sum(
                 corr * (timetable_matrix[t1.id_teaching, s] * timetable_matrix[t_id, s + i])
                 for i in range(1, params.slot_per_day - (s % params.slot_per_day)) if s + i in slots
-                for t_id, (corr, mandatory) in teaching_ids.items()))
-
-            model.add(teaching_correlations_in_day[t1.id_teaching, s] <= params.max_corr_in_day)
+                for t_id, (corr, mandatory) in teaching_ids.items())
+                <= params.max_corr_in_day)
 
             '''Practice Slots'''
             add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params)
@@ -222,7 +220,8 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
                     if corr > params.min_corr_overlaps or mandatory:
                         model.add(timetable_matrix[t1.id_teaching, s] + timetable_matrix[t2.id_teaching, s] <= 1)
                     else:
-                        # If the correlation is <= params.min_corr_overlaps, I add a soft constraint to minimize the overlaps between correlated lectures
+                        # If the correlation is <= params.min_corr_overlaps, I add a soft constraint to minimize the overlaps between correlated lectures.
+                        # teaching_overlaps is 1 if t1 and t2 overlap in the slot s, 0 otherwise
                         teaching_overlaps[(t1.id_teaching, t2.id_teaching, s)] = (
                             model.binary_var(name=f"overlap_{t1.id_teaching}_{t2.id_teaching}_{s}"))
                         model.add(
@@ -322,7 +321,7 @@ def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, sl
 '''
     Add an objective function that minimizes the soft constraints
 '''
-def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected, params):
+def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params):
 
     teaching_ids = get_teaching_ids(teachings)
 
@@ -369,8 +368,7 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
     # Constraint: limiting the number of correlated lectures in a day
     # Constraint: a Teaching cannot overlap with the others, according to the correlations
     teaching_overlaps = {}
-    teaching_correlations_in_day = {}
-    add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, teaching_correlations_in_day, params)
+    add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, params)
 
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     lectures_dispersion_of_day = {}
@@ -380,4 +378,4 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
     add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots, params)
 
     # Add an objective function that minimizes the soft constraints
-    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teaching_correlations_in_day, teacher_preferences_respected, params)
+    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params)
