@@ -1,9 +1,0 @@
-BASE_PATH = './Script_calcolo_numero_iscritti'
-LOG_PATH = f"{BASE_PATH}/Logs"
-INPUT_PATH_CSV = f"{BASE_PATH}/FilesStudenti_Source_csv"
-INPUT_PATH_XLSX = f"{BASE_PATH}/FilesStudenti_Source_xlsx"
-OUTPUT_PATH_ID_INC = f"{BASE_PATH}/FilesStudenti_Dest"
-FILE_GOF = f"./Data/20230613_Ins_2024_ICM_ETF_OdC_estratto_iscritti.xlsx"
-PATH_FILE_NON_PRESENTI = f"{BASE_PATH}/FileNonPresenti"
-PATH_FILE_PIU_ID_INC = f"{BASE_PATH}/FilePiuIDINC"
-INTERESEZIONE_STUDENTI = f'{BASE_PATH}/intersezioneStudenti_2324.xlsx'

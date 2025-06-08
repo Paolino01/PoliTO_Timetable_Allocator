@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa7f07eb-f4e1-41a0-a650-12340c1636fe" name="Changes" comment="Refining parameters">
-      <change beforePath="$PROJECT_DIR$/.idea/PoliTO_Timetable_Allocator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PoliTO_Timetable_Allocator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel_to_db_converter/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Excel_to_db_converter/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Timetable_Allocator/Utils/Components/Teacher.py" beforeDir="false" afterPath="$PROJECT_DIR$/Timetable_Allocator/Utils/Components/Teacher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Timetable_Allocator/Utils/Hooks/Teachers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Timetable_Allocator/Utils/Hooks/Teachers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Courses_DB.db" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Courses_DB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Timetable_Allocator/Data/DbAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Timetable_Allocator/Data/DbAPI.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,29 +41,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.DbAPI.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;mechatronic-timetable&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/paolocagliero/Desktop/PoliTO/Tesi/PoliTO_Timetable_Allocator&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Database&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.DbAPI.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "single-courses-timetable",
+    "last_opened_file_path": "/Users/paolocagliero/Desktop/PoliTO/Tesi/PoliTO_Timetable_Allocator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Database",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.main (1)">
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PoliTO_Timetable_Allocator" />
@@ -155,6 +153,7 @@
       <workItem from="1743151378302" duration="673000" />
       <workItem from="1743263410491" duration="166000" />
       <workItem from="1743264031030" duration="1637000" />
+      <workItem from="1746948413986" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="Limiting the maximum number of consecutive lecture slots (to be tested)">
       <option name="closed" value="true" />

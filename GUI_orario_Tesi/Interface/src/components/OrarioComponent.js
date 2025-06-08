@@ -24,7 +24,7 @@ function Slot(props) {
     </Popover>
   );
 
-  if (slot.insegnamento.tipoInsegnamento === "Obbligatorio" || slot.insegnamento.tipoInsegnamento === "Obbligatorio_a_scelta") {
+  if (slot.insegnamento.tipoInsegnamento === "Obbligatorio") {
     return (
       <OverlayTrigger placement={giorno !== 'Ven' ? 'right' : 'left'} trigger='click' delay={{ show: 250, hide: 300 }} overlay={popover}>
         <Badge className='bg-danger text-light'>
@@ -33,7 +33,7 @@ function Slot(props) {
       </OverlayTrigger>
     )
   }
-  if (slot.insegnamento.tipoInsegnamento === "Tabella_a_scelta") {
+  if (slot.insegnamento.tipoInsegnamento === "Obbligatorio_a_scelta") {
     return (
       <OverlayTrigger placement={giorno !== 'Ven' ? 'right' : 'left'} trigger='click' delay={{ show: 250, hide: 300 }} overlay={popover}>
         <Badge className='bg-warning text-dark'>
@@ -42,7 +42,7 @@ function Slot(props) {
       </OverlayTrigger>
     )
   }
-  if (slot.insegnamento.tipoInsegnamento === "Credito_libero") {
+  if (slot.insegnamento.tipoInsegnamento === "Credito_libero" || slot.insegnamento.tipoInsegnamento === "Tabella_a_scelta") {
     return (
       <OverlayTrigger placement={giorno !== 'Ven' ? 'right' : 'left'} trigger='click' delay={{ show: 250, hide: 300 }} overlay={popover}>
         <Badge className='bg-success text-light'>
