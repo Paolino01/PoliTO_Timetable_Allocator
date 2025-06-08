@@ -207,13 +207,12 @@ class DbAPI:
                     # Assigning the collaborators of a Teaching to its Slots
                     # This variable is used to know if the Teaching has Collaborators. If not, we insert a temporary Teacher as collaborator
                     has_coll = False
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?,?, ?)"
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EA":
                                 has_coll = True
-                                sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
-                                       "VALUES (?,?, ?)")
                                 cur.execute(
                                     sql,
                                     (
@@ -224,8 +223,6 @@ class DbAPI:
                                 )
 
                     if not has_coll:
-                        sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
-                               "VALUES (?,?, ?)")
                         cur.execute(
                             sql,
                             (
@@ -256,14 +253,13 @@ class DbAPI:
                     # Assigning the collaborators of a Teaching to its Slots
                     # This variable is used to know if the Teaching has Collaborators. If not, we insert a temporary Teacher as collaborator
                     has_coll = False
+                    sql = "INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) VALUES (?,?, ?)"
                     for teacher in teachers:
                         for t in teacher.teachings:
                             # For each Teacher I check that the Teaching ID and Teaching Type matches.
                             if t[0].id_teaching == teaching.id_teaching and t[1] == "EL":
                                 has_coll = True
 
-                                sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
-                                       "VALUES (?,?, ?)")
                                 cur.execute(
                                     sql,
                                     (
@@ -274,8 +270,6 @@ class DbAPI:
                                 )
 
                     if not has_coll:
-                        sql = ("INSERT INTO Docente_in_Slot (Cognome, idSlot, pianoAllocazione) "
-                               "VALUES (?,?, ?)")
                         cur.execute(
                             sql,
                             (

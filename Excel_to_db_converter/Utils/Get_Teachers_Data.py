@@ -34,11 +34,20 @@ lab_slot_preferences_dict = {
 }
 
 '''
+    Given a field, returns its value if it is != nan, 0 otherwise 
+'''
+def check_nan(value):
+    if str(value) != "nan":
+        return int(value)
+    else:
+        return 0
+
+'''
     Get Practice organization preferences from the Excel file
 '''
 def get_practice_preferences(row):
-    practice_hours = int(row["NUM_ORE_ESE"]) if str(row["NUM_ORE_ESE"]) != "nan" else 0
-    n_practice_groups = int(row["NUM_SQU_ESE"]) if str(row["NUM_SQU_ESE"]) != "nan" else 0
+    practice_hours = check_nan(row["NUM_ORE_ESE"])
+    n_practice_groups = check_nan(row["NUM_SQU_ESE"])
     if practice_hours != 0:
         n_min_double_slots_practice = \
             practice_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE"])][0]
@@ -54,20 +63,16 @@ def get_practice_preferences(row):
     Get Lab organization preferences from the Excel file
 '''
 def get_lab_preferences(row):
-    lab_hours = int(row["NUM_ORE_LAB"]) if str(row["NUM_ORE_LAB"]) != "nan" else 0
-    n_lab_groups = int(row["NUM_SQU_LAB"]) if str(row["NUM_SQU_LAB"]) != "nan" else 0
+    lab_hours = check_nan(row["NUM_ORE_LAB"])
+    n_lab_groups = check_nan(row["NUM_SQU_LAB"])
     if lab_hours != 0:
         if str(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan":
-            n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) if str(
-                row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
-            n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) if str(
-                row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"]) != "nan" else 0
+            n_blocks_lab = check_nan(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"])
+            n_weekly_groups_lab = check_nan(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"])
             double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])]
         else:
-            n_blocks_lab = int(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
-                row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
-            n_weekly_groups_lab = int(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) if str(
-                row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"]) != "nan" else 0
+            n_blocks_lab = check_nan(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"])
+            n_weekly_groups_lab = check_nan(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"])
             double_slots_lab = \
                 lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])]
     else:

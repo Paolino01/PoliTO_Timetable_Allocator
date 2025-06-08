@@ -73,7 +73,7 @@ if __name__ == '__main__':
         add_teachings_constraints(model, timetable_matrix, teachings, slots, days, params)
 
         '''Teachers Contraints'''
-        add_teachers_constraints(model, timetable_matrix, teachers, slots, days, params)
+        add_teachers_constraints(model, timetable_matrix, teachers, slots, params)
 
         solution = model.solve(log_output=True)
     
