@@ -9,7 +9,8 @@ import InsegnamentiComponent from './components/InsegnamentiComponent.js';
 import OrarioComponent from './components/OrarioComponent.js';
 import API from './API.js'
 import DocentiComponent from './components/DocentiComponent';
-import SovrapposizioniComponent from './components/SovrapposizioniComponent';
+import SovrapposizioniComponent from './components/SovrapposizioniComponent.js';
+import DifferenzeComponent from './components/DifferenzeComponent.js';
 
 
 const sleep = (milliseconds) => {
@@ -37,6 +38,7 @@ function App() {
   const [listPianiAllocazione, setListPianiAllocazione] = useState([]);
   const [currPianoAllocazione, setCurrPianoAllocazione] = useState(listPianiAllocazione.length > 0 ? listPianiAllocazione[0].pianoAllocazione : EMPTY_VALUE);
   const [listSlot, setListSlot] = useState([]);
+  const [listSlotOtherTimetable, setListSlotOtherTimetable] = useState([]);
   const [fullListSlot, setFullListSlot] = useState([])
   const [listInfoCorr, setListInfoCorr] = useState([]);
   const [listDocenti, setListDocenti] = useState([]);
@@ -175,8 +177,11 @@ function App() {
     const load = async () => {
       setLoading(true);
       let _listSlot = await API.get_pianoAllocazioneOrientamento_withDocenti(currPianoAllocazione, tipoCdl, currCdl, currOrientamento, periodoDidattico);
+      let _listSlotOtherTimetable = await API.get_other_timetable(tipoCdl, currCdl, currOrientamento, periodoDidattico);
       let _fullListSlot = await API.get_slots_pianoAllocazione(currPianoAllocazione)
       setListSlot(_listSlot.map((slot) => slot.expandSlot()).flat());
+      console.log(_listSlotOtherTimetable)
+      setListSlotOtherTimetable(_listSlotOtherTimetable.map((slot) => slot).flat());
       setFullListSlot(_fullListSlot.map((slot) => slot.expandSlot()).flat())
       setLoading(false);
       setDirty(false);
@@ -237,13 +242,21 @@ function App() {
             listInfoCorr={listInfoCorr} fullListSlot={fullListSlot } fullListInsegnamenti={fullListInsegnamenti}/>
         </Route>
 
+        <Route path="/differenze_orario">
+          <DifferenzeComponent loading={loading} listCdl={listCdl} tipoCdl={tipoCdl} setTipoCdl={_setTipoCdl} currCdl={currCdl}
+            setCurrCdl={_setCurrCdl} currOrientamento={currOrientamento} listOrientamenti={listOrientamenti}
+            setCurrOrientamento={_setCurrOrientamento} periodoDidattico={periodoDidattico} setPeriodoDidattico={_setPeriodoDidattico}
+            listSlot={listSlot} listSlotOtherTimetable={listSlotOtherTimetable} listPianiAllocazione={listPianiAllocazione} currPianoAllocazione={currPianoAllocazione}
+            setCurrPianoAllocazione={_setCurrPianoAllocazione} fasceOrarie={fasceOrarie} giorni={giorni} 
+            listInsegnamenti={listInsegnamenti.filter((ins) => ins.periodoDidattico === periodoDidattico)} currInsegnamento={currInsegnamento} setCurrInsegnamento={_setCurrInsegnamento}
+            listInfoCorr={listInfoCorr} fullListSlot={fullListSlot } fullListInsegnamenti={fullListInsegnamenti}/>
+        </Route>
+
         <Route path="/" render={() =>
-          <>
-            <Row>
-              {loading ? <span>🕗 Please wait, loading... 🕗</span> : <></>
-              }
-            </Row>
-          </>
+          <Row>
+            {loading ? <span>🕗 Please wait, loading... 🕗</span> : <></>
+            }
+          </Row>
         } />
       </Switch>
 

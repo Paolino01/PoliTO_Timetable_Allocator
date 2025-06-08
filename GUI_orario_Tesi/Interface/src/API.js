@@ -141,6 +141,32 @@ async function get_pianoAllocazioneOrientamento_withDocenti(pianoAllocazione, ti
   }
 }
 
+async function get_other_timetable(tipoCdl, nomeCdl, orientamento, periodoDidattico) {
+  // GET /api/otherTimetable/:tipoCdl/:nomeCdl/:orientamento/:periodoDidattico
+  const response = await fetch(BASEURL + "/otherTimetable/" + tipoCdl + "/" + nomeCdl + "/" + orientamento + "/" + periodoDidattico);
+  const slotsJson = await response.json();
+  if (response.ok) {
+    let listSlot = [];
+    let prevSlotId = "";
+    
+    for (let slot of slotsJson) {
+      let currSlotId = slot.idSlot;
+
+      if (currSlotId != prevSlotId) {
+        listSlot.push(Slot.from(slot).setInsegnamento(Insegnamento.from(slot).setOrientamento(
+              new Orientamento(orientamento, new CorsoDiLaurea(tipoCdl, nomeCdl)),
+              slot.tipoInsegnamento, periodoDidattico, slot.nStudentiOrient, slot.alfabetica
+            )));
+      }
+      listSlot[listSlot.length - 1].addDocente(slot.Cognome);
+      prevSlotId = currSlotId;
+    }
+    return listSlot;
+  } else {
+    throw slotsJson;
+  }
+}
+
 async function get_corsiDiLaurea() {
   // GET /api/corsiDiLaurea
   const response = await fetch(BASEURL + "/corsiDiLaurea");
@@ -209,6 +235,18 @@ async function get_fasceOrarie() {
   }
 }
 
+async function get_fasceOrarieOtherTimetable() {
+  // GET /api/fasceOrarieOtherTimetable
+  const response = await fetch(BASEURL + "/fasceOrarieOtherTimetable");
+  console.log(response)
+  const fasceJson = await response.json();
+  if (response.ok) {
+    return fasceJson.map((fascia) => String(fascia.fasciaOraria));
+  } else {
+    throw fasceJson;
+  }
+}
+
 async function get_giorni() {
   // GET /api/giorni
   const response = await fetch(BASEURL + "/giorni");
@@ -235,6 +273,6 @@ async function get_infoCorrelazioni() {
 const API = {
   get_Insegnamenti, get_PianoAllocazione, get_pianoAllocazioneID_INC_withDocenti, get_Insegnamenti_withOrientamento,
   get_corsiDiLaurea, get_Orientamenti, get_Orientamenti_Cdl, get_corsiDiLaurea_withTipoCdl, get_pianoAllocazioneOrientamento_withDocenti,
-  get_fasceOrarie, get_giorni, get_pianoAllocazioneDocente, get_docenti, get_infoCorrelazioni, get_slots_pianoAllocazione,
+  get_other_timetable, get_fasceOrarie, get_giorni, get_pianoAllocazioneDocente, get_docenti, get_infoCorrelazioni, get_slots_pianoAllocazione,
 };
 export default API;

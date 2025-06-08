@@ -197,6 +197,31 @@ exports.get_pianoAllocazioneOrientamento_withDocenti = (pianoAllocazione, tipoCd
     })
 }
 
+exports.get_otherTimetable = (tipoCdl, nomeCdl, orientamento, periodoDidattico) => {
+    const days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
+    const time_slots = ["8:30-10:00", "10:00-11:30", "11:30-13:00", "13:00-14:30", "14:30-16:00", "16:00-17:30", "17:30-19:00"]
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT PS.ID_INC, lectureType, day, timeSlot, lectGroup, I.titolo, IiO.alfabetica \
+                    FROM PreviousSolution PS, Insegnamento I, Insegnamento_in_Orientamento IiO \
+                    WHERE I.ID_INC = PS.ID_INC AND IiO.ID_INC = I.ID_INC \
+                    AND IiO.periodoDidattico = ? AND IiO.orientamento = ? AND IiO.nomeCdl = ? AND IiO.tipoCdl = ?";
+        db.all(sql, [periodoDidattico, orientamento, nomeCdl, tipoCdl], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const slots = rows.map((slot) => ({
+                idSlot: slot.ID_INC + "_" + (slot.lectureType == "L" ? "" : (slot.lectureType == "EA" ? "practice_group" : "lab_group")) + (slot.lectureType != "L" ? (slot.lectGroup == "No squadre" ? "1" : slot.lectGroup.substr(slot.lectGroup.length - 1)) : "") + "_slot_" + (7*days.indexOf(slot.day) + time_slots.indexOf(slot.timeSlot)),
+                tipoLez: slot.lectureType, ID_INC: slot.ID_INC, giorno: slot.day,
+                fasciaOraria: slot.timeSlot, numSlotConsecutivi: 1, tipoLocale: "Aula",
+                tipoInsegnamento: "Obbligatorio", titolo: slot.titolo, alfabetica: slot.alfabetica
+            }));
+            console.log(slots);
+            resolve(slots);
+        })
+    })
+}
+
 exports.get_pianoAllocazioneDocente = (pianoAllocazione, docente) => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT S.pianoAllocazione, S.idSlot, S.nStudentiAssegnati, S.tipoLez, S.numSlotConsecutivi, S.ID_INC, S.giorno, \
