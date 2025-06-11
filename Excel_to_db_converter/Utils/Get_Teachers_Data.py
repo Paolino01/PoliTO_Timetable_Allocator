@@ -131,6 +131,44 @@ def get_teachers_preferences(teachings):
 
     print("Teachers preferences inserted in the DB")
 
+def get_practice_lab_not_in_preferences():
+    db_api = DbApi()
+
+    # Get all the Excel files in the "Courses Data" folder
+    courses_files = glob.glob(os.path.join("../Data/Excels/Courses Data", "*.xls"))
+
+    teachings = db_api.get_teachings_without_lab()
+
+    for f in courses_files:
+        # For each file, getting only the courses that are in the DB
+        df = pandas.read_excel(f)
+        filtered_df = df.loc[df["id_inc"].isin([t[0] for t in teachings])]
+
+        for index, row in filtered_df.iterrows():
+            teaching_id = row["id_inc"]
+            h_practice = 0
+            n_practice_groups = 0
+            h_lab = 0
+            n_lab_groups = 0
+            slots_lab = 0
+
+            if str(row["h_ese"]) != "0":
+                if str(row["h_ese"]).split('*')[0].split(' ')[0] == "EA":
+                    h_practice = int(str(row["h_ese"]).split('*')[0].split(' ')[1].split(',')[0])
+                    n_practice_groups = int(str(row["h_ese"]).split('*')[1])
+
+            if str(row["h_lab"]) != "0":
+                if str(row["h_lab"]).split('*')[0].split(' ')[0] == "EL":
+                    h_lab = int(str(row["h_lab"]).split('*')[0].split(' ')[1].split(',')[0])
+                    n_lab_groups = int(str(row["h_lab"]).split('*')[1])
+
+                    slots_fract_lab = (h_lab / 14) / 1.5
+                    slots_lab = math.floor(slots_fract_lab) \
+                        if slots_fract_lab - math.floor(slots_fract_lab) <= 0.35 \
+                        else math.ceil(slots_fract_lab)
+
+            db_api.add_practice_lab_not_in_preferences(teaching_id, h_practice, n_practice_groups, h_lab, n_lab_groups, slots_lab)
+
 '''
     Get Teacher's unavailabilities from the file PreferenzeDocenti.xlsx
 '''

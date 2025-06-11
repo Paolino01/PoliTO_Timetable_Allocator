@@ -214,6 +214,20 @@ class DbApi:
 
         self.db.commit()
 
+    def get_teachings_without_lab(self):
+        cur = self.db.cursor()
+        sql = "SELECT ID_INC FROM Insegnamento WHERE practice_hours = 0 AND lab_hours = 0"
+        cur.execute(sql)
+        teaching_ids = cur.fetchall()
+        return teaching_ids
+
+    def add_practice_lab_not_in_preferences(self, teaching_id, h_practice, n_practice_groups, h_lab, n_lab_groups, slots_lab):
+        cur = self.db.cursor()
+        sql = "UPDATE Insegnamento SET practice_hours = ?, n_practice_groups = ?, lab_hours = ?, n_lab_groups = ?, n_blocks_lab = ? WHERE ID_INC = ?"
+
+        cur.execute(sql, (h_practice, n_practice_groups, h_lab, n_lab_groups, slots_lab, teaching_id))
+        self.db.commit()
+
     '''
         Delete all the Teachers_Unavailability entries    
     '''
