@@ -33,17 +33,8 @@ class Parameters:
             },
             {
                 "courses": [
-                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
                     "DATA SCIENCE AND ENGINEERING",
-                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
                     "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
-                    "INGEGNERIA FISICA",
-                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
-                    "COMMUNICATIONS ENGINEERING",
-                    "QUANTUM ENGINEERING",
-                    "AGRITECH ENGINEERING",
                     "CYBERSECURITY"
                 ],
                 "orientations": [],
@@ -57,10 +48,8 @@ class Parameters:
             },
             {
                 "courses": [
-                    "ICT ENGINEERING FOR SMART SOCIETIES",
                     "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
                     "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA ELETTRONICA",
                     "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
                 ],
                 "orientations": [],
@@ -98,19 +87,6 @@ class Parameters:
                 "no_overlap_groups": False,
                 "teachers_unavailabilities": True
             },
-            {
-                "courses": [
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
-                ],
-                "orientations": [],
-                "course_type": "",
-                "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 30,
-                "min_corr_overlaps": 35,
-                "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": False,
-                "teachers_unavailabilities": False  # Note: in order to be able to generate a timetable for Electronic Engineering, we must not consider the Teachers' unavailabilities
-            }
         ]
 
         # Number of lecture Slots per each day, 5 days per week
@@ -151,7 +127,7 @@ class Parameters:
         self.teacher_preferences_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses"
+        self.timetable_name = "ICM Timetable"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
