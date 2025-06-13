@@ -318,7 +318,7 @@ class DbAPI:
                 "s.fasciaOraria, "
                 "s.tipoLez AS tipo_insegnamento, "
                 "s.squadra, "
-                "cdl.nomeCdl AS CorsoDiLaurea, "
+                "(cdl.nomeCdl || ' - ' || cdl.tipoCdl) AS CorsoDiLaurea, "
                 "o.orientamento AS Orientamento, "
                 "io.periodoDidattico AS Anno, "
                 "i.titolo "

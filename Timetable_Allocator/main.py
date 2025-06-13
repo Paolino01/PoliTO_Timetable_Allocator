@@ -13,10 +13,6 @@ from Utils.Parameters import Parameters
 
 if __name__ == '__main__':
     params = Parameters()
-
-    export_solution_to_excel(params)
-
-    exit(0)
     db_api = DbAPI(params)
 
     # Number of slots per week

@@ -17,7 +17,11 @@ def export_solution_to_excel(params):
     with pd.ExcelWriter("../Data/" + params.timetable_name + '.xlsx') as writer:
         for course, dg_group in df.groupby('CorsoDiLaurea'):
             current_row = 0  # Keeps track of the current row
-            sheet_name = course[:31]  # Max 31 characters per Excel sheet
+
+            # Max 31 characters per Excel sheet
+            sheet_name = course[:26]
+            if len(course) > 26:
+                sheet_name += course[-4:]
 
             for orientation, orientation_group in dg_group.groupby('Orientamento'):
                 for year, year_group in orientation_group.groupby('Anno'):
@@ -85,3 +89,5 @@ def export_solution_to_excel(params):
             ws.column_dimensions[get_column_letter(col_idx)].width = 80
 
     wb.save(file_path)
+
+    print("Excel file saved in Data/" + params.timetable_name + ".xlsx")

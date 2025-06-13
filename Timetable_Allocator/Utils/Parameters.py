@@ -151,7 +151,7 @@ class Parameters:
         self.teacher_preferences_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "ICM Timetable"
+        self.timetable_name = "All courses"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
