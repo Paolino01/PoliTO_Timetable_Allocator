@@ -1,5 +1,6 @@
 from docplex.cp.model import CpoModel
 
+from Components.Export_to_Excel import export_solution_to_excel
 from Components.Generated_Solution import add_generated_courses
 from Components.Previous_Solution import get_previous_solution, ask_previous_solution
 from Components.Slots import get_slots_per_week
@@ -12,6 +13,10 @@ from Utils.Parameters import Parameters
 
 if __name__ == '__main__':
     params = Parameters()
+
+    export_solution_to_excel(params)
+
+    exit(0)
     db_api = DbAPI(params)
 
     # Number of slots per week
@@ -104,6 +109,10 @@ if __name__ == '__main__':
         db_api.rename_temp_solution(params)
 
         print("\nTimetable generated successfully.")
+
+        print("Do you want to export the solution to an Excel file (y/n)?")
+        if input().lower() == "y":
+            export_solution_to_excel(params)
     else:
         # No solution found, I ask the user if they want to keep or delete the partial results
         print("No solution found, would you like to delete the partial results of this execution from the database (y/n)?")

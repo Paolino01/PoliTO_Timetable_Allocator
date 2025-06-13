@@ -3,7 +3,7 @@ import sqlite3
 
 from Utils.Components.Teacher import Teacher
 from Utils.Components.Teaching import Teaching
-from Utils.Parameters import Parameters
+import pandas as pd
 
 
 class DbAPI:
@@ -310,3 +310,31 @@ class DbAPI:
         cur.execute(sql, (params.timetable_name, params.timetable_name + "_temp"))
 
         self.db.commit()
+
+    def get_joined_solution(self, params):
+        sql = ("SELECT "
+                "s.ID_INC AS ID_Insegnamento, "
+                "s.giorno, "
+                "s.fasciaOraria, "
+                "s.tipoLez AS tipo_insegnamento, "
+                "s.squadra, "
+                "cdl.nomeCdl AS CorsoDiLaurea, "
+                "o.orientamento AS Orientamento, "
+                "io.periodoDidattico AS Anno, "
+                "i.titolo "
+            "FROM Slot s "
+            "JOIN Insegnamento i "
+                "ON s.ID_INC = i.ID_INC "
+            "JOIN Insegnamento_in_Orientamento io "
+                "ON s.ID_INC = io.ID_INC "
+            "JOIN Orientamento o "
+                "ON io.orientamento = o.orientamento "
+                "AND io.nomeCdl = o.nomeCdl "
+                "AND io.tipoCdl = o.tipoCdl "
+            "JOIN Corso_di_laurea cdl "
+                "ON o.nomeCdl = cdl.nomeCdl "
+                "AND o.tipoCdl = cdl.tipoCdl "
+            "WHERE s.pianoAllocazione = ? "
+            )
+
+        return pd.read_sql(sql, self.db, params = (params.timetable_name,))

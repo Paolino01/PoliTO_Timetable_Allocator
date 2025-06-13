@@ -48,9 +48,9 @@ class Parameters:
                 ],
                 "orientations": [],
                 "course_type": "",
-                "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 30,
-                "min_corr_overlaps": 35,
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True,
                 "teachers_unavailabilities": True
@@ -65,9 +65,9 @@ class Parameters:
                 ],
                 "orientations": [],
                 "course_type": "",
-                "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 30,
-                "min_corr_overlaps": 35,
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": True,
                 "teachers_unavailabilities": True
@@ -78,8 +78,8 @@ class Parameters:
                 ],
                 "orientations": [],
                 "course_type": "1",
-                "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 30,
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": True,
@@ -151,7 +151,7 @@ class Parameters:
         self.teacher_preferences_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses with practices and labs"
+        self.timetable_name = "ICM Timetable"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
