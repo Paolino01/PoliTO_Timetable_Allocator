@@ -44,7 +44,7 @@ class Parameters:
                     "COMMUNICATIONS ENGINEERING",
                     "QUANTUM ENGINEERING",
                     "AGRITECH ENGINEERING",
-                    "CYBERSECURITY"
+                    "CYBERSECURITY",
                 ],
                 "orientations": [],
                 "course_type": "",
@@ -151,7 +151,7 @@ class Parameters:
         self.teacher_preferences_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses"
+        self.timetable_name = "All courses with practices and labs"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
