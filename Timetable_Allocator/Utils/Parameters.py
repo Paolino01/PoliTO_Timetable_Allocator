@@ -146,7 +146,6 @@ class Parameters:
         # Penalties for soft contraints
         self.teaching_overlaps_penalty = 55
         self.lecture_dispersion_penalty = 25
-        self.correlation_in_day_penalty = 10
         # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
         self.teacher_preferences_penalty = -10
 
