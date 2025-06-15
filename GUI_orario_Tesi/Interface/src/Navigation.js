@@ -18,6 +18,7 @@ const Navigation = (props) => {
         <Nav.Link as={NavLink} to="/insegnamenti" onClick={() => setMoving((old) => !old)}>Insegnamenti</Nav.Link>
         <Nav.Link as={NavLink} to="/docenti" onClick={() => setMoving((old) => !old)}>Docenti</Nav.Link>
         <Nav.Link as={NavLink} to="/sovrapposizioni" onClick={() => setMoving((old) => !old)}>Sovrapposizioni</Nav.Link>
+        <Nav.Link as={NavLink} to="/differenze_orario" onClick={() => setMoving((old) => !old)}>Differenze orario</Nav.Link>
       </Nav>
 
     </Navbar>
