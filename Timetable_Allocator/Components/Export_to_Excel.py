@@ -32,7 +32,18 @@ def export_solution_to_excel(params):
                     for _, row in year_group.iterrows():
                         day = row['giorno']
                         slot = row['fasciaOraria']
-                        teaching = f"{row['titolo']}" + (" (Lezione" if row['tipo_insegnamento'] == 'L' else (" (Esercitazione" if row['tipo_insegnamento'] == 'EA' else " (Laboratorio"))
+
+                        lect_type = ""
+                        if row['tipo_insegnamento'] == 'L':
+                            lect_type = '(Lezione'
+                        else:
+                            if row['tipo_insegnamento'] == 'EA':
+                                lect_type = '(Esercitazione'
+                            else:
+                                if row['tipo_insegnamento'] == 'EL':
+                                    lect_type = '(Laboratorio'
+
+                        teaching = f"{row['titolo']}" + lect_type
                         if pd.notna(row['squadra']) and row['squadra'] != 'No squadra':
                             teaching += f" - {row['squadra']}"
                         teaching += ")"
