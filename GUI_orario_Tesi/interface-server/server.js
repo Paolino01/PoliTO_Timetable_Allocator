@@ -126,13 +126,21 @@ app.get('/api/pianoAllocazione/:pianoAllocazione', (req, res) => {
     .catch(() => res.status(500).end());
 })
 
-// GET /api/pianoAllocazione/:pianoAllocazione/:tipoCdl/:nomeCdl/:orientamento
+// GET /api/pianoAllocazione/:pianoAllocazione/:tipoCdl/:nomeCdl/:orientamento/:periodoDidattico
 app.get('/api/pianoAllocazione/:pianoAllocazione/:tipoCdl/:nomeCdl/:orientamento/:periodoDidattico', (req, res) => {
   insegnamentiDao.get_pianoAllocazioneOrientamento_withDocenti(req.params.pianoAllocazione, req.params.tipoCdl, req.params.nomeCdl,
     req.params.orientamento, req.params.periodoDidattico)
     .then(slots => res.json(slots))
     .catch(() => res.status(500).end());
 })
+
+// GET /api/otherTimetable/:tipoCdl/:nomeCdl/:orientamento/:periodoDidattico
+app.get('/api/otherTimetable/:tipoCdl/:nomeCdl/:orientamento/:periodoDidattico', (req, res) => {
+  insegnamentiDao.get_otherTimetable(req.params.tipoCdl, req.params.nomeCdl,
+    req.params.orientamento, req.params.periodoDidattico)
+    .then(otherTimetable => res.json(otherTimetable))
+    .catch(() => res.status(500).end());
+});
 
 // GET /api/pianoAllocazione/:pianoAllocazione/:docente
 app.get('/api/pianoAllocazione/:pianoAllocazione/:docente', (req, res) => {
