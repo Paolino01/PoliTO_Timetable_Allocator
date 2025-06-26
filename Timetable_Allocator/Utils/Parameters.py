@@ -112,6 +112,8 @@ class Parameters:
         self.lecture_dispersion_penalty = 25
         # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
         self.teacher_preferences_penalty = -10
+        # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
+        self.consecutive_groups_penalty = -10
 
         # Name of the timetable saved in the DB
         self.timetable_name = "ICM courses with preferences and lab compact"

@@ -330,7 +330,7 @@ def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, sl
 '''
     Add an objective function that minimizes the soft constraints
 '''
-def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params):
+def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, consecutive_groups_slots, params):
 
     teaching_ids = get_teaching_ids(teachings)
 
@@ -356,6 +356,13 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             teacher_preferences_respected[t1.id_teaching, d]
             for t1 in teachings
             for d in days
+        )
+        +
+        params.consecutive_groups_penalty *
+        model.sum(
+            consecutive_groups_slots[t.id_teaching, s]
+            for t in teachings
+            for s in slots
         )
     )
 
@@ -391,4 +398,4 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
     add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots, params)
 
     # Add an objective function that minimizes the soft constraints
-    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params)
+    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, consecutive_groups_slots, params)
