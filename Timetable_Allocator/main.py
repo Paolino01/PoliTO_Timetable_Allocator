@@ -77,7 +77,7 @@ if __name__ == '__main__':
         add_teachers_constraints(model, timetable_matrix, teachers, slots, params)
 
         # Limiting the number of workers and search point in order to not have problems with memory
-        solution = model.solve(log_output=True, Workers=4, MultiPointNumberOfSearchPoints = 15)
+        solution = model.solve(log_output=True, Workers=4, MultiPointNumberOfSearchPoints = 15, TimeLimit=21600)
     
         # Printing the results
         if solution:

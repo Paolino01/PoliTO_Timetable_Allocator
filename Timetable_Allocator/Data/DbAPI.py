@@ -335,6 +335,15 @@ class DbAPI:
                 "ON o.nomeCdl = cdl.nomeCdl "
                 "AND o.tipoCdl = cdl.tipoCdl "
             "WHERE s.pianoAllocazione = ? "
+               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?, ?)"
             )
 
-        return pd.read_sql(sql, self.db, params = (params.timetable_name,))
+        return pd.read_sql(sql, self.db, params = (params.timetable_name,
+                                                   "INGEGNERIA INFORMATICA",
+                                                   "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
+                                                   "DATA SCIENCE AND ENGINEERING",
+                                                   "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                                                   "CYBERSECURITY",
+                                                   "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                                                   "CYBERSECURITY ENGINEERING",
+                                                   "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"))
