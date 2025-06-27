@@ -335,7 +335,7 @@ class DbAPI:
                 "ON o.nomeCdl = cdl.nomeCdl "
                 "AND o.tipoCdl = cdl.tipoCdl "
             "WHERE s.pianoAllocazione = ? "
-               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?)"
             )
 
         return pd.read_sql(sql, self.db, params = (params.timetable_name,

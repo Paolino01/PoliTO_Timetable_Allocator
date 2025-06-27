@@ -38,6 +38,21 @@ def get_teaching_ids(teachings):
 
     return teaching_ids
 
+def get_practice_lab_ids(teachings):
+    practice_lab_ids = []
+    for t in teachings:
+        '''Practice Slots'''
+        if t.practice_slots != 0:
+            for i in range(1, t.n_practice_groups + 1):
+                practice_lab_ids.append(t.id_teaching + f"_practice_group{i}")
+
+        '''Lab Slots'''
+        if t.n_blocks_lab != 0:
+            for i in range(1, t.n_lab_groups + 1):
+                practice_lab_ids.append(t.id_teaching + f"_lab_group{i}")
+
+    return practice_lab_ids
+
 '''
     Get the IDs of the Teachings correlated to another Teaching (considering Practices and Labs as well)
     Returns a dictionary in the format id_teaching: correlation
@@ -252,7 +267,7 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
 def add_consecutive_groups_slots_constraint(model, timetable_matrix, teachings, days, consecutive_groups_slots, params):
     for teaching in teachings:
         for d in days:
-            for s in range(d * params.slot_per_day, (d + 1) * params.slot_per_day):
+            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - 1):
                 add_consecutive_groups_slots_constraint_practice(model, timetable_matrix, teaching, s, consecutive_groups_slots)
 
                 add_consecutive_groups_slots_constraint_lab(model, timetable_matrix, teaching, s, consecutive_groups_slots)
@@ -333,6 +348,7 @@ def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, sl
 def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, consecutive_groups_slots, params):
 
     teaching_ids = get_teaching_ids(teachings)
+    practice_lab_ids = get_practice_lab_ids(teachings)
 
     model.minimize(
         params.teaching_overlaps_penalty *
@@ -357,14 +373,18 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for t1 in teachings
             for d in days
         )
+    )
+
+    '''
         +
         params.consecutive_groups_penalty *
         model.sum(
-            consecutive_groups_slots[t.id_teaching, s]
-            for t in teachings
-            for s in slots
+            consecutive_groups_slots[t_id, s]
+            for t_id in practice_lab_ids
+            for d in days
+            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - 1)
         )
-    )
+    '''
 
 '''
     Add the constraints for the Teachings to the model.

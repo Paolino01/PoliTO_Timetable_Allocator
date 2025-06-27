@@ -106,7 +106,7 @@ def add_consecutive_groups_slots_constraint_lab(model, timetable_matrix, teachin
         for i in range(1, teaching.n_lab_groups + 1):
             consecutive_groups_slots[teaching.id_teaching + f"_lab_group{i}", s] = model.binary_var(name=f"consecutive_groups_{teaching.id_teaching + '_lab_group' + str(i)}_{s}")
             for j in range(1, i):
-                model.add(consecutive_groups_slots[teaching.id_teaching + f"_lab_group", s] == model.max(
+                model.add(consecutive_groups_slots[teaching.id_teaching + f"_lab_group{i}", s] == model.max(
                     timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s] * timetable_matrix[teaching.id_teaching + f"_lab_group{j}", s + 1],
                     timetable_matrix[teaching.id_teaching + f"_lab_group{j}", s] *timetable_matrix[teaching.id_teaching + f"_lab_group{i}", s + 1]
                     )
