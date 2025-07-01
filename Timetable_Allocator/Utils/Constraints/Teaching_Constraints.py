@@ -373,9 +373,6 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for t1 in teachings
             for d in days
         )
-    )
-
-    '''
         +
         params.consecutive_groups_penalty *
         model.sum(
@@ -384,7 +381,7 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for d in days
             for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - 1)
         )
-    '''
+    )
 
 '''
     Add the constraints for the Teachings to the model.

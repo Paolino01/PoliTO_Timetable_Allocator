@@ -159,7 +159,7 @@ def add_consecutive_groups_slots_constraint_practice(model, timetable_matrix, te
             for j in range(1, i):
                 model.add(consecutive_groups_slots[teaching.id_teaching + f"_practice_group{i}", s] == model.max(
                     timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] * timetable_matrix[teaching.id_teaching + f"_practice_group{j}", s + 1],
-                    timetable_matrix[teaching.id_teaching + f"_practice_group{j}", s] *timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{j}", s] * timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
                     )
                 )
 

@@ -8,19 +8,7 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
-                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
-                ],
-                "orientations": [],
-                "course_type": "Z",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20,
-                "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
                     "DATA SCIENCE AND ENGINEERING",
                     "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
                     "CYBERSECURITY",
@@ -33,7 +21,7 @@ class Parameters:
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True,
                 "teachers_unavailabilities": True
-            },
+            },Created timetable with Teachers preferences and lab groupractice/lab groups compacted
             {
                 "courses": [
                     "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
@@ -116,7 +104,7 @@ class Parameters:
         self.consecutive_groups_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "ICM courses with preferences and lab compact"
+        self.timetable_name = "ICM courses with lab compact 2"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
