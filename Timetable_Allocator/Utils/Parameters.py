@@ -21,7 +21,7 @@ class Parameters:
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True,
                 "teachers_unavailabilities": True
-            },Created timetable with Teachers preferences and lab groupractice/lab groups compacted
+            },
             {
                 "courses": [
                     "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",

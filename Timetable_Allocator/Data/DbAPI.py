@@ -44,7 +44,6 @@ class DbAPI:
                     "lab_hours, "
                     "n_lab_groups, "
                     "n_blocks_lab, "
-                    "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "

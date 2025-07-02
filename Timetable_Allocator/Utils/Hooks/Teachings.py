@@ -57,12 +57,10 @@ class Teachings:
             if slots_lab > 0:
                 n_lab_groups = int(row[13])
                 n_blocks_lab = int(row[14])
-                n_weekly_groups_lab = int(row[15])
                 double_slots_lab = int(row[16])
             else:
                 n_lab_groups = 0
                 n_blocks_lab = 0
-                n_weekly_groups_lab = 0
                 double_slots_lab = 0
 
             if slots_lecture > 0:
@@ -86,7 +84,6 @@ class Teachings:
                         lab_slots=slots_lab,
                         n_lab_groups=n_lab_groups,
                         n_blocks_lab=n_blocks_lab,
-                        n_weekly_groups_lab=n_weekly_groups_lab,
                         double_slots_lab=double_slots_lab
                     ))
 

@@ -21,7 +21,6 @@ class Teaching:
         lab_slots: int,
         n_lab_groups: int,
         n_blocks_lab: int,
-        n_weekly_groups_lab: int,
         double_slots_lab: int
     ):
         self.id_teaching: str = id_teaching
@@ -42,7 +41,6 @@ class Teaching:
         self.lab_slots: int = lab_slots
         self.n_lab_groups: int = n_lab_groups
         self.n_blocks_lab: int = n_blocks_lab
-        self.n_weekly_groups_lab: int = n_weekly_groups_lab
         self.double_slots_lab: int = double_slots_lab
 
         # Correlations between teachings. I have a dictionary where the key is a teaching and the value is the weight of the correlation for that teaching
