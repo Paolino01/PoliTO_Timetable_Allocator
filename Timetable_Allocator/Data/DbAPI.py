@@ -44,7 +44,6 @@ class DbAPI:
                     "lab_hours, "
                     "n_lab_groups, "
                     "n_blocks_lab, "
-                    "n_weekly_groups_lab, "
                     "double_slots_lab "
                  "FROM Insegnamento, Insegnamento_in_Orientamento "
                  "WHERE Insegnamento.ID_INC = Insegnamento_in_Orientamento.ID_INC "
@@ -335,6 +334,18 @@ class DbAPI:
                 "ON o.nomeCdl = cdl.nomeCdl "
                 "AND o.tipoCdl = cdl.tipoCdl "
             "WHERE s.pianoAllocazione = ? "
+               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             )
 
-        return pd.read_sql(sql, self.db, params = (params.timetable_name,))
+        return pd.read_sql(sql, self.db, params = (params.timetable_name,
+                                                   "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                                                   "INGEGNERIA FISICA",
+                                                   "AGRITECH ENGINEERING",
+                                                   "COMMUNICATIONS ENGINEERING",
+                                                   "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                                                   "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                                                   "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
+                                                   "QUANTUM ENGINEERING",
+                                                   "ICT ENGINEERING FOR SMART SOCIETIES",
+                                                   "INGEGNERIA ELETTRONICA",
+                                                   "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"))

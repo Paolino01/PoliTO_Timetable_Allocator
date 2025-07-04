@@ -152,7 +152,18 @@ def add_practice_overlaps_constraint(model, timetable_matrix, t1, t2, s):
             if t2.n_blocks_lab != 0 and i <= t2.n_lab_groups and t1.id_teaching < t2.id_teaching:
                 model.add(timetable_matrix[t1.id_teaching + f"_practice_group{i}", s] + timetable_matrix[t2.id_teaching + f"_lab_group{i}", s] <= 1)
 
-'''
+def add_consecutive_groups_slots_constraint_practice(model, timetable_matrix, teaching, s, consecutive_groups_slots):
+    if teaching.practice_slots != 0:
+        for i in range(1, teaching.n_practice_groups + 1):
+            consecutive_groups_slots[teaching.id_teaching + f"_practice_group{i}", s] = model.binary_var(name=f"consecutive_groups_{teaching.id_teaching + '_practice_group' + str(i)}_{s}")
+            for j in range(1, i):
+                model.add(consecutive_groups_slots[teaching.id_teaching + f"_practice_group{i}", s] == model.max(
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s] * timetable_matrix[teaching.id_teaching + f"_practice_group{j}", s + 1],
+                    timetable_matrix[teaching.id_teaching + f"_practice_group{j}", s] * timetable_matrix[teaching.id_teaching + f"_practice_group{i}", s + 1]
+                    )
+                )
+
+    '''
     Constraint: limiting the number of correlated lectures in a day
 '''
 def add_correlations_constraint_practice(model, timetable_matrix, slots, t1, s, teaching_ids, params):

@@ -59,8 +59,8 @@ if __name__ == '__main__':
         get_previous_solution(model, timetable_matrix, teachings, slots, params)
     
         # Add courses of an already generated timetable
-        if i != 0:
-            add_generated_courses(model, timetable_matrix, slots, params)
+        #if i != 0:
+        add_generated_courses(model, timetable_matrix, slots, params)
 
         # Set parameters according to the the current course generation schema
         params.max_corr_in_day = params.course_order[i]["max_corr_in_day"]
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         add_teachers_constraints(model, timetable_matrix, teachers, slots, params)
 
         # Limiting the number of workers and search point in order to not have problems with memory
-        solution = model.solve(log_output=True, Workers=4, MultiPointNumberOfSearchPoints = 15)
+        solution = model.solve(log_output=True, Workers=4, MultiPointNumberOfSearchPoints = 15, TimeLimit=21600)
     
         # Printing the results
         if solution:

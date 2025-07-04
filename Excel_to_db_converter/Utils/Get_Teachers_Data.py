@@ -68,19 +68,16 @@ def get_lab_preferences(row):
     if lab_hours != 0:
         if str(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"]) != "nan":
             n_blocks_lab = check_nan(row["NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO"])
-            n_weekly_groups_lab = check_nan(row["NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO"])
             double_slots_lab = lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO"])]
         else:
             n_blocks_lab = check_nan(row["NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE"])
-            n_weekly_groups_lab = check_nan(row["NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE"])
             double_slots_lab = \
                 lab_slot_preferences_dict[str(row["ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE"])]
     else:
         n_blocks_lab = 0
-        n_weekly_groups_lab = 0
         double_slots_lab = 0
 
-    return lab_hours, n_lab_groups, n_blocks_lab, n_weekly_groups_lab, double_slots_lab
+    return lab_hours, n_lab_groups, n_blocks_lab, double_slots_lab
 
 '''
     Get Lecture organization preferences from the Excel file
@@ -110,7 +107,7 @@ def get_teachers_preferences(teachings):
             practice_hours, n_practice_groups, n_min_double_slots_practice, n_min_single_slots_practice = get_practice_preferences(row)
 
             # Labs
-            lab_hours, n_lab_groups, n_blocks_lab, n_weekly_groups_lab, double_slots_lab = get_lab_preferences(row)
+            lab_hours, n_lab_groups, n_blocks_lab, double_slots_lab = get_lab_preferences(row)
 
             # Insert the data retrieved from the Excel files in the DB
             db_api.insert_teaching_preference(
@@ -125,7 +122,6 @@ def get_teachers_preferences(teachings):
                 lab_hours,
                 n_lab_groups,
                 n_blocks_lab,
-                n_weekly_groups_lab,
                 double_slots_lab
             )
 

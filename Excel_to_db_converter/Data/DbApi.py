@@ -178,7 +178,6 @@ class DbApi:
             lab_hours,
             n_lab_groups,
             n_blocks_lab,
-            n_weekly_groups_lab,
             double_slots_lab,
     ):
         cur = self.db.cursor()
@@ -192,7 +191,6 @@ class DbApi:
                "lab_hours = ?,"
                "n_lab_groups = ?,"
                "n_blocks_lab = ?,"
-               "n_weekly_groups_lab = ?,"
                "double_slots_lab = ?"
                "WHERE lower(titolo) = ? AND titolare = ?")
 
@@ -206,7 +204,6 @@ class DbApi:
             lab_hours,
             n_lab_groups,
             n_blocks_lab,
-            n_weekly_groups_lab,
             double_slots_lab,
             title.lower(),
             main_teacher_id,

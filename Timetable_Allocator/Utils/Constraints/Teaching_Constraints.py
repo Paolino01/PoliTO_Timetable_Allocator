@@ -8,12 +8,14 @@ from Utils.Constraints.Lab_Constraints import add_double_slots_constraint_lab, a
     define_double_slots_in_day_lab, count_double_slots_in_day_lab, add_lab_overlaps_constraint, \
     add_correlations_constraint_lab, define_lecture_dispersion_variables_lab, \
     assign_first_last_slot_of_day_lab, calculate_lecture_dispersion_lab, add_first_last_slot_correlation_limit_lab, \
-    add_lab_group_constraint
+    add_lab_group_constraint, add_consecutive_groups_slots_constraint_lab
 from Utils.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
     add_min_double_slots_contraint_practice, define_double_slots_in_day_practice, count_double_slots_in_day_practice, \
-    count_days_with_double_slots_practice, add_practice_overlaps_constraint, add_correlations_constraint_practice, define_lecture_dispersion_variables_practice, \
+    count_days_with_double_slots_practice, add_practice_overlaps_constraint, add_correlations_constraint_practice, \
+    define_lecture_dispersion_variables_practice, \
     assign_first_last_slot_of_day_practice, calculate_lecture_dispersion_practice, \
-    add_first_last_slot_correlation_limit_practice, add_max_consecutive_slots_constraint_practice, add_practice_group_constraint
+    add_first_last_slot_correlation_limit_practice, add_max_consecutive_slots_constraint_practice, \
+    add_practice_group_constraint, add_consecutive_groups_slots_constraint_practice
 
 '''
     Get the IDs of the Teachings, considering Practices and Labs as well
@@ -35,6 +37,21 @@ def get_teaching_ids(teachings):
                 teaching_ids.append(t.id_teaching + f"_lab_group{i}")
 
     return teaching_ids
+
+def get_practice_lab_ids(teachings):
+    practice_lab_ids = []
+    for t in teachings:
+        '''Practice Slots'''
+        if t.practice_slots != 0:
+            for i in range(1, t.n_practice_groups + 1):
+                practice_lab_ids.append(t.id_teaching + f"_practice_group{i}")
+
+        '''Lab Slots'''
+        if t.n_blocks_lab != 0:
+            for i in range(1, t.n_lab_groups + 1):
+                practice_lab_ids.append(t.id_teaching + f"_lab_group{i}")
+
+    return practice_lab_ids
 
 '''
     Get the IDs of the Teachings correlated to another Teaching (considering Practices and Labs as well)
@@ -79,14 +96,12 @@ def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teac
     model.add(n_slots_in_day_teaching[teaching.id_teaching, d] <= params.max_consecutive_slots_teaching)
 
     # Uncomment the following part to add the Teacher's preferences about lectures to the objective function
-    '''
     if teaching.lect_slots % 2 == 0 and teaching.n_min_double_slots_lecture == 1:
         model.add(
             teacher_preferences_respected[teaching.id_teaching, d] == (
                 (n_slots_in_day_teaching[teaching.id_teaching, d] == 0) |
                 (n_slots_in_day_teaching[teaching.id_teaching, d] == params.max_consecutive_slots_teaching))
         )
-    '''
 
     '''Practice Slots'''
     add_max_consecutive_slots_constraint_practice(model, teaching, d, n_slots_in_day_teaching, params)
@@ -121,11 +136,9 @@ def add_double_slots_constraint(model, timetable_matrix, slots, teaching, d, n_s
 '''
 def add_min_double_slots_contraint(model, days, teaching, double_slots_in_day, teacher_preferences_respected):
     # Uncomment the following part to add the Teacher's preferences about lectures to the objective function
-    '''
     if teaching.n_min_double_slots_lecture >= 1 and teaching.lect_slots >= teaching.n_min_double_slots_lecture + 1:
         for d in days:
             model.add(teacher_preferences_respected[teaching.id_teaching, d] >= double_slots_in_day[teaching.id_teaching, d])
-    '''
 
     '''Practice Slots'''
     # Same as above but for practice
@@ -249,6 +262,17 @@ def add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slo
             add_lab_group_constraint(model, timetable_matrix, t1, s, params)
 
 '''
+    Constraint: 
+'''
+def add_consecutive_groups_slots_constraint(model, timetable_matrix, teachings, days, consecutive_groups_slots, params):
+    for teaching in teachings:
+        for d in days:
+            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - 1):
+                add_consecutive_groups_slots_constraint_practice(model, timetable_matrix, teaching, s, consecutive_groups_slots)
+
+                add_consecutive_groups_slots_constraint_lab(model, timetable_matrix, teaching, s, consecutive_groups_slots)
+
+'''
     Constraint: the difference between the first and last lecture slot of the day should be minimized
 '''
 def add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days, params):
@@ -321,9 +345,10 @@ def add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, sl
 '''
     Add an objective function that minimizes the soft constraints
 '''
-def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params):
+def add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, consecutive_groups_slots, params):
 
     teaching_ids = get_teaching_ids(teachings)
+    practice_lab_ids = get_practice_lab_ids(teachings)
 
     model.minimize(
         params.teaching_overlaps_penalty *
@@ -348,6 +373,14 @@ def add_soft_constraints_objective_function(model, teachings, slots, days, teach
             for t1 in teachings
             for d in days
         )
+        +
+        params.consecutive_groups_penalty *
+        model.sum(
+            consecutive_groups_slots[t_id, s]
+            for t_id in practice_lab_ids
+            for d in days
+            for s in range(d * params.slot_per_day, ((d + 1) * params.slot_per_day) - 1)
+        )
     )
 
 '''
@@ -370,6 +403,10 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
     teaching_overlaps = {}
     add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, params)
 
+    # Constraint: minimizing the difference between practice/lab Slots of different groups for the same Teaching
+    consecutive_groups_slots={}
+    add_consecutive_groups_slots_constraint(model, timetable_matrix, teachings, days, consecutive_groups_slots, params)
+
     # Constraint: the difference between the first and last lecture slot of the day should be minimized
     lectures_dispersion_of_day = {}
     lectures_dispersion_of_day = add_first_last_lecture_of_day_limit(model, timetable_matrix, teachings, slots, days, params)
@@ -378,4 +415,4 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
     add_first_last_slot_correlation_limit(model, timetable_matrix, teachings, slots, params)
 
     # Add an objective function that minimizes the soft constraints
-    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, params)
+    add_soft_constraints_objective_function(model, teachings, slots, days, teaching_overlaps, lectures_dispersion_of_day, teacher_preferences_respected, consecutive_groups_slots, params)

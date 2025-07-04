@@ -8,108 +8,38 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
-                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
-                ],
-                "orientations": [
-                    "Artificial Intelligence and Data Analytics",
-                    "Automation and Intelligent Cyber-Physical Systems",
-                    "Bio and Health Informatics",
-                    "Computing and Network Infrastructures",
-                    "Embedded & Smart System Design",
-                    "Embedded systems",
-                    "EMECS - Path 1 - Erasmus Mundus Joint Master",
-                    "EMECS - Path 2 - Erasmus Mundus Joint Master",
-                    "Orientamento \"Eurecom\"",
-                    "Software",
-                    "Grafica e Multimedia"
-                ],
-                "course_type": "Z",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20,
-                "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
-                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
-                    "DATA SCIENCE AND ENGINEERING",
                     "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI)",
-                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
                     "INGEGNERIA FISICA",
-                    "PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI)",
-                    "COMMUNICATIONS ENGINEERING",
-                    "QUANTUM ENGINEERING",
                     "AGRITECH ENGINEERING",
-                    "CYBERSECURITY",
-                ],
-                "orientations": [],
-                "course_type": "",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20,
-                "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
+                    "COMMUNICATIONS ENGINEERING",
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
+                    "QUANTUM ENGINEERING",
                     "ICT ENGINEERING FOR SMART SOCIETIES",
-                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
-                    "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA ELETTRONICA",
-                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"
-                ],
-                "orientations": [],
-                "course_type": "",
-                "max_corr_in_day": 700,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20,
-                "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": True,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
-                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
-                ],
-                "orientations": [],
-                "course_type": "1",
-                "max_corr_in_day": 800,
-                "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 35,
-                "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": True,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
-                    "INGEGNERIA INFORMATICA"
-                ],
-                "orientations": [],
-                "course_type": "1",
-                "max_corr_in_day": 900,
-                "max_corr_first_last_slot": 30,
-                "min_corr_overlaps": 35,
-                "no_overlap_mandatory_practice_lab": False,
-                "no_overlap_groups": False,
-                "teachers_unavailabilities": True
-            },
-            {
-                "courses": [
                     "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
                 ],
                 "orientations": [],
                 "course_type": "",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20,
+                "no_overlap_mandatory_practice_lab": True,
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "INGEGNERIA ELETTRONICA",
+                ],
+                "orientations": [],
+                "course_type": "",
                 "max_corr_in_day": 900,
                 "max_corr_first_last_slot": 30,
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": False,
-                "teachers_unavailabilities": False  # Note: in order to be able to generate a timetable for Electronic Engineering, we must not consider the Teachers' unavailabilities
+                "teachers_unavailabilities": False
             }
         ]
 
@@ -118,7 +48,7 @@ class Parameters:
         # Number of weeks in a semester
         self.n_weeks_in_semester = 14
         # Number of hours that are in a slot
-        self.hours_in_slot = 1.5
+        self.hours_in_slot = 1.5CreGenerated timetable with ETF courses
 
         # Boolean variable that tells if we start from an existing solution or not
         self.start_from_previous_solution = False
@@ -148,9 +78,11 @@ class Parameters:
         self.lecture_dispersion_penalty = 25
         # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
         self.teacher_preferences_penalty = -10
+        # This penalty should be negative since we are trying to maximize this parameter (and not minimize it)
+        self.consecutive_groups_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "All courses with practices and labs"
+        self.timetable_name = "ETF courses timetable"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
