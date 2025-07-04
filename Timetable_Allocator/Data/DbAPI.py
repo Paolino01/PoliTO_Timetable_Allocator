@@ -334,15 +334,18 @@ class DbAPI:
                 "ON o.nomeCdl = cdl.nomeCdl "
                 "AND o.tipoCdl = cdl.tipoCdl "
             "WHERE s.pianoAllocazione = ? "
-               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?)"
+               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             )
 
         return pd.read_sql(sql, self.db, params = (params.timetable_name,
-                                                   "INGEGNERIA INFORMATICA",
-                                                   "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
-                                                   "DATA SCIENCE AND ENGINEERING",
-                                                   "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
-                                                   "CYBERSECURITY",
-                                                   "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
-                                                   "CYBERSECURITY ENGINEERING",
-                                                   "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)"))
+                                                   "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                                                   "INGEGNERIA FISICA",
+                                                   "AGRITECH ENGINEERING",
+                                                   "COMMUNICATIONS ENGINEERING",
+                                                   "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                                                   "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                                                   "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
+                                                   "QUANTUM ENGINEERING",
+                                                   "ICT ENGINEERING FOR SMART SOCIETIES",
+                                                   "INGEGNERIA ELETTRONICA",
+                                                   "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"))

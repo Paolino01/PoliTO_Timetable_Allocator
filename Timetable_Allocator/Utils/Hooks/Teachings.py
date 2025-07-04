@@ -57,7 +57,7 @@ class Teachings:
             if slots_lab > 0:
                 n_lab_groups = int(row[13])
                 n_blocks_lab = int(row[14])
-                double_slots_lab = int(row[16])
+                double_slots_lab = int(row[15])
             else:
                 n_lab_groups = 0
                 n_blocks_lab = 0
