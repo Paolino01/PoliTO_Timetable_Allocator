@@ -48,7 +48,7 @@ class Parameters:
         # Number of weeks in a semester
         self.n_weeks_in_semester = 14
         # Number of hours that are in a slot
-        self.hours_in_slot = 1.5CreGenerated timetable with ETF courses
+        self.hours_in_slot = 1.5
 
         # Boolean variable that tells if we start from an existing solution or not
         self.start_from_previous_solution = False
