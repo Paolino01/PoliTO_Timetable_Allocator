@@ -36,7 +36,7 @@ class Parameters:
                 "min_corr_overlaps": 35,
                 "no_overlap_mandatory_practice_lab": False,
                 "no_overlap_groups": False,
-                "teachers_unavailabilities": Trueall courses, preferences and lab groups compactedpractice/,
+                "teachers_unavailabilities": True
             },
             {
                 "courses": [
