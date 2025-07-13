@@ -8,6 +8,11 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "CYBERSECURITY",
+                    "DATA SCIENCE AND ENGINEERING",
+
                     "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
                     "INGEGNERIA FISICA",
                     "AGRITECH ENGINEERING",
@@ -16,16 +21,47 @@ class Parameters:
                     "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
                     "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
                     "QUANTUM ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
+
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+
                     "ICT ENGINEERING FOR SMART SOCIETIES",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
                 ],
                 "orientations": [],
                 "course_type": "",
-                "max_corr_in_day": 700,
+                "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
-                "min_corr_overlaps": 20,
-                "no_overlap_mandatory_practice_lab": True,
-                "no_overlap_groups": True,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": Trueall courses, preferences and lab groups compactedpractice/,
+            },
+            {
+                "courses": [
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
+                ],
+                "orientations": [],
+                "course_type": "1",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "INGEGNERIA INFORMATICA"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 900,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
                 "teachers_unavailabilities": True
             },
             {
@@ -82,7 +118,7 @@ class Parameters:
         self.consecutive_groups_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "ETF courses timetable"
+        self.timetable_name = "All courses timetable with preferences"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
