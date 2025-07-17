@@ -9,6 +9,18 @@ class Parameters:
             {
                 "courses": [
                     "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 700,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 20,
+                "no_overlap_mandatory_practice_lab": True,
+                "no_overlap_groups": True,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
                     "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
                     "CYBERSECURITY",
                     "DATA SCIENCE AND ENGINEERING",
@@ -21,13 +33,7 @@ class Parameters:
                     "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
                     "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
                     "QUANTUM ENGINEERING",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)",
-
-                    "CYBERSECURITY ENGINEERING",
-                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
-                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
-
-                    "ICT ENGINEERING FOR SMART SOCIETIES",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
                 ],
                 "orientations": [],
                 "course_type": "",
@@ -40,10 +46,14 @@ class Parameters:
             },
             {
                 "courses": [
-                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)"
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+
+                    "ICT ENGINEERING FOR SMART SOCIETIES",
                 ],
                 "orientations": [],
-                "course_type": "1",
+                "course_type": "",
                 "max_corr_in_day": 800,
                 "max_corr_first_last_slot": 20,
                 "min_corr_overlaps": 35,
