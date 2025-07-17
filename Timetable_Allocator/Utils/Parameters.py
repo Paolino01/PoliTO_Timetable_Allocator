@@ -8,16 +8,7 @@ class Parameters:
         self.course_order = [
             {
                 "courses": [
-                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                    "INGEGNERIA FISICA",
-                    "AGRITECH ENGINEERING",
-                    "COMMUNICATIONS ENGINEERING",
-                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
-                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                    "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
-                    "QUANTUM ENGINEERING",
-                    "ICT ENGINEERING FOR SMART SOCIETIES",
-                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
+                    "INGEGNERIA INFORMATICA (COMPUTER ENGINEERING)",
                 ],
                 "orientations": [],
                 "course_type": "",
@@ -26,6 +17,61 @@ class Parameters:
                 "min_corr_overlaps": 20,
                 "no_overlap_mandatory_practice_lab": True,
                 "no_overlap_groups": True,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE",
+                    "CYBERSECURITY",
+                    "DATA SCIENCE AND ENGINEERING",
+
+                    "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
+                    "INGEGNERIA FISICA",
+                    "AGRITECH ENGINEERING",
+                    "COMMUNICATIONS ENGINEERING",
+                    "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
+                    "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
+                    "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
+                    "QUANTUM ENGINEERING",
+                    "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "CYBERSECURITY ENGINEERING",
+                    "INGEGNERIA DEL CINEMA E DEI MEDIA DIGITALI",
+                    "MECHATRONIC ENGINEERING (INGEGNERIA MECCATRONICA)",
+
+                    "ICT ENGINEERING FOR SMART SOCIETIES",
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 800,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
+                "teachers_unavailabilities": True
+            },
+            {
+                "courses": [
+                    "INGEGNERIA INFORMATICA"
+                ],
+                "orientations": [],
+                "course_type": "",
+                "max_corr_in_day": 900,
+                "max_corr_first_last_slot": 20,
+                "min_corr_overlaps": 35,
+                "no_overlap_mandatory_practice_lab": False,
+                "no_overlap_groups": False,
                 "teachers_unavailabilities": True
             },
             {
@@ -48,7 +94,7 @@ class Parameters:
         # Number of weeks in a semester
         self.n_weeks_in_semester = 14
         # Number of hours that are in a slot
-        self.hours_in_slot = 1.5CreGenerated timetable with ETF courses
+        self.hours_in_slot = 1.5
 
         # Boolean variable that tells if we start from an existing solution or not
         self.start_from_previous_solution = False
@@ -82,7 +128,7 @@ class Parameters:
         self.consecutive_groups_penalty = -10
 
         # Name of the timetable saved in the DB
-        self.timetable_name = "ETF courses timetable"
+        self.timetable_name = "All courses timetable with preferences"
 
         # Name of day and time slot
         self.days = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"]
