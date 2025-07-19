@@ -121,6 +121,54 @@ function TableOrario(props) {
       }, {});
   });
 
+  let n_different_days = 0;
+  let n_different_slots = 0;
+
+  let average_position_previous = 0;
+  let n_slots_previous = 0;
+  let average_position_current = 0;
+  let n_slots_current = 0;
+
+  let days_current = new Set();
+  let days_previous = new Set();
+  
+  Object.keys(res).forEach(slot => {
+    Object.keys(res[slot]).forEach(day => {
+      average_position_current += fasceOrarie.length * giorni.indexOf(day) + fasceOrarie.indexOf(slot);
+      n_slots_current++;
+
+      if (!resOtherTimetable.hasOwnProperty(slot) || !resOtherTimetable[slot].hasOwnProperty(day)) {
+        n_different_slots += res[slot][day].length;
+      }
+
+      days_current.add(day);
+    });
+  });
+  if(resOtherTimetable.length > res.length)
+    n_different_slots += resOtherTimetable.length - res.length;
+
+  average_position_current = average_position_current / n_slots_current;
+
+  Object.keys(resOtherTimetable).forEach(slot => {
+    Object.keys(resOtherTimetable[slot]).forEach(day => {
+      average_position_previous += fasceOrarie.length * giorni.indexOf(day) + fasceOrarie.indexOf(slot);
+      n_slots_previous++;
+
+      days_previous.add(day);
+    });
+  });
+
+  average_position_previous = average_position_previous / n_slots_previous;
+
+  days_current.forEach(day => {
+    if (!days_previous.has(day)) {
+      n_different_days++;
+    }
+  });
+
+  if(days_previous.size > days_current.size)
+    n_different_days += days_previous.size - days_current.size;
+
   return (
     <>
       {loading ? <span>🕗 Please wait, loading Piano allocazione... 🕗</span> :
@@ -133,6 +181,7 @@ function TableOrario(props) {
                 <span className='bg-danger py-1 px-2 rounded-pill text-white font-weight-bold'>Red</span> this timetable
               </div>
             </div>
+
             <Table>
                 <thead>
                     <th>{currPianoAllocazione}</th>
@@ -180,6 +229,29 @@ function TableOrario(props) {
                     </tr>
                 </tbody>
             </Table>
+
+            <div>
+              <h5>Stats:</h5>
+              <div>
+                <ul>
+                  <li>
+                    # Days changed: <span className='font-weight-bold'>{n_different_days}</span> <br />
+                  </li>
+                  <li>
+                    # Slots changed: <span className='font-weight-bold'>{n_different_slots}</span> <br />
+                  </li>
+                
+                  <li>
+                    <span>Average position in week: </span> <br />
+                    <div>
+                      Previous timetable: <span className='font-weight-bold'>{average_position_previous.toFixed(2)}</span> <br />
+                      Current timetable: <span className='font-weight-bold'>{average_position_current.toFixed(2)}</span> <br />
+                      Difference: <span className='font-weight-bold'>{(average_position_current - average_position_previous >= 0 ? "+" : "" )+ (average_position_current - average_position_previous).toFixed(2)}</span> Slots <br />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
         </Container>
       }</>
   )
