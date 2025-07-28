@@ -320,6 +320,7 @@ class DbAPI:
                 "(cdl.nomeCdl || ' - ' || cdl.tipoCdl) AS CorsoDiLaurea, "
                 "o.orientamento AS Orientamento, "
                 "io.periodoDidattico AS Anno, "
+                "io.alfabetica, "
                 "i.titolo "
             "FROM Slot s "
             "JOIN Insegnamento i "
@@ -334,18 +335,6 @@ class DbAPI:
                 "ON o.nomeCdl = cdl.nomeCdl "
                 "AND o.tipoCdl = cdl.tipoCdl "
             "WHERE s.pianoAllocazione = ? "
-               "AND cdl.nomeCdl IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             )
 
-        return pd.read_sql(sql, self.db, params = (params.timetable_name,
-                                                   "ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI)",
-                                                   "INGEGNERIA FISICA",
-                                                   "AGRITECH ENGINEERING",
-                                                   "COMMUNICATIONS ENGINEERING",
-                                                   "ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO)",
-                                                   "NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT)",
-                                                   "PHYSICS OF COMPLEX SYSTEMS(FISICA DEI SISTEMI COMPLESSI)",
-                                                   "QUANTUM ENGINEERING",
-                                                   "ICT ENGINEERING FOR SMART SOCIETIES",
-                                                   "INGEGNERIA ELETTRONICA",
-                                                   "INGEGNERIA ELETTRONICA (ELECTRONIC ENGINEERING)"))
+        return pd.read_sql(sql, self.db, params = (params.timetable_name, ))
