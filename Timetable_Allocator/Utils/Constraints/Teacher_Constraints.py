@@ -36,10 +36,10 @@ def get_teaching_ids(teacher):
     return teaching_ids_1, teaching_ids_2
 
 '''
-    Teachings with the same Teacher as main Teacher should not overlap
+    Teachings with the same Teacher should not overlap
 '''
 def add_no_overlap_constraint(model, timetable_matrix, teacher, slots):
-    # Getting the teaching IDs for the first semester and the second semester
+    # Getting the IDs of the Teachings taught by "teacher" for the first and the second semester
     teaching_ids_1, _teaching_ids_2 = get_teaching_ids(teacher)
 
     for s in slots:
@@ -58,12 +58,13 @@ def add_unavailable_slots_constraint(model, timetable_matrix, teacher):
             if teaching[1] == "L":
                 model.add(timetable_matrix[teaching[0].id_teaching, s] == 0)
             else:
-                '''Practice Slots'''
                 if teaching[1] == "EA" and teaching[0].practice_slots != 0:
+                    '''Practice Slots'''
                     for i in range(1, teaching[0].n_practice_groups + 1):
                         model.add(timetable_matrix[teaching[0].id_teaching + f"_practice_group{i}", s] == 0)
                 else:
                     if teaching[1] == "EL" and teaching[0].n_blocks_lab != 0:
+                        '''Lab Slots'''
                         for i in range(1, teaching[0].n_lab_groups + 1):
                             model.add(timetable_matrix[teaching[0].id_teaching + f"_lab_group{i}", s] == 0)
 

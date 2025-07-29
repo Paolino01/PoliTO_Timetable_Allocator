@@ -95,7 +95,6 @@ def add_max_consecutive_slots_constraint(model, teaching, d, n_slots_in_day_teac
 
     model.add(n_slots_in_day_teaching[teaching.id_teaching, d] <= params.max_consecutive_slots_teaching)
 
-    # Uncomment the following part to add the Teacher's preferences about lectures to the objective function
     if teaching.lect_slots % 2 == 0 and teaching.n_min_double_slots_lecture == 1:
         model.add(
             teacher_preferences_respected[teaching.id_teaching, d] == (
@@ -400,7 +399,6 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
 
     # Constraint: limiting the number of correlated lectures in a day
     # Constraint: a Teaching cannot overlap with the others, according to the correlations
-    teaching_overlaps = {}
     add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, params)
 
     # Constraint: minimizing the difference between practice/lab Slots of different groups for the same Teaching
