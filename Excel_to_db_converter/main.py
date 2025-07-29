@@ -31,5 +31,6 @@ if __name__ == '__main__':
 
     get_practice_lab_not_in_preferences()
 
-    # Get the information about unavailable Slots for each Teacher from the PreferenzeDocenti.xlsx Excel file and insert them in the database
+    # Get the information about unavailable Slots for each Teacher from the PreferenzeDocenti.xlsx Excel file
+    # and insert them in the database
     get_teachers_unavailabilities()
