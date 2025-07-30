@@ -177,7 +177,18 @@ The Allocator uses a series of parameters that can be adjusted to obtain a bette
 
 
 ## GUI_orario_Tesi
+During the previous thesis, in order to be able to visualize the timetables generated and easily read them in order to check their validity, a web application that displays the timetable via a GUI was developed. This web application reads the generated timetable in the Database and displays it in a graphical, user-friendly way.
 
+### Allocation plan section
+The web application is organized in different sections. The most important one when validating the timetables is the one related to the allocation plan. Here we can select the Allocation Plan that we are interested in validating and visualize the weekly timetable, divided by the degree type (Bachelor's or Master's Degree), the Degree Course, the Semester, and the Orientation.
+
+### Teachers section
+The Teachers section allows us to visualize the Slots for each Teacher and analyze if they have too many consecutive hours or not. You can select the allocation plan and the Teacher you are interested in and see its Teachings.
+
+### Timetable differences section
+A new section was added during this thesis: the Timetable differences section. This section is useful to compare the timetables generated with another timetable (for example, we compared our timetables with the one generated during the previous thesis related to the academic year 2023/24) in order to visualize the differences in the allocation of the single Teachings.
+
+An analysis is provided quantifying the number of Days and Slots that have been changed from the previous timetable and how they have changed (if the Teaching's Slots have shifted towards the start or the end of the Week or if they are the same as in the other timetable).
 
 ## Constraints
 
