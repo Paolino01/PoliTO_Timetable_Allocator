@@ -1,7 +1,7 @@
 '''
     In this file there are the functions needed to add the Constraints about Practice Slots to the model
 '''
-from Utils.Components.Teaching import Teaching
+from Timetable_Allocator.Components.Models.Teaching import Teaching
 
 '''
     Add the constraint about the number of Slots that each Teaching should have in a week

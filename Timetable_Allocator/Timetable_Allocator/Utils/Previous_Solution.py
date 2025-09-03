@@ -1,6 +1,6 @@
-from Data.DbAPI import DbAPI
-from Utils.Components.Teaching import Teaching
-from Utils.Parameters import Parameters
+from Timetable_Allocator.DB_Connection.DbAPI import DbAPI
+from Timetable_Allocator.Components.Models.Teaching import Teaching
+from Timetable_Allocator.Components.Parameters import Parameters
 
 '''
     Ask the user if they want to start from an existing solution

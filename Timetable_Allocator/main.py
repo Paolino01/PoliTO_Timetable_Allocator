@@ -1,15 +1,15 @@
 from docplex.cp.model import CpoModel
 
-from Components.Export_to_Excel import export_solution_to_excel
-from Components.Generated_Solution import add_generated_courses
-from Components.Previous_Solution import get_previous_solution, ask_previous_solution
-from Components.Slots import get_slots_per_week
-from Data.DbAPI import DbAPI
-from Utils.Constraints.Teacher_Constraints import add_teachers_constraints
-from Utils.Constraints.Teaching_Constraints import add_teachings_constraints
-from Utils.Hooks.Teachers import Teachers
-from Utils.Hooks.Teachings import Teachings
-from Utils.Parameters import Parameters
+from Timetable_Allocator.Utils.Export_to_Excel import export_solution_to_excel
+from Timetable_Allocator.Utils.Generated_Solution import add_generated_courses
+from Timetable_Allocator.Utils.Previous_Solution import get_previous_solution, ask_previous_solution
+from Timetable_Allocator.Utils.Slots import get_slots_per_week
+from Timetable_Allocator.DB_Connection.DbAPI import DbAPI
+from Timetable_Allocator.Components.Constraints.Teacher_Constraints import add_teachers_constraints
+from Timetable_Allocator.Components.Constraints.Teaching_Constraints import add_teachings_constraints
+from Timetable_Allocator.Components.Data.Teachers import Teachers
+from Timetable_Allocator.Components.Data.Teachings import Teachings
+from Timetable_Allocator.Components.Parameters import Parameters
 
 if __name__ == '__main__':
     params = Parameters()

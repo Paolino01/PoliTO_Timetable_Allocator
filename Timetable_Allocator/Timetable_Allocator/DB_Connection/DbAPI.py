@@ -1,8 +1,8 @@
 import math
 import sqlite3
 
-from Utils.Components.Teacher import Teacher
-from Utils.Components.Teaching import Teaching
+from Timetable_Allocator.Components.Models.Teacher import Teacher
+from Timetable_Allocator.Components.Models.Teaching import Teaching
 import pandas as pd
 
 

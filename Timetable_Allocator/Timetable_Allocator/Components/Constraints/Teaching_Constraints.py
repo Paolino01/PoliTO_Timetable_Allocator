@@ -4,12 +4,12 @@
 
 import math
 
-from Utils.Constraints.Lab_Constraints import add_double_slots_constraint_lab, add_slots_per_week_lab, \
+from Timetable_Allocator.Components.Constraints.Lab_Constraints import add_double_slots_constraint_lab, add_slots_per_week_lab, \
     define_double_slots_in_day_lab, count_double_slots_in_day_lab, add_lab_overlaps_constraint, \
     add_correlations_constraint_lab, define_lecture_dispersion_variables_lab, \
     assign_first_last_slot_of_day_lab, calculate_lecture_dispersion_lab, add_first_last_slot_correlation_limit_lab, \
     add_lab_group_constraint, add_consecutive_groups_slots_constraint_lab
-from Utils.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
+from Timetable_Allocator.Components.Constraints.Practice_Constraints import add_double_slots_constraint_practice, add_slots_per_week_practice, \
     add_min_double_slots_contraint_practice, define_double_slots_in_day_practice, count_double_slots_in_day_practice, \
     count_days_with_double_slots_practice, add_practice_overlaps_constraint, add_correlations_constraint_practice, \
     define_lecture_dispersion_variables_practice, \

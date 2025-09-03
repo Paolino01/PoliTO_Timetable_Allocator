@@ -2,9 +2,9 @@
 class Parameters:
     def __init__(self):
         # DB witth the information about the courses
-        self.DB = "../Data/Courses_DB.db"
+        self.DB = "../DB_Connection/Courses_DB.db"
 
-        # Data structure that is used to decide the order of the courses when generating a timetable
+        # DB_Connection structure that is used to decide the order of the courses when generating a timetable
         self.course_order = [
             {
                 "courses": [

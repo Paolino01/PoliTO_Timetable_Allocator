@@ -1,13 +1,11 @@
 import math
 
-from Data.DbAPI import DbAPI
-from Utils.Components.Teaching import Teaching
-from Utils.Parameters import Parameters
-
+from Timetable_Allocator.DB_Connection.DbAPI import DbAPI
+from Timetable_Allocator.Components.Models.Teaching import Teaching
 
 '''
-    Calculate the number of Slots per week per Lecture, Practice, and Lab
-    Return the number of slots per week
+    Calculates the number of Slots per week per Lecture, Practice, and Lab
+    Returns the number of slots per week
 '''
 def calculate_slots_per_week(total_lecture_hours, total_practice_hours, total_lab_hours, params):
 

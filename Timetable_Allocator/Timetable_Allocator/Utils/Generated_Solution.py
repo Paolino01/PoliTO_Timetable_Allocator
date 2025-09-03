@@ -1,5 +1,4 @@
-from Data.DbAPI import DbAPI
-from Utils.Parameters import Parameters
+from Timetable_Allocator.DB_Connection.DbAPI import DbAPI
 
 '''
     Get the courses from a previously generated timetable and add them to the model as fixed variables

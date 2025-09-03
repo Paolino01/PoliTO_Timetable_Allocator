@@ -1,4 +1,4 @@
-from Utils.Components.Teaching import Teaching
+from Timetable_Allocator.Components.Models.Teaching import Teaching
 
 
 class Teacher:
