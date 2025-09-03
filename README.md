@@ -2,6 +2,10 @@
 
 Allocator for PoliTO courses timetable
 
+This readme was written by Paolo Cagliero.  
+Email: paolocagliero2001@gmail.com  
+Phone: +39 3451437020  
+
 This file contains the documentation about the Timetable Allocator for the Politecnico di Torino. The purpose of this documentation is to provide a guide both to those who want to use the Timetable Allocator and to those who want to modify the code to add or improve constraints.  
 Please note that some of the parts of the project derived from previous theses, where they were written in Italian. That's why there are some terms in Italian and some in English
 
