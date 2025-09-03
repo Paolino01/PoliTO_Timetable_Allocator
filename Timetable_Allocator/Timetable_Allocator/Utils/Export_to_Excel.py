@@ -19,7 +19,7 @@ def export_solution_to_excel(params):
     write_teachers_view(params, df, days)
 
 def write_students_view(params, df, days, time_slots):
-    file_path = "../DB_Connection/" + params.timetable_name + '_weekly_view.xlsx'
+    file_path = "../Data/" + params.timetable_name + '_weekly_view.xlsx'
 
     with pd.ExcelWriter(file_path) as writer:
         for course, dg_group in df.groupby('CorsoDiLaurea'):
@@ -51,7 +51,7 @@ def write_students_view(params, df, days, time_slots):
     adjust_cells_appearance(file_path)
 
 def write_teachers_view(params, df, days):
-    file_path = "../DB_Connection/" + params.timetable_name + '_teachings_view.xlsx'
+    file_path = "../Data/" + params.timetable_name + '_teachings_view.xlsx'
 
     with pd.ExcelWriter(file_path) as writer:
         for course, dg_group in df.groupby('CorsoDiLaurea'):

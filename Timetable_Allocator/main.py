@@ -15,10 +15,6 @@ if __name__ == '__main__':
     params = Parameters()
     db_api = DbAPI(params)
 
-    export_solution_to_excel(params)
-
-    exit(0)
-
     # Number of slots per week
     slots = get_slots_per_week(params)
     # Number of days per week

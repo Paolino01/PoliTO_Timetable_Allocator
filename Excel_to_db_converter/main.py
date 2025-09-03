@@ -1,8 +1,8 @@
-from Data.DbApi import DbApi
-from Utils.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities, \
+from Excel_to_db_converter.DB_Connection.DbApi import DbApi
+from Excel_to_db_converter.Components.Get_Teachers_Data import get_teachers_preferences, get_teachers_unavailabilities, \
     get_practice_lab_not_in_preferences
-from Utils.Get_Teachings_Data import get_teaching_information, get_teachings, calculate_correlations
-from Utils.Teaching import Teaching
+from Excel_to_db_converter.Components.Get_Teachings_Data import get_teaching_information, get_teachings, calculate_correlations
+from Excel_to_db_converter.Components.Teaching import Teaching
 
 if __name__ == '__main__':
     db_api = DbApi()

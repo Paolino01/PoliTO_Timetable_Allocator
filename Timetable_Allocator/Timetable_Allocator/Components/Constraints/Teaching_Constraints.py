@@ -399,6 +399,7 @@ def add_teachings_constraints(model, timetable_matrix, teachings, slots, days, p
 
     # Constraint: limiting the number of correlated lectures in a day
     # Constraint: a Teaching cannot overlap with the others, according to the correlations
+    teaching_overlaps = {}
     add_correlations_overlaps_constraint(model, timetable_matrix, teachings, slots, teaching_overlaps, params)
 
     # Constraint: minimizing the difference between practice/lab Slots of different groups for the same Teaching

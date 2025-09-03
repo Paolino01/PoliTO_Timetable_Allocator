@@ -2,15 +2,14 @@ import glob
 import math
 import os
 import pandas
-from openpyxl.styles.builtins import title
 
-from Data.DbApi import DbApi
+from Excel_to_db_converter.DB_Connection.DbApi import DbApi
 
 '''
     Returns true if the given value is not nan nor empty
 '''
 def check_nan_empty(value):
-    if value != "" and value != "nan":
+    if str(value) != "" and str(value) != "nan":
         return True
     else:
         return False

@@ -3,7 +3,7 @@ import math
 import os
 import pandas
 
-from Data.DbApi import DbApi
+from Excel_to_db_converter.DB_Connection.DbApi import DbApi
 
 # Dictionaries that match the preferences written in the Excel files with the number of double and single Slots.
 # Data is in the format: "preference": [n° double Slots, n° single slots]
@@ -85,7 +85,8 @@ def get_lab_preferences(row):
 def get_teachers_preferences(teachings):
     db_api = DbApi()
 
-    preferences_files = glob.glob(os.path.join("../Data/Excels/Teachers Data/Teachers Preferences", "*.xlsx"))
+    preferences_files = glob.glob(os.path.join(
+        "../Data/Excels/Teachers Data/Teachers Preferences", "*.xlsx"))
 
     for f in preferences_files:
         # For each file, getting only the courses that are in the DB
