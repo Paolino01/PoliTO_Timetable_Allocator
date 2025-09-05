@@ -39,25 +39,6 @@ There are different tables. In alphabetical order:
 ### “Excels” folder
 This folder contains the Excels files in which we can find the information about the courses. The idea is that all the information is stored in the Database, so the script “Excel_to_db_converter” reads the information from the Excel files and writes it in the Database.
 
-In the subfolder Teachers_Data there is the information related to the Teachers.  
-In the folder Teachers Preferences there are the preferences of the Main Teachers about the Slot allocation of their Teachings. We are interested to these columns in particular:
-- NUM_ORE_TOT: the total number of hours of a Teaching in a semester, considering lectures, Practices, and Labs;
-- NUM_ORE_ESE: the total number of Practice hours in a semester;
-- NUM_SQU_ESE: number of Practice groups;
-- NUM_ORE_LAB: the total number of Laboratory hours in a semester;
-- NUM_SQU_LAB: number of Laboratory groups;
-- ORGANIZZAZIONE_BLOCCHI_LEZIONE: contains the Teacher’s preference about the allocation of the lecture Slots. Its values can be: “tutti i blocchi da 3h” (all blocks of 3h), “un blocco da 3h e gli altri da 1,5h” (one block of 3h and the others of 1.5h), “un blocco da 4,5h (Atelier per Architettura)” (one block of 4.5h, Atelier for Architecture),;
-- ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE: contains the Teacher’s preference about the allocation of the Practice Slots. Its values can be: “tutti i blocchi da 1,5h per ciascuna squadra” (all blocks of 1.5h for each group), “tutti i blocchi da 3h per ciascuna squadra” (all blocks of 3h for each group), “un blocco da 3h e gli altri da 1,5h per ciascuna squadra” (one block of 3 hours and the other of 1.5h for each group). NOTE: in some cases the Teachers request blocks of 3 hours (2 Slots), but there is only one Slot per Week. In that case we allocate blocks of 1.5 hours (1 Slot);
-- NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO: number of blocks per week for the Laboratory.  
-NOTE: this can be empty, but the information about the blocks per week could be found in the column NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE
-- NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO: number of Lab groups.  
-NOTE: this can be empty, but the information about the Lab groups could be found in the column NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE
-- ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO: preference about the Slot allocation for the Lab. Its values can be: “blocchi da 1,5h per ciascuna squadra” (blocks of 1.5h for each group), “blocchi da 3h per ciascuna squadra” (blocks of 3h for each group), “indifferente” (no preference).  
-NOTE: this can be empty, but the information about the organization of the Lab Slots could be found in the column ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE;
-- INDISPONIBILITA_SETTIMANALI: Slots in which the Teacher is unavailable (max. 4 per Teacher).
-  
-NOTE: some Teachers do not express the preferences for their Teachings here. Therefore, in order to retrieve the number of practice and laboratory hours, we have to use the columns h_ese and h_lab of the Degree Courses files (see below for more details).
-
 In the subfolder Courses Data>Courses List we can find the file with all the information about the Teachings for the Academic Year 2025/26. This file does not only contain the Degree Courses associated to ICM and ETF colleges, but also those from other colleges. So, we have to select only the Courses we are interested in.  
 The columns in which we are interested are:
 - ID_COLLEGIO: contains the ID of the college (ICM or ETF);
@@ -82,6 +63,25 @@ NOTE: h_lab refers to the laboratory hours for each group individually;
 - id_inc: the unique ID of the Teaching;
 - matricola: ID of the Main Teacher of the Course;
 - Collaboratori: this column contains the information about the collaborators of the Teaching (i.e. the Teachers other than the Main Teacher), the type of their lectures, and their hours. Refer to the Excel_to_db_converter part to understand how the column is organized and how we manage this information.
+
+In the subfolder Teachers_Data there is the information related to the Teachers.  
+Here there are the preferences of the Main Teachers about the Slot allocation of their Teachings as well as their unavailabilities. We are interested to these columns in particular:
+- NUM_ORE_TOT: the total number of hours of a Teaching in a semester, considering lectures, Practices, and Labs;
+- NUM_ORE_ESE: the total number of Practice hours in a semester;
+- NUM_SQU_ESE: number of Practice groups;
+- NUM_ORE_LAB: the total number of Laboratory hours in a semester;
+- NUM_SQU_LAB: number of Laboratory groups;
+- ORGANIZZAZIONE_BLOCCHI_LEZIONE: contains the Teacher’s preference about the allocation of the lecture Slots. Its values can be: “tutti i blocchi da 3h” (all blocks of 3h), “un blocco da 3h e gli altri da 1,5h” (one block of 3h and the others of 1.5h), “un blocco da 4,5h (Atelier per Architettura)” (one block of 4.5h, Atelier for Architecture),;
+- ORGANIZZAZIONE_BLOCCHI_ESERCITAZIONE: contains the Teacher’s preference about the allocation of the Practice Slots. Its values can be: “tutti i blocchi da 1,5h per ciascuna squadra” (all blocks of 1.5h for each group), “tutti i blocchi da 3h per ciascuna squadra” (all blocks of 3h for each group), “un blocco da 3h e gli altri da 1,5h per ciascuna squadra” (one block of 3 hours and the other of 1.5h for each group). NOTE: in some cases the Teachers request blocks of 3 hours (2 Slots), but there is only one Slot per Week. In that case we allocate blocks of 1.5 hours (1 Slot);
+- NUM_BLOCCHI_SETTIMANALI_LAIB_ATENEO: number of blocks per week for the Laboratory.  
+NOTE: this can be empty, but the information about the blocks per week could be found in the column NUM_BLOCCHI_SETTIMANALI_LAB_DIPARTIMENTALE
+- NUM_SQUADRE_SETTIMANALI_LAIB_ATENEO: number of Lab groups.  
+NOTE: this can be empty, but the information about the Lab groups could be found in the column NUM_SQUADRE_SETTIMANALI_LAB_DIPARTIMENTALE
+- ORGANIZZAZIONE_BLOCCHI_LAIB_ATENEO: preference about the Slot allocation for the Lab. Its values can be: “blocchi da 1,5h per ciascuna squadra” (blocks of 1.5h for each group), “blocchi da 3h per ciascuna squadra” (blocks of 3h for each group), “indifferente” (no preference).  
+NOTE: this can be empty, but the information about the organization of the Lab Slots could be found in the column ORGANIZZAZIONE_BLOCCHI_LAB_DIPARTIMENTALE;
+- INDISPONIBILITA_SETTIMANALI: Slots in which the Teacher is unavailable (max. 4 per Teacher).
+  
+NOTE: some Teachers do not express the preferences for their Teachings here. Therefore, in order to retrieve the number of practice and laboratory hours, we have to use the columns h_ese and h_lab of the Degree Courses files.
 
 ## Excel_to_db_converter
 As said before, most of the information about the Teachings and the Teachers (number of lecture, practice, and Lab hours, Teachers’ preferences about the Slot allocation, Teachers’ unavailabilities) is saved in Excel files. This Python script takes the data about Teachers and Teachings from those Excel files and saves it in the database, so that it can be used by the Allocator.
