@@ -66,6 +66,7 @@ NOTE: h_lab refers to the laboratory hours for each group individually;
 
 In the subfolder Teachers_Data there is the information related to the Teachers.  
 Here there are the preferences of the Main Teachers about the Slot allocation of their Teachings as well as their unavailabilities. We are interested to these columns in particular:
+- MATRICOLA_TITOLARE: the ID of the Main Teacher of the Teaching;
 - NUM_ORE_TOT: the total number of hours of a Teaching in a semester, considering lectures, Practices, and Labs;
 - NUM_ORE_ESE: the total number of Practice hours in a semester;
 - NUM_SQU_ESE: number of Practice groups;
