@@ -23,6 +23,7 @@ if __name__ == '__main__':
     # Ask the user if they want to start from an existing solution
     ask_previous_solution(params)
 
+    # Initializing Teachings class
     teachings_class = Teachings(params)
 
     solution_found = True

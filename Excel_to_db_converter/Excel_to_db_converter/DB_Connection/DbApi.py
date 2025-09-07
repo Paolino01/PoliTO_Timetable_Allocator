@@ -211,7 +211,7 @@ class DbApi:
 
         self.db.commit()
 
-    def get_teachings_without_lab(self):
+    def get_teachings_without_practice_lab(self):
         cur = self.db.cursor()
         sql = "SELECT ID_INC FROM Insegnamento WHERE practice_hours = 0 AND lab_hours = 0"
         cur.execute(sql)

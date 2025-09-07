@@ -128,13 +128,17 @@ def get_teachers_preferences(teachings):
 
     print("Teachers preferences inserted in the DB")
 
+
+'''
+    If a Teacher has not specified any preference about their Slots, we retrieve the data about lecture, practice, and lab hours from the Courses Data file 
+'''
 def get_practice_lab_not_in_preferences():
     db_api = DbApi()
 
     # Get all the Excel files in the "Courses Data" folder
     courses_files = glob.glob(os.path.join("../Data/Excels/Courses Data", "*.xls"))
 
-    teachings = db_api.get_teachings_without_lab()
+    teachings = db_api.get_teachings_without_practice_lab()
 
     for f in courses_files:
         # For each file, getting only the courses that are in the DB
