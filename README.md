@@ -126,13 +126,13 @@ For the unavailabilities, these are managed by the function get_teachers_unavail
 ## Timetable_Allocator
 Once all the data needed is retrieved by the Excel_to_DB_Converted and inserted in the Database, we can use the Timetable_Allocator project to generate a Timetable. This script models the timetable allocation problem as an Integer Linear Programming problem and uses the software CPLEX (developed by IBM) to solve it.
 
-First of all, the script initializes the Teachings and Teachers classes, retrieving those information from the Database.
-
-Then, by using the function get_slots_per_week(), we ask the user if they want to enable lecture allocation on Saturday and, if so, we ask them how many Slots they want to allocate on Saturday. The function returns the number of Slots in a Week, which can vary between 35 (5 Days per Week, 7 Slots per Day) and 42 (6 Days per Week, Saturday allocation enabled, 7 Slots per Day).
+First of all, by using the function get_slots_per_week(), we ask the user if they want to enable lecture allocation on Saturday and, if so, we ask them how many Slots they want to allocate on Saturday. The function returns the number of Slots in a Week, which can vary between 35 (5 Days per Week, 7 Slots per Day) and 42 (6 Days per Week, Saturday allocation enabled, 7 Slots per Day).
 
 Then, via the function get_previous_solution, we ask the user if they want use an existing solution (which is saved in the DB in the table PreviousSolution) as a base to start from when generating the timetable. If so, we retrieve the previous solution from the DB and add it to the model.
 
-After doing so we generate the timetable. We use an incremental approach: since generating the timetable with all the Degree Courses together would require too much time and computational power (at least two weeks with a machine with 64 threads and 100GB of RAM), we generate many timetables with a smaller set of Degree Courses each. This reduces the computational time to 4 hours and 40 minutes and also allows us to change the parameters for each subset of Degree Course. After generating a timetable, we save it in the DB and load it in the solver at the next iteration, so that the new courses are added to the ones that have already been generated.
+Consequently, the script initializes the Teachings and Teachers classes, retrieving those information from the Database.
+
+After doing so we generate the timetable. We use an incremental approach: since generating the timetable with all the Degree Courses together would require too much time and computational power (at least two weeks with a machine with 64 threads and 100GB of RAM), we generate many timetables with a smaller set of Degree Courses each. This reduces the computational time to 13 hours and also allows us to change the parameters for each subset of Degree Course. After generating a timetable, we save it in the DB and load it in the solver at the next iteration, so that the new courses are added to the ones that have already been generated.
 The generation order is:
 - Master's Degree of INGEGNERIA INFORMATICA (COMPUTER ENGINEERING);
 - ICT FOR SMART SOCIETIES (ICT PER LA SOCIETA' DEL FUTURO), DATA SCIENCE AND ENGINEERING, ELECTRONIC AND COMMUNICATIONS ENGINEERING (INGEGNERIA ELETTRONICA E DELLE COMUNICAZIONI), COMMUNICATIONS AND COMPUTER NETWORKS ENGINEERING (INGEGNERIA TELEMATICA E DELLE COMUNICAZIONI), NANOTECHNOLOGIES FOR ICTs (NANOTECNOLOGIE PER LE ICT), INGEGNERIA DEL CINEMA E DEI MEZZI DI COMUNICAZIONE,INGEGNERIA FISICA, PHYSICS OF COMPLEX SYSTEMS (FISICA DEI SISTEMI COMPLESSI), COMMUNICATIONS ENGINEERING, QUANTUM ENGINEERING, AGRITECH ENGINEERING, CYBERSECURITY;
@@ -156,28 +156,33 @@ Please refer to the Python project and to the list of constraints below to know 
 Same as above, but for Teachers.  
 Please refer to the Python project and to the list of constraints below to know which constraints have been implemented.
 
-Finally, after adding all the constraints, we can solve the model by calling the function model.solve.
-If a solution is found, we print it to screen and we save it in the DB, in the PianoAllocazione, Slot, and Docente_in_Slot tables. We also ask the user if they want to export the solution to an Excel file, that can be found in the Data folder. This file has one sheet for each Degree Course and in each sheet the timetables are divided by Orientation and Year.
+Finally, after adding all the constraints, we can solve the model by calling the function model.solve. Note that we have to limit CPLEX execution time to 6 hours (21600 seconds), otherwise it would try to optimize a solution indefinitely without ever returning a result.
+If a solution is found, we print it to screen and we save it in the DB, in the PianoAllocazione, Slot, and Docente_in_Slot tables.  
+We also ask the user if they want to export the solution as Excel files, that can be found in the Data folder. There are two files for each timetable:
+- The first Excel file contains the timetables saved in weekly format: each sheet of the file represents a Degree Course and, for each of them, there is a timetable for every Orientation and Year. The timetables are represented as tables with the Days in the columns and the hours in the rows.
+- The second Excel file focuses on the single Teachings: we have the same structure where there is one sheet for each Degree Course and for each of them the timetables are divided by Orientation and Year, but in this case, instead of representing the timetables as tables, we have one row for each Teaching, correlated with its Slots. This visualization is better for a Teacher who wants to view the Slots for his Teachings.
 
 ### Parameters.py
 The Allocator uses a series of parameters that can be adjusted to obtain a better timetable or to reduce the time needed to generate one. These parameters are defined in the file Parameters.py.
-- slot_per_day: number of lecture Slots per Day;
-- n_weeks_in_semester: number of Weeks in a Semester, used to calculate how many Slots per week need to be allocated to a Teaching;
-- hours_in_slot: number of hours that are in a Slots, at the moment we have Slots of 1.5 hours;
-- start_from_previous_solution: boolean variable that tells if we start from an existing solution or not;
-- saturday_enabled: boolean variable that tells if we can allocate lectures on Saturday or not. Default is false;
-- n_slots_saturday: saves the number of slots on Saturday. Minimum is 1, maximum is 7, default is 4;
-- max_corr_in_day: number of maximum correlated Lectures in a Day;
-- max_corr_first_last_slot: maximum correlation value between the first and last Slot of the Day. The lower the number, the least student will have lecture at 8:30 and 17:30 in the same Day;
-- min_corr_overlaps: the minimum number of correlation between Teachings for which we guarantee that there are no overlaps;
-- no_overlap_mandatory_practice_lab: if true, practices and labs of mandatory courses can not overlap with lectures of other correlated courses;
-- no_overlap_groups: if true, groups of the same practice/lab can not overlap with each other;
-- teachers_unavailabilities: if false, we do not consider Teachers' unavailabilities when generating the timetable;
-- max_consecutive_slots_teaching: maximum number of consecutive Slots that a Teaching can have;
-- teaching_overlap_penalty: the penalty in the objective function for overlaps between Teaching with a correlation < min_corr_overlaps;
-- lecture_dispersion_penalty: the penalty in the objective function for lecture dispersion (defined as the difference between the first and last Lecture Slot of a Day);
-- teacher_preferences_penalty: the penalty in the objective function for Teachers' preferences about Slot organization that have not been respected (note that this value should be negative, since we are trying to maximize the number of Teachers' preferences respected);
-- timetable_name: the name with which the timetable is saved in the DB;
+- course_order: This structure defines the sets of Degree Courses used to generate the timetable. Changing the order of these Degree Courses can change the time needed to generate a timetable as well as the results. Along with the each set of Degree Courses, it is possible to change the parameters used to generate the timetable for that set.
+- slot_per_day: number of lecture Slots per Day. Default is 7.
+- n_weeks_in_semester: number of Weeks in a Semester, used to calculate how many Slots per week need to be allocated to a Teaching. Default is 14.
+- hours_in_slot: number of hours that are in a Slots, at the moment we have Slots of 1.5 hours.
+- start_from_previous_solution: boolean variable that is true if we start from an existing solution. Default is false.
+- saturday_enabled: boolean variable that is true if we can allocate lectures on Saturday. Default is false.
+- n_slots_saturday: saves the number of slots on Saturday. Minimum is 1, maximum is 7, default is 4.
+- max_corr_in_day: number of maximum correlated Lectures in a Day.
+- max_corr_first_last_slot: maximum correlation value between the first and last Slot of the Day. The lower the number, the least student will have lecture at 8:30 and 17:30 in the same Day.
+- min_corr_overlaps: the minimum number of correlation between Teachings for which we guarantee that there are no overlaps.
+- no_overlap_mandatory_practice_lab: if true, practices and labs of mandatory courses can not overlap with lectures of other correlated courses.
+- no_overlap_groups: if true, groups of the same practice/lab can not overlap with each other.
+- teachers_unavailabilities: if false, we do not consider Teachers' unavailabilities when generating the timetable.
+- max_consecutive_slots_teaching: maximum number of consecutive Slots that a Teaching can have.
+- teaching_overlap_penalty: the penalty in the objective function for overlaps between Teaching with a correlation < min_corr_overlaps.
+- lecture_dispersion_penalty: the penalty in the objective function for lecture dispersion (defined as the difference between the first and last Lecture Slot of a Day).
+- teacher_preferences_penalty: the penalty in the objective function for Teachers' preferences about Slot organization that have not been respected (note that this value should be negative, since we are trying to maximize the number of Teachers' preferences respected).
+- consecutive_groups_penalty: the penalty in the objective function for different Practice or Laboratories groups of the same day that are not consecutive (note that this value should be negative, since we are trying to maximize the number of consecutive groups).
+- timetable_name: the name with which the timetable is saved in the DB.
 - days and time_slots: the name of the Days (“Lun”, “Mar”, “Mer”, etc.) and the Slots (“8.30-10.00”, “10.00-11.30”, etc), used when saving the timetable in the DB.
 
 
@@ -221,3 +226,4 @@ The allocator implements the following constraints, divided in hard constraints 
 - Difference between the first and last lecture of a Day: The difference between the first lecture Slot of a Day and the last one should be minimized (while maintaining some empty Slots during the Day), in order to have a more compact timetable.
 - Overlaps: The overlaps between Teachings with a Correlation below the threshold should be minimized.
 - Teachers’ preferences: As we said previously, the Teaching’s Main Teacher can express a preference about the Slots allocation. The amount of Slots that respect this preferences should be maximized.
+- Distance between different Groups of the same Practice/Laboratory: where possible, Practice or Laboratory Slots of different Groups for the same Teaching in the same day should be consecutive. For example, considering the Laboratory Groups for Teaching A, it would be ideal to have Group 1 in Slot 1 and Group 2 in Slot 2, so that students from Group 1 can stay for the Group 2’s lecture.
