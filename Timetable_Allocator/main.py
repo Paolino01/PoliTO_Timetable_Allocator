@@ -28,6 +28,7 @@ if __name__ == '__main__':
 
     solution_found = True
 
+    # Generating timetables
     for i in range(0, len(params.course_order)):
         print("Generating timetable for " + str(params.course_order[i]["courses"]))
 
